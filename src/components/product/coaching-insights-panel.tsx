@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
+import { PremiumEmptyState } from "@/components/ui/premium-empty-state";
 import { cn } from "@/lib/utils";
 import type { CoachingInsight } from "@/components/product/demo-data";
 
@@ -15,35 +16,24 @@ export function CoachingInsightsPanel({ insights }: { insights: CoachingInsight[
     <div className="flex flex-col gap-3">
       <div className="flex items-center justify-between">
         <span className="font-brand text-[10px] tracking-widest text-accent">
-          AI INSIGHTS
+          PSYCH INTELLIGENCE
         </span>
         <motion.span
-          className="text-[10px] text-green-400"
+          className="text-[10px] text-red-400"
           animate={{ opacity: [1, 0.4, 1] }}
           transition={{ duration: 2, repeat: Infinity }}
         >
-          ● מייצר תובנות
+          ● Authority · Frame · Pressure
         </motion.span>
       </div>
 
       <AnimatePresence initial={false}>
         {insights.length === 0 ? (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="border border-dashed border-white/10 p-6 text-center"
-          >
-            <motion.div
-              className="mx-auto mb-3 flex gap-1 justify-center"
-              animate={{ opacity: [0.3, 1, 0.3] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-            >
-              {[0, 1, 2].map((i) => (
-                <div key={i} className="size-1.5 rounded-full bg-accent/50" />
-              ))}
-            </motion.div>
-            <p className="text-sm text-muted-foreground">ממתין לניתוח שיחה...</p>
-          </motion.div>
+          <PremiumEmptyState
+            status="PSYCH ENGINE"
+            title="מנוע ניתוח פסיכולוגי פעיל"
+            description="תובנות על frame dominance, emotional control, certainty ו-pressure response יופיעו כאן — חדות, ללא פילטר."
+          />
         ) : (
           insights.map((item, i) => (
             <motion.div
@@ -69,10 +59,10 @@ export function CoachingInsightsPanel({ insights }: { insights: CoachingInsight[
                   </span>
                 </div>
               </div>
-              <p className="mb-3 text-sm leading-relaxed text-white/75">{item.insight}</p>
-              <div className="border border-accent/10 bg-accent/5 px-3 py-2">
-                <span className="font-brand text-[9px] text-accent">ACTION →</span>
-                <p className="mt-1 text-xs leading-relaxed text-white/80">{item.action}</p>
+              <p className="mb-3 text-sm font-medium leading-relaxed text-white/80">{item.insight}</p>
+              <div className="border border-red-500/10 bg-red-500/5 px-3 py-2">
+                <span className="font-brand text-[9px] text-red-400">CORRECTION →</span>
+                <p className="mt-1 text-xs leading-relaxed text-white/85">{item.action}</p>
               </div>
             </motion.div>
           ))

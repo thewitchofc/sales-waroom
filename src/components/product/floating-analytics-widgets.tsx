@@ -4,19 +4,27 @@ import { motion } from "framer-motion";
 import { useSimulationOptional } from "@/components/product/simulation-provider";
 
 const widgets = [
-  { id: "close", label: "שיעור סגירה", base: 34, suffix: "%", trend: "+8%" },
-  { id: "pressure", label: "לחץ ממוצע", base: 72, suffix: "", trend: "↑" },
-  { id: "objections", label: "התנגדויות", base: 847, suffix: "", trend: "+124" },
+  { id: "frame", label: "Frame Control", suffix: "", trend: "↓" },
+  { id: "authority", label: "Authority", suffix: "", trend: "+6" },
+  { id: "certainty", label: "Certainty", suffix: "", trend: "-18" },
 ];
 
 export function FloatingAnalyticsWidgets() {
   const simulation = useSimulationOptional();
   const pressure = simulation?.scores.pressure ?? 72;
-  const confidence = simulation?.scores.confidence ?? 82;
+  const frameControl = simulation?.scores.frameControl ?? 68;
+  const authority = simulation?.scores.authority ?? 74;
+  const certainty = simulation?.scores.certainty ?? 61;
+  const behaviorMode = simulation?.behaviorMode ?? "leading";
+
+  const metricValues: Record<string, number> = {
+    frame: frameControl,
+    authority,
+    certainty,
+  };
 
   return (
     <>
-      {/* Top-left floating chip */}
       <motion.div
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
@@ -28,26 +36,23 @@ export function FloatingAnalyticsWidgets() {
           transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
           className="glass-premium metallic-border border border-accent/20 px-4 py-3 backdrop-blur-xl"
         >
-          <div className="font-brand text-[9px] text-muted-foreground">CONFIDENCE</div>
+          <div className="font-brand text-[9px] text-muted-foreground">FRAME CONTROL</div>
           <motion.div
-            key={confidence}
+            key={frameControl}
             initial={{ scale: 1.1 }}
             animate={{ scale: 1 }}
-            className="font-display text-2xl font-black text-white"
+            className={`font-display text-2xl font-black ${
+              frameControl < 45 ? "text-red-400" : "text-white"
+            }`}
           >
-            {confidence}
+            {frameControl}
           </motion.div>
-          <div className="mt-1 h-1 w-16 overflow-hidden bg-white/5">
-            <motion.div
-              className="h-full bg-gradient-to-l from-green-500 to-accent"
-              animate={{ width: `${confidence}%` }}
-              transition={{ duration: 0.8 }}
-            />
+          <div className="mt-1 font-brand text-[8px] text-red-400/80">
+            {behaviorMode.toUpperCase()}
           </div>
         </motion.div>
       </motion.div>
 
-      {/* Top-right pressure alert */}
       <motion.div
         initial={{ opacity: 0, x: 20 }}
         animate={{ opacity: 1, x: 0 }}
@@ -85,13 +90,12 @@ export function FloatingAnalyticsWidgets() {
               animate={{ opacity: 1 }}
               className="text-[9px] text-red-400"
             >
-              THREAT ELEVATED
+              FRAME COLLAPSE RISK
             </motion.span>
           )}
         </motion.div>
       </motion.div>
 
-      {/* Bottom metrics strip — mobile friendly */}
       <div className="pointer-events-none absolute inset-x-0 -bottom-4 z-10 hidden lg:flex justify-center gap-3">
         {widgets.map((w, i) => (
           <motion.div
@@ -104,10 +108,12 @@ export function FloatingAnalyticsWidgets() {
             <div className="font-brand text-[8px] text-muted-foreground">{w.label}</div>
             <div className="flex items-baseline gap-2">
               <span className="font-display text-lg font-bold text-white">
-                {w.id === "pressure" ? pressure : w.base}
+                {metricValues[w.id]}
                 {w.suffix}
               </span>
-              <span className="text-[9px] text-green-400">{w.trend}</span>
+              <span className={`text-[9px] ${w.id === "frame" || w.id === "certainty" ? "text-red-400" : "text-green-400"}`}>
+                {w.trend}
+              </span>
             </div>
           </motion.div>
         ))}

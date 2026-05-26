@@ -1,6 +1,15 @@
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import { PageHero } from "@/components/pages/page-hero";
-import { LivePlatform } from "@/components/sections/live-platform";
+import { SectionSkeleton } from "@/components/ui/section-skeleton";
+
+const LivePlatform = dynamic(
+  () =>
+    import("@/components/sections/live-platform").then((m) => ({
+      default: m.LivePlatform,
+    })),
+  { loading: () => <SectionSkeleton className="py-24" /> }
+);
 
 export const metadata: Metadata = {
   title: "דמו חי",

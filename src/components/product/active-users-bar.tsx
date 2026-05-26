@@ -27,7 +27,7 @@ export function ActiveUsersBar() {
     <motion.div
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
-      className="mb-10 flex flex-wrap items-center justify-between gap-4 border border-white/5 bg-black/60 px-5 py-4 backdrop-blur-xl"
+      className="mb-6 flex flex-col gap-4 border border-white/5 bg-black/60 px-4 py-4 backdrop-blur-xl sm:mb-8 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:gap-4 sm:px-5"
     >
       <div className="flex items-center gap-3">
         <motion.span
@@ -40,7 +40,7 @@ export function ActiveUsersBar() {
         </span>
       </div>
 
-      <div className="flex flex-wrap items-center gap-6 md:gap-10">
+      <div className="grid grid-cols-3 gap-3 sm:flex sm:flex-wrap sm:items-center sm:gap-6 md:gap-10">
         {stats.map((stat, i) => (
           <div key={stat.key} className="flex items-center gap-3">
             <motion.span

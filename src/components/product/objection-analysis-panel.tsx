@@ -28,7 +28,7 @@ export function ObjectionAnalysisPanel({ scenario, live = false }: ObjectionAnal
       <div className="relative">
         <div className="mb-5 flex items-center justify-between">
           <span className="font-brand text-[10px] tracking-widest text-accent">
-            OBJECTION ANALYSIS
+            OBJECTION PSYCHOLOGY
           </span>
           <motion.span
             className={cn(
@@ -76,7 +76,14 @@ export function ObjectionAnalysisPanel({ scenario, live = false }: ObjectionAnal
 
             <div>
               <div className="mb-2 font-brand text-[9px] text-muted-foreground">
-                AI ANALYSIS
+                PSYCHOLOGY
+              </div>
+              <p className="text-sm leading-relaxed text-red-400/90">{scenario.psychology}</p>
+            </div>
+
+            <div>
+              <div className="mb-2 font-brand text-[9px] text-muted-foreground">
+                AUTHORITY ANALYSIS
               </div>
               <p className="text-sm leading-relaxed text-white/75">{scenario.analysis}</p>
             </div>
@@ -120,8 +127,8 @@ export function ObjectionAnalysisPanel({ scenario, live = false }: ObjectionAnal
             </div>
             <p className="text-sm text-white/60">
               {isAnalyzing
-                ? "מזהה דפוס התנגדות ומייצר המלצות..."
-                : "מעקב אחר התנגדות פעילה בשיחה"}
+                ? "מנתח frame test ו-pressure response..."
+                : "מעקב אחר התנגדות פעילה · בדיקת dominance"}
             </p>
           </motion.div>
         ) : (

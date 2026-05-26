@@ -2,24 +2,25 @@
 
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
-
-const pageVariants = {
-  initial: { opacity: 0, y: 16, filter: "blur(6px)" },
-  animate: { opacity: 1, y: 0, filter: "blur(0px)" },
-  exit: { opacity: 0, y: -8, filter: "blur(4px)" },
-};
+import { useReducedMotion } from "@/hooks/use-reduced-motion";
+import {
+  cinematicEase,
+  pageTransition,
+  pageTransitionReduced,
+} from "@/lib/motion";
 
 export function AnimatedPage({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const reduced = useReducedMotion();
+  const variants = reduced ? pageTransitionReduced : pageTransition;
 
   return (
     <motion.div
       key={pathname}
-      variants={pageVariants}
-      initial="initial"
-      animate="animate"
-      exit="exit"
-      transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+      initial={variants.initial}
+      animate={variants.animate}
+      exit={variants.exit}
+      transition={{ duration: reduced ? 0.2 : 0.45, ease: cinematicEase }}
     >
       {children}
     </motion.div>

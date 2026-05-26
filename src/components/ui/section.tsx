@@ -43,7 +43,7 @@ export function Section({
   return (
     <section
       id={id}
-      className={`relative px-6 py-36 md:py-48 lg:px-12 ${className}`}
+      className={`relative px-4 py-20 sm:px-6 sm:py-28 md:py-36 lg:px-12 lg:py-44 ${className}`}
     >
       {atmosphere && (
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
@@ -76,7 +76,7 @@ export function SectionHeader({
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "-120px" }}
-      className={`mb-24 flex max-w-4xl flex-col ${alignClass}`}
+      className={`mb-12 flex max-w-4xl flex-col sm:mb-16 md:mb-20 lg:mb-24 ${alignClass}`}
     >
       {label && (
         <motion.div custom={0} variants={fadeUp} className="mb-8 flex items-center gap-4">
@@ -90,7 +90,7 @@ export function SectionHeader({
       <motion.h2
         custom={1}
         variants={fadeUp}
-        className="font-display text-4xl font-black leading-[1.05] tracking-tight text-white md:text-5xl lg:text-6xl xl:text-7xl"
+        className="font-display text-3xl font-black leading-[1.08] tracking-tight text-white sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-balance"
       >
         {title}
       </motion.h2>

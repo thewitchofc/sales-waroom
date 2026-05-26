@@ -68,9 +68,9 @@ export function PlatformCommandPanel() {
                   <span
                     className={`text-xs font-semibold ${
                       msg.type === "coach"
-                        ? "text-blue-400"
+                        ? "text-red-400"
                         : msg.type === "analysis"
-                          ? "text-red-400"
+                          ? "text-red-500"
                           : "text-white/70"
                     }`}
                   >

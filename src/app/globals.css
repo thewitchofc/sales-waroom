@@ -69,6 +69,9 @@ body {
   font-family: var(--font-sans), "Heebo", system-ui, sans-serif;
   overflow-x: hidden;
   text-align: right;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 .font-brand {
@@ -188,11 +191,75 @@ body {
   border-radius: inherit;
   background: linear-gradient(
     105deg,
-    transparent 40%,
-    rgba(255, 255, 255, 0.04) 50%,
-    transparent 60%
+    transparent 38%,
+    rgba(255, 255, 255, 0.06) 50%,
+    transparent 62%
   );
   pointer-events: none;
+  opacity: 0.6;
+}
+
+.glass-shimmer::after {
+  animation: glass-sweep 7s ease-in-out infinite;
+}
+
+@keyframes glass-sweep {
+  0%,
+  100% {
+    transform: translateX(-120%) skewX(-12deg);
+    opacity: 0;
+  }
+  45%,
+  55% {
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(120%) skewX(-12deg);
+  }
+}
+
+.interactive-surface {
+  transition:
+    transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.45s ease,
+    border-color 0.3s ease,
+    background-color 0.3s ease;
+}
+
+.interactive-surface:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.45),
+    0 0 24px rgba(212, 175, 85, 0.08);
+}
+
+.depth-elevated {
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.04),
+    0 8px 32px rgba(0, 0, 0, 0.5),
+    0 24px 64px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .glass-shimmer::after,
+  .ai-scan-line,
+  .gradient-text {
+    animation: none !important;
+  }
 }
 
 .metallic-border {
@@ -430,5 +497,95 @@ body {
   }
   html {
     @apply font-sans;
+  }
+}
+
+/* ── Competitive Arena / Esports ── */
+.arena-banner {
+  position: relative;
+}
+
+.arena-scan {
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(212, 175, 85, 0.03) 2px,
+    rgba(212, 175, 85, 0.03) 4px
+  );
+  animation: arena-scan-move 8s linear infinite;
+}
+
+@keyframes arena-scan-move {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+.arena-rank-card {
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.arena-rank-card:hover {
+  box-shadow: 0 0 24px rgba(212, 175, 85, 0.12);
+}
+
+.arena-top-rank {
+  background: linear-gradient(90deg, rgba(212, 175, 85, 0.04), transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .arena-scan {
+    animation: none;
+  }
+}
+
+/* ── Brand Logo ── */
+.brand-logo-link:focus-visible {
+  outline: 1px solid rgba(212, 175, 85, 0.5);
+  outline-offset: 4px;
+}
+
+.brand-logo-hover:hover .brand-logo-glow {
+  opacity: 1;
+  box-shadow:
+    0 0 24px rgba(212, 175, 85, 0.18),
+    0 0 48px rgba(212, 175, 85, 0.08);
+}
+
+.brand-logo-glow {
+  opacity: 0;
+  transition: opacity 0.4s ease, box-shadow 0.4s ease;
+  border-radius: inherit;
+}
+
+.brand-logo-shimmer-active .brand-logo-sweep-line {
+  animation: brand-logo-sweep 2.8s ease-in-out infinite;
+}
+
+.brand-logo-sweep-line {
+  background: linear-gradient(
+    105deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.03) 35%,
+    rgba(255, 255, 255, 0.14) 50%,
+    rgba(255, 255, 255, 0.03) 65%,
+    transparent 100%
+  );
+  transform: translateX(-120%);
+}
+
+@keyframes brand-logo-sweep {
+  0% {
+    transform: translateX(-120%);
+  }
+  45%,
+  100% {
+    transform: translateX(320%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brand-logo-shimmer-active .brand-logo-sweep-line {
+    animation: none;
   }
 }

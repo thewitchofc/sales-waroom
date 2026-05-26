@@ -1,5 +1,7 @@
 export type MessageType = "prospect" | "user" | "coach" | "analysis";
 
+export type BehaviorMode = "leading" | "reactive" | "neutral";
+
 export interface TranscriptMessage {
   id: number;
   type: MessageType;
@@ -24,33 +26,104 @@ export interface TimelineEvent {
   active?: boolean;
 }
 
+export interface PsychologyScores {
+  confidence: number;
+  objection: number;
+  pressure: number;
+  frameControl: number;
+  authority: number;
+  certainty: number;
+}
+
+export interface ClientPersona {
+  id: string;
+  name: string;
+  title: string;
+  dominance: "HIGH" | "CRIT";
+  traits: string[];
+  pressureLevel: number;
+}
+
+export interface PressureLevel {
+  id: number;
+  label: string;
+  code: string;
+  description: string;
+}
+
+export const INITIAL_PSYCHOLOGY_SCORES: PsychologyScores = {
+  confidence: 91,
+  objection: 88,
+  pressure: 42,
+  frameControl: 86,
+  authority: 84,
+  certainty: 89,
+};
+
+export const CLIENT_PERSONAS: ClientPersona[] = [
+  {
+    id: "dominant-cfo",
+    name: "CFO סקепטי",
+    title: "קונה דומיננטי · High-Ticket",
+    dominance: "CRIT",
+    traits: ["שולט בפריים", "בוחן סמכות", "לוחץ על מחיר", "מחפש חולשה"],
+    pressureLevel: 4,
+  },
+  {
+    id: "procurement",
+    name: "רכש עוין",
+    title: "מנהל רכש · Enterprise",
+    dominance: "HIGH",
+    traits: ["מתנגד מוקדם", "מושווה תחרות", "מאיץ החלטות"],
+    pressureLevel: 3,
+  },
+  {
+    id: "founder",
+    name: "Founder עייף",
+    title: "יזם · Series B",
+    dominance: "HIGH",
+    traits: ["חסר סבלנות", "מחפש ROI", "לא סובל הסברים ארוכים"],
+    pressureLevel: 3,
+  },
+];
+
+export const ACTIVE_PERSONA = CLIENT_PERSONAS[0];
+
+export const PRESSURE_LEVELS: PressureLevel[] = [
+  { id: 1, label: "בסיסי", code: "BASE", description: "לקוח ידידותי — בניית ביטחון" },
+  { id: 2, label: "מתקדם", code: "ADV", description: "התנגדויות מובנות — שמירת פריים" },
+  { id: 3, label: "עילית", code: "ELITE", description: "לחץ פסיכולוגי — בדיקת סמכות" },
+  { id: 4, label: "אינטנסיבי", code: "INTENSE", description: "קונה דומיננטי — אין מקום לחולשה" },
+  { id: 5, label: "שטח", code: "COMBAT", description: "סימולציית סגירה תחת אש — zero margin" },
+];
+
 export const DEMO_TRANSCRIPT: TranscriptMessage[] = [
   {
     id: 1,
     type: "prospect",
-    speaker: "לקוח",
-    text: "שלום, אני רוצה להבין מה הפתרון שלכם נותן לנו",
+    speaker: "לקוח · CFO",
+    text: "יש לי 12 דקות. תגיד לי מה אתם עושים — ולמה שאשקיע בזה.",
     timestamp: "00:12",
   },
   {
     id: 2,
     type: "user",
     speaker: "אתה",
-    text: "בטח. לפני שאני מסביר — מה הכי כואב לכם היום בתהליך המכירה?",
+    text: "מצוין. לפני שאני מסביר — מה הכי עולה לכם היום כשעסקה נופלת?",
     timestamp: "00:28",
   },
   {
     id: 3,
     type: "prospect",
-    speaker: "לקוח",
-    text: "זה נשמע יקר מדי כרגע",
+    speaker: "לקוח · CFO",
+    text: "זה נשמע יקר מדי כרגע.",
     timestamp: "01:04",
   },
   {
     id: 4,
     type: "coach",
-    speaker: "AI Coach",
-    text: "היית צריך לשאול שאלת כאב במקום להגן על המחיר",
+    speaker: "FIELD COACH",
+    text: "הלקוח הוביל אותך למחיר. ענית מתוך צורך להוכיח — לא מתוך שליטה.",
     timestamp: "01:06",
   },
   {
@@ -63,15 +136,15 @@ export const DEMO_TRANSCRIPT: TranscriptMessage[] = [
   {
     id: 6,
     type: "prospect",
-    speaker: "לקוח",
-    text: "תשלח לי פרטים",
+    speaker: "לקוח · CFO",
+    text: "תשלח לי פרטים. אני אחזור אליך.",
     timestamp: "01:42",
   },
   {
     id: 7,
     type: "analysis",
-    speaker: "AI Analysis",
-    text: "איבדת שליטה בפריים של השיחה",
+    speaker: "PSYCH ANALYSIS",
+    text: "איבדת שליטה בפריים ברגע שהתחלת להסביר. נשמעת לא בטוח — הלקוח הרגיש את זה.",
     timestamp: "01:44",
   },
 ];
@@ -80,33 +153,40 @@ export const COACH_FEEDBACK: CoachFeedback[] = [
   {
     id: 1,
     type: "critical",
-    title: "הגנה על מחיר",
-    body: "התגובה שלך הפעילה מצב הגנה. חזור לשאלת כאב.",
+    title: "איבוד פריים · מחיר",
+    body: "הלקוח הוביל אותך למחיר. ענית מתוך צורך להוכיח את עצמך — לא מתוך סמכות.",
     time: "01:06",
   },
   {
     id: 2,
-    type: "warning",
-    title: "איבוד פריים",
-    body: "הלקוח הוביל את השיחה. אתה עוקב במקום לכוון.",
-    time: "01:44",
+    type: "critical",
+    title: "התנהגות ריאקטיבית",
+    body: "איבדת שליטה ברגע שהתחלת להסביר. מי שמסביר — מגיב. מי שמוביל — שואל.",
+    time: "01:18",
   },
   {
     id: 3,
+    type: "warning",
+    title: "ויתור על פריים",
+    body: "הלקוח סגר אותך ב'תשלח פרטים'. לא ביקשת commitment — נתת לו בריחה.",
+    time: "01:44",
+  },
+  {
+    id: 4,
     type: "info",
-    title: "הזדמנות שהוחמצה",
-    body: "לא חקרת תקציב לפני הצגת מחיר. סיכון גבוה.",
-    time: "01:50",
+    title: "טונality · Certainty",
+    body: "נשמעת לא בטוחה כשהתחלת להסביר. האטה בקצב = חשיפת חולשה ללקוח.",
+    time: "01:44",
   },
 ];
 
 export const TIMELINE_EVENTS: TimelineEvent[] = [
-  { id: 1, label: "פתיחת שיחה", time: "00:00", type: "recovery" },
-  { id: 2, label: "שאלת גילוי", time: "00:28", type: "recovery", active: true },
-  { id: 3, label: "התנגדות: מחיר", time: "01:04", type: "objection" },
-  { id: 4, label: "משוב AI Coach", time: "01:06", type: "coach" },
-  { id: 5, label: "ירידה בביטחון", time: "01:18", type: "drop" },
-  { id: 6, label: "איבוד שליטה", time: "01:44", type: "drop" },
+  { id: 1, label: "פתיחה · בדיקת סמכות", time: "00:00", type: "recovery" },
+  { id: 2, label: "פריים: שאלת כאב", time: "00:28", type: "recovery", active: true },
+  { id: 3, label: "התנגדות · מחיר", time: "01:04", type: "objection" },
+  { id: 4, label: "Coach · איבוד פריים", time: "01:06", type: "coach" },
+  { id: 5, label: "ירידת Certainty", time: "01:18", type: "drop" },
+  { id: 6, label: "נכנעות · Reactive", time: "01:44", type: "drop" },
 ];
 
 export interface CoachingInsight {
@@ -121,34 +201,34 @@ export interface CoachingInsight {
 export const COACHING_INSIGHTS: CoachingInsight[] = [
   {
     id: 1,
-    category: "טיפול במחיר",
-    insight: "הלקוח העלה התנגדות מחיר — אתה הגנת במקום לחקור כאב",
-    action: "שאל: 'מה העלות של לא לפתור את הבעיה הזו?'",
+    category: "Frame Dominance",
+    insight: "הלקוח העלה מחיר — אתה הגנת במקום להחזיר שליטה לשיחה",
+    action: "אל תגן. שאל: 'מה העלות של לא לפתור את זה עכשיו?'",
     priority: "high",
     time: "01:06",
   },
   {
     id: 2,
-    category: "שליטה בפריים",
-    insight: "הלקוח ביקש 'תשלח פרטים' — סימן לאיבוד שליטה",
-    action: "החזר שליטה: 'לפני שאשלח — מה חשוב שיהיה בפתרון?'",
+    category: "Emotional Control",
+    insight: "הלקוח ביקש 'תשלח פרטים' — סימן שקנית reactive behavior",
+    action: "החזר authority: 'לפני שאשלח — מה חייב להיות בפתרון?'",
     priority: "high",
     time: "01:44",
   },
   {
     id: 3,
-    category: "גילוי תקציב",
-    insight: "לא נחקר תקציב לפני הצגת מחיר — סיכון גבוה לעסקה",
-    action: "בשיחה הבאה: גלה תקציב לפני שלב ההצעה",
+    category: "Authority Analysis",
+    insight: "לא בדקת סמכות החלטה לפני הצעת מחיר — הלקוח לא היה committed",
+    action: "בשיחה הבאה: גלה מי חותם ומה קритריון ההחלטה",
     priority: "medium",
     time: "01:50",
   },
   {
     id: 4,
-    category: "טון דיבור",
-    insight: "זוהה האטה בקצב דיבור ב-01:18 — סימן לחוסר ביטחון",
-    action: "שמור על קצב יציב ושאל שאלות קצרות",
-    priority: "low",
+    category: "Certainty Level",
+    insight: "נשמעת לא בטוחה כשהתחלת להסביר — tonality ירד ב-34%",
+    action: "קצר. שאל. אל תמלא שקט בהסברים.",
+    priority: "high",
     time: "01:18",
   },
 ];
@@ -180,6 +260,7 @@ export interface ObjectionScenario {
   analysis: string;
   suggestedResponse: string;
   scoreImpact: number;
+  psychology: string;
 }
 
 export const OBJECTION_SCENARIOS: ObjectionScenario[] = [
@@ -188,8 +269,9 @@ export const OBJECTION_SCENARIOS: ObjectionScenario[] = [
     type: "מחיר",
     text: "זה נשמע יקר מדי כרגע",
     severity: "HIGH",
-    analysis: "התנגדות מחיר מוקדמת — סימן שלא נבנה ערך מספיק לפני הצעת מחיר",
-    suggestedResponse: "אני מבין. לפני שנדבר על מחיר — מה העלות של להמשיך עם הבעיה?",
+    analysis: "הלקוח בודק אם תיגע — לא באמת על מחיר. זו בדיקת frame.",
+    psychology: "Frame test · הלקוח מחפש מי מוביל את השיחה",
+    suggestedResponse: "מובן. לפני מחיר — מה העלות של להמשיך עם הבעיה?",
     scoreImpact: -18,
   },
   {
@@ -197,8 +279,9 @@ export const OBJECTION_SCENARIOS: ObjectionScenario[] = [
     type: "תזמון",
     text: "אנחנו לא מוכנים לקבל החלטה ברבעון הזה",
     severity: "MED",
-    analysis: "התנגדות תזמון — לרוב מסווה חוסר עדיפות או חוסר ROI",
-    suggestedResponse: "מה צריך לקרות כדי שזה יהיה עדיפות ברבעון הבא?",
+    analysis: "התנגדות תזמון — לרוב מסווה חוסר conviction או חוסר ROI",
+    psychology: "Avoidance · הלקוח בורח מ-commitment",
+    suggestedResponse: "מה צריך לקרות כדי שזה יהיה עדיפות — לא רבעון הבא?",
     scoreImpact: -8,
   },
   {
@@ -206,8 +289,9 @@ export const OBJECTION_SCENARIOS: ObjectionScenario[] = [
     type: "סמכות",
     text: "אני צריך להעביר את זה ל-CEO לפני שממשיכים",
     severity: "HIGH",
-    analysis: "התנגדות סמכות — לא זוהה decision maker אמיתי",
-    suggestedResponse: "מעולה. מה חשוב שה-CEO יראה כדי לאשר?",
+    analysis: "בדיקת authority — האם אתה מדבר עם decision maker אמיתי?",
+    psychology: "Authority gap · אתה מאבד leverage",
+    suggestedResponse: "מעולה. מה ה-CEO חייב לראה — ומה יהרוס את העסקה?",
     scoreImpact: -12,
   },
   {
@@ -215,8 +299,18 @@ export const OBJECTION_SCENARIOS: ObjectionScenario[] = [
     type: "תחרות",
     text: "אנחנו כבר מדברים עם המתחרה שלכם",
     severity: "CRIT",
-    analysis: "איום תחרותי — דורש differentiation מיידי",
-    suggestedResponse: "מצוין שאתם בודקים. מה חסר לכם בפתרון הנוכחי?",
+    analysis: "איום תחרותי — הלקוח בודק certainty ו-confidence שלך",
+    psychology: "Dominance play · אל תתפשר על frame",
+    suggestedResponse: "טוב שאתם בודקים. מה חסר לכם שם — שאנחנו חייבים לפתור?",
     scoreImpact: -22,
   },
 ];
+
+export const BEHAVIOR_LABELS: Record<
+  BehaviorMode,
+  { label: string; labelHe: string; color: string }
+> = {
+  leading: { label: "LEADING", labelHe: "מוביל", color: "text-green-400" },
+  neutral: { label: "NEUTRAL", labelHe: "ניטרלי", color: "text-accent" },
+  reactive: { label: "REACTIVE", labelHe: "ריאקטיבי", color: "text-red-400" },
+};

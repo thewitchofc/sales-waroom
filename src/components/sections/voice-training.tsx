@@ -9,18 +9,19 @@ import { fadeUp } from "@/components/ui/section";
 import { HudFrame } from "@/components/ui/hud-elements";
 import { SectionAtmosphere } from "@/components/ui/cinematic-bg";
 import { AIThinkingIndicator } from "@/components/product/ai-thinking-indicator";
+import { PRESSURE_LEVELS } from "@/components/product/demo-data";
 
 const voiceLines = [
-  "אני מבין שתקציב הוא נושא רגיש...",
-  "לפני שנדבר על מחיר — מה העלות של לא לפתור את הבעיה?",
-  "לקוחותינו רואים ROI כבר ב-90 הימים הראשונים.",
+  "לפני מחיר — מה העלות של לא לפתור את זה?",
+  "אני לא מסביר. אני שואל. מה חייב להשתנות?",
+  "אתה לא צריך לשכנע אותי. אתה צריך להחליט.",
 ];
 
 const baseMetrics = [
-  { label: "מילים/דקה", base: 142, suffix: "", status: "אופטימלי", color: "text-green-400" },
-  { label: "מילות מילוי", base: 2, suffix: "", status: "נמוך", color: "text-green-400" },
-  { label: "שיעור הפסקות", base: 8, suffix: "%", status: "טוב", color: "text-accent" },
-  { label: "אנרגיה", base: 94, suffix: "", status: "שיא", color: "text-red-400", isEnergy: true },
+  { label: "Certainty", base: 88, suffix: "%", status: "יציב", color: "text-green-400" },
+  { label: "Tonality · Authority", base: 91, suffix: "", status: "Dominant", color: "text-accent" },
+  { label: "Emotional Control", base: 94, suffix: "", status: "שליטה", color: "text-green-400" },
+  { label: "Pressure Response", base: 76, suffix: "", status: "Under fire", color: "text-red-400", isEnergy: true },
 ];
 
 export function VoiceTraining({ showHeader = true }: { showHeader?: boolean }) {
@@ -48,8 +49,8 @@ export function VoiceTraining({ showHeader = true }: { showHeader?: boolean }) {
       {showHeader && (
         <SectionHeader
           label="VOICE TRAINING"
-          title="אימון קולי שקורא את הביטחון שלכם"
-          description="דברו בטבעיות. ה-AI מנתח טון, קצב, מילות מילוי ותהודה רגשית — משוב מיידי על כל מילה."
+          title="Tonality · Certainty · Authority — תחת לחץ"
+          description="ה-AI מזהה חולשה בקול לפני שהלקוח שומע אותה. לא feedback ידידותי — חשיפה פסיכולוגית."
         />
       )}
 
@@ -99,7 +100,7 @@ export function VoiceTraining({ showHeader = true }: { showHeader?: boolean }) {
               )}
 
               <div className="mt-6 flex flex-wrap justify-center gap-3">
-                {["AI מזהה חולשות בסגירה", "סימולציית לקוח קשה"].map((tag) => (
+                {["Frame under pressure", "Dominant persona · CFO"].map((tag) => (
                   <span
                     key={tag}
                     className="border border-red-500/20 bg-red-500/5 px-3 py-1 text-[11px] text-red-400/90"
@@ -133,7 +134,7 @@ export function VoiceTraining({ showHeader = true }: { showHeader?: boolean }) {
                     animate={{ scale: 1 }}
                     className="mt-1 font-display text-3xl font-bold text-white"
                   >
-                    {metric.isEnergy ? "גבוהה" : `${metrics[i]}${metric.suffix}`}
+                    {metric.isEnergy ? "INTENSE" : `${metrics[i]}${metric.suffix}`}
                   </motion.div>
                 </div>
               </div>
@@ -150,23 +151,26 @@ export function VoiceTraining({ showHeader = true }: { showHeader?: boolean }) {
           ))}
 
           <GlassCard delay={0.4} premium>
-            <div className="mb-2 font-brand text-[10px] text-accent">ADAPTIVE PRESSURE</div>
-            <h3 className="mb-4 font-display text-xl font-bold text-white">קושי אדפטיבי</h3>
+            <div className="mb-2 font-brand text-[10px] text-red-400">PRESSURE SIMULATION</div>
+            <h3 className="mb-4 font-display text-xl font-bold text-white">רמות לחץ פסיכולוגי</h3>
             <p className="mb-6 text-sm leading-relaxed text-muted-foreground">
-              ה-AI מעלה לחץ ככל שאתם משתפרים. מלקוחות ידידותיים — דרך C-suite
-              סקепטיים — ועד שיחות ועדה רב-משתתפים.
+              מבסיסי — דרך עילית ואינטנסיבי — ועד COMBAT. קונים דומיננטיים
+              שבודקים frame, authority ו-certainty. אין מקום לריאקטיביות.
             </p>
             <div className="flex flex-wrap gap-2">
-              {["מתחיל", "מתקדם", "עילית"].map((level, idx) => (
+              {PRESSURE_LEVELS.map((level) => (
                 <span
-                  key={level}
-                  className={`px-4 py-1.5 text-xs font-semibold ${
-                    idx === 2
-                      ? "border border-accent/30 bg-accent/10 text-accent glow-accent"
-                      : "border border-white/5 bg-white/[0.02] text-muted-foreground"
+                  key={level.code}
+                  className={`px-3 py-1.5 text-xs font-semibold ${
+                    level.id >= 4
+                      ? "border border-red-500/30 bg-red-500/10 text-red-400"
+                      : level.id === 3
+                        ? "border border-accent/30 bg-accent/10 text-accent glow-accent"
+                        : "border border-white/5 bg-white/[0.02] text-muted-foreground"
                   }`}
+                  title={level.description}
                 >
-                  {level}
+                  {level.label}
                 </span>
               ))}
             </div>

@@ -3,24 +3,30 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Waveform } from "@/components/ui/waveform";
+import { useIsMobile } from "@/hooks/use-is-mobile";
+import { useReducedMotion } from "@/hooks/use-reduced-motion";
 
 export function CinematicBackground({ intense = false }: { intense?: boolean }) {
+  const isMobile = useIsMobile();
+  const reduced = useReducedMotion();
+  const particleCount = reduced ? 0 : isMobile ? (intense ? 18 : 10) : intense ? 55 : 35;
+
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden">
       <div className="absolute inset-0 bg-[#000000]" />
       <div className="absolute inset-0 metallic-texture opacity-80" />
       <div className="absolute inset-0 command-grid opacity-[0.35]" />
-      <AnimatedGridLayer />
-      <HorizonGlow />
-      <LightBeams intense={intense} />
-      <RadarSweep />
-      <FloatingParticles count={intense ? 55 : 35} />
-      <RadialSpotlight />
-      {intense && <AmbientWaveformLayer />}
+      {!reduced && <AnimatedGridLayer />}
+      {!reduced && <HorizonGlow />}
+      {!reduced && <LightBeams intense={intense && !isMobile} />}
+      {!reduced && !isMobile && <RadarSweep />}
+      {particleCount > 0 && <FloatingParticles count={particleCount} />}
+      {!reduced && <RadialSpotlight compact={isMobile} />}
+      {intense && !isMobile && !reduced && <AmbientWaveformLayer />}
       <div className="absolute inset-0 vignette opacity-90" />
       <div className="noise-overlay absolute inset-0 opacity-70" />
-      <ScanLine />
-      {intense && <ThreatScanLines />}
+      {!reduced && !isMobile && <ScanLine />}
+      {intense && !isMobile && !reduced && <ThreatScanLines />}
     </div>
   );
 }
@@ -164,11 +170,11 @@ function FloatingParticles({ count }: { count: number }) {
   );
 }
 
-function RadialSpotlight() {
+function RadialSpotlight({ compact = false }: { compact?: boolean }) {
   return (
     <>
       <motion.div
-        className="absolute start-1/3 top-1/4 size-[700px] -translate-x-1/2 rounded-full"
+        className={`absolute start-1/3 top-1/4 -translate-x-1/2 rounded-full ${compact ? "size-[320px]" : "size-[700px]"}`}
         style={{
           background:
             "radial-gradient(circle, rgba(212,175,85,0.1) 0%, transparent 60%)",
@@ -177,7 +183,7 @@ function RadialSpotlight() {
         transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div
-        className="absolute end-1/4 top-1/2 size-[500px] rounded-full"
+        className={`absolute end-1/4 top-1/2 rounded-full ${compact ? "size-[240px]" : "size-[500px]"}`}
         style={{
           background:
             "radial-gradient(circle, rgba(122,143,181,0.06) 0%, transparent 65%)",

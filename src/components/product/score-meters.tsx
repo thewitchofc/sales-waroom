@@ -2,13 +2,24 @@
 
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import type { PsychologyScores, BehaviorMode } from "@/components/product/demo-data";
+import {
+  FrameControlIndicator,
+  BehaviorModeBadge,
+} from "@/components/product/frame-control-indicator";
 
 interface ScoreMeterProps {
   label: string;
   value: number;
   max?: number;
   unit?: string;
-  variant?: "confidence" | "objection" | "pressure";
+  variant:
+    | "confidence"
+    | "objection"
+    | "pressure"
+    | "frameControl"
+    | "authority"
+    | "certainty";
   delay?: number;
 }
 
@@ -28,26 +39,53 @@ const variantStyles = {
     glow: "rgba(239,68,68,0.3)",
     label: "PRESSURE",
   },
+  frameControl: {
+    gradient: "from-purple-500 via-accent to-green-500",
+    glow: "rgba(168,85,247,0.25)",
+    label: "FRAME",
+  },
+  authority: {
+    gradient: "from-accent via-yellow-500 to-accent-secondary",
+    glow: "rgba(212,175,85,0.35)",
+    label: "AUTHORITY",
+  },
+  certainty: {
+    gradient: "from-blue-400 via-green-400 to-accent",
+    glow: "rgba(96,165,250,0.25)",
+    label: "CERTAINTY",
+  },
 };
 
-export function ScoreMeter({
+function ScoreMeter({
   label,
   value,
   max = 100,
   unit = "%",
-  variant = "confidence",
+  variant,
   delay = 0,
 }: ScoreMeterProps) {
   const pct = Math.min((value / max) * 100, 100);
   const style = variantStyles[variant];
-  const isCritical = variant === "pressure" && value > 80;
+  const isCritical =
+    (variant === "pressure" && value > 80) ||
+    (["frameControl", "authority", "certainty", "confidence"].includes(variant) &&
+      value < 45);
 
   return (
     <motion.div
-      className="border border-white/5 bg-black/40 p-4"
+      className={cn(
+        "border bg-black/40 p-4",
+        isCritical ? "border-red-500/20" : "border-white/5"
+      )}
       animate={
         isCritical
-          ? { boxShadow: ["0 0 0 rgba(239,68,68,0)", "0 0 20px rgba(239,68,68,0.15)", "0 0 0 rgba(239,68,68,0)"] }
+          ? {
+              boxShadow: [
+                "0 0 0 rgba(239,68,68,0)",
+                "0 0 20px rgba(239,68,68,0.12)",
+                "0 0 0 rgba(239,68,68,0)",
+              ],
+            }
           : {}
       }
       transition={{ duration: 2, repeat: Infinity }}
@@ -57,7 +95,10 @@ export function ScoreMeter({
           {style.label}
         </span>
         <motion.span
-          className="font-display text-2xl font-black text-white"
+          className={cn(
+            "font-display text-2xl font-black",
+            isCritical && variant !== "pressure" ? "text-red-400" : "text-white"
+          )}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: delay + 0.5 }}
@@ -75,31 +116,30 @@ export function ScoreMeter({
           transition={{ duration: 1.2, delay, ease: [0.21, 0.47, 0.32, 0.98] }}
           style={{ boxShadow: `0 0 12px ${style.glow}` }}
         />
-        <motion.div
-          className="absolute inset-y-0 end-0 w-px bg-white/50"
-          initial={{ right: "100%" }}
-          animate={{ right: `${100 - pct}%` }}
-          transition={{ duration: 1.2, delay, ease: [0.21, 0.47, 0.32, 0.98] }}
-        />
       </div>
     </motion.div>
   );
 }
 
 export function ScoreMetersPanel({
-  confidence,
-  objection,
-  pressure,
+  scores,
+  behaviorMode = "leading",
 }: {
-  confidence: number;
-  objection: number;
-  pressure: number;
+  scores: PsychologyScores;
+  behaviorMode?: BehaviorMode;
 }) {
   return (
     <div className="flex flex-col gap-3">
-      <ScoreMeter label="ציון ביטחון בשיחה" value={confidence} variant="confidence" delay={0.1} />
-      <ScoreMeter label="טיפול בהתנגדויות" value={objection} variant="objection" delay={0.2} />
-      <ScoreMeter label="רמת לחץ בסימולציה" value={pressure} variant="pressure" delay={0.3} />
+      <FrameControlIndicator value={scores.frameControl} mode={behaviorMode} />
+      <div className="flex items-center justify-between border border-white/5 bg-black/30 px-3 py-2">
+        <span className="font-brand text-[9px] text-muted-foreground">BEHAVIOR MODE</span>
+        <BehaviorModeBadge mode={behaviorMode} />
+      </div>
+      <ScoreMeter label="סמכות בשיחה · Authority" value={scores.authority} variant="authority" delay={0.05} />
+      <ScoreMeter label="רמת Certainty · ביטחון פסיכולוגי" value={scores.certainty} variant="certainty" delay={0.1} />
+      <ScoreMeter label="ביטחון קולי · Confidence" value={scores.confidence} variant="confidence" delay={0.15} />
+      <ScoreMeter label="טיפול בהתנגדויות" value={scores.objection} variant="objection" delay={0.2} />
+      <ScoreMeter label="לחץ פסיכולוגי · Pressure" value={scores.pressure} variant="pressure" delay={0.25} />
     </div>
   );
 }

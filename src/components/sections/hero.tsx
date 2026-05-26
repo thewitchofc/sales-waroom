@@ -9,9 +9,9 @@ import { Waveform } from "@/components/ui/waveform";
 import { fadeUp } from "@/components/ui/section";
 
 const stats = [
-  { value: "10K+", label: "סימולציות שבוצעו" },
-  { value: "94%", label: "עלייה בשיעור סגירה" },
-  { value: "2.4x", label: "האצת התקדמות" },
+  { value: "2,847", label: "לוחמים פעילים" },
+  { value: "#1", label: "Weekly Arena" },
+  { value: "12🔥", label: "Streak Record" },
 ];
 
 export function Hero() {
@@ -88,9 +88,9 @@ export function Hero() {
               animate="visible"
               className="max-w-lg text-xl leading-[1.75] text-white/55 md:text-2xl md:leading-[1.7]"
             >
-              סימולציות מכירה מבוססות AI שמאתגרות את הביטחון, ההתנגדויות
-              ויכולת הסגירה שלכם —{" "}
-              <span className="text-white/80">בזמן אמת, תחת לחץ, בלי רחמים.</span>
+              סימולציות AI שמבחנות frame control, authority ו-certainty —
+              {" "}
+              <span className="text-white/80">תחת לחץ פסיכולוגי. בלי רחמים. בלי עידוד.</span>
             </motion.p>
 
             <motion.div
@@ -100,8 +100,8 @@ export function Hero() {
               animate="visible"
               className="mt-14 flex flex-wrap items-center gap-5"
             >
-              <BrandLink href="/dashboard" variant="command" size="lg">
-                להיכנס לחדר המלחמה
+              <BrandLink href="/arena" variant="command" size="lg">
+                להיכנס ל-Arena
                 <svg className="size-4 rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                 </svg>

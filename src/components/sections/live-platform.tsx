@@ -16,10 +16,10 @@ import { FloatingAnalyticsWidgets } from "@/components/product/floating-analytic
 import { useSimulation } from "@/components/product/simulation-provider";
 
 const performanceMetrics = [
-  { label: "שיעור סגירה", value: "34%", trend: "+8%" },
-  { label: "זמן ממוצע לסגירה", value: "18 יום", trend: "-4 יום" },
-  { label: "התנגדויות שטופלו", value: "847", trend: "+124" },
-  { label: "ציון ביטחון ממוצע", value: "82", trend: "+11" },
+  { label: "Frame Dominance", value: "68%", trend: "-12%" },
+  { label: "Authority Score", value: "74", trend: "+9" },
+  { label: "Reactive Sessions", value: "23%", trend: "-6%" },
+  { label: "Certainty Under Pressure", value: "61", trend: "+14" },
 ];
 
 function LivePlatformContent() {
@@ -69,22 +69,13 @@ function LivePlatformContent() {
         <div className="flex min-h-[520px] flex-col gap-5">
           <div className="glass-premium metallic-border os-panel-glow flex-1 p-5 md:p-6">
             <div className="mb-5 font-brand text-[10px] tracking-widest text-accent">
-              LIVE SCORES
+              PSYCH METRICS
             </div>
-            <ScoreMetersPanel
-              confidence={demo.scores.confidence}
-              objection={demo.scores.objection}
-              pressure={demo.scores.pressure}
-            />
+            <ScoreMetersPanel scores={demo.scores} behaviorMode={demo.behaviorMode} />
           </div>
 
           <div className="glass-premium metallic-border os-panel-glow flex-[1.2] p-5 md:p-6">
-            <AICoachPanel feedback={demo.visibleFeedback.length > 0 ? demo.visibleFeedback : []} />
-            {demo.visibleFeedback.length === 0 && (
-              <p className="mt-4 text-center text-sm text-muted-foreground">
-                משוב AI יופיע בזמן אמת במהלך השיחה
-              </p>
-            )}
+            <AICoachPanel feedback={demo.visibleFeedback} />
           </div>
 
           <div className="glass-premium metallic-border os-panel-glow flex-[1.4] p-5 md:p-6">
@@ -113,8 +104,8 @@ export function LivePlatform({ showHeader = true }: { showHeader?: boolean }) {
       {showHeader && (
         <SectionHeader
           label="COMMAND CENTER"
-          title="מערכת ההפעלה של קלוזרים עילית"
-          description="שיחות AI חיות, תמלול בזמן אמת, ניתוח התנגדויות, משוב Coach — הכל רץ. עכשיו."
+          title="מערכת אימון פסיכולוגית לקלוזרים עילית"
+          description="שליטה בפריים, סמכות, certainty ו-pressure response — ניתוח חד בזמן אמת. לא מוטיבציה. אימון."
         />
       )}
 

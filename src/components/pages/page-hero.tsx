@@ -12,7 +12,7 @@ interface PageHeroProps {
 
 export function PageHero({ label, title, description }: PageHeroProps) {
   return (
-    <section className="relative overflow-hidden pt-32 pb-20 md:pt-40 md:pb-28">
+    <section className="relative overflow-hidden pt-28 pb-16 sm:pt-32 sm:pb-20 md:pt-40 md:pb-28">
       <CinematicBackground />
       <div className="pointer-events-none absolute inset-6 border border-white/[0.04] lg:inset-10">
         <span className="hud-corner hud-corner-tl !top-0 !start-0 !size-6" />
@@ -37,7 +37,7 @@ export function PageHero({ label, title, description }: PageHeroProps) {
           variants={fadeUp}
           initial="hidden"
           animate="visible"
-          className="hero-headline max-w-4xl font-display text-4xl font-black leading-[1.05] text-white md:text-6xl lg:text-7xl"
+          className="hero-headline max-w-4xl font-display text-3xl font-black leading-[1.08] text-white sm:text-4xl md:text-6xl lg:text-7xl text-balance"
         >
           {title}
         </motion.h1>

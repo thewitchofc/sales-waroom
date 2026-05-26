@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
+import { useState } from "react";
+import { BrandLogoLink } from "@/components/brand/brand-logo";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { CinematicBackground } from "@/components/ui/cinematic-bg";
@@ -30,12 +31,7 @@ export function LoginPageContent() {
         transition={{ duration: 0.8 }}
         className="relative w-full max-w-md"
       >
-        <Link href="/" className="mb-10 flex items-center justify-center gap-3">
-          <div className="flex size-10 items-center justify-center border border-accent/20 bg-accent/5">
-            <span className="font-brand text-xs font-bold text-accent">SW</span>
-          </div>
-          <span className="font-brand text-xs tracking-[0.2em] text-white">SALES WAROOM</span>
-        </Link>
+        <BrandLogoLink href="/" variant="login" animated hoverGlow shimmer className="mb-10 justify-center" />
 
         <HudFrame label="SECURE ACCESS" className="glass-premium metallic-border bg-black/80 p-8">
           <h1 className="mb-2 font-display text-2xl font-bold text-white">כניסה למערכת</h1>

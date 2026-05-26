@@ -13,18 +13,18 @@ import { cn } from "@/lib/utils";
 
 const features = [
   {
-    title: "טיפול בהתנגדויות",
-    description: "200+ התנגדויות מהשטח. AI שמתאים קושי בזמן אמת לפי הביצועים שלכם.",
+    title: "Objection Psychology",
+    description: "כל התנגדות היא frame test. ה-AI חושף אם אתה מוביל או מגיב — לפני שהלקוח מרגיש.",
     icon: "01",
   },
   {
-    title: "ניתוח ביטחון בשיחה",
-    description: "טון, קצב, היסוס — כל סימני החולשה נחשפים לפני שהלקוח מרגיש אותם.",
+    title: "Authority Analysis",
+    description: "Tonality, certainty, emotional control — חולשה נחשפת בשנייה. לא אחרי שהעסקה מתה.",
     icon: "02",
   },
   {
-    title: "שיחות AI בזמן אמת",
-    description: "דיאלוגים דינמיים ללא תסריט. כל שיחה שונה. כל סגירה אמיתית.",
+    title: "Dominant Personas",
+    description: "CFO סקепטי, רכש עוין, Founder עייף — לקוחות ששולטים בפריים ומחפשים חולשה.",
     icon: "03",
   },
 ];
@@ -47,8 +47,8 @@ export function ObjectionSimulator({ showHeader = true }: { showHeader?: boolean
       {showHeader && (
         <SectionHeader
           label="OBJECTION SIMULATOR"
-          title="אתגרו כל התנגדות לפני שהיא הורגת עסקה"
-          description="לחצו על התנגדות — ה-AI מנתח, מדרג, ומציע תגובה. בזמן אמת."
+          title="כל התנגדות היא בדיקת פריים — לא טיעון"
+          description="ה-AI מנתח frame dominance, authority ו-pressure response. משוב חד. לא עידוד."
         />
       )}
 
@@ -122,7 +122,7 @@ export function ObjectionSimulator({ showHeader = true }: { showHeader?: boolean
                 </AnimatePresence>
               </div>
               <div className="text-start">
-                <div className="text-xs text-muted-foreground">ציון תגובה AI</div>
+                <div className="text-xs text-muted-foreground">ציון Authority · תגובה</div>
                 <motion.div
                   key={responseScore}
                   initial={{ scale: 1.2, opacity: 0 }}
@@ -163,7 +163,7 @@ export function ObjectionSimulator({ showHeader = true }: { showHeader?: boolean
                   transition={{ duration: 0.8, repeat: Infinity, delay: i * 0.15 }}
                 />
               ))}
-              <span className="text-sm text-white/70">מנתח התנגדות ומייצר תגובה מומלצת...</span>
+              <span className="text-sm text-white/70">מנתח פסיכולוגיית התנגדות ו-frame response...</span>
             </motion.div>
           )}
         </div>

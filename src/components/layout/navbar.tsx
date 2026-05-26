@@ -2,9 +2,10 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { BrandLink } from "@/components/brand/brand-link";
+import { BrandLogoLink } from "@/components/brand/brand-logo";
 import { siteConfig } from "@/config/site";
 import { footerNav } from "@/config/navigation";
 import { cn } from "@/lib/utils";
@@ -20,8 +21,6 @@ export function Navbar() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const { scrollY } = useScroll();
-  const opacity = useTransform(scrollY, [0, 80], [0, 1]);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -33,36 +32,28 @@ export function Navbar() {
     setMobileOpen(false);
   }, [pathname]);
 
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileOpen]);
+
   return (
     <motion.header
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.8, ease: [0.21, 0.47, 0.32, 0.98] }}
-      className="fixed top-0 inset-x-0 z-50 px-6 lg:px-10"
+      className="fixed top-0 inset-x-0 z-50 px-4 sm:px-6 lg:px-10"
     >
-      <motion.div
-        style={{ opacity: scrolled ? opacity : 0 }}
-        className="absolute inset-0 border-b border-white/5 bg-black/80 backdrop-blur-2xl"
+      <div
+        className={cn(
+          "absolute inset-0 border-b border-white/5 bg-black/85 backdrop-blur-2xl transition-opacity duration-300",
+          scrolled || mobileOpen ? "opacity-100" : "opacity-0"
+        )}
       />
-      <nav className="relative mx-auto flex max-w-7xl items-center justify-between py-5">
-        <Link href="/" className="group flex items-center gap-3">
-          <div className="relative flex size-10 items-center justify-center border border-accent/20 bg-accent/5">
-            <span className="font-brand text-xs font-bold text-accent">SW</span>
-            <motion.div
-              className="absolute inset-0 border border-accent/30"
-              animate={{ opacity: [0.2, 0.6, 0.2] }}
-              transition={{ duration: 3, repeat: Infinity }}
-            />
-          </div>
-          <div>
-            <span className="font-brand text-xs font-semibold tracking-[0.25em] text-white">
-              SALES WAROOM
-            </span>
-            <div className="font-brand text-[8px] tracking-widest text-muted-foreground">
-              ELITE COMMAND
-            </div>
-          </div>
-        </Link>
+      <nav className="relative mx-auto flex max-w-7xl items-center justify-between py-4 sm:py-5">
+        <BrandLogoLink href="/" variant="navbar" priority hoverGlow shimmer />
 
         <div className="hidden items-center gap-8 lg:flex">
           {navLinks.map((link) => {
@@ -116,28 +107,44 @@ export function Navbar() {
       </nav>
 
       {mobileOpen && (
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="glass-premium mx-4 mb-4 p-6 lg:hidden"
-        >
-          <div className="flex flex-col gap-4">
-            {navLinks.map((link) => {
-              const active = isActivePath(pathname, link.href);
-              return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={cn(
-                    "text-sm",
-                    active ? "text-accent" : "text-muted-foreground"
-                  )}
-                >
-                  {link.label}
-                </Link>
-              );
-            })}
-            <div className="flex flex-col gap-2 border-t border-white/10 pt-4">
+        <>
+          <motion.button
+            type="button"
+            aria-label="סגירת תפריט"
+            className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm lg:hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            onClick={() => setMobileOpen(false)}
+          />
+          <motion.div
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            className="glass-premium metallic-border relative z-50 mx-2 mb-3 max-h-[80vh] overflow-y-auto p-5 sm:mx-4 sm:p-6 lg:hidden"
+          >
+            <div className="mb-5 flex justify-center border-b border-white/5 pb-5">
+              <BrandLogoLink href="/" variant="login" animated hoverGlow />
+            </div>
+            <div className="flex flex-col gap-1">
+              {navLinks.map((link) => {
+                const active = isActivePath(pathname, link.href);
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={cn(
+                      "interactive-surface rounded-none border border-transparent px-4 py-3.5 text-sm transition-colors",
+                      active
+                        ? "border-accent/20 bg-accent/5 text-accent"
+                        : "text-muted-foreground hover:text-white"
+                    )}
+                  >
+                    {link.label}
+                  </Link>
+                );
+              })}
+            </div>
+            <div className="mt-4 flex flex-col gap-2 border-t border-white/10 pt-4">
               <BrandLink href="/login" variant="ghost" size="sm" className="w-full justify-center">
                 התחברות
               </BrandLink>
@@ -145,8 +152,8 @@ export function Navbar() {
                 לדשבורד
               </BrandLink>
             </div>
-          </div>
-        </motion.div>
+          </motion.div>
+        </>
       )}
     </motion.header>
   );
@@ -159,15 +166,8 @@ export function Footer() {
       <div className="mx-auto flex max-w-7xl flex-col gap-10">
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           <div>
-            <Link href="/" className="flex items-center gap-3">
-              <div className="flex size-9 items-center justify-center border border-accent/20 bg-accent/5">
-                <span className="font-brand text-xs font-bold text-accent">SW</span>
-              </div>
-              <div>
-                <span className="font-brand text-xs tracking-[0.2em] text-white">SALES WAROOM</span>
-                <div className="text-[10px] text-muted-foreground">מערכת הפעלה למכירות עילית</div>
-              </div>
-            </Link>
+            <BrandLogoLink href="/" variant="footer" hoverGlow />
+            <div className="mt-3 text-[10px] text-muted-foreground">מערכת הפעלה למכירות עילית</div>
           </div>
           {footerNav.map((item) => (
             <Link
@@ -180,7 +180,7 @@ export function Footer() {
           ))}
         </div>
         <div className="flex flex-col items-center justify-between gap-4 border-t border-white/5 pt-8 md:flex-row">
-          <p className="text-sm text-muted-foreground">© 2026 Sales Waroom</p>
+          <p className="text-sm text-muted-foreground">© 2026 Sales waroom</p>
           <div className="flex gap-8">
             {["פרטיות", "תנאים", "צור קשר"].map((item) => (
               <span key={item} className="text-sm text-muted-foreground">

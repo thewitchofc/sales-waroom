@@ -1,10 +1,19 @@
 import { mainNav } from "@/config/navigation";
 
+export const BRAND_LOGO = {
+  src: "/assets/sales-waroom-logo.png",
+  alt: "Sales waroom — The money is on the floor",
+  width: 1024,
+  height: 1024,
+} as const;
+
 export const siteConfig = {
   name: "SALES WAROOM",
   nameHe: "SALES WAROOM",
+  tagline: "THE MONEY IS ON THE FLOOR",
+  logo: BRAND_LOGO,
   description:
-    "סימולציות מכירה מבוססות AI שמאתגרות את הביטחון, ההתנגדויות ויכולת הסגירה שלכם בזמן אמת.",
+    "מערכת אימון פסיכולוגית ל-high-ticket sales — frame control, authority, certainty ו-pressure response תחת אש. לא מוטיבציה. אימון.",
   url: process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000",
   locale: "he-IL",
   direction: "rtl" as const,
@@ -13,6 +22,7 @@ export const siteConfig = {
     dashboard: "/dashboard",
     login: "/login",
     pricing: "/pricing",
+    arena: "/arena",
   },
   nav: mainNav,
 } as const;

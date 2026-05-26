@@ -9,6 +9,12 @@ import { AICoachPanel } from "@/components/product/ai-coach-panel";
 import { ConversationTimeline } from "@/components/product/conversation-timeline";
 import { ObjectionAnalysisPanel } from "@/components/product/objection-analysis-panel";
 import { FloatingActiveStats } from "@/components/product/active-users-bar";
+import {
+  ClientPersonaBadge,
+  PressureLevelBadge,
+  PersonaTraits,
+} from "@/components/product/client-persona-badge";
+import { BehaviorModeBadge } from "@/components/product/frame-control-indicator";
 import { useSimulationOptional } from "@/components/product/simulation-provider";
 import { useLiveDemo } from "@/hooks/use-live-demo";
 import { TIMELINE_EVENTS } from "@/components/product/demo-data";
@@ -26,7 +32,7 @@ export function LiveCallInterface({ compact = false }: { compact?: boolean }) {
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, ease: [0.21, 0.47, 0.32, 0.98] }}
-        className="glass-premium glass-reflection metallic-border glow-accent-strong os-panel-glow relative overflow-hidden"
+        className="glass-premium glass-reflection glass-shimmer metallic-border glow-accent-strong os-panel-glow relative overflow-hidden"
       >
         <div className="ai-scan-line pointer-events-none absolute inset-0 opacity-10" />
 
@@ -53,13 +59,20 @@ export function LiveCallInterface({ compact = false }: { compact?: boolean }) {
                 <span className="font-brand text-[10px] text-red-400">LIVE</span>
               </motion.div>
               <div>
-                <div className="text-sm font-semibold text-white">סימולציית לקוח קשה</div>
-                <div className="font-brand text-[10px] text-muted-foreground">
-                  SESSION #2847 · ENTERPRISE PROSPECT
+                <div className="text-sm font-semibold text-white">
+                  {demo.persona?.title ?? "סימולציה פסיכולוגית · High-Ticket"}
+                </div>
+                <div className="mt-1 flex flex-wrap items-center gap-2">
+                  <span className="font-brand text-[10px] text-muted-foreground">
+                    SESSION #2847 · FIELD TRAINING
+                  </span>
+                  {demo.behaviorMode && <BehaviorModeBadge mode={demo.behaviorMode} />}
                 </div>
               </div>
             </div>
-            <div className="flex items-center gap-6">
+            <div className="flex flex-wrap items-center gap-3 md:gap-4">
+              {demo.persona && <ClientPersonaBadge persona={demo.persona} />}
+              {demo.pressureLevel && <PressureLevelBadge level={demo.pressureLevel} />}
               <div className="text-start">
                 <motion.div
                   key={demo.formatElapsed()}
@@ -80,11 +93,27 @@ export function LiveCallInterface({ compact = false }: { compact?: boolean }) {
             </div>
           </div>
 
-          <div className={compact ? "space-y-5" : "grid gap-5 lg:grid-cols-5 lg:gap-6"}>
-            <div className={compact ? "" : "lg:col-span-3 space-y-5"}>
-              <div className="border border-white/5 bg-black/50 p-4">
+          {demo.persona && (
+            <div className="mb-5 border border-white/5 bg-black/40 px-4 py-3">
+              <PersonaTraits persona={demo.persona} />
+            </div>
+          )}
+
+          <div
+            className={
+              compact
+                ? "space-y-5"
+                : "grid gap-5 lg:grid-cols-5 lg:items-stretch lg:gap-6"
+            }
+          >
+            <div
+              className={
+                compact ? "" : "flex flex-col gap-5 lg:col-span-3 lg:min-h-[520px]"
+              }
+            >
+              <div className="shrink-0 border border-white/5 bg-black/50 p-4">
                 <div className="mb-3 flex items-center justify-between">
-                  <span className="text-[10px] text-muted-foreground">AI Voice Analysis</span>
+                  <span className="text-[10px] text-muted-foreground">Tonality · Authority Analysis</span>
                   <motion.span
                     className="font-brand text-[9px] text-green-400"
                     animate={{ opacity: [1, 0.4, 1] }}
@@ -101,22 +130,20 @@ export function LiveCallInterface({ compact = false }: { compact?: boolean }) {
                 />
               </div>
 
-              <LiveTranscript
-                messages={demo.visibleMessages}
-                isThinking={demo.isThinking}
-                activeId={demo.activeId}
-              />
+              <div className="flex min-h-[280px] flex-1 flex-col border border-white/5 bg-black/50 p-4 sm:min-h-[320px]">
+                <LiveTranscript
+                  messages={demo.visibleMessages}
+                  isThinking={demo.isThinking}
+                  activeId={demo.activeId}
+                />
+              </div>
             </div>
 
             {!compact && (
-              <div className="lg:col-span-2 space-y-5">
-                <ScoreMetersPanel
-                  confidence={demo.scores.confidence}
-                  objection={demo.scores.objection}
-                  pressure={demo.scores.pressure}
-                />
+              <div className="flex flex-col gap-5 lg:col-span-2 lg:min-h-[520px]">
+                <ScoreMetersPanel scores={demo.scores} behaviorMode={demo.behaviorMode ?? "leading"} />
                 <ObjectionAnalysisPanel live />
-                <div className="border border-white/5 bg-black/40 p-4">
+                <div className="flex min-h-[180px] flex-1 flex-col border border-white/5 bg-black/40 p-4">
                   <ConversationTimeline
                     events={TIMELINE_EVENTS}
                     activeIndex={demo.timelineIndex}

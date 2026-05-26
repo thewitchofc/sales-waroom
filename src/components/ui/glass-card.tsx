@@ -34,10 +34,9 @@ export function GlassCard({
       }
       className={cn(
         "relative overflow-hidden rounded-none",
-        premium ? "glass-premium glass-reflection metallic-border" : "glass metallic-border",
-        hover &&
-          "transition-all duration-500 hover:glow-accent hover:border-accent/20",
-        "p-7 md:p-9",
+        premium ? "glass-premium glass-reflection glass-shimmer metallic-border depth-elevated" : "glass metallic-border",
+        hover && "interactive-surface hover:glow-accent hover:border-accent/20",
+        "p-5 sm:p-7 md:p-9",
         className
       )}
     >

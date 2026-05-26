@@ -26,6 +26,11 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     title: siteConfig.name,
     description: siteConfig.description,
+    images: [{ url: siteConfig.logo.src, width: 1024, height: 1024, alt: siteConfig.logo.alt }],
+  },
+  icons: {
+    icon: [{ url: siteConfig.logo.src, type: "image/jpeg", sizes: "1024x1024" }],
+    apple: [{ url: siteConfig.logo.src, type: "image/jpeg", sizes: "1024x1024" }],
   },
 };
 

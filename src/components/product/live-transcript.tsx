@@ -22,15 +22,15 @@ const typeStyles: Record<
     labelColor: "text-accent",
   },
   coach: {
-    border: "border-blue-400/30",
-    bg: "bg-blue-500/5",
-    label: "AI Coach",
-    labelColor: "text-blue-400",
+    border: "border-red-500/40",
+    bg: "bg-red-500/8",
+    label: "FIELD COACH",
+    labelColor: "text-red-400",
   },
   analysis: {
-    border: "border-red-500/30",
-    bg: "bg-red-500/5",
-    label: "AI Analysis",
+    border: "border-red-500/40",
+    bg: "bg-red-500/8",
+    label: "PSYCH ANALYSIS",
     labelColor: "text-red-400",
   },
 };
@@ -39,12 +39,18 @@ interface LiveTranscriptProps {
   messages: TranscriptMessage[];
   isThinking?: boolean;
   activeId?: number;
+  className?: string;
 }
 
-export function LiveTranscript({ messages, isThinking, activeId }: LiveTranscriptProps) {
+export function LiveTranscript({
+  messages,
+  isThinking,
+  activeId,
+  className,
+}: LiveTranscriptProps) {
   return (
-    <div className="flex h-[320px] flex-col">
-      <div className="mb-3 flex items-center justify-between">
+    <div className={cn("flex min-h-0 flex-1 flex-col", className)}>
+      <div className="mb-3 flex shrink-0 items-center justify-between">
         <div className="flex items-center gap-2">
           <motion.span
             className="size-2 rounded-full bg-red-500"
@@ -53,12 +59,13 @@ export function LiveTranscript({ messages, isThinking, activeId }: LiveTranscrip
           />
           <span className="font-brand text-[10px] text-red-400">TRANSCRIPT LIVE</span>
         </div>
-        <span className="text-[10px] text-muted-foreground">ניתוח שיחה בזמן אמת</span>
+        <span className="text-[10px] text-muted-foreground">Frame · Authority · Certainty</span>
       </div>
 
-      <div className="flex-1 space-y-3 overflow-y-auto pe-1 scrollbar-hide">
-        <AnimatePresence initial={false}>
-          {messages.map((msg) => {
+      <div className="relative min-h-0 flex-1">
+        <div className="absolute inset-0 space-y-3 overflow-y-auto pe-1 scrollbar-hide">
+          <AnimatePresence initial={false}>
+            {messages.map((msg) => {
             const style = typeStyles[msg.type];
             const isActive = msg.id === activeId;
 
@@ -89,17 +96,24 @@ export function LiveTranscript({ messages, isThinking, activeId }: LiveTranscrip
                     {msg.timestamp}
                   </span>
                 </div>
-                <p className="text-sm leading-relaxed text-white/90">{msg.text}</p>
+                <p className={cn(
+                  "text-sm leading-relaxed",
+                  msg.type === "coach" || msg.type === "analysis"
+                    ? "font-medium text-white"
+                    : "text-white/90"
+                )}>{msg.text}</p>
               </motion.div>
             );
-          })}
-        </AnimatePresence>
+            })}
+          </AnimatePresence>
 
-        {isThinking && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-            <AIThinkingIndicator />
-          </motion.div>
-        )}
+          {isThinking && (
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+              <AIThinkingIndicator />
+            </motion.div>
+          )}
+        </div>
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t from-[#0a0a0a] to-transparent" />
       </div>
     </div>
   );

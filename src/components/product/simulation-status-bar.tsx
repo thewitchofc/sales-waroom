@@ -3,18 +3,22 @@
 import { motion } from "framer-motion";
 import { useSimulation } from "@/components/product/simulation-provider";
 import { Waveform } from "@/components/ui/waveform";
+import { BehaviorModeBadge } from "@/components/product/frame-control-indicator";
+import { PressureLevelBadge } from "@/components/product/client-persona-badge";
+import { BEHAVIOR_LABELS } from "@/components/product/demo-data";
 
 const phaseLabels = {
   connecting: { label: "מתחבר...", color: "text-yellow-400", dot: "bg-yellow-400" },
   live: { label: "סימולציה פעילה", color: "text-green-400", dot: "bg-green-400" },
-  analyzing: { label: "AI מנתח", color: "text-red-400", dot: "bg-red-400" },
-  coaching: { label: "AI Coach פעיל", color: "text-blue-400", dot: "bg-blue-400" },
+  analyzing: { label: "ניתוח פסיכולוגי", color: "text-red-400", dot: "bg-red-400" },
+  coaching: { label: "FIELD COACH", color: "text-red-400", dot: "bg-red-400" },
   idle: { label: "ממתין לסימולציה", color: "text-muted-foreground", dot: "bg-muted-foreground" },
 };
 
 export function SimulationStatusBar() {
   const demo = useSimulation();
   const phase = phaseLabels[demo.phase];
+  const behavior = BEHAVIOR_LABELS[demo.behaviorMode];
 
   return (
     <motion.div
@@ -56,6 +60,19 @@ export function SimulationStatusBar() {
             </motion.span>
           </div>
 
+          <BehaviorModeBadge mode={demo.behaviorMode} />
+
+          {demo.pressureLevel && (
+            <PressureLevelBadge level={demo.pressureLevel} />
+          )}
+
+          <div className="hidden items-center gap-2 border border-white/5 px-3 py-1 md:flex">
+            <span className="font-brand text-[9px] text-muted-foreground">FRAME</span>
+            <span className={`font-brand text-sm ${demo.scores.frameControl < 45 ? "text-red-400" : "text-green-400"}`}>
+              {demo.scores.frameControl}
+            </span>
+          </div>
+
           {demo.activeObjection && (
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
@@ -63,7 +80,7 @@ export function SimulationStatusBar() {
               className="border border-red-500/30 bg-red-500/10 px-3 py-1"
             >
               <span className="text-[10px] text-red-400">
-                התנגדות: {demo.activeObjection}
+                {demo.activeObjection}
               </span>
             </motion.div>
           )}
@@ -74,11 +91,14 @@ export function SimulationStatusBar() {
             <motion.span
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="font-brand text-[9px] text-accent"
+              className="font-brand text-[9px] text-red-400"
             >
-              AI PROCESSING...
+              PSYCH ANALYSIS...
             </motion.span>
           )}
+          <span className={`hidden font-brand text-[9px] sm:inline ${behavior.color}`}>
+            {behavior.label}
+          </span>
           <Waveform
             bars={16}
             intense={demo.isSpeaking || demo.isThinking}

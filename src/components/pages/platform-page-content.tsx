@@ -12,28 +12,28 @@ import { Waveform } from "@/components/ui/waveform";
 const modules = [
   {
     code: "SIM",
-    title: "מנוע סימולציה",
-    description: "שיחות AI דינמיות בעברית עם לקוחות קשים, התנגדויות אמיתיות ולחץ מתגבר.",
+    title: "סימולציית לחץ",
+    description: "קונים דומיננטיים, רמות INTENSE/COMBAT, בדיקות frame ו-authority בזמן אמת.",
   },
   {
-    code: "NLP",
-    title: "ניתוח שיחה",
-    description: "תמלול בזמן אמת, זיהוי דפוסים, איבוד פריים והגנה על מחיר.",
+    code: "PSYCH",
+    title: "ניתוח פסיכולוגי",
+    description: "Frame dominance, emotional control, reactive vs leading — מדידה חיה בשיחה.",
   },
   {
     code: "COACH",
-    title: "AI Coach",
-    description: "משוב מיידי, תובנות actionable והמלצות תגובה בכל רגע קריטי.",
+    title: "FIELD COACH",
+    description: "משוב חד ולא מתנחם. חושף איבוד פריים, certainty ו-tonality — ברגע שזה קורה.",
   },
   {
     code: "CMD",
     title: "מרכז פיקוד",
-    description: "דשבורד מנהלים, ביצועי צוות, replay ו-session analytics.",
+    description: "Authority metrics, pressure response, replay — ביצועי צוות תחת אש.",
   },
   {
     code: "VOX",
-    title: "אימון קולי",
-    description: "ניתוח טון, קצב, מילות מילוי ואנרגיה — כמו ב-shootout אמיתי.",
+    title: "Tonality Engine",
+    description: "Certainty, authority ו-emotional control בקול — לפני שהלקוח מרגיש חולשה.",
   },
   {
     code: "INT",
