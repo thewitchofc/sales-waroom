@@ -32,7 +32,9 @@ export function TrustedBy() {
     <Section className="border-t border-white/5 py-14 sm:py-20">
       <div className="grid gap-10 lg:grid-cols-12 lg:items-start lg:gap-8">
         <div className="lg:col-span-5">
-          <p className="mb-2 font-brand text-[10px] tracking-[0.2em] text-accent">מערכת חיה</p>
+          <p className="mb-2 font-brand text-[10px] tracking-[0.2em] text-accent">
+            מערכת חיה
+          </p>
           <h2 className="font-display text-2xl font-black text-white sm:text-3xl">
             תחרות שרצה
             <span className="mt-1 block text-white/45">גם כשאתם לא במסך</span>
@@ -59,7 +61,9 @@ export function TrustedBy() {
                     {stat.value}
                   </span>
                 </div>
-                <div className="mt-1 text-[10px] text-muted-foreground">{stat.label}</div>
+                <div className="mt-1 text-[10px] text-muted-foreground">
+                  {stat.label}
+                </div>
               </div>
             ))}
           </div>
@@ -68,8 +72,13 @@ export function TrustedBy() {
         <div className="lg:col-span-7">
           <div className="border border-white/5 bg-black/50 p-5 sm:p-6">
             <div className="mb-4 flex items-center justify-between">
-              <span className="font-brand text-[10px] text-accent">מובילים · השבוע</span>
-              <Link href="/leaderboard" className="font-brand text-[9px] text-muted-foreground hover:text-accent">
+              <span className="font-brand text-[10px] text-accent">
+                מובילים, השבוע
+              </span>
+              <Link
+                href="/leaderboard"
+                className="font-brand text-[9px] text-muted-foreground hover:text-accent"
+              >
                 לוח דירוג ←
               </Link>
             </div>
@@ -89,11 +98,17 @@ export function TrustedBy() {
                     >
                       #{closer.rank}
                     </span>
-                    <span className="text-sm font-medium text-white">{closer.name}</span>
+                    <span className="text-sm font-medium text-white">
+                      {closer.name}
+                    </span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <span className="font-brand text-[10px] text-green-400">{closer.delta}</span>
-                    <span className="font-display text-base font-black text-white">{closer.score}</span>
+                    <span className="font-brand text-[10px] text-green-400">
+                      {closer.delta}
+                    </span>
+                    <span className="font-display text-base font-black text-white">
+                      {closer.score}
+                    </span>
                   </div>
                 </motion.div>
               ))}
@@ -102,7 +117,7 @@ export function TrustedBy() {
               href="/arena"
               className="mt-4 block border border-red-500/20 bg-red-500/5 px-4 py-3 text-center text-xs text-red-400/90 transition-colors hover:border-red-500/35 hover:text-red-300"
             >
-              אתגר שבועי · שליטה בפריים · הזירה פתוחה
+              אתגר שבועי, שליטה בפריים, הזירה פתוחה
             </Link>
           </div>
 

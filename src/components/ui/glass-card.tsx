@@ -34,10 +34,12 @@ export function GlassCard({
       }
       className={cn(
         "relative overflow-hidden rounded-none",
-        premium ? "glass-premium glass-reflection glass-shimmer metallic-border depth-elevated" : "glass metallic-border",
+        premium
+          ? "glass-premium glass-reflection glass-shimmer metallic-border depth-elevated"
+          : "glass metallic-border",
         hover && "interactive-surface hover:glow-accent hover:border-accent/20",
         "p-5 sm:p-7 md:p-9",
-        className
+        className,
       )}
     >
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/[0.03] via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />

@@ -9,8 +9,14 @@ import {
   CURRENT_SEASON,
   STAT_LABELS,
 } from "@/config/arena-data";
-import { WeeklyCountdown, TournamentCountdown } from "@/components/arena/season-banner";
-import { BattleStatsGrid, PressureLevelVisual } from "@/components/arena/battle-stats-grid";
+import {
+  WeeklyCountdown,
+  TournamentCountdown,
+} from "@/components/arena/season-banner";
+import {
+  BattleStatsGrid,
+  PressureLevelVisual,
+} from "@/components/arena/battle-stats-grid";
 import { PremiumGate, PremiumBadge } from "@/components/arena/premium-gate";
 import { LiveIndicator } from "@/components/arena/rank-tier-badge";
 import { RankingCard } from "@/components/arena/ranking-card";
@@ -30,9 +36,9 @@ export function ArenaHeroChallenge() {
         <div className="mb-8 flex flex-wrap items-start justify-between gap-6">
           <div className="max-w-2xl">
             <div className="mb-3 flex flex-wrap items-center gap-3">
-              <LiveIndicator label="אתגר שבועי · חי" />
+              <LiveIndicator label="אתגר שבועי, חי" />
               <span className="font-brand text-[9px] text-white/35">
-                {CURRENT_SEASON.nameHe} · {CURRENT_SEASON.daysRemaining} ימים
+                {CURRENT_SEASON.nameHe}, {CURRENT_SEASON.daysRemaining} ימים
               </span>
             </div>
             <h1 className="font-display text-3xl font-black leading-tight text-white sm:text-4xl md:text-5xl">
@@ -52,7 +58,10 @@ export function ArenaHeroChallenge() {
         <div className="arena-stat-strip mb-8 flex flex-wrap gap-x-8 gap-y-4 border-y border-white/6 py-5">
           <StatItem label="פרסונה" value={WEEKLY_CHALLENGE.persona} accent />
           <StatItem label="לחץ" value={`רמה ${4}`} />
-          <StatItem label="משתתפים" value={WEEKLY_CHALLENGE.participants.toLocaleString()} />
+          <StatItem
+            label="משתתפים"
+            value={WEEKLY_CHALLENGE.participants.toLocaleString()}
+          />
           <StatItem label="פרס" value={WEEKLY_CHALLENGE.prize} accent />
           <StatItem label="פעילים עכשיו" value="847" live />
         </div>
@@ -68,7 +77,7 @@ export function ArenaHeroChallenge() {
         {!isPremium ? (
           <PremiumGate
             title="הזירה המדורגת נעולה"
-            description="תחרות שבועית, דירוג חי וטורנירים — גישת Warroom."
+            description="תחרות שבועית, דירוג חי וטורנירים. גישת Warroom."
             blur={false}
           />
         ) : (
@@ -94,13 +103,17 @@ function StatItem({
 }) {
   return (
     <div>
-      <p className="font-brand text-[8px] tracking-wide text-white/30">{label}</p>
+      <p className="font-brand text-[8px] tracking-wide text-white/30">
+        {label}
+      </p>
       <p
         className={`mt-1 flex items-center gap-1.5 font-display text-lg font-bold sm:text-xl ${
           accent ? "text-accent" : "text-white"
         }`}
       >
-        {live && <span className="size-1.5 rounded-full bg-red-500 pressure-pulse" />}
+        {live && (
+          <span className="size-1.5 rounded-full bg-red-500 pressure-pulse" />
+        )}
         {value}
       </p>
     </div>
@@ -114,14 +127,16 @@ export function ArenaPersonalPerformance() {
         <RankingCard player={CURRENT_USER} highlight minimal />
       </div>
       <div className="lg:col-span-3">
-        <p className="mb-4 font-brand text-[9px] text-white/35">מדדי קרב · השבוע</p>
+        <p className="mb-4 font-brand text-[9px] text-white/35">
+          מדדי קרב, השבוע
+        </p>
         <BattleStatsGrid stats={CURRENT_USER.stats} compact />
       </div>
     </div>
   );
 }
 
-/** @deprecated Use ArenaHeroChallenge — kept for imports */
+/** @deprecated Use ArenaHeroChallenge. kept for imports */
 export function ArenaChallengePanel() {
   return (
     <>
@@ -154,7 +169,10 @@ export function TournamentPanel() {
           <div className="space-y-4 text-sm">
             <InfoRow label="פורמט" value={tournament.format} />
             <InfoRow label="פרס" value={tournament.prizePool} accent />
-            <InfoRow label="מקומות" value={`${tournament.filled}/${tournament.slots}`} />
+            <InfoRow
+              label="מקומות"
+              value={`${tournament.filled}/${tournament.slots}`}
+            />
             <div>
               <p className="mb-2 font-brand text-[8px] text-white/30">לחץ</p>
               <PressureLevelVisual level={tournament.pressureLevel} />
@@ -178,7 +196,9 @@ function InfoRow({
   return (
     <div className="flex items-center justify-between gap-4 border-b border-white/5 py-2 last:border-0">
       <span className="font-brand text-[9px] text-white/35">{label}</span>
-      <span className={`text-sm font-medium ${accent ? "text-accent" : "text-white/80"}`}>
+      <span
+        className={`text-sm font-medium ${accent ? "text-accent" : "text-white/80"}`}
+      >
         {value}
       </span>
     </div>

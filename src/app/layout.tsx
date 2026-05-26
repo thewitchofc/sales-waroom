@@ -8,7 +8,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: `${siteConfig.name} | מערכת פיקוד AI לקלוזרים עילית`,
+    default: `${siteConfig.name} | מערכת פיקוד AI לזאבים עילית`,
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
@@ -26,11 +26,22 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     title: siteConfig.name,
     description: siteConfig.description,
-    images: [{ url: siteConfig.logo.src, width: 1024, height: 1024, alt: siteConfig.logo.alt }],
+    images: [
+      {
+        url: siteConfig.logo.src,
+        width: 1024,
+        height: 1024,
+        alt: siteConfig.logo.alt,
+      },
+    ],
   },
   icons: {
-    icon: [{ url: siteConfig.logo.src, type: "image/jpeg", sizes: "1024x1024" }],
-    apple: [{ url: siteConfig.logo.src, type: "image/jpeg", sizes: "1024x1024" }],
+    icon: [
+      { url: siteConfig.logo.src, type: "image/jpeg", sizes: "1024x1024" },
+    ],
+    apple: [
+      { url: siteConfig.logo.src, type: "image/jpeg", sizes: "1024x1024" },
+    ],
   },
 };
 

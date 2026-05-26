@@ -7,7 +7,9 @@ export function MarketingShell({ children }: { children: React.ReactNode }) {
   return (
     <WarRoomShell>
       <Navbar />
-      <main id="main-content" className="relative min-h-screen">{children}</main>
+      <main id="main-content" className="relative min-h-screen">
+        {children}
+      </main>
       <Footer />
     </WarRoomShell>
   );

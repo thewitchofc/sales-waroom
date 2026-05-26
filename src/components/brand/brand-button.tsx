@@ -42,7 +42,7 @@ export function BrandButton({
         "relative inline-flex items-center justify-center font-semibold transition-all duration-500 overflow-hidden group",
         variants[variant],
         sizes[size],
-        className
+        className,
       )}
       {...props}
     >

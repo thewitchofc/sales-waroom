@@ -7,7 +7,7 @@ import { PREMIUM_ARENA_FEATURES } from "@/config/arena-data";
 
 export function PremiumGate({
   title = "הזירה פרימיום",
-  description = "תחרויות דירוג, טורנירים שבועיים ו-פרסונות עילית, רק למנויי חדר מלחמה.",
+  description = "תחרויות דירוג, טורנירים שבועיים ופרסונות עילית, רק למנויי חדר מלחמה.",
   children,
   blur = true,
 }: {
@@ -19,7 +19,11 @@ export function PremiumGate({
   return (
     <div className="relative overflow-hidden">
       {children && (
-        <div className={blur ? "pointer-events-none select-none blur-sm opacity-40" : ""}>
+        <div
+          className={
+            blur ? "pointer-events-none select-none blur-sm opacity-40" : ""
+          }
+        >
           {children}
         </div>
       )}
@@ -32,8 +36,12 @@ export function PremiumGate({
           <div className="mb-3 font-brand text-[10px] tracking-[0.3em] text-accent">
             🔒 {title}
           </div>
-          <h3 className="font-display text-xl font-black text-white">נדרש פרימיום</h3>
-          <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{description}</p>
+          <h3 className="font-display text-xl font-black text-white">
+            נדרש פרימיום
+          </h3>
+          <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+            {description}
+          </p>
           <ul className="mt-4 space-y-1.5 text-start text-xs text-white/60">
             {PREMIUM_ARENA_FEATURES.slice(0, 4).map((f) => (
               <li key={f} className="flex items-center gap-2">

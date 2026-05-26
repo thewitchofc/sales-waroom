@@ -14,7 +14,11 @@ const phaseLabels = {
   idle: { label: "ממתין", color: "text-white/35" },
 };
 
-export function SimulationStatusBar({ minimalTelemetry = false }: { minimalTelemetry?: boolean }) {
+export function SimulationStatusBar({
+  minimalTelemetry = false,
+}: {
+  minimalTelemetry?: boolean;
+}) {
   const demo = useSimulation();
   const phase = phaseLabels[demo.phase];
   const behavior = BEHAVIOR_LABELS[demo.behaviorMode];
@@ -22,9 +26,13 @@ export function SimulationStatusBar({ minimalTelemetry = false }: { minimalTelem
   if (minimalTelemetry) {
     return (
       <div className="flex flex-wrap items-center gap-4 border-y border-white/[0.04] py-4 text-sm">
-        <span className={`font-brand text-[10px] ${phase.color}`}>{phase.label}</span>
+        <span className={`font-brand text-[10px] ${phase.color}`}>
+          {phase.label}
+        </span>
         <span className="text-white/30">·</span>
-        <span className="font-brand text-[10px] text-white/45">{demo.formatElapsed()}</span>
+        <span className="font-brand text-[10px] text-white/45">
+          {demo.formatElapsed()}
+        </span>
         <BehaviorModeBadge mode={demo.behaviorMode} />
       </div>
     );
@@ -36,22 +44,30 @@ export function SimulationStatusBar({ minimalTelemetry = false }: { minimalTelem
         <div className="flex flex-wrap items-center gap-4 md:gap-6">
           <div className="flex items-center gap-2">
             <span className={`size-1.5 rounded-full bg-white/40`} />
-            <span className={`font-brand text-[10px] ${phase.color}`}>{phase.label}</span>
+            <span className={`font-brand text-[10px] ${phase.color}`}>
+              {phase.label}
+            </span>
           </div>
 
           <div className="hidden h-4 w-px bg-white/10 sm:block" />
 
-          <span className="font-brand text-sm text-white/70">{demo.formatElapsed()}</span>
+          <span className="font-brand text-sm text-white/70">
+            {demo.formatElapsed()}
+          </span>
 
           <BehaviorModeBadge mode={demo.behaviorMode} />
 
-          {demo.pressureLevel && <PressureLevelBadge level={demo.pressureLevel} />}
+          {demo.pressureLevel && (
+            <PressureLevelBadge level={demo.pressureLevel} />
+          )}
 
           <div className="hidden items-center gap-2 md:flex">
             <span className="font-brand text-[9px] text-white/30">FRAME</span>
             <span
               className={`font-brand text-sm ${
-                demo.scores.frameControl < 45 ? "text-red-400/80" : "text-white/70"
+                demo.scores.frameControl < 45
+                  ? "text-red-400/80"
+                  : "text-white/70"
               }`}
             >
               {demo.scores.frameControl}

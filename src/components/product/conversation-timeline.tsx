@@ -46,17 +46,23 @@ export function ConversationTimeline({
                 className={cn(
                   "relative z-10 mt-1 size-3.5 shrink-0 rounded-full border-2 border-black",
                   typeColors[event.type],
-                  isActive && "ring-2 ring-accent ring-offset-1 ring-offset-black"
+                  isActive &&
+                    "ring-2 ring-accent ring-offset-1 ring-offset-black",
                 )}
                 animate={isActive ? { scale: [1, 1.3, 1] } : {}}
                 transition={{ duration: 1.5, repeat: Infinity }}
               />
-              <div className={cn("flex-1 pb-1", !isPast && !isActive && "opacity-40")}>
+              <div
+                className={cn(
+                  "flex-1 pb-1",
+                  !isPast && !isActive && "opacity-40",
+                )}
+              >
                 <div className="flex items-center justify-between">
                   <span
                     className={cn(
                       "text-sm",
-                      isActive ? "font-semibold text-white" : "text-white/70"
+                      isActive ? "font-semibold text-white" : "text-white/70",
                     )}
                   >
                     {event.label}

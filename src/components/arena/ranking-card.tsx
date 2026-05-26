@@ -1,7 +1,12 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { getXpProgress, getTierForXp, getTierConfig, type ArenaPlayer } from "@/config/arena-data";
+import {
+  getXpProgress,
+  getTierForXp,
+  getTierConfig,
+  type ArenaPlayer,
+} from "@/config/arena-data";
 import { RankTierBadge } from "@/components/arena/rank-tier-badge";
 
 export function XpProgressBar({
@@ -23,7 +28,8 @@ export function XpProgressBar({
           <RankTierBadge tier={tierCfg.id} size="sm" plain={subtle} />
           {!subtle && (
             <span className="font-brand text-[10px] text-white/35">
-              {progress.current.toLocaleString()} / {progress.next.toLocaleString()} XP
+              {progress.current.toLocaleString()} /{" "}
+              {progress.next.toLocaleString()} XP
             </span>
           )}
         </div>
@@ -74,9 +80,9 @@ export function RankingCard({
                   "border",
                   highlight
                     ? "border-accent/15 bg-accent/[0.02]"
-                    : cn(tierCfg.border, "border-white/[0.05] bg-black/30")
-                )
-          )
+                    : cn(tierCfg.border, "border-white/[0.05] bg-black/30"),
+                ),
+          ),
       )}
     >
       {isChampion && (
@@ -98,7 +104,11 @@ export function RankingCard({
                 ? "size-16 border border-accent/20 text-3xl text-accent sm:size-20 sm:text-4xl"
                 : isPodium
                   ? "size-11 border border-white/[0.08] text-lg text-white/70"
-                  : cn("size-14 border text-2xl", tierCfg.border, tierCfg.color)
+                  : cn(
+                      "size-14 border text-2xl",
+                      tierCfg.border,
+                      tierCfg.color,
+                    ),
             )}
           >
             #{displayRank}
@@ -107,13 +117,21 @@ export function RankingCard({
             <div
               className={cn(
                 "font-display font-bold text-white",
-                isChampion ? "text-xl sm:text-2xl" : isPodium ? "text-base" : "text-lg"
+                isChampion
+                  ? "text-xl sm:text-2xl"
+                  : isPodium
+                    ? "text-base"
+                    : "text-lg",
               )}
             >
               {player.name}
             </div>
             <div className="mt-1">
-              <RankTierBadge tier={player.tier} size="sm" plain={isPodium || minimal} />
+              <RankTierBadge
+                tier={player.tier}
+                size="sm"
+                plain={isPodium || minimal}
+              />
             </div>
           </div>
         </div>
@@ -121,7 +139,11 @@ export function RankingCard({
           <div
             className={cn(
               "font-display font-black text-white",
-              isChampion ? "text-4xl sm:text-5xl" : isPodium ? "text-2xl text-white/80" : "text-3xl"
+              isChampion
+                ? "text-4xl sm:text-5xl"
+                : isPodium
+                  ? "text-2xl text-white/80"
+                  : "text-3xl",
             )}
           >
             {player.score}
@@ -134,7 +156,11 @@ export function RankingCard({
 
       {(isChampion || (!isPodium && !minimal)) && (
         <div className="relative mt-5">
-          <XpProgressBar xp={player.xp} showLabel={!isPodium} subtle={isChampion || minimal} />
+          <XpProgressBar
+            xp={player.xp}
+            showLabel={!isPodium}
+            subtle={isChampion || minimal}
+          />
         </div>
       )}
 
@@ -142,7 +168,7 @@ export function RankingCard({
         <div className="relative mt-4 flex flex-wrap gap-4 text-[10px] text-white/40">
           <span>{player.streak} רצף</span>
           <span>
-            {player.wins} ניצחונות · {player.losses} הפסדים
+            {player.wins} ניצחונות, {player.losses} הפסדים
           </span>
         </div>
       )}

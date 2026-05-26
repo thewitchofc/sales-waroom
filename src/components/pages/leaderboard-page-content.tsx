@@ -1,7 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { LeaderboardTable, LeaderboardPodium } from "@/components/arena/leaderboard-table";
+import {
+  LeaderboardTable,
+  LeaderboardPodium,
+} from "@/components/arena/leaderboard-table";
 import { CURRENT_USER } from "@/config/arena-data";
 import { RankingCard } from "@/components/arena/ranking-card";
 import { PremiumGate } from "@/components/arena/premium-gate";
@@ -15,13 +18,15 @@ export function LeaderboardPageContent() {
           דירוג
         </h1>
         <PageGuide title="מה זה?">
-          רשימת כל המתרגלים לפי ציון. למעלה — שלושת המובילים השבוע. הטבלה
-          מראה את שאר המשתתפים. השורה שלך מסומנת.
+          רשימת כל המתרגלים לפי ציון. למעלה. שלושת המובילים השבוע. הטבלה מראה את
+          שאר המשתתפים. השורה שלך מסומנת.
         </PageGuide>
       </header>
 
       <section className="mb-12">
-        <h2 className="mb-6 text-sm font-medium text-white/60">שלושה ראשונים</h2>
+        <h2 className="mb-6 text-sm font-medium text-white/60">
+          שלושה ראשונים
+        </h2>
         <LeaderboardPodium champion />
       </section>
 

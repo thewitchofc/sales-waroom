@@ -18,10 +18,12 @@ export function SeasonPageContent() {
   return (
     <div className="arena-page season-page mx-auto max-w-4xl pb-12">
       <header className="mb-8">
-        <h1 className="font-display text-2xl font-black text-white sm:text-3xl">עונה</h1>
+        <h1 className="font-display text-2xl font-black text-white sm:text-3xl">
+          עונה
+        </h1>
         <PageGuide title="מה זה?">
           כל כמה חודשים יש &quot;עונה&quot; חדשה. צוברים נקודות, עולים בדרגות,
-          ורואים מי מוביל. למטה — ההתקדמות שלכם והדירוג הנוכחי.
+          ורואים מי מוביל. למטה. ההתקדמות שלכם והדירוג הנוכחי.
         </PageGuide>
       </header>
 
@@ -39,7 +41,9 @@ export function SeasonPageContent() {
                   מובילי העונה
                 </h2>
               </div>
-              <span className="font-brand text-[9px] text-white/25">עדכון חי</span>
+              <span className="font-brand text-[9px] text-white/25">
+                עדכון חי
+              </span>
             </div>
             <LeaderboardTable
               players={seasonStandings}
@@ -100,7 +104,7 @@ export function SeasonPageContent() {
         <div className="relative mt-16 min-h-[140px] sm:mt-20">
           <PremiumGate
             title="אליפות העונה"
-            description="כניסה לטורניר העונה, פרסים בלעדיים ופרסונות עילית — פרימיום בלבד."
+            description="כניסה לטורניר העונה, פרסים בלעדיים ופרסונות עילית. פרימיום בלבד."
           />
         </div>
       )}

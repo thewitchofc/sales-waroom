@@ -229,23 +229,22 @@ body {
 }
 
 .pricing-tier-muted {
-  opacity: 0.42;
-  border-color: rgba(255, 255, 255, 0.04) !important;
-  background: rgba(0, 0, 0, 0.55) !important;
-  transform: scale(0.97);
-  filter: saturate(0.6);
+  opacity: 1;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  background: rgba(255, 255, 255, 0.02) !important;
+  transform: scale(0.99);
+  filter: none;
 }
 
 @media (min-width: 1024px) {
   .pricing-tier-muted {
-    opacity: 0.38;
-    transform: scale(0.94);
+    transform: scale(0.98);
   }
 }
 
 .pricing-tier-muted:hover {
-  opacity: 0.55;
-  filter: saturate(0.75);
+  border-color: rgba(255, 255, 255, 0.14) !important;
+  background: rgba(255, 255, 255, 0.035) !important;
 }
 
 .pricing-tier-active {

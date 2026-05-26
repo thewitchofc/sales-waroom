@@ -26,7 +26,9 @@ export function TrainingCallReplay() {
     <div className="mt-12 border border-white/8 bg-black/40 p-6 sm:p-8">
       <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
         <div>
-          <p className="font-brand text-[9px] tracking-[0.15em] text-accent">השמעת קרב</p>
+          <p className="font-brand text-[9px] tracking-[0.15em] text-accent">
+            השמעת קרב
+          </p>
           <h3 className="mt-2 font-display text-xl font-bold text-white sm:text-2xl">
             AI משחזר את השיחה
           </h3>
@@ -57,7 +59,7 @@ export function TrainingCallReplay() {
               >
                 {ev.time}
               </span>
-              <span className="text-white/20">—</span>
+              <span className="text-white/20">. </span>
               <span
                 className={`flex-1 text-sm font-medium sm:text-base ${
                   active ? typeColors[ev.type] : "text-white/50"

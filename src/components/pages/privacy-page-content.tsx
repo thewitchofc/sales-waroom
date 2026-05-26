@@ -1,8 +1,10 @@
 import Link from "next/link";
 import { privacyPolicy } from "@/config/privacy";
+import { accessibilityStatement } from "@/config/accessibility";
 
 export function PrivacyPageContent() {
-  const { lastUpdated, company, contactEmail, sections } = privacyPolicy;
+  const { lastUpdated, company, sections } = privacyPolicy;
+  const { coordinator } = accessibilityStatement;
 
   return (
     <article className="mx-auto max-w-3xl px-5 py-16 sm:px-8 sm:py-20 lg:py-24">
@@ -11,7 +13,9 @@ export function PrivacyPageContent() {
         <h1 className="mt-3 font-display text-3xl font-black text-white sm:text-4xl">
           מדיניות פרטיות
         </h1>
-        <p className="mt-4 text-sm text-white/45">עודכן לאחרונה: {lastUpdated}</p>
+        <p className="mt-4 text-sm text-white/45">
+          עודכן לאחרונה: {lastUpdated}
+        </p>
       </header>
 
       <div className="space-y-10 text-sm leading-relaxed text-white/60">
@@ -26,10 +30,13 @@ export function PrivacyPageContent() {
                   <>
                     {section.body}{" "}
                     <a
-                      href={`mailto:${contactEmail}`}
+                      href={`https://wa.me/${coordinator.whatsapp}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="text-accent/80 underline-offset-2 hover:text-accent hover:underline"
+                      dir="ltr"
                     >
-                      {contactEmail}
+                      {coordinator.phone}
                     </a>
                   </>
                 ) : (

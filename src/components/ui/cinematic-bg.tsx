@@ -3,8 +3,12 @@
 import { useIsMobile } from "@/hooks/use-is-mobile";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 
-/** Section-level accent — stacks on global SiteAtmosphere */
-export function CinematicBackground({ intense: _intense = false }: { intense?: boolean }) {
+/** Section-level accent. stacks on global SiteAtmosphere */
+export function CinematicBackground({
+  intense: _intense = false,
+}: {
+  intense?: boolean;
+}) {
   const isMobile = useIsMobile();
   const reduced = useReducedMotion();
 
@@ -14,7 +18,8 @@ export function CinematicBackground({ intense: _intense = false }: { intense?: b
         <div
           className="absolute start-1/2 top-1/4 size-[min(70vw,560px)] -translate-x-1/2 rounded-full opacity-40"
           style={{
-            background: "radial-gradient(circle, rgba(212,175,85,0.06) 0%, transparent 65%)",
+            background:
+              "radial-gradient(circle, rgba(212,175,85,0.06) 0%, transparent 65%)",
           }}
         />
       )}

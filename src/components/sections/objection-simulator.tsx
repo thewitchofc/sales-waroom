@@ -7,35 +7,50 @@ import { GlassCard } from "@/components/ui/glass-card";
 import { fadeUp } from "@/components/ui/section";
 import { SectionAtmosphere } from "@/components/ui/cinematic-bg";
 import { ObjectionAnalysisPanel } from "@/components/product/objection-analysis-panel";
-import { OBJECTION_SCENARIOS, type ObjectionScenario } from "@/components/product/demo-data";
+import {
+  OBJECTION_SCENARIOS,
+  type ObjectionScenario,
+} from "@/components/product/demo-data";
 import { Waveform } from "@/components/ui/waveform";
 import { AIThinkingIndicator } from "@/components/product/ai-thinking-indicator";
 import { TrainingCompetitionStrip } from "@/components/training/training-competition-strip";
 import { TrainingCoachPresence } from "@/components/training/training-coach-presence";
 import { TrainingCallReplay } from "@/components/training/training-call-replay";
-import { SCENARIO_COMBAT_INTEL, PSYCHOLOGY_ALERTS } from "@/config/training-combat-data";
+import {
+  SCENARIO_COMBAT_INTEL,
+  PSYCHOLOGY_ALERTS,
+} from "@/config/training-combat-data";
 import { cn } from "@/lib/utils";
 
 const features = [
   {
     title: "פסיכולוגיית התנגדות",
-    description: "כל התנגדות היא בדיקת פריים. AI חושף אם אתה מוביל או מגיב, לפני שהלקוח מרגיש.",
+    description:
+      "כל התנגדות היא בדיקת פריים. AI חושף אם אתה מוביל או מגיב, לפני שהלקוח מרגיש.",
     icon: "01",
   },
   {
     title: "ניתוח סמכות",
-    description: "טון, ודאות, שליטה רגשית. חולשה נחשפת בשנייה. לא אחרי שהעסקה מתה.",
+    description:
+      "טון, ודאות, שליטה רגשית. חולשה נחשפת בשנייה. לא אחרי שהעסקה מתה.",
     icon: "02",
   },
   {
     title: "פרסונות דומיננטיות",
-    description: "קונה סמכותי, רכש עוין, יזם עייף. לקוחות ששולטים בפריים ומחפשים חולשה.",
+    description:
+      "קונה סמכותי, רכש עוין, יזם עייף. לקוחות ששולטים בפריים ומחפשים חולשה.",
     icon: "03",
   },
 ];
 
-export function ObjectionSimulator({ showHeader = true }: { showHeader?: boolean }) {
-  const [selected, setSelected] = useState<ObjectionScenario>(OBJECTION_SCENARIOS[0]);
+export function ObjectionSimulator({
+  showHeader = true,
+}: {
+  showHeader?: boolean;
+}) {
+  const [selected, setSelected] = useState<ObjectionScenario>(
+    OBJECTION_SCENARIOS[0],
+  );
   const [analyzing, setAnalyzing] = useState(false);
   const [responseScore, setResponseScore] = useState(92);
 
@@ -55,7 +70,9 @@ export function ObjectionSimulator({ showHeader = true }: { showHeader?: boolean
 
       {showHeader && (
         <div className="mb-12 text-center">
-          <p className="font-brand text-[10px] tracking-[0.2em] text-accent">סימולטור קרב</p>
+          <p className="font-brand text-[10px] tracking-[0.2em] text-accent">
+            סימולטור קרב
+          </p>
           <h2 className="mt-4 font-display text-3xl font-black text-white sm:text-4xl">
             כל התנגדות היא בדיקת פריים
           </h2>
@@ -74,7 +91,7 @@ export function ObjectionSimulator({ showHeader = true }: { showHeader?: boolean
                 ? "border-red-500/30 bg-red-500/10 text-red-400"
                 : alert.severity === "HIGH"
                   ? "border-red-500/20 bg-red-500/5 text-red-400/90"
-                  : "border-accent/20 bg-accent/5 text-accent/80"
+                  : "border-accent/20 bg-accent/5 text-accent/80",
             )}
           >
             {alert.label}
@@ -84,7 +101,11 @@ export function ObjectionSimulator({ showHeader = true }: { showHeader?: boolean
 
       <div className="grid gap-10 lg:grid-cols-5 lg:gap-12">
         <div className="lg:col-span-2">
-          <GlassCard hover={false} premium className="relative h-full overflow-hidden !p-6 sm:!p-8">
+          <GlassCard
+            hover={false}
+            premium
+            className="relative h-full overflow-hidden !p-6 sm:!p-8"
+          >
             <div className="ai-scan-line pointer-events-none absolute inset-0 opacity-15" />
             <div className="relative">
               <div className="mb-6 flex items-center justify-between">
@@ -102,7 +123,12 @@ export function ObjectionSimulator({ showHeader = true }: { showHeader?: boolean
               </div>
 
               <div className="mb-6 border border-white/8 bg-black/50 p-4">
-                <Waveform bars={48} intense={analyzing || !analyzing} active className="h-14" />
+                <Waveform
+                  bars={48}
+                  intense={analyzing || !analyzing}
+                  active
+                  className="h-14"
+                />
               </div>
 
               <div className="flex flex-col gap-3">
@@ -120,7 +146,7 @@ export function ObjectionSimulator({ showHeader = true }: { showHeader?: boolean
                       "group relative w-full overflow-hidden border p-5 text-start transition-all",
                       selected.id === obj.id
                         ? "border-red-500/35 bg-red-500/[0.04] glow-accent"
-                        : "border-white/5 bg-black/40 hover:border-accent/25 hover:bg-white/[0.02]"
+                        : "border-white/5 bg-black/40 hover:border-accent/25 hover:bg-white/[0.02]",
                     )}
                   >
                     <div className="absolute inset-y-0 start-0 w-px bg-gradient-to-b from-transparent via-red-500/40 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
@@ -143,7 +169,9 @@ export function ObjectionSimulator({ showHeader = true }: { showHeader?: boolean
 
               <div className="mt-6 flex items-center justify-between border border-white/8 bg-black/40 p-5">
                 <div className="flex-1 pe-4">
-                  <p className="font-brand text-[8px] text-white/35">מדד דומיננטיות · תגובה</p>
+                  <p className="font-brand text-[8px] text-white/35">
+                    מדד דומיננטיות, תגובה
+                  </p>
                   <div className="mt-2 h-2 overflow-hidden bg-white/5">
                     <AnimatePresence mode="wait">
                       <motion.div
@@ -196,10 +224,21 @@ export function ObjectionSimulator({ showHeader = true }: { showHeader?: boolean
 
       <div className="mt-12 grid gap-6 sm:grid-cols-3">
         {features.map((feature, i) => (
-          <GlassCard key={feature.title} delay={i * 0.1} premium className="!p-6 sm:!p-8">
-            <div className="mb-4 font-brand text-2xl font-bold text-accent/30">{feature.icon}</div>
-            <h3 className="mb-3 font-display text-xl font-bold text-white">{feature.title}</h3>
-            <p className="text-sm leading-relaxed text-white/45">{feature.description}</p>
+          <GlassCard
+            key={feature.title}
+            delay={i * 0.1}
+            premium
+            className="!p-6 sm:!p-8"
+          >
+            <div className="mb-4 font-brand text-2xl font-bold text-accent/30">
+              {feature.icon}
+            </div>
+            <h3 className="mb-3 font-display text-xl font-bold text-white">
+              {feature.title}
+            </h3>
+            <p className="text-sm leading-relaxed text-white/45">
+              {feature.description}
+            </p>
           </GlassCard>
         ))}
       </div>

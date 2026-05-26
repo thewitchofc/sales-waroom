@@ -3,7 +3,7 @@ interface PageGuideProps {
   children: React.ReactNode;
 }
 
-/** הסבר קצר בראש דף — מה קורה כאן */
+/** הסבר קצר בראש דף. מה קורה כאן */
 export function PageGuide({ title, children }: PageGuideProps) {
   return (
     <div className="mb-8 max-w-2xl border-s-2 border-accent/30 ps-4 sm:mb-10">

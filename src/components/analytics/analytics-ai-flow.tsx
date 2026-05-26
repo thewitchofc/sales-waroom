@@ -24,7 +24,9 @@ export function AnalyticsAiFlow() {
   return (
     <section className="relative px-5 py-16 sm:px-8 sm:py-20 lg:px-12">
       <div className="relative mx-auto max-w-6xl">
-        <p className="font-brand text-[10px] tracking-[0.2em] text-accent">זרימת ניתוח</p>
+        <p className="font-brand text-[10px] tracking-[0.2em] text-accent">
+          זרימת ניתוח
+        </p>
         <h2 className="mt-3 font-display text-2xl font-black text-white sm:text-3xl">
           AI מפרק את הפסיכולוגיה שלך בזמן אמת
         </h2>
@@ -51,7 +53,9 @@ export function AnalyticsAiFlow() {
                 )}
                 <div className="relative">
                   <div className="flex items-center justify-between gap-3">
-                    <span className="font-brand text-[10px] text-accent">{step.step}</span>
+                    <span className="font-brand text-[10px] text-accent">
+                      {step.step}
+                    </span>
                     {isActive && analyzing && (
                       <motion.span
                         className="font-brand text-[8px] text-accent"
@@ -62,8 +66,12 @@ export function AnalyticsAiFlow() {
                       </motion.span>
                     )}
                   </div>
-                  <h3 className="mt-4 font-display text-lg font-bold text-white">{step.title}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-white/50">{step.body}</p>
+                  <h3 className="mt-4 font-display text-lg font-bold text-white">
+                    {step.title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-relaxed text-white/50">
+                    {step.body}
+                  </p>
                   <div className="mt-5 flex flex-wrap gap-2">
                     {step.metrics.map((m) => (
                       <span
@@ -84,7 +92,10 @@ export function AnalyticsAiFlow() {
           <motion.div
             key={activeStep}
             initial={{ opacity: 0, width: "0%" }}
-            animate={{ opacity: 1, width: `${((activeStep + 1) / AI_ANALYSIS_STEPS.length) * 100}%` }}
+            animate={{
+              opacity: 1,
+              width: `${((activeStep + 1) / AI_ANALYSIS_STEPS.length) * 100}%`,
+            }}
             className="mt-8 h-0.5 bg-gradient-to-r from-accent/20 via-accent to-accent/20"
           />
         </AnimatePresence>

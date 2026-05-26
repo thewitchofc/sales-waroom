@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 const THINKING_STATES = [
   "מנתח שליטה בפריים...",
   "מזהה התנהגות ריאקטיבית...",
-  "מודד ודאות ו-טונality...",
+  "מודד ודאות וטונality...",
   "מעריך סמכות תחת לחץ...",
   "מייצר משוב פסיכולוגי חד...",
 ];
@@ -42,7 +42,9 @@ export function AIThinkingIndicator({ active = true }: { active?: boolean }) {
         ))}
       </div>
       <div>
-        <div className="font-brand text-[9px] text-red-400">ניתוח פסיכולוגי</div>
+        <div className="font-brand text-[9px] text-red-400">
+          ניתוח פסיכולוגי
+        </div>
         <AnimatePresence mode="wait">
           <motion.span
             key={index}

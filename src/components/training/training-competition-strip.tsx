@@ -5,10 +5,22 @@ import { motion } from "framer-motion";
 import { TRAINING_COMPETITION } from "@/config/training-combat-data";
 
 const stats = [
-  { label: "מדד דומיננטיות", value: String(TRAINING_COMPETITION.dominance), suffix: "" },
-  { label: "דירוג שבועי", value: `#${TRAINING_COMPETITION.weeklyRank}`, href: "/leaderboard" },
+  {
+    label: "מדד דומיננטיות",
+    value: String(TRAINING_COMPETITION.dominance),
+    suffix: "",
+  },
+  {
+    label: "דירוג שבועי",
+    value: `#${TRAINING_COMPETITION.weeklyRank}`,
+    href: "/leaderboard",
+  },
   { label: "רצף ניצחונות", value: String(TRAINING_COMPETITION.winStreak) },
-  { label: "רצף סגירות", value: String(TRAINING_COMPETITION.closingStreak), href: "/arena" },
+  {
+    label: "רצף סגירות",
+    value: String(TRAINING_COMPETITION.closingStreak),
+    href: "/arena",
+  },
   {
     label: "עמידות בלחץ",
     value: String(TRAINING_COMPETITION.pressureResistance),
@@ -25,8 +37,13 @@ export function TrainingCompetitionStrip() {
   return (
     <div className="mb-10 border border-white/8 bg-black/50 p-5 sm:p-6">
       <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
-        <p className="font-brand text-[9px] tracking-[0.15em] text-accent">מערכת תחרותית</p>
-        <Link href="/leaderboard" className="font-brand text-[9px] text-white/40 hover:text-accent">
+        <p className="font-brand text-[9px] tracking-[0.15em] text-accent">
+          מערכת תחרותית
+        </p>
+        <Link
+          href="/leaderboard"
+          className="font-brand text-[9px] text-white/40 hover:text-accent"
+        >
           ללוח הדירוג ←
         </Link>
       </div>
@@ -42,7 +59,9 @@ export function TrainingCompetitionStrip() {
                 stat.highlight ? "border-accent/20 bg-accent/[0.03]" : ""
               } ${stat.href ? "transition-colors hover:border-accent/20" : ""}`}
             >
-              <p className="font-brand text-[8px] text-white/35">{stat.label}</p>
+              <p className="font-brand text-[8px] text-white/35">
+                {stat.label}
+              </p>
               <p
                 className={`mt-2 font-display text-2xl font-black ${
                   stat.highlight ? "text-accent" : "text-white"

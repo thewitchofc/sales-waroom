@@ -3,7 +3,8 @@ import { PrivacyPageContent } from "@/components/pages/privacy-page-content";
 
 export const metadata: Metadata = {
   title: "מדיניות פרטיות",
-  description: "מדיניות הפרטיות של Sales Waroom — איסוף מידע, שימוש, זכויות ויצירת קשר.",
+  description:
+    "מדיניות הפרטיות של Sales Waroom. איסוף מידע, שימוש, זכויות ויצירת קשר.",
 };
 
 export default function PrivacyPage() {

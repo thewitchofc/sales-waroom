@@ -11,7 +11,12 @@ import { SiteAtmosphere } from "@/components/ui/site-atmosphere";
 
 export function AppProviders({ children }: { children: React.ReactNode }) {
   return (
-    <ThemeProvider attribute="class" defaultTheme="dark" forcedTheme="dark" enableSystem={false}>
+    <ThemeProvider
+      attribute="class"
+      defaultTheme="dark"
+      forcedTheme="dark"
+      enableSystem={false}
+    >
       <AccessibilityProvider>
         <SiteAtmosphere />
         <SkipToContent />

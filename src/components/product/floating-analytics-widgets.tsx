@@ -36,7 +36,9 @@ export function FloatingAnalyticsWidgets() {
           transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
           className="glass-premium metallic-border border border-accent/20 px-4 py-3 backdrop-blur-xl"
         >
-          <div className="font-brand text-[9px] text-muted-foreground">שליטה בפריים</div>
+          <div className="font-brand text-[9px] text-muted-foreground">
+            שליטה בפריים
+          </div>
           <motion.div
             key={frameControl}
             initial={{ scale: 1.1 }}
@@ -61,11 +63,14 @@ export function FloatingAnalyticsWidgets() {
       >
         <motion.div
           animate={{ y: [0, 6, 0] }}
-          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+          transition={{
+            duration: 4,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1,
+          }}
           className={`glass-premium metallic-border border px-4 py-3 backdrop-blur-xl ${
-            pressure > 80
-              ? "border-red-500/30 glow-accent"
-              : "border-white/10"
+            pressure > 80 ? "border-red-500/30 glow-accent" : "border-white/10"
           }`}
         >
           <div className="flex items-center gap-2">
@@ -74,7 +79,9 @@ export function FloatingAnalyticsWidgets() {
               animate={{ opacity: [1, 0.3, 1] }}
               transition={{ duration: 1, repeat: Infinity }}
             />
-            <span className="font-brand text-[9px] text-muted-foreground">לחץ</span>
+            <span className="font-brand text-[9px] text-muted-foreground">
+              לחץ
+            </span>
           </div>
           <motion.div
             key={pressure}
@@ -105,13 +112,17 @@ export function FloatingAnalyticsWidgets() {
             transition={{ delay: 0.3 + i * 0.1 }}
             className="glass-premium border border-white/5 px-4 py-2 backdrop-blur-md"
           >
-            <div className="font-brand text-[8px] text-muted-foreground">{w.label}</div>
+            <div className="font-brand text-[8px] text-muted-foreground">
+              {w.label}
+            </div>
             <div className="flex items-baseline gap-2">
               <span className="font-display text-lg font-bold text-white">
                 {metricValues[w.id]}
                 {w.suffix}
               </span>
-              <span className={`text-[9px] ${w.id === "frame" || w.id === "ודאות" ? "text-red-400" : "text-green-400"}`}>
+              <span
+                className={`text-[9px] ${w.id === "frame" || w.id === "ודאות" ? "text-red-400" : "text-green-400"}`}
+              >
                 {w.trend}
               </span>
             </div>

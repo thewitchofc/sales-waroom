@@ -39,7 +39,7 @@ function ToolButton({
         "flex w-full flex-col gap-1 border px-3 py-3 text-start transition-colors",
         active
           ? "border-accent/40 bg-accent/10 text-white"
-          : "border-white/10 bg-white/[0.02] text-white/75 hover:border-white/20 hover:bg-white/[0.04]"
+          : "border-white/10 bg-white/[0.02] text-white/75 hover:border-white/20 hover:bg-white/[0.04]",
       )}
     >
       <span className="text-sm font-medium">{label}</span>
@@ -146,7 +146,10 @@ export function AccessibilityWidget() {
           className="a11y-panel w-[min(100vw-2rem,320px)] border border-white/10 bg-[#0a0a0a] shadow-2xl"
         >
           <div className="flex items-center justify-between border-b border-white/10 px-4 py-3">
-            <h2 id="a11y-panel-title" className="text-sm font-semibold text-white">
+            <h2
+              id="a11y-panel-title"
+              className="text-sm font-semibold text-white"
+            >
               הגדרות נגישות
             </h2>
             <button
@@ -161,7 +164,9 @@ export function AccessibilityWidget() {
 
           <div className="max-h-[min(70vh,420px)] space-y-2 overflow-y-auto p-3">
             {accessibilityTools.map((tool) => {
-              const isToggle = !["fontIncrease", "fontDecrease"].includes(tool.id);
+              const isToggle = !["fontIncrease", "fontDecrease"].includes(
+                tool.id,
+              );
               return (
                 <ToolButton
                   key={tool.id}
@@ -204,7 +209,7 @@ export function AccessibilityWidget() {
           "a11y-widget-trigger flex size-14 items-center justify-center rounded-full border-2 shadow-lg transition-all",
           panelOpen
             ? "border-accent bg-accent text-black"
-            : "border-accent/60 bg-[#0a0a0a] text-accent hover:border-accent hover:bg-accent/10"
+            : "border-accent/60 bg-[#0a0a0a] text-accent hover:border-accent hover:bg-accent/10",
         )}
       >
         <AccessibilityIcon className="size-7" />

@@ -3,7 +3,7 @@ import { LeaderboardPageContent } from "@/components/pages/leaderboard-page-cont
 
 export const metadata: Metadata = {
   title: "לוח דירוג",
-  description: "לוח דירוג חי, top closers, דירוג movement, רצףs ו-badges.",
+  description: "לוח דירוג חי, זאבים מובילים, דירוג movement, רצףs וbadges.",
 };
 
 export default function LeaderboardPage() {

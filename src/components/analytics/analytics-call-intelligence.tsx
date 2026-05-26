@@ -39,17 +39,22 @@ export function AnalyticsCallIntelligence() {
       <div className="relative mx-auto max-w-6xl">
         <div className="mb-12 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div>
-            <p className="font-brand text-[10px] tracking-[0.2em] text-accent">מודיעין שיחה</p>
+            <p className="font-brand text-[10px] tracking-[0.2em] text-accent">
+              מודיעין שיחה
+            </p>
             <h2 className="mt-3 font-display text-3xl font-black text-white sm:text-4xl">
-              השמעת קרב · {ANALYTICS_SESSION.label}
+              השמעת קרב, {ANALYTICS_SESSION.label}
             </h2>
             <p className="mt-4 max-w-lg text-sm text-white/45 sm:text-base">
-              AI משחזר את השיחה. כל ירידת סמכות, כל היסוס, כל קפיצת מומנטום, חשוף.
+              AI משחזר את השיחה. כל ירידת סמכות, כל היסוס, כל קפיצת מומנטום,
+              חשוף.
             </p>
           </div>
           <div className="flex items-center gap-2 border border-red-500/20 bg-red-500/5 px-3 py-2">
             <span className="pressure-pulse size-1.5 rounded-full bg-red-500" />
-            <span className="font-brand text-[9px] text-red-400/90">ניתוח חי פעיל</span>
+            <span className="font-brand text-[9px] text-red-400/90">
+              ניתוח חי פעיל
+            </span>
           </div>
         </div>
 
@@ -61,7 +66,9 @@ export function AnalyticsCallIntelligence() {
                 <div className="relative">
                   <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
                     <div>
-                      <p className="font-brand text-[9px] text-white/40">סימולציה · קונה עוין</p>
+                      <p className="font-brand text-[9px] text-white/40">
+                        סימולציה, קונה עוין
+                      </p>
                       <p className="mt-1 font-display text-lg font-bold text-white">
                         שיחה #{ANALYTICS_SESSION.id}
                       </p>
@@ -74,21 +81,38 @@ export function AnalyticsCallIntelligence() {
                         aria-label={playing ? "השהה" : "נגן"}
                       >
                         {playing ? (
-                          <svg className="size-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                          <svg
+                            className="size-4 text-white"
+                            fill="currentColor"
+                            viewBox="0 0 24 24"
+                          >
                             <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z" />
                           </svg>
                         ) : (
-                          <svg className="size-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                          <svg
+                            className="size-4 text-white"
+                            fill="currentColor"
+                            viewBox="0 0 24 24"
+                          >
                             <path d="M8 5v14l11-7z" />
                           </svg>
                         )}
                       </button>
-                      <span className="font-brand text-sm text-white">{currentTime}</span>
-                      <span className="font-brand text-xs text-white/35">/ {ANALYTICS_SESSION.duration}</span>
+                      <span className="font-brand text-sm text-white">
+                        {currentTime}
+                      </span>
+                      <span className="font-brand text-xs text-white/35">
+                        / {ANALYTICS_SESSION.duration}
+                      </span>
                     </div>
                   </div>
 
-                  <Waveform bars={72} intense active={playing} className="mb-6 h-20 md:h-24" />
+                  <Waveform
+                    bars={72}
+                    intense
+                    active={playing}
+                    className="mb-6 h-20 md:h-24"
+                  />
 
                   <div className="relative mb-2 h-2 bg-white/5">
                     <motion.div
@@ -116,7 +140,7 @@ export function AnalyticsCallIntelligence() {
 
           <div className="lg:col-span-5">
             <p className="mb-4 font-brand text-[9px] tracking-[0.15em] text-white/40">
-              ציר זמן · אירועים
+              ציר זמן, אירועים
             </p>
             <div className="space-y-0 border border-white/8">
               {CALL_TIMELINE_EVENTS.map((ev, i) => {
@@ -139,7 +163,7 @@ export function AnalyticsCallIntelligence() {
                     >
                       {ev.time}
                     </span>
-                    <span className="text-white/20">—</span>
+                    <span className="text-white/20">. </span>
                     <span
                       className={`flex-1 text-sm font-medium ${
                         active ? "text-white" : "text-white/50"
@@ -169,7 +193,7 @@ export function AnalyticsCallIntelligence() {
                     : "border-white/5 text-white/25"
                 }`}
               >
-                {ev.time} · {ev.label}
+                {ev.time}, {ev.label}
               </span>
             );
           })}

@@ -2,8 +2,13 @@ import Link from "next/link";
 import { accessibilityStatement } from "@/config/accessibility";
 
 export function AccessibilityPageContent() {
-  const { lastUpdated, standard, coordinator, accessibleFeatures, knownLimitations } =
-    accessibilityStatement;
+  const {
+    lastUpdated,
+    standard,
+    coordinator,
+    accessibleFeatures,
+    knownLimitations,
+  } = accessibilityStatement;
 
   return (
     <article className="mx-auto max-w-3xl px-5 py-16 sm:px-8 sm:py-20 lg:py-24">
@@ -12,7 +17,9 @@ export function AccessibilityPageContent() {
         <h1 className="mt-3 font-display text-3xl font-black text-white sm:text-4xl">
           הצהרת נגישות
         </h1>
-        <p className="mt-4 text-sm text-white/45">עודכן לאחרונה: {lastUpdated}</p>
+        <p className="mt-4 text-sm text-white/45">
+          עודכן לאחרונה: {lastUpdated}
+        </p>
       </header>
 
       <div className="space-y-10 text-sm leading-relaxed text-white/60">
@@ -23,8 +30,8 @@ export function AccessibilityPageContent() {
           <p>
             בכל דף באתר מופיע כפתור נגישות צף (פינה שמאלית תחתונה). לחיצה עליו
             פותחת תפריט עם הגדרות: הגדלת/הקטנת טקסט, ניגודיות גבוהה, הדגשת
-            קישורים, גופן קריא, ריווח שורות וביטול אנימציות. ההגדרות נשמרות
-            בין ביקורים.
+            קישורים, גופן קריא, ריווח שורות וביטול אנימציות. ההגדרות נשמרות בין
+            ביקורים.
           </p>
         </section>
 
@@ -43,8 +50,8 @@ export function AccessibilityPageContent() {
             תקן נגישות
           </h2>
           <p>
-            האתר נבנה בהתאם ל{standard}. ייתכנו אזורים שטרם הושלמה
-            הנגשתם במלואה.
+            האתר נבנה בהתאם ל{standard}. ייתכנו אזורים שטרם הושלמה הנגשתם
+            במלואה.
           </p>
         </section>
 
@@ -81,7 +88,7 @@ export function AccessibilityPageContent() {
             פנייה בנושא נגישות
           </h2>
           <p className="mb-4">
-            נתקלתם בבעיית נגישות? נשמח לעזור. ניתן לפנות לרכז/ת הנגישות:
+            נתקלתם בבעיית נגישות? נשמח לעזור. ניתן לפנות אלינו:
           </p>
           <ul className="space-y-2 border border-white/[0.06] bg-white/[0.02] p-5">
             <li>
@@ -89,18 +96,11 @@ export function AccessibilityPageContent() {
               {coordinator.name}
             </li>
             <li>
-              <span className="text-white/40">דוא&quot;ל: </span>
-              <a
-                href={`mailto:${coordinator.email}`}
-                className="text-accent/80 underline-offset-2 hover:text-accent hover:underline"
-              >
-                {coordinator.email}
-              </a>
-            </li>
-            <li>
               <span className="text-white/40">טלפון: </span>
               <a
-                href={`tel:${coordinator.phone.replace(/-/g, "")}`}
+                href={`https://wa.me/${coordinator.whatsapp}`}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-accent/80 underline-offset-2 hover:text-accent hover:underline"
                 dir="ltr"
               >

@@ -40,7 +40,9 @@ export function StatusIndicator({
 
   return (
     <div className="flex items-center justify-between gap-4 border-b border-white/5 py-2 last:border-0">
-      <span className="font-brand text-[10px] text-muted-foreground">{value}</span>
+      <span className="font-brand text-[10px] text-muted-foreground">
+        {value}
+      </span>
       <div className="flex items-center gap-2">
         <span className="text-xs text-white/70">{label}</span>
         <span className={cn("size-1.5 rounded-full", colors[status])} />
@@ -71,7 +73,7 @@ export function ClassifiedBadge() {
     <div className="inline-flex items-center gap-2 border border-white/10 bg-black/40 px-3 py-1">
       <span className="size-1 bg-red-500/80" />
       <span className="font-brand text-[9px] tracking-wider text-white/50">
-        סודי · גישת עילית
+        סודי, גישת עילית
       </span>
     </div>
   );

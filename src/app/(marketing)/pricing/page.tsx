@@ -4,7 +4,7 @@ import { Pricing } from "@/components/sections/pricing";
 
 export const metadata: Metadata = {
   title: "חבילות",
-  description: "רמות גישה ל-Sales Waroom, ממפעיל עצמאי ועד מרכז פיקוד ארגוני.",
+  description: "רמות גישה ל Sales Waroom, ממפעיל עצמאי ועד מרכז פיקוד ארגוני.",
 };
 
 export default function PricingPage() {
@@ -12,7 +12,7 @@ export default function PricingPage() {
     <>
       <PageHero
         compact
-        label="חבילות · SALES WAROOM"
+        label="חבילות, SALES WAROOM"
         title="שלוש רמות גישה"
         description="בחרו רמה. הזירה והדירוג פתוחים למנויים."
       />

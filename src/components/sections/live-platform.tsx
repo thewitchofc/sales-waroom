@@ -12,10 +12,12 @@ function DemoContent() {
   return (
     <div className="mx-auto max-w-4xl space-y-8 py-16 sm:py-20">
       <header className="px-5 sm:px-8">
-        <h1 className="font-display text-2xl font-black text-white sm:text-3xl">דמו</h1>
+        <h1 className="font-display text-2xl font-black text-white sm:text-3xl">
+          דמו
+        </h1>
         <PageGuide title="מה קורה כאן?">
-          זו שיחת תרגול קצרה. ה-AI מדבר כמו לקוח — אתם עונים. אין צורך
-          להבין הכל; פשוט קראו את התמלול וראו איך המערכת עובדת.
+          זו שיחת תרגול קצרה. ה AI מדבר כמו לקוח. אתם עונים. אין צורך להבין הכל;
+          פשוט קראו את התמלול וראו איך המערכת עובדת.
         </PageGuide>
       </header>
 

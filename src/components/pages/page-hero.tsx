@@ -5,7 +5,12 @@ interface PageHeroProps {
   compact?: boolean;
 }
 
-export function PageHero({ label, title, description, compact = false }: PageHeroProps) {
+export function PageHero({
+  label,
+  title,
+  description,
+  compact = false,
+}: PageHeroProps) {
   return (
     <section
       className={`relative overflow-hidden border-b border-white/[0.04] pt-28 sm:pt-32 ${

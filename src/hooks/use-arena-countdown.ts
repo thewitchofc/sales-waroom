@@ -26,7 +26,10 @@ function getRemaining(target: Date) {
   return { days, hours, minutes, seconds, total, expired: total === 0 };
 }
 
-export function formatCountdown(r: ReturnType<typeof getRemaining>, compact = false) {
+export function formatCountdown(
+  r: ReturnType<typeof getRemaining>,
+  compact = false,
+) {
   if (r.expired) return compact ? "00:00:00" : "הסתיים";
   if (compact) {
     return `${pad(r.hours + r.days * 24)}:${pad(r.minutes)}:${pad(r.seconds)}`;

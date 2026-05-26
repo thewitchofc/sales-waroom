@@ -9,7 +9,13 @@ import { arenaRoutes } from "@/config/routes";
 import { BrandLogoLink } from "@/components/brand/brand-logo";
 import { cn } from "@/lib/utils";
 
-function SidebarNav({ onNavigate, quiet = false }: { onNavigate?: () => void; quiet?: boolean }) {
+function SidebarNav({
+  onNavigate,
+  quiet = false,
+}: {
+  onNavigate?: () => void;
+  quiet?: boolean;
+}) {
   const pathname = usePathname();
 
   return (
@@ -35,15 +41,18 @@ function SidebarNav({ onNavigate, quiet = false }: { onNavigate?: () => void; qu
                       ? isArena
                         ? "border-red-500/30 bg-red-500/10 text-red-400"
                         : "border-accent/30 bg-accent/10 text-accent"
-                      : "border-transparent text-muted-foreground hover:border-white/5 hover:bg-white/[0.02] hover:text-white"
-                  )
+                      : "border-transparent text-muted-foreground hover:border-white/5 hover:bg-white/[0.02] hover:text-white",
+                  ),
             )}
           >
             <span className="flex items-center gap-2.5">
               {active && !quiet && (
                 <motion.span
                   layoutId="dash-nav"
-                  className={cn("size-1.5 rounded-full", isArena ? "bg-red-500" : "bg-accent")}
+                  className={cn(
+                    "size-1.5 rounded-full",
+                    isArena ? "bg-red-500" : "bg-accent",
+                  )}
                 />
               )}
               {active && quiet && (
@@ -52,7 +61,9 @@ function SidebarNav({ onNavigate, quiet = false }: { onNavigate?: () => void; qu
               {item.label}
             </span>
             {item.badge && !quiet && (
-              <span className="font-brand text-[8px] text-red-400/80">{item.badge}</span>
+              <span className="font-brand text-[8px] text-red-400/80">
+                {item.badge}
+              </span>
             )}
           </Link>
         );
@@ -81,10 +92,17 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
           "fixed inset-y-0 start-0 z-40 hidden w-60 flex-col border-e lg:flex",
           quietSidebar
             ? "border-white/[0.04] bg-black/90"
-            : "border-white/5 bg-black/95 backdrop-blur-xl"
+            : "border-white/5 bg-black/95 backdrop-blur-xl",
         )}
       >
-        <div className={cn("px-4 py-6", quietSidebar ? "border-b border-white/[0.04]" : "border-b border-white/5")}>
+        <div
+          className={cn(
+            "px-4 py-6",
+            quietSidebar
+              ? "border-b border-white/[0.04]"
+              : "border-b border-white/5",
+          )}
+        >
           <BrandLogoLink
             href="/"
             variant="sidebar"
@@ -92,19 +110,28 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
           />
         </div>
         <SidebarNav quiet={quietSidebar} />
-        <div className={cn("p-3", quietSidebar ? "border-t border-white/[0.04]" : "border-t border-white/5")}>
+        <div
+          className={cn(
+            "p-3",
+            quietSidebar
+              ? "border-t border-white/[0.04]"
+              : "border-t border-white/5",
+          )}
+        >
           <Link
             href="/profile"
             className={cn(
               "block p-3 transition-colors",
               quietSidebar
                 ? "border border-transparent hover:border-white/[0.06] hover:bg-white/[0.02]"
-                : "glass-premium glass-shimmer interactive-surface border border-white/5 p-4 hover:border-accent/20"
+                : "glass-premium glass-shimmer interactive-surface border border-white/5 p-4 hover:border-accent/20",
             )}
           >
-            <div className="mb-1.5 font-brand text-[8px] text-white/30">לוחם</div>
+            <div className="mb-1.5 font-brand text-[8px] text-white/30">
+              לוחם
+            </div>
             <div className="text-sm font-medium text-white/85">דנה כהן</div>
-            <div className="text-xs text-white/35">עילית · #7</div>
+            <div className="text-xs text-white/35">עילית, #7</div>
           </Link>
         </div>
       </aside>
@@ -131,7 +158,10 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
               <div className="border-b border-white/5 p-5">
                 <BrandLogoLink href="/" variant="sidebar" className="mx-auto" />
               </div>
-              <SidebarNav onNavigate={() => setMobileOpen(false)} quiet={quietSidebar} />
+              <SidebarNav
+                onNavigate={() => setMobileOpen(false)}
+                quiet={quietSidebar}
+              />
             </motion.aside>
           </>
         )}
@@ -153,7 +183,9 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
             <span className="text-xs text-white/40">Sales Waroom</span>
           </div>
           <div className="flex items-center gap-3 sm:gap-4">
-            <span className="hidden text-xs text-white/35 md:block">דנה כהן</span>
+            <span className="hidden text-xs text-white/35 md:block">
+              דנה כהן
+            </span>
             <Link
               href="/"
               className="interactive-surface border border-white/10 px-3 py-1.5 text-xs text-muted-foreground hover:border-accent/30 hover:text-white"
@@ -162,7 +194,9 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
             </Link>
           </div>
         </header>
-        <main id="main-content" className="flex-1 p-4 sm:p-6 lg:p-8">{children}</main>
+        <main id="main-content" className="flex-1 p-4 sm:p-6 lg:p-8">
+          {children}
+        </main>
       </div>
     </div>
   );

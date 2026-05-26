@@ -5,7 +5,7 @@ export interface NavItem {
   badge?: string;
 }
 
-/** תפריט ראשי — רק מה שצריך להחלטה ראשונה */
+/** תפריט ראשי. רק מה שצריך להחלטה ראשונה */
 export const mainNav: NavItem[] = [
   { label: "דמו", href: "/demo", description: "לנסות שיחה עם AI" },
   { label: "חבילות", href: "/pricing", description: "מחירים ותוכניות" },
@@ -14,6 +14,7 @@ export const mainNav: NavItem[] = [
 
 export const dashboardNav: NavItem[] = [
   { label: "תרגול", href: "/dashboard" },
+  { label: "מבחן תיאוריה", href: "/theory-quiz" },
   { label: "הזירה", href: "/arena" },
   { label: "דירוג", href: "/leaderboard" },
   { label: "עונה", href: "/season" },
@@ -29,6 +30,7 @@ export const footerNav: NavItem[] = [
 
 export const footerPlatformLinks: NavItem[] = [
   { label: "תרגול", href: "/dashboard" },
+  { label: "מבחן תיאוריה", href: "/theory-quiz" },
   { label: "אימון", href: "/training" },
   { label: "אנליטיקה", href: "/analytics" },
   { label: "פלטפורמה", href: "/platform" },
@@ -53,7 +55,13 @@ export const productRoutes = [
     title: "דמו",
     href: "/demo",
     label: "התחלה",
-    description: "שיחת AI קצרה — רואים איך זה עובד.",
+    description: "שיחת AI קצרה. רואים איך זה עובד.",
+  },
+  {
+    title: "מבחן תיאוריה",
+    href: "/theory-quiz",
+    label: "תיאוריה",
+    description: "שאלון אמריקאי עם ציון. התנגדויות, פתיחה, סגירה.",
   },
   {
     title: "תרגול",

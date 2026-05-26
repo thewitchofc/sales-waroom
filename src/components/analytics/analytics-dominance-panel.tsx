@@ -10,7 +10,9 @@ export function AnalyticsDominancePanel() {
       <div className="relative mx-auto max-w-6xl">
         <div className="mb-12 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div>
-            <p className="font-brand text-[10px] tracking-[0.2em] text-accent">מדדי ביצוע</p>
+            <p className="font-brand text-[10px] tracking-[0.2em] text-accent">
+              מדדי ביצוע
+            </p>
             <h2 className="mt-3 font-display text-3xl font-black text-white sm:text-4xl">
               מדדי דומיננטיות
             </h2>
@@ -22,7 +24,12 @@ export function AnalyticsDominancePanel() {
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
           {DOMINANCE_METRICS.map((metric, i) => (
-            <GlassCard key={metric.id} delay={i * 0.08} premium className="!p-6 sm:!p-8">
+            <GlassCard
+              key={metric.id}
+              delay={i * 0.08}
+              premium
+              className="!p-6 sm:!p-8"
+            >
               <p className="font-brand text-[8px] tracking-[0.12em] text-white/35">
                 {metric.label}
               </p>
@@ -58,7 +65,9 @@ export function AnalyticsDominancePanel() {
                 </div>
                 <div>
                   {metric.trend && (
-                    <span className="font-brand text-sm text-green-400">{metric.trend}%</span>
+                    <span className="font-brand text-sm text-green-400">
+                      {metric.trend}%
+                    </span>
                   )}
                   <p className="mt-1 text-[10px] text-white/35">שבועי</p>
                 </div>

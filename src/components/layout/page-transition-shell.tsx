@@ -9,7 +9,11 @@ import {
   pageTransitionReduced,
 } from "@/lib/motion";
 
-export function PageTransitionShell({ children }: { children: React.ReactNode }) {
+export function PageTransitionShell({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const pathname = usePathname();
   const reduced = useReducedMotion();
   const variants = reduced ? pageTransitionReduced : pageTransition;

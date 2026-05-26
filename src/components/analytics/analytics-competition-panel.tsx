@@ -29,7 +29,7 @@ const stats = [
   {
     label: "רצף סגירות",
     value: String(COMPETITION_INTEL.closingStreak),
-    sub: "רצף פעיל · הזירה",
+    sub: "רצף פעיל, הזירה",
     href: "/arena",
   },
 ];
@@ -47,7 +47,9 @@ export function AnalyticsCompetitionPanel() {
       <div className="relative mx-auto max-w-6xl">
         <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="font-brand text-[10px] tracking-[0.2em] text-accent">חיבור להזירה</p>
+            <p className="font-brand text-[10px] tracking-[0.2em] text-accent">
+              חיבור להזירה
+            </p>
             <h2 className="mt-3 font-display text-2xl font-black text-white sm:text-3xl">
               האנליטיקה שלך = המיקום שלך בקרב
             </h2>
@@ -75,7 +77,9 @@ export function AnalyticsCompetitionPanel() {
                 <p className="font-brand text-[8px] tracking-[0.12em] text-white/35">
                   {stat.label}
                 </p>
-                <p className="mt-3 font-display text-3xl font-black text-accent">{stat.value}</p>
+                <p className="mt-3 font-display text-3xl font-black text-accent">
+                  {stat.value}
+                </p>
                 <p className="mt-2 text-xs text-white/40">{stat.sub}</p>
               </motion.div>
             );
@@ -91,7 +95,7 @@ export function AnalyticsCompetitionPanel() {
         </div>
 
         <p className="mt-8 text-center font-brand text-[10px] text-white/30">
-          רק מנויים נכנסים לקרבות מדורגים · הלוח מתעדכן כל שבוע
+          רק מנויים נכנסים לקרבות מדורגים, הלוח מתעדכן כל שבוע
         </p>
       </div>
     </section>

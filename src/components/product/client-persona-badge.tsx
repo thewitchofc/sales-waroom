@@ -2,7 +2,10 @@
 
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
-import type { ClientPersona, PressureLevel } from "@/components/product/demo-data";
+import type {
+  ClientPersona,
+  PressureLevel,
+} from "@/components/product/demo-data";
 
 const dominanceStyles = {
   HIGH: "border-red-500/30 bg-red-500/10 text-red-400",
@@ -26,7 +29,7 @@ export function ClientPersonaBadge({ persona }: { persona: ClientPersona }) {
       <span
         className={cn(
           "border px-2 py-1 font-brand text-[9px]",
-          dominanceStyles[persona.dominance]
+          dominanceStyles[persona.dominance],
         )}
       >
         {dominanceLabels[persona.dominance]}
@@ -44,17 +47,28 @@ export function PressureLevelBadge({ level }: { level: PressureLevel }) {
         "border px-3 py-1.5",
         isIntense
           ? "border-red-500/30 bg-red-500/10"
-          : "border-accent/20 bg-accent/5"
+          : "border-accent/20 bg-accent/5",
       )}
       animate={
         isIntense
-          ? { boxShadow: ["0 0 0 rgba(239,68,68,0)", "0 0 12px rgba(239,68,68,0.15)", "0 0 0 rgba(239,68,68,0)"] }
+          ? {
+              boxShadow: [
+                "0 0 0 rgba(239,68,68,0)",
+                "0 0 12px rgba(239,68,68,0.15)",
+                "0 0 0 rgba(239,68,68,0)",
+              ],
+            }
           : {}
       }
       transition={{ duration: 2, repeat: Infinity }}
     >
       <div className="font-brand text-[8px] text-muted-foreground">לחץ</div>
-      <div className={cn("text-xs font-bold", isIntense ? "text-red-400" : "text-accent")}>
+      <div
+        className={cn(
+          "text-xs font-bold",
+          isIntense ? "text-red-400" : "text-accent",
+        )}
+      >
         {level.label}
       </div>
     </motion.div>

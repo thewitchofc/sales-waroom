@@ -48,7 +48,7 @@ export const AI_ANALYSIS_STEPS = [
   {
     step: "02",
     title: "ניתוח AI",
-    body: "לחץ · סמכות · שליטה רגשית · ודאות · התנגדויות · טונality",
+    body: "לחץ, סמכות, שליטה רגשית, ודאות, התנגדויות, טונality",
     metrics: ["לחץ", "סמכות", "ודאות"],
   },
   {
@@ -91,7 +91,7 @@ export const ANALYTICS_CORRECTIONS: AnalyticsCorrection[] = [
   {
     id: 3,
     severity: "HIGH",
-    behavior: "איבוד פריים · מחיר",
+    behavior: "איבוד פריים, מחיר",
     psychology: "הלקוח הוביל אותך לדיון על עלות לפני ערך",
     correction: "החזר שליטה. אל תוכיח. תוביל.",
     improvedResponse: "לפני שאדבר על מחיר, מה כבר נכשל בפתרונות קודמים?",
@@ -127,12 +127,12 @@ export const COMPETITION_INTEL = {
 };
 
 export const PSYCHOLOGICAL_SIGNALS: PsychologicalSignal[] = [
-  { id: 1, time: "00:52", signal: "עלייה בלחץ · בדיקת סמכות", type: "shift" },
-  { id: 2, time: "01:14", signal: "ירידת ביטחון · האטה בקול", type: "collapse" },
-  { id: 3, time: "01:44", signal: "סימן פחד · הגנה על מחיר", type: "fear" },
-  { id: 4, time: "02:07", signal: "היסוס · מילוי שקט", type: "hesitation" },
-  { id: 5, time: "02:55", signal: "קפיצת ביטחון · החזרת פריים", type: "spike" },
-  { id: 6, time: "03:18", signal: "מומנטום סגירה · ודאות עלתה", type: "spike" },
+  { id: 1, time: "00:52", signal: "עלייה בלחץ, בדיקת סמכות", type: "shift" },
+  { id: 2, time: "01:14", signal: "ירידת ביטחון, האטה בקול", type: "collapse" },
+  { id: 3, time: "01:44", signal: "סימן פחד, הגנה על מחיר", type: "fear" },
+  { id: 4, time: "02:07", signal: "היסוס, מילוי שקט", type: "hesitation" },
+  { id: 5, time: "02:55", signal: "קפיצת ביטחון, החזרת פריים", type: "spike" },
+  { id: 6, time: "03:18", signal: "מומנטום סגירה, ודאות עלתה", type: "spike" },
 ];
 
 export const severityLabels: Record<CorrectionSeverity, string> = {

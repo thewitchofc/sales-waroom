@@ -8,7 +8,11 @@ import { AnalyticsCompetitionPanel } from "@/components/analytics/analytics-comp
 import { AnalyticsCorrectionsPanel } from "@/components/analytics/analytics-corrections-panel";
 import { AnalyticsPsychologicalBreakdown } from "@/components/analytics/analytics-psychological-breakdown";
 
-export function AnalyticsDashboard({ showHeader = true }: { showHeader?: boolean }) {
+export function AnalyticsDashboard({
+  showHeader = true,
+}: {
+  showHeader?: boolean;
+}) {
   return (
     <>
       {showHeader && <AnalyticsLiveHud />}

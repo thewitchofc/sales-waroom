@@ -2,7 +2,10 @@
 
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
-import type { PsychologyScores, BehaviorMode } from "@/components/product/demo-data";
+import type {
+  PsychologyScores,
+  BehaviorMode,
+} from "@/components/product/demo-data";
 import {
   FrameControlIndicator,
   BehaviorModeBadge,
@@ -68,14 +71,16 @@ function ScoreMeter({
   const style = variantStyles[variant];
   const isCritical =
     (variant === "pressure" && value > 80) ||
-    (["frameControl", "authority", "certainty", "confidence"].includes(variant) &&
+    (["frameControl", "authority", "certainty", "confidence"].includes(
+      variant,
+    ) &&
       value < 45);
 
   return (
     <motion.div
       className={cn(
         "border bg-black/40 p-4",
-        isCritical ? "border-red-500/20" : "border-white/5"
+        isCritical ? "border-red-500/20" : "border-white/5",
       )}
       animate={
         isCritical
@@ -97,20 +102,27 @@ function ScoreMeter({
         <motion.span
           className={cn(
             "font-display text-2xl font-black",
-            isCritical && variant !== "pressure" ? "text-red-400" : "text-white"
+            isCritical && variant !== "pressure"
+              ? "text-red-400"
+              : "text-white",
           )}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: delay + 0.5 }}
         >
           {value}
-          <span className="text-sm font-normal text-muted-foreground">{unit}</span>
+          <span className="text-sm font-normal text-muted-foreground">
+            {unit}
+          </span>
         </motion.span>
       </div>
       <p className="mb-3 text-xs text-white/60">{label}</p>
       <div className="relative h-2 overflow-hidden bg-white/5">
         <motion.div
-          className={cn("absolute inset-y-0 end-0 bg-gradient-to-l", style.gradient)}
+          className={cn(
+            "absolute inset-y-0 end-0 bg-gradient-to-l",
+            style.gradient,
+          )}
           initial={{ width: 0 }}
           animate={{ width: `${pct}%` }}
           transition={{ duration: 1.2, delay, ease: [0.21, 0.47, 0.32, 0.98] }}
@@ -132,14 +144,41 @@ export function ScoreMetersPanel({
     <div className="flex flex-col gap-3">
       <FrameControlIndicator value={scores.frameControl} mode={behaviorMode} />
       <div className="flex items-center justify-between border border-white/5 bg-black/30 px-3 py-2">
-        <span className="font-brand text-[9px] text-muted-foreground">מצב התנהגות</span>
+        <span className="font-brand text-[9px] text-muted-foreground">
+          מצב התנהגות
+        </span>
         <BehaviorModeBadge mode={behaviorMode} />
       </div>
-      <ScoreMeter label="סמכות בשיחה" value={scores.authority} variant="authority" delay={0.05} />
-      <ScoreMeter label="רמת ודאות" value={scores.certainty} variant="certainty" delay={0.1} />
-      <ScoreMeter label="ביטחון קולי" value={scores.confidence} variant="confidence" delay={0.15} />
-      <ScoreMeter label="טיפול בהתנגדויות" value={scores.objection} variant="objection" delay={0.2} />
-      <ScoreMeter label="לחץ פסיכולוגי" value={scores.pressure} variant="pressure" delay={0.25} />
+      <ScoreMeter
+        label="סמכות בשיחה"
+        value={scores.authority}
+        variant="authority"
+        delay={0.05}
+      />
+      <ScoreMeter
+        label="רמת ודאות"
+        value={scores.certainty}
+        variant="certainty"
+        delay={0.1}
+      />
+      <ScoreMeter
+        label="ביטחון קולי"
+        value={scores.confidence}
+        variant="confidence"
+        delay={0.15}
+      />
+      <ScoreMeter
+        label="טיפול בהתנגדויות"
+        value={scores.objection}
+        variant="objection"
+        delay={0.2}
+      />
+      <ScoreMeter
+        label="לחץ פסיכולוגי"
+        value={scores.pressure}
+        variant="pressure"
+        delay={0.25}
+      />
     </div>
   );
 }

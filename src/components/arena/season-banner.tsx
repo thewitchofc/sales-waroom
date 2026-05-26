@@ -16,7 +16,7 @@ export function SeasonBanner() {
       <div className="relative flex flex-wrap items-center justify-between gap-4">
         <div>
           <div className="font-brand text-[10px] tracking-[0.3em] text-accent">
-            SEASON {CURRENT_SEASON.id} · ACTIVE
+            SEASON {CURRENT_SEASON.id}, ACTIVE
           </div>
           <h2 className="mt-1 font-display text-2xl font-black text-white md:text-3xl">
             {CURRENT_SEASON.nameHe}
@@ -24,9 +24,20 @@ export function SeasonBanner() {
           <p className="mt-1 text-sm text-white/50">{CURRENT_SEASON.tagline}</p>
         </div>
         <div className="flex flex-wrap gap-6 md:gap-10">
-          <StatBlock label="ימים נותרו" value={String(CURRENT_SEASON.daysRemaining)} accent />
-          <StatBlock label="קרבות" value={CURRENT_SEASON.totalBattles.toLocaleString()} />
-          <StatBlock label="לוחמים" value={CURRENT_SEASON.activePlayers.toLocaleString()} live />
+          <StatBlock
+            label="ימים נותרו"
+            value={String(CURRENT_SEASON.daysRemaining)}
+            accent
+          />
+          <StatBlock
+            label="קרבות"
+            value={CURRENT_SEASON.totalBattles.toLocaleString()}
+          />
+          <StatBlock
+            label="לוחמים"
+            value={CURRENT_SEASON.activePlayers.toLocaleString()}
+            live
+          />
         </div>
       </div>
     </motion.div>
@@ -83,7 +94,9 @@ export function TournamentCountdown({
   if (atmospheric) {
     return (
       <div>
-        <p className="font-brand text-[9px] tracking-[0.1em] text-white/30">{label}</p>
+        <p className="font-brand text-[9px] tracking-[0.1em] text-white/30">
+          {label}
+        </p>
         <motion.p
           key={formatCountdown(remaining, true)}
           initial={{ opacity: 0.7 }}

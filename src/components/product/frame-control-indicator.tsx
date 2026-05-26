@@ -2,7 +2,10 @@
 
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { BEHAVIOR_LABELS, type BehaviorMode } from "@/components/product/demo-data";
+import {
+  BEHAVIOR_LABELS,
+  type BehaviorMode,
+} from "@/components/product/demo-data";
 
 export function FrameControlIndicator({
   value,
@@ -23,7 +26,7 @@ export function FrameControlIndicator({
       className={cn(
         "border bg-black/50",
         isCritical ? "border-red-500/30 bg-red-500/5" : "border-white/5",
-        compact ? "p-3" : "p-4"
+        compact ? "p-3" : "p-4",
       )}
       animate={
         isCritical
@@ -47,7 +50,10 @@ export function FrameControlIndicator({
             {behavior.label}
           </span>
           <motion.span
-            className={cn("font-display text-xl font-black", isCritical ? "text-red-400" : "text-white")}
+            className={cn(
+              "font-display text-xl font-black",
+              isCritical ? "text-red-400" : "text-white",
+            )}
             key={value}
             initial={{ scale: 1.08 }}
             animate={{ scale: 1 }}
@@ -87,8 +93,8 @@ export function FrameControlIndicator({
       </div>
 
       <div className="mt-2 flex justify-between text-[9px] text-muted-foreground">
-        <span>נציג · {repDominance}%</span>
-        <span>לקוח · {clientDominance}%</span>
+        <span>נציג, {repDominance}%</span>
+        <span>לקוח, {clientDominance}%</span>
       </div>
     </motion.div>
   );
@@ -106,7 +112,7 @@ export function BehaviorModeBadge({ mode }: { mode: BehaviorMode }) {
           : mode === "reactive"
             ? "border-red-500/30 bg-red-500/10"
             : "border-accent/30 bg-accent/10",
-        behavior.color
+        behavior.color,
       )}
     >
       {behavior.label}

@@ -69,24 +69,39 @@ export function SessionReplay({
               aria-label={playing ? "השהה" : "נגן"}
             >
               {playing ? (
-                <svg className="size-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <svg
+                  className="size-4 text-white"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
                   <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z" />
                 </svg>
               ) : (
-                <svg className="size-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <svg
+                  className="size-4 text-white"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
                   <path d="M8 5v14l11-7z" />
                 </svg>
               )}
             </button>
             <span className="font-brand text-sm text-white">{currentTime}</span>
-            <span className="font-brand text-xs text-muted-foreground">/ 01:44</span>
+            <span className="font-brand text-xs text-muted-foreground">
+              / 01:44
+            </span>
           </div>
         </div>
 
         {compactTelemetry ? (
           <TacticalScanLine className="mb-6" />
         ) : (
-          <Waveform bars={72} intense active={playing} className="mb-6 h-20 md:h-24" />
+          <Waveform
+            bars={72}
+            intense
+            active={playing}
+            className="mb-6 h-20 md:h-24"
+          />
         )}
 
         <div className="relative mb-5 h-2 bg-white/5">
@@ -97,7 +112,10 @@ export function SessionReplay({
           />
           <motion.div
             className="absolute top-1/2 size-3.5 -translate-y-1/2 rounded-full border-2 border-black bg-accent glow-accent"
-            style={{ insetInlineEnd: `${progress}%`, transform: "translate(50%, -50%)" }}
+            style={{
+              insetInlineEnd: `${progress}%`,
+              transform: "translate(50%, -50%)",
+            }}
           />
           {[25, 50, 75].map((mark) => (
             <div
@@ -110,17 +128,34 @@ export function SessionReplay({
 
         <div className="flex flex-wrap gap-2">
           {[
-            { label: "התנגדות: מחיר", time: "01:04", color: "border-red-500/30 text-red-400", at: 60 },
-            { label: "משוב מאמן", time: "01:06", color: "border-blue-400/30 text-blue-400", at: 62 },
-            { label: "איבוד פריים", time: "01:44", color: "border-accent/30 text-accent", at: 95 },
+            {
+              label: "התנגדות: מחיר",
+              time: "01:04",
+              color: "border-red-500/30 text-red-400",
+              at: 60,
+            },
+            {
+              label: "משוב מאמן",
+              time: "01:06",
+              color: "border-blue-400/30 text-blue-400",
+              at: 62,
+            },
+            {
+              label: "איבוד פריים",
+              time: "01:44",
+              color: "border-accent/30 text-accent",
+              at: 95,
+            },
           ].map((marker) => (
             <span
               key={marker.label}
               className={`border bg-black/40 px-3 py-1.5 text-[11px] transition-all ${
-                progress >= marker.at ? marker.color + " glow-accent" : "border-white/5 text-white/30"
+                progress >= marker.at
+                  ? marker.color + " glow-accent"
+                  : "border-white/5 text-white/30"
               }`}
             >
-              {marker.time} · {marker.label}
+              {marker.time}, {marker.label}
             </span>
           ))}
         </div>

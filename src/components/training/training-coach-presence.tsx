@@ -35,10 +35,12 @@ export function TrainingCoachPresence({
               transition={{ duration: 1.5, repeat: Infinity }}
             />
             <span className="font-brand text-[9px] tracking-[0.15em] text-red-400">
-              מאמן AI · מחובר
+              מאמן AI, מחובר
             </span>
           </div>
-          <span className="font-brand text-[8px] text-white/30">סטטוס · פעיל</span>
+          <span className="font-brand text-[8px] text-white/30">
+            סטטוס, פעיל
+          </span>
         </div>
 
         <p className="mt-4 font-display text-lg font-bold text-white">
@@ -61,7 +63,9 @@ export function TrainingCoachPresence({
           <div className="mt-5 border border-red-500/15 bg-black/40 px-4 py-3">
             <p className="font-brand text-[8px] text-red-400/70">חולשה מזוהה</p>
             <p className="mt-1 text-sm font-semibold text-white">{weakness}</p>
-            <p className="mt-2 font-brand text-[9px] text-accent">תיקון מומלץ נטען ←</p>
+            <p className="mt-2 font-brand text-[9px] text-accent">
+              תיקון מומלץ נטען ←
+            </p>
           </div>
         )}
       </div>

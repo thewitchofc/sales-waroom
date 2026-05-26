@@ -11,13 +11,17 @@ const statusConfig: Record<
   live: { label: "בשיחה", color: "text-green-400", dot: "bg-green-400" },
   training: { label: "באימון", color: "text-accent", dot: "bg-accent" },
   reviewing: { label: "בסקירה", color: "text-blue-400", dot: "bg-blue-400" },
-  idle: { label: "זמין", color: "text-muted-foreground", dot: "bg-muted-foreground" },
+  idle: {
+    label: "זמין",
+    color: "text-muted-foreground",
+    dot: "bg-muted-foreground",
+  },
 };
 
 export function TeamPerformanceDashboard() {
   const liveCount = TEAM_MEMBERS.filter((m) => m.status === "live").length;
   const avgScore = Math.round(
-    TEAM_MEMBERS.reduce((a, m) => a + m.score, 0) / TEAM_MEMBERS.length
+    TEAM_MEMBERS.reduce((a, m) => a + m.score, 0) / TEAM_MEMBERS.length,
   );
 
   return (
@@ -36,12 +40,20 @@ export function TeamPerformanceDashboard() {
           </div>
           <div className="flex gap-6">
             <div className="text-center">
-              <div className="font-display text-2xl font-black text-green-400">{liveCount}</div>
-              <div className="text-[10px] text-muted-foreground">פעילים עכשיו</div>
+              <div className="font-display text-2xl font-black text-green-400">
+                {liveCount}
+              </div>
+              <div className="text-[10px] text-muted-foreground">
+                פעילים עכשיו
+              </div>
             </div>
             <div className="text-center">
-              <div className="font-display text-2xl font-black text-accent">{avgScore}</div>
-              <div className="text-[10px] text-muted-foreground">ציון ממוצע</div>
+              <div className="font-display text-2xl font-black text-accent">
+                {avgScore}
+              </div>
+              <div className="text-[10px] text-muted-foreground">
+                ציון ממוצע
+              </div>
             </div>
           </div>
         </div>
@@ -51,11 +63,21 @@ export function TeamPerformanceDashboard() {
         <table className="w-full min-w-[640px]">
           <thead>
             <tr className="border-b border-white/5 text-[10px] text-muted-foreground">
-              <th className="px-5 py-3 text-start font-brand tracking-widest">נציג</th>
-              <th className="px-5 py-3 text-start font-brand tracking-widest">סטטוס</th>
-              <th className="px-5 py-3 text-start font-brand tracking-widest">ציון</th>
-              <th className="px-5 py-3 text-start font-brand tracking-widest">סשנים</th>
-              <th className="px-5 py-3 text-start font-brand tracking-widest">מגמה</th>
+              <th className="px-5 py-3 text-start font-brand tracking-widest">
+                נציג
+              </th>
+              <th className="px-5 py-3 text-start font-brand tracking-widest">
+                סטטוס
+              </th>
+              <th className="px-5 py-3 text-start font-brand tracking-widest">
+                ציון
+              </th>
+              <th className="px-5 py-3 text-start font-brand tracking-widest">
+                סשנים
+              </th>
+              <th className="px-5 py-3 text-start font-brand tracking-widest">
+                מגמה
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -72,7 +94,9 @@ export function TeamPerformanceDashboard() {
                 >
                   <td className="px-5 py-4">
                     <div className="font-medium text-white">{member.name}</div>
-                    <div className="text-xs text-muted-foreground">{member.role}</div>
+                    <div className="text-xs text-muted-foreground">
+                      {member.role}
+                    </div>
                   </td>
                   <td className="px-5 py-4">
                     <div className="flex items-center gap-2">
@@ -85,7 +109,9 @@ export function TeamPerformanceDashboard() {
                         }
                         transition={{ duration: 1.5, repeat: Infinity }}
                       />
-                      <span className={cn("text-xs", status.color)}>{status.label}</span>
+                      <span className={cn("text-xs", status.color)}>
+                        {status.label}
+                      </span>
                     </div>
                   </td>
                   <td className="px-5 py-4">
@@ -108,7 +134,9 @@ export function TeamPerformanceDashboard() {
                     {member.sessions}
                   </td>
                   <td className="px-5 py-4">
-                    <span className="font-brand text-xs text-green-400">{member.trend}</span>
+                    <span className="font-brand text-xs text-green-400">
+                      {member.trend}
+                    </span>
                   </td>
                 </motion.tr>
               );

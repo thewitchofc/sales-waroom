@@ -38,7 +38,7 @@ export function ObjectionAnalysisPanel({
     <div
       className={cn(
         "glass-premium metallic-border relative overflow-hidden bg-black/60 p-5 md:p-6",
-        combat && scenario?.severity === "CRIT" && "border-red-500/25"
+        combat && scenario?.severity === "CRIT" && "border-red-500/25",
       )}
     >
       <div className="ai-scan-line pointer-events-none absolute inset-0 opacity-20" />
@@ -49,12 +49,12 @@ export function ObjectionAnalysisPanel({
       <div className="relative">
         <div className="mb-5 flex items-center justify-between">
           <span className="font-brand text-[10px] tracking-widest text-accent">
-            {combat ? "ניתוח פסיכולוגי · סיווג" : "פסיכולוגיית התנגדות"}
+            {combat ? "ניתוח פסיכולוגי, סיווג" : "פסיכולוגיית התנגדות"}
           </span>
           <motion.span
             className={cn(
               "flex items-center gap-1.5 text-[10px]",
-              isAnalyzing ? "text-accent" : "text-red-400"
+              isAnalyzing ? "text-accent" : "text-red-400",
             )}
             animate={{ opacity: [1, 0.4, 1] }}
             transition={{ duration: 1.5, repeat: Infinity }}
@@ -62,7 +62,7 @@ export function ObjectionAnalysisPanel({
             <span
               className={cn(
                 "size-1.5 rounded-full pressure-pulse",
-                isAnalyzing ? "bg-accent" : "bg-red-500"
+                isAnalyzing ? "bg-accent" : "bg-red-500",
               )}
             />
             {isAnalyzing ? "AI מנתח..." : "● מאמן פעיל"}
@@ -79,12 +79,20 @@ export function ObjectionAnalysisPanel({
             {combat && intel && (
               <div className="grid gap-3 sm:grid-cols-2">
                 <div className="border border-red-500/20 bg-red-500/[0.04] p-4">
-                  <p className="font-brand text-[8px] text-red-400/70">התנהגות מזוהה</p>
-                  <p className="mt-2 font-display text-lg font-bold text-white">{intel.behavior}</p>
+                  <p className="font-brand text-[8px] text-red-400/70">
+                    התנהגות מזוהה
+                  </p>
+                  <p className="mt-2 font-display text-lg font-bold text-white">
+                    {intel.behavior}
+                  </p>
                 </div>
                 <div className="border border-red-500/25 bg-red-500/[0.06] p-4">
-                  <p className="font-brand text-[8px] text-red-400/70">תווית איום</p>
-                  <p className="mt-2 font-display text-lg font-bold text-red-400">{intel.threat}</p>
+                  <p className="font-brand text-[8px] text-red-400/70">
+                    תווית איום
+                  </p>
+                  <p className="mt-2 font-display text-lg font-bold text-red-400">
+                    {intel.threat}
+                  </p>
                 </div>
               </div>
             )}
@@ -100,32 +108,42 @@ export function ObjectionAnalysisPanel({
                 <span
                   className={cn(
                     "border px-2 py-0.5 font-brand text-[9px]",
-                    severityColors[scenario.severity]
+                    severityColors[scenario.severity],
                   )}
                 >
                   {severityLabels[scenario.severity]}
                 </span>
                 {combat && (
                   <span className="border border-red-500/20 px-2 py-0.5 font-brand text-[8px] text-red-400/80">
-                    סיווג · פעיל
+                    סיווג, פעיל
                   </span>
                 )}
               </div>
             </div>
 
             <div className="border border-red-500/10 bg-red-500/[0.03] p-4">
-              <div className="mb-2 font-brand text-[9px] text-red-400/70">פסיכולוגיה</div>
-              <p className="text-sm leading-relaxed text-red-400/90">{scenario.psychology}</p>
+              <div className="mb-2 font-brand text-[9px] text-red-400/70">
+                פסיכולוגיה
+              </div>
+              <p className="text-sm leading-relaxed text-red-400/90">
+                {scenario.psychology}
+              </p>
             </div>
 
             <div>
-              <div className="mb-2 font-brand text-[9px] text-white/35">ניתוח סמכות</div>
-              <p className="text-sm leading-relaxed text-white/75">{scenario.analysis}</p>
+              <div className="mb-2 font-brand text-[9px] text-white/35">
+                ניתוח סמכות
+              </div>
+              <p className="text-sm leading-relaxed text-white/75">
+                {scenario.analysis}
+              </p>
             </div>
 
             {combat && intel && (
               <div className="border border-red-500/20 bg-red-500/[0.04] p-4">
-                <div className="mb-2 font-brand text-[9px] text-red-400">תיקון AI</div>
+                <div className="mb-2 font-brand text-[9px] text-red-400">
+                  תיקון AI
+                </div>
                 <p className="text-sm font-medium leading-relaxed text-white/85">
                   {intel.correction}
                 </p>
@@ -133,7 +151,9 @@ export function ObjectionAnalysisPanel({
             )}
 
             <div className="border border-green-500/20 bg-green-500/5 p-4">
-              <div className="mb-2 font-brand text-[9px] text-green-400">תגובה משופרת</div>
+              <div className="mb-2 font-brand text-[9px] text-green-400">
+                תגובה משופרת
+              </div>
               <p className="text-sm leading-relaxed text-white/85">
                 {scenario.suggestedResponse}
               </p>
@@ -165,12 +185,14 @@ export function ObjectionAnalysisPanel({
                   transition={{ duration: 2, repeat: Infinity }}
                 />
               </motion.div>
-              <span className="font-brand text-sm text-white">{activeObjection}</span>
+              <span className="font-brand text-sm text-white">
+                {activeObjection}
+              </span>
             </div>
             <p className="text-sm text-white/60">
               {isAnalyzing
-                ? "מנתח בדיקת פריים ו-תגובה ללחץ..."
-                : "מעקב אחר התנגדות פעילה · בדיקת dominance"}
+                ? "מנתח בדיקת פריים ותגובה ללחץ..."
+                : "מעקב אחר התנגדות פעילה, בדיקת dominance"}
             </p>
           </motion.div>
         ) : (

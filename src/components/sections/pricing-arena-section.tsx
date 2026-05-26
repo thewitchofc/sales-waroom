@@ -63,8 +63,12 @@ export function PricingArenaSection() {
             className="mb-16 flex flex-col gap-6 md:mb-20 md:flex-row md:items-end md:justify-between"
           >
             <div>
-              <motion.p custom={0} variants={fadeUp} className="font-brand text-[10px] tracking-[0.2em] text-accent">
-                האקו-סистемה
+              <motion.p
+                custom={0}
+                variants={fadeUp}
+                className="font-brand text-[10px] tracking-[0.2em] text-accent"
+              >
+                האקוסистемה
               </motion.p>
               <motion.h2
                 custom={1}
@@ -78,8 +82,8 @@ export function PricingArenaSection() {
                 variants={fadeUp}
                 className="mt-5 max-w-xl text-base leading-relaxed text-white/50 sm:text-lg"
               >
-                לא משחק. תחרות. אי-ספורט של מכירות, עם לחץ, דירוגים, ותוצאות
-                שאי אפשר לזייף.
+                לא משחק. תחרות. לא ספורט של מכירות, עם לחץ, דירוגים, ותוצאות
+                שאין אפשר לזייף.
               </motion.p>
             </div>
             <motion.div custom={3} variants={fadeUp}>
@@ -105,7 +109,9 @@ export function PricingArenaSection() {
                 <h3 className="mt-5 font-display text-xl font-bold text-white transition-colors group-hover:text-accent">
                   {item.title}
                 </h3>
-                <p className="mt-3 text-sm leading-relaxed text-white/45">{item.body}</p>
+                <p className="mt-3 text-sm leading-relaxed text-white/45">
+                  {item.body}
+                </p>
               </motion.div>
             ))}
           </div>
@@ -126,7 +132,9 @@ export function PricingArenaSection() {
           </p>
           <h3 className="mt-4 font-display text-2xl font-black text-white sm:text-3xl">
             לא קונים תוכנה.
-            <span className="mt-2 block text-white/50">נכנסים למערכת תחרותית.</span>
+            <span className="mt-2 block text-white/50">
+              נכנסים למערכת תחרותית.
+            </span>
           </h3>
 
           <ul className="mt-10 space-y-0 border border-white/8">

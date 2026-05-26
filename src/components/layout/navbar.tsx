@@ -53,7 +53,7 @@ export function Navbar() {
       <div
         className={cn(
           "absolute inset-0 border-b border-white/5 bg-black/85 backdrop-blur-2xl transition-opacity duration-300",
-          scrolled || mobileOpen ? "opacity-100" : "opacity-0"
+          scrolled || mobileOpen ? "opacity-100" : "opacity-0",
         )}
       />
       <nav className="relative mx-auto flex max-w-7xl items-center justify-between py-3 sm:py-4">
@@ -72,14 +72,16 @@ export function Navbar() {
                 href={link.href}
                 className={cn(
                   "relative py-1 text-sm transition-colors",
-                  active ? "text-white" : "text-muted-foreground hover:text-white"
+                  active
+                    ? "text-white"
+                    : "text-muted-foreground hover:text-white",
                 )}
               >
                 {link.label}
                 <span
                   className={cn(
                     "absolute -bottom-1 start-0 h-px bg-accent transition-all duration-300",
-                    active ? "w-full" : "w-0 group-hover:w-full"
+                    active ? "w-full" : "w-0 group-hover:w-full",
                   )}
                 />
                 {active && (
@@ -97,8 +99,8 @@ export function Navbar() {
           <BrandLink href="/login" variant="ghost" size="sm">
             התחברות
           </BrandLink>
-          <BrandLink href="/dashboard" variant="command" size="sm">
-            לדשבורד
+          <BrandLink href="/arena" variant="arena" size="sm">
+            לזירה
           </BrandLink>
         </div>
 
@@ -108,9 +110,24 @@ export function Navbar() {
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="פתיחת תפריט"
         >
-          <span className={cn("block h-px w-6 bg-white transition-transform", mobileOpen && "translate-y-2 rotate-45")} />
-          <span className={cn("block h-px w-6 bg-white transition-opacity", mobileOpen && "opacity-0")} />
-          <span className={cn("block h-px w-6 bg-white transition-transform", mobileOpen && "-translate-y-2 -rotate-45")} />
+          <span
+            className={cn(
+              "block h-px w-6 bg-white transition-transform",
+              mobileOpen && "translate-y-2 rotate-45",
+            )}
+          />
+          <span
+            className={cn(
+              "block h-px w-6 bg-white transition-opacity",
+              mobileOpen && "opacity-0",
+            )}
+          />
+          <span
+            className={cn(
+              "block h-px w-6 bg-white transition-transform",
+              mobileOpen && "-translate-y-2 -rotate-45",
+            )}
+          />
         </button>
       </nav>
 
@@ -144,7 +161,7 @@ export function Navbar() {
                       "interactive-surface rounded-none border border-transparent px-4 py-3.5 text-sm transition-colors",
                       active
                         ? "border-accent/20 bg-accent/5 text-accent"
-                        : "text-muted-foreground hover:text-white"
+                        : "text-muted-foreground hover:text-white",
                     )}
                   >
                     {link.label}
@@ -153,11 +170,21 @@ export function Navbar() {
               })}
             </div>
             <div className="mt-4 flex flex-col gap-2 border-t border-white/10 pt-4">
-              <BrandLink href="/login" variant="ghost" size="sm" className="w-full justify-center">
+              <BrandLink
+                href="/login"
+                variant="ghost"
+                size="sm"
+                className="w-full justify-center"
+              >
                 התחברות
               </BrandLink>
-              <BrandLink href="/dashboard" variant="command" size="sm" className="w-full justify-center">
-                לדשבורד
+              <BrandLink
+                href="/arena"
+                variant="arena"
+                size="sm"
+                className="w-full justify-center"
+              >
+                לזירה
               </BrandLink>
             </div>
           </motion.div>
@@ -188,13 +215,13 @@ export function Footer() {
               {siteConfig.tagline}
             </p>
             <p className="mt-3 max-w-sm text-sm leading-relaxed text-white/40">
-              מערכת הפעלה AI לקלוזרים שמתאמנים ברצינות. סימולציות, לחץ, דירוגים, תרבות
-              עילית.
+              מערכת הפעלה AI לזאבים שמתאמנים ברצינות. סימולציות, לחץ, דירוגים,
+              תרבות עילית.
             </p>
             <div className="mt-8 inline-flex items-center gap-2.5 border border-white/8 bg-white/[0.02] px-4 py-2.5">
               <span className="pressure-pulse size-1.5 rounded-full bg-accent" />
               <span className="font-brand text-[9px] tracking-[0.15em] text-white/45">
-                847 לוחמים פעילים · הזירה חיה
+                847 לוחמים פעילים, הזירה חיה
               </span>
             </div>
           </div>
@@ -235,10 +262,18 @@ export function Footer() {
   );
 }
 
-function FooterLinkGroup({ title, links }: { title: string; links: { label: string; href: string }[] }) {
+function FooterLinkGroup({
+  title,
+  links,
+}: {
+  title: string;
+  links: { label: string; href: string }[];
+}) {
   return (
     <div>
-      <p className="mb-5 font-brand text-[9px] tracking-[0.2em] text-accent/70">{title}</p>
+      <p className="mb-5 font-brand text-[9px] tracking-[0.2em] text-accent/70">
+        {title}
+      </p>
       <ul className="space-y-3.5">
         {links.map((item) => (
           <li key={item.href}>

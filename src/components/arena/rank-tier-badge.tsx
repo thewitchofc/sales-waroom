@@ -30,7 +30,7 @@ export function RankTierBadge({
         config.color,
         size === "sm" && "px-2 py-0.5 text-[8px]",
         size === "md" && "px-2.5 py-1 text-[9px]",
-        size === "lg" && "px-3 py-1.5 text-[10px]"
+        size === "lg" && "px-3 py-1.5 text-[10px]",
       )}
     >
       {config.labelHe}
@@ -47,7 +47,7 @@ export function RankMovement({ delta }: { delta: number }) {
     <span
       className={cn(
         "font-brand text-[10px]",
-        up ? "text-white/60" : "text-red-400/80"
+        up ? "text-white/60" : "text-red-400/80",
       )}
     >
       {up ? "▲" : "▼"} {Math.abs(delta)}

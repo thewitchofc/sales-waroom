@@ -7,7 +7,7 @@ import { BRAND_LOGO } from "@/config/site";
 
 export { BRAND_LOGO };
 
-/** Height-led sizing — full wordmark including tagline */
+/** Height-led sizing. full wordmark including tagline */
 const variantStyles = {
   navbar: "h-14 w-auto sm:h-16",
   sidebar: "h-12 w-auto sm:h-14",
@@ -50,7 +50,7 @@ export function BrandLogo({
       className={cn(
         "brand-logo relative inline-flex shrink-0 items-center bg-transparent",
         variantStyles[variant],
-        className
+        className,
       )}
     >
       <Image
@@ -78,7 +78,7 @@ export function BrandLogoLink({
       href={href}
       className={cn(
         "brand-logo-link inline-flex shrink-0 items-center bg-transparent transition-opacity duration-300 hover:opacity-90",
-        className
+        className,
       )}
       aria-label={BRAND_LOGO.alt}
     >

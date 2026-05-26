@@ -1,9 +1,12 @@
 "use client";
 
-/** Global fixed background — luxury tactical atmosphere on every page */
+/** Global fixed background. luxury tactical atmosphere on every page */
 export function SiteAtmosphere() {
   return (
-    <div className="site-atmosphere pointer-events-none fixed inset-0 -z-10 overflow-hidden" aria-hidden>
+    <div
+      className="site-atmosphere pointer-events-none fixed inset-0 -z-10 overflow-hidden"
+      aria-hidden
+    >
       <div className="site-atmosphere-base absolute inset-0" />
       <div className="site-atmosphere-grid absolute inset-0" />
       <div className="site-atmosphere-glow site-atmosphere-glow-a absolute rounded-full" />

@@ -17,11 +17,11 @@ export function AnalyticsCorrectionsPanel() {
             <div className="mb-3 inline-flex items-center gap-2 border border-red-500/25 bg-red-500/5 px-3 py-1">
               <span className="pressure-pulse size-1.5 rounded-full bg-red-500" />
               <span className="font-brand text-[8px] tracking-[0.15em] text-red-400/90">
-                סיווג · פעיל
+                סיווג, פעיל
               </span>
             </div>
             <h2 className="font-display text-3xl font-black text-white sm:text-4xl">
-              תיקוני קרב · AI
+              תיקוני קרב, AI
             </h2>
             <p className="mt-4 max-w-lg text-sm text-white/45">
               כל חולשה מזוהה. כל תיקון מדורג. כל שיפור מדיד.
@@ -62,7 +62,10 @@ export function AnalyticsCorrectionsPanel() {
                     >
                       {severityLabels[item.severity]}
                     </span>
-                    <span className="font-brand text-[8px] text-white/30" dir="ltr">
+                    <span
+                      className="font-brand text-[8px] text-white/30"
+                      dir="ltr"
+                    >
                       {item.time}
                     </span>
                   </div>
@@ -77,13 +80,17 @@ export function AnalyticsCorrectionsPanel() {
 
                 <div className="mt-6 grid gap-4 sm:grid-cols-2">
                   <div className="border border-white/5 bg-black/40 p-4">
-                    <p className="font-brand text-[8px] text-white/35">הסבר פסיכולוגי</p>
+                    <p className="font-brand text-[8px] text-white/35">
+                      הסבר פסיכולוגי
+                    </p>
                     <p className="mt-2 text-sm leading-relaxed text-white/65">
                       {item.psychology}
                     </p>
                   </div>
                   <div className="border border-red-500/15 bg-red-500/[0.04] p-4">
-                    <p className="font-brand text-[8px] text-red-400/70">תיקון AI</p>
+                    <p className="font-brand text-[8px] text-red-400/70">
+                      תיקון AI
+                    </p>
                     <p className="mt-2 text-sm font-medium leading-relaxed text-white/85">
                       {item.correction}
                     </p>
@@ -91,7 +98,9 @@ export function AnalyticsCorrectionsPanel() {
                 </div>
 
                 <div className="mt-4 border border-accent/15 bg-accent/[0.03] px-4 py-3">
-                  <p className="font-brand text-[8px] text-accent/70">תגובה משופרת</p>
+                  <p className="font-brand text-[8px] text-accent/70">
+                    תגובה משופרת
+                  </p>
                   <p className="mt-2 text-sm leading-relaxed text-white/80">
                     {item.improvedResponse}
                   </p>

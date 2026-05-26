@@ -4,12 +4,22 @@ import { motion } from "framer-motion";
 import { SessionReplay } from "@/components/product/session-replay";
 import { ConversationTimeline } from "@/components/product/conversation-timeline";
 import { Waveform } from "@/components/ui/waveform";
-import { TacticalScanLine, TacticalStatusChip } from "@/components/ui/tactical-signal";
+import {
+  TacticalScanLine,
+  TacticalStatusChip,
+} from "@/components/ui/tactical-signal";
 import { HudFrame } from "@/components/ui/hud-elements";
 import { useSimulationOptional } from "@/components/product/simulation-provider";
-import { DEMO_TRANSCRIPT, TIMELINE_EVENTS } from "@/components/product/demo-data";
+import {
+  DEMO_TRANSCRIPT,
+  TIMELINE_EVENTS,
+} from "@/components/product/demo-data";
 
-export function PlatformCommandPanel({ minimalTelemetry = false }: { minimalTelemetry?: boolean }) {
+export function PlatformCommandPanel({
+  minimalTelemetry = false,
+}: {
+  minimalTelemetry?: boolean;
+}) {
   const simulation = useSimulationOptional();
   const timelineIndex = simulation?.timelineIndex ?? 0;
   const replayProgress = simulation?.replayProgress ?? 0;
@@ -18,21 +28,30 @@ export function PlatformCommandPanel({ minimalTelemetry = false }: { minimalTele
 
   const highlightMessages =
     visibleMessages.length > 0
-      ? visibleMessages.filter((m) => ["prospect", "coach", "analysis"].includes(m.type))
+      ? visibleMessages.filter((m) =>
+          ["prospect", "coach", "analysis"].includes(m.type),
+        )
       : DEMO_TRANSCRIPT.filter((m) =>
-          ["prospect", "coach", "analysis"].includes(m.type)
+          ["prospect", "coach", "analysis"].includes(m.type),
         ).slice(-4);
 
   return (
     <div className="flex min-h-[520px] flex-col gap-5">
-      <SessionReplay progress={replayProgress} synced compactTelemetry={minimalTelemetry} />
+      <SessionReplay
+        progress={replayProgress}
+        synced
+        compactTelemetry={minimalTelemetry}
+      />
 
       <div className="grid flex-1 gap-5 md:grid-cols-2">
         <HudFrame
           label="ציר זמן"
           className="glass-premium metallic-border os-panel-glow min-h-[220px] bg-black/60 p-5"
         >
-          <ConversationTimeline events={TIMELINE_EVENTS} activeIndex={timelineIndex} />
+          <ConversationTimeline
+            events={TIMELINE_EVENTS}
+            activeIndex={timelineIndex}
+          />
         </HudFrame>
 
         <HudFrame
@@ -81,7 +100,9 @@ export function PlatformCommandPanel({ minimalTelemetry = false }: { minimalTele
                     {msg.timestamp}
                   </span>
                 </div>
-                <p className="text-sm leading-relaxed text-white/80">{msg.text}</p>
+                <p className="text-sm leading-relaxed text-white/80">
+                  {msg.text}
+                </p>
               </motion.div>
             ))}
           </div>
@@ -91,11 +112,17 @@ export function PlatformCommandPanel({ minimalTelemetry = false }: { minimalTele
       {minimalTelemetry ? (
         <div className="border border-white/5 bg-black/40 px-4 py-3">
           <div className="flex flex-wrap items-center justify-between gap-3">
-            <span className="font-brand text-[9px] text-white/35">טלמטריה · AI</span>
+            <span className="font-brand text-[9px] text-white/35">
+              טלמטריה, AI
+            </span>
             <div className="flex flex-wrap gap-2">
               <TacticalStatusChip label="מאמן מחובר" active />
               <TacticalStatusChip label="אות נעול" active variant="accent" />
-              <TacticalStatusChip label="ניתוח פעיל" active={!isThinking} variant="danger" />
+              <TacticalStatusChip
+                label="ניתוח פעיל"
+                active={!isThinking}
+                variant="danger"
+              />
             </div>
           </div>
           <TacticalScanLine className="mt-3" />
@@ -103,7 +130,9 @@ export function PlatformCommandPanel({ minimalTelemetry = false }: { minimalTele
       ) : (
         <div className="border border-white/5 bg-black/40 px-4 py-3">
           <div className="mb-2 flex items-center justify-between">
-            <span className="font-brand text-[9px] text-muted-foreground">חתימה קולית</span>
+            <span className="font-brand text-[9px] text-muted-foreground">
+              חתימה קולית
+            </span>
             <motion.span
               className="text-[10px] text-green-400"
               animate={{ opacity: [1, 0.4, 1] }}

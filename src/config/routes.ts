@@ -1,9 +1,9 @@
 /**
  * App route groups and page composition map.
  *
- * (marketing)/  → public pages with MarketingShell (navbar + footer + HUD)
- * (auth)/       → login flow
- * (dashboard)/  → authenticated command center + competitive arena
+ * (marketing)/ → public pages with MarketingShell (navbar + footer + HUD)
+ * (auth)/ → login flow
+ * (dashboard)/ → authenticated command center + competitive arena
  */
 
 export type AppRouteGroup = "marketing" | "auth" | "dashboard";
@@ -20,6 +20,7 @@ export const appRoutes = {
   privacy: "/privacy",
   login: "/login",
   dashboard: "/dashboard",
+  theoryQuiz: "/theory-quiz",
   arena: "/arena",
   leaderboard: "/leaderboard",
   season: "/season",

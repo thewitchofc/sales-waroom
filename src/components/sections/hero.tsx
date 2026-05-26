@@ -44,15 +44,27 @@ export function Hero() {
         </ul>
 
         <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:justify-center sm:gap-4">
-          <BrandLink href="/demo" variant="command" size="lg" className="w-full sm:w-auto">
+          <BrandLink
+            href="/demo"
+            variant="command"
+            size="lg"
+            className="w-full sm:w-auto"
+          >
             נסו דמו חינם
           </BrandLink>
-          <BrandLink href="/pricing" variant="secondary" size="lg" className="w-full sm:w-auto">
+          <BrandLink
+            href="/pricing"
+            variant="secondary"
+            size="lg"
+            className="w-full sm:w-auto"
+          >
             ראו חבילות
           </BrandLink>
         </div>
 
-        <p className="mt-6 text-xs text-white/35">14 יום ניסיון · בלי כרטיס אשראי</p>
+        <p className="mt-6 text-xs text-white/35">
+          14 יום ניסיון, בלי כרטיס אשראי
+        </p>
       </div>
     </section>
   );

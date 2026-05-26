@@ -32,7 +32,10 @@ function SeasonDivisionLadder({ currentTier }: { currentTier: RankTier }) {
           const isCurrent = tier.id === currentTier;
           const isComplete = i < currentIndex;
           return (
-            <div key={tier.id} className="flex flex-1 flex-col items-center gap-2.5">
+            <div
+              key={tier.id}
+              className="flex flex-1 flex-col items-center gap-2.5"
+            >
               <div
                 className={[
                   "season-ladder-segment h-0.5 w-full rounded-full transition-colors",
@@ -45,7 +48,11 @@ function SeasonDivisionLadder({ currentTier }: { currentTier: RankTier }) {
               />
               <span
                 className={`font-brand text-[8px] tracking-wide sm:text-[9px] ${
-                  isCurrent ? tier.color : isComplete ? "text-white/35" : "text-white/20"
+                  isCurrent
+                    ? tier.color
+                    : isComplete
+                      ? "text-white/35"
+                      : "text-white/20"
                 }`}
               >
                 {tier.labelHe}
@@ -76,7 +83,9 @@ function HeroStat({
       >
         {value}
       </div>
-      <div className="mt-1 font-brand text-[8px] tracking-wider text-white/30">{label}</div>
+      <div className="mt-1 font-brand text-[8px] tracking-wider text-white/30">
+        {label}
+      </div>
     </div>
   );
 }
@@ -84,7 +93,10 @@ function HeroStat({
 export function SeasonHero() {
   const tierCfg = getTierConfig(CURRENT_USER.tier);
   const progress = getXpProgress(CURRENT_USER.xp);
-  const movement = getRankMovement(CURRENT_USER.rank, CURRENT_USER.previousRank);
+  const movement = getRankMovement(
+    CURRENT_USER.rank,
+    CURRENT_USER.previousRank,
+  );
   const xpToNext = progress.next - progress.current;
 
   return (
@@ -107,7 +119,8 @@ export function SeasonHero() {
             </span>
             <span className="h-3 w-px bg-white/10" />
             <span className="font-brand text-[9px] text-white/35">
-              עונה {CURRENT_SEASON.id} · {CURRENT_SEASON.daysRemaining} ימים לסיום
+              עונה {CURRENT_SEASON.id}, {CURRENT_SEASON.daysRemaining} ימים
+              לסיום
             </span>
           </div>
 
@@ -155,14 +168,19 @@ export function SeasonHero() {
                 >
                   {TIER_SIGILS[CURRENT_USER.tier]}
                 </span>
-                <p className={`mt-2 font-display text-sm font-bold ${tierCfg.color}`}>
+                <p
+                  className={`mt-2 font-display text-sm font-bold ${tierCfg.color}`}
+                >
                   {tierCfg.labelHe}
                 </p>
               </div>
             </div>
 
             <div className="mt-8 grid grid-cols-3 gap-4 border-t border-white/[0.05] pt-6">
-              <HeroStat label="קרבות" value={CURRENT_SEASON.totalBattles.toLocaleString()} />
+              <HeroStat
+                label="קרבות"
+                value={CURRENT_SEASON.totalBattles.toLocaleString()}
+              />
               <HeroStat
                 label="לוחמים"
                 value={CURRENT_SEASON.activePlayers.toLocaleString()}
@@ -208,12 +226,14 @@ export function SeasonTierGrid() {
             <span className={`season-tier-sigil text-base ${tier.color}`}>
               {TIER_SIGILS[tier.id]}
             </span>
-            <p className={`mt-3 font-display text-sm font-bold ${isActive ? tier.color : "text-white/75"}`}>
+            <p
+              className={`mt-3 font-display text-sm font-bold ${isActive ? tier.color : "text-white/75"}`}
+            >
               {tier.labelHe}
             </p>
             <p className="mt-1.5 font-brand text-[9px] leading-relaxed text-white/30">
               {tier.minXp.toLocaleString()}
-              {" – "}
+              {" עד "}
               {tier.maxXp === 99999 ? "∞" : tier.maxXp.toLocaleString()} XP
             </p>
           </div>

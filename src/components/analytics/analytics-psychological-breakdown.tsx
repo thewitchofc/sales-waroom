@@ -34,7 +34,8 @@ export function AnalyticsPsychologicalBreakdown() {
               <span className="mt-1 block text-white/55">פסיכולוגי</span>
             </h2>
             <p className="mt-6 text-sm leading-relaxed text-white/45 sm:text-base">
-              AI קורא את המוח שלך בשיחה. כל שינוי רגשי, כל סימן פחד, כל קריסת סמכות, מתועד.
+              AI קורא את המוח שלך בשיחה. כל שינוי רגשי, כל סימן פחד, כל קריסת
+              סמכות, מתועד.
             </p>
           </div>
 
@@ -59,7 +60,10 @@ export function AnalyticsPsychologicalBreakdown() {
                           : "bg-accent"
                     }`}
                   />
-                  <span className="w-12 shrink-0 font-brand text-xs text-white/40" dir="ltr">
+                  <span
+                    className="w-12 shrink-0 font-brand text-xs text-white/40"
+                    dir="ltr"
+                  >
                     {signal.time}
                   </span>
                   <div className="flex-1">

@@ -1,4 +1,9 @@
-export const cinematicEase = [0.16, 1, 0.3, 1] as [number, number, number, number];
+export const cinematicEase = [0.16, 1, 0.3, 1] as [
+  number,
+  number,
+  number,
+  number,
+];
 
 export const pageTransition = {
   initial: { opacity: 0, y: 12 },

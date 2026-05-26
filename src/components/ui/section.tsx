@@ -68,7 +68,9 @@ export function SectionHeader({
   align = "center",
 }: SectionHeaderProps) {
   const alignClass =
-    align === "center" ? "text-center mx-auto items-center" : "text-start items-start";
+    align === "center"
+      ? "text-center mx-auto items-center"
+      : "text-start items-start";
 
   return (
     <motion.div
@@ -78,7 +80,11 @@ export function SectionHeader({
       className={`mb-10 flex max-w-3xl flex-col sm:mb-14 md:mb-16 ${alignClass}`}
     >
       {label && (
-        <motion.p custom={0} variants={fadeUp} className="mb-4 font-brand text-[10px] tracking-[0.2em] text-accent">
+        <motion.p
+          custom={0}
+          variants={fadeUp}
+          className="mb-4 font-brand text-[10px] tracking-[0.2em] text-accent"
+        >
           {label}
         </motion.p>
       )}

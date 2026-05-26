@@ -37,10 +37,12 @@ export function LiveCallInterface({
           <div>
             <p className="text-sm font-medium text-white">שיחת תרגול</p>
             <p className="text-xs text-white/40">
-              {demo.persona?.title ?? "לקוח AI · עסקה לדוגמה"}
+              {demo.persona?.title ?? "לקוח AI, עסקה לדוגמה"}
             </p>
           </div>
-          <p className="font-brand text-lg text-white/80">{demo.formatElapsed()}</p>
+          <p className="font-brand text-lg text-white/80">
+            {demo.formatElapsed()}
+          </p>
         </div>
         <div className="min-h-[320px] p-4 sm:p-5">
           <p className="mb-3 text-xs text-white/35">תמלול השיחה</p>
@@ -62,20 +64,26 @@ export function LiveCallInterface({
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2 border border-red-500/15 bg-red-500/5 px-3 py-1.5">
                 <span className="size-2 rounded-full bg-red-500/70" />
-                <span className="font-brand text-[10px] text-red-400/80">חי</span>
+                <span className="font-brand text-[10px] text-red-400/80">
+                  חי
+                </span>
               </div>
               <div>
                 <div className="text-sm font-semibold text-white">
-                  {demo.persona?.title ?? "סימולציה · עסקה גבוהה"}
+                  {demo.persona?.title ?? "סימולציה, עסקה גבוהה"}
                 </div>
                 <div className="mt-1 flex flex-wrap items-center gap-2">
-                  {demo.behaviorMode && <BehaviorModeBadge mode={demo.behaviorMode} />}
+                  {demo.behaviorMode && (
+                    <BehaviorModeBadge mode={demo.behaviorMode} />
+                  )}
                 </div>
               </div>
             </div>
             <div className="flex flex-wrap items-center gap-3 md:gap-4">
               {demo.persona && <ClientPersonaBadge persona={demo.persona} />}
-              {demo.pressureLevel && <PressureLevelBadge level={demo.pressureLevel} />}
+              {demo.pressureLevel && (
+                <PressureLevelBadge level={demo.pressureLevel} />
+              )}
               <div className="text-start">
                 <div className="font-brand text-2xl font-bold text-white">
                   {demo.formatElapsed()}
@@ -118,7 +126,9 @@ export function LiveCallInterface({
           >
             <div
               className={
-                isCompact ? "" : "flex flex-col gap-5 lg:col-span-3 lg:min-h-[520px]"
+                isCompact
+                  ? ""
+                  : "flex flex-col gap-5 lg:col-span-3 lg:min-h-[520px]"
               }
             >
               {!isCompact && (
@@ -151,7 +161,10 @@ export function LiveCallInterface({
 
             {!isCompact && (
               <div className="flex flex-col gap-5 lg:col-span-2 lg:min-h-[520px]">
-                <ScoreMetersPanel scores={demo.scores} behaviorMode={demo.behaviorMode ?? "leading"} />
+                <ScoreMetersPanel
+                  scores={demo.scores}
+                  behaviorMode={demo.behaviorMode ?? "leading"}
+                />
                 <ObjectionAnalysisPanel live />
                 <div className="flex min-h-[180px] flex-1 flex-col border border-white/[0.05] bg-black/40 p-4">
                   <ConversationTimeline

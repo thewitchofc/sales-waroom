@@ -59,51 +59,59 @@ export function LiveTranscript({
           />
           <span className="font-brand text-[10px] text-red-400">תמלול חי</span>
         </div>
-        <span className="text-[10px] text-muted-foreground">Frame · Authority · Certainty</span>
+        <span className="text-[10px] text-muted-foreground">
+          Frame, Authority, Certainty
+        </span>
       </div>
 
       <div className="relative min-h-0 flex-1">
         <div className="absolute inset-0 space-y-3 overflow-y-auto pe-1 scrollbar-hide">
           <AnimatePresence initial={false}>
             {messages.map((msg) => {
-            const style = typeStyles[msg.type];
-            const isActive = msg.id === activeId;
+              const style = typeStyles[msg.type];
+              const isActive = msg.id === activeId;
 
-            return (
-              <motion.div
-                key={msg.id}
-                initial={{ opacity: 0, x: 20, height: 0 }}
-                animate={{ opacity: 1, x: 0, height: "auto" }}
-                transition={{ duration: 0.4, ease: [0.21, 0.47, 0.32, 0.98] }}
-                className={cn(
-                  "relative border p-3 transition-all",
-                  style.border,
-                  style.bg,
-                  isActive && "ring-1 ring-accent/30 glow-accent"
-                )}
-              >
-                {isActive && (
-                  <motion.div
-                    layoutId="transcript-active"
-                    className="absolute inset-y-0 start-0 w-0.5 bg-accent"
-                  />
-                )}
-                <div className="mb-1.5 flex items-center justify-between">
-                  <span className={cn("text-xs font-semibold", style.labelColor)}>
-                    {msg.speaker}
-                  </span>
-                  <span className="font-brand text-[9px] text-muted-foreground">
-                    {msg.timestamp}
-                  </span>
-                </div>
-                <p className={cn(
-                  "text-sm leading-relaxed",
-                  msg.type === "coach" || msg.type === "analysis"
-                    ? "font-medium text-white"
-                    : "text-white/90"
-                )}>{msg.text}</p>
-              </motion.div>
-            );
+              return (
+                <motion.div
+                  key={msg.id}
+                  initial={{ opacity: 0, x: 20, height: 0 }}
+                  animate={{ opacity: 1, x: 0, height: "auto" }}
+                  transition={{ duration: 0.4, ease: [0.21, 0.47, 0.32, 0.98] }}
+                  className={cn(
+                    "relative border p-3 transition-all",
+                    style.border,
+                    style.bg,
+                    isActive && "ring-1 ring-accent/30 glow-accent",
+                  )}
+                >
+                  {isActive && (
+                    <motion.div
+                      layoutId="transcript-active"
+                      className="absolute inset-y-0 start-0 w-0.5 bg-accent"
+                    />
+                  )}
+                  <div className="mb-1.5 flex items-center justify-between">
+                    <span
+                      className={cn("text-xs font-semibold", style.labelColor)}
+                    >
+                      {msg.speaker}
+                    </span>
+                    <span className="font-brand text-[9px] text-muted-foreground">
+                      {msg.timestamp}
+                    </span>
+                  </div>
+                  <p
+                    className={cn(
+                      "text-sm leading-relaxed",
+                      msg.type === "coach" || msg.type === "analysis"
+                        ? "font-medium text-white"
+                        : "text-white/90",
+                    )}
+                  >
+                    {msg.text}
+                  </p>
+                </motion.div>
+              );
             })}
           </AnimatePresence>
 

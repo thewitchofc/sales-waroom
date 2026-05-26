@@ -36,7 +36,7 @@ export function AICoachPanel({ feedback }: { feedback: CoachFeedback[] }) {
           animate={{ opacity: [1, 0.4, 1] }}
           transition={{ duration: 2, repeat: Infinity }}
         >
-          ● מנטר · לא מרגיע
+          ● מנטר, לא מרגיע
         </motion.span>
       </div>
 
@@ -44,7 +44,7 @@ export function AICoachPanel({ feedback }: { feedback: CoachFeedback[] }) {
         <PremiumEmptyState
           status="מאמן שטח ARבינוני"
           title="אין מקום לרכות בשיחה"
-          description="משוב חד יופיע ברגע שתאבד פריים, ודאות, או שליטה רגשית. ה-מאמן לא יעודד, הוא יחשוף."
+          description="משוב חד יופיע ברגע שתאבד פריים, ודאות, או שליטה רגשית. המאמן לא יעודד, הוא יחשוף."
         />
       ) : (
         feedback.map((item, i) => (
@@ -55,16 +55,22 @@ export function AICoachPanel({ feedback }: { feedback: CoachFeedback[] }) {
             transition={{ delay: i * 0.15, duration: 0.5 }}
             className={cn(
               "border p-4 transition-all hover:glow-accent",
-              typeStyles[item.type].wrapper
+              typeStyles[item.type].wrapper,
             )}
           >
             <div className="mb-2 flex items-center justify-between">
-              <span className={cn("text-xs font-bold", typeStyles[item.type].title)}>
+              <span
+                className={cn("text-xs font-bold", typeStyles[item.type].title)}
+              >
                 {item.title}
               </span>
-              <span className="font-brand text-[9px] text-muted-foreground">{item.time}</span>
+              <span className="font-brand text-[9px] text-muted-foreground">
+                {item.time}
+              </span>
             </div>
-            <p className="text-sm font-medium leading-relaxed text-white/85">{item.body}</p>
+            <p className="text-sm font-medium leading-relaxed text-white/85">
+              {item.body}
+            </p>
           </motion.div>
         ))
       )}

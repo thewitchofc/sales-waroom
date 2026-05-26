@@ -9,7 +9,7 @@ export function ProductPreviewGrid() {
           לאן ללכת?
         </h2>
         <p className="mx-auto mt-3 max-w-md text-center text-sm text-white/45">
-          שלוש אפשרויות. אם אתם לא בטוחים — התחילו מהדמו.
+          שלוש אפשרויות. אם אתם לא בטוחים. התחילו מהדמו.
         </p>
 
         <div className="mt-10 space-y-3">
@@ -29,7 +29,9 @@ export function ProductPreviewGrid() {
                   <h3 className="mt-1 font-display text-lg font-bold text-white">
                     {route.title}
                   </h3>
-                  <p className="mt-2 text-sm text-white/45">{route.description}</p>
+                  <p className="mt-2 text-sm text-white/45">
+                    {route.description}
+                  </p>
                 </div>
                 <span className="shrink-0 text-accent/60">←</span>
               </div>

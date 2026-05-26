@@ -17,7 +17,11 @@ const priorityStyles = {
   low: "border-blue-400/30 bg-blue-500/5 text-blue-400",
 };
 
-export function CoachingInsightsPanel({ insights }: { insights: CoachingInsight[] }) {
+export function CoachingInsightsPanel({
+  insights,
+}: {
+  insights: CoachingInsight[];
+}) {
   return (
     <div className="flex flex-col gap-3">
       <div className="flex items-center justify-between">
@@ -29,7 +33,7 @@ export function CoachingInsightsPanel({ insights }: { insights: CoachingInsight[
           animate={{ opacity: [1, 0.4, 1] }}
           transition={{ duration: 2, repeat: Infinity }}
         >
-          ● סמכות · פריים · לחץ
+          ● סמכות, פריים, לחץ
         </motion.span>
       </div>
 
@@ -38,7 +42,7 @@ export function CoachingInsightsPanel({ insights }: { insights: CoachingInsight[
           <PremiumEmptyState
             status="מנוע פסיכולוגי"
             title="מנוע ניתוח פסיכולוגי פעיל"
-            description="תובנות על שליטה בפריים, שליטה רגשית, ודאות ו-תגובה ללחץ יופיעו כאן, חדות, ללא פילטר."
+            description="תובנות על שליטה בפריים, שליטה רגשית, ודאות ותגובה ללחץ יופיעו כאן, חדות, ללא פילטר."
           />
         ) : (
           insights.map((item, i) => (
@@ -50,12 +54,14 @@ export function CoachingInsightsPanel({ insights }: { insights: CoachingInsight[
               className="group border border-white/5 bg-black/40 p-4 transition-all hover:border-accent/20 hover:glow-accent"
             >
               <div className="mb-3 flex items-center justify-between gap-2">
-                <span className="text-xs font-bold text-white">{item.category}</span>
+                <span className="text-xs font-bold text-white">
+                  {item.category}
+                </span>
                 <div className="flex items-center gap-2">
                   <span
                     className={cn(
                       "border px-2 py-0.5 text-[9px] font-brand",
-                      priorityStyles[item.priority]
+                      priorityStyles[item.priority],
                     )}
                   >
                     {priorityLabels[item.priority]}
@@ -65,10 +71,16 @@ export function CoachingInsightsPanel({ insights }: { insights: CoachingInsight[
                   </span>
                 </div>
               </div>
-              <p className="mb-3 text-sm font-medium leading-relaxed text-white/80">{item.insight}</p>
+              <p className="mb-3 text-sm font-medium leading-relaxed text-white/80">
+                {item.insight}
+              </p>
               <div className="border border-red-500/10 bg-red-500/5 px-3 py-2">
-                <span className="font-brand text-[9px] text-red-400">תיקון ←</span>
-                <p className="mt-1 text-xs leading-relaxed text-white/85">{item.action}</p>
+                <span className="font-brand text-[9px] text-red-400">
+                  תיקון ←
+                </span>
+                <p className="mt-1 text-xs leading-relaxed text-white/85">
+                  {item.action}
+                </p>
               </div>
             </motion.div>
           ))

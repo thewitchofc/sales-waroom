@@ -25,10 +25,34 @@ export function AnimatedGrid() {
 
 export function FloatingGlows() {
   const glows = [
-    { top: "10%", left: "15%", size: 400, color: "rgba(201,169,98,0.15)", delay: 0 },
-    { top: "60%", left: "70%", size: 500, color: "rgba(139,157,195,0.12)", delay: 2 },
-    { top: "30%", left: "80%", size: 300, color: "rgba(201,169,98,0.08)", delay: 4 },
-    { top: "80%", left: "20%", size: 350, color: "rgba(139,157,195,0.1)", delay: 1 },
+    {
+      top: "10%",
+      left: "15%",
+      size: 400,
+      color: "rgba(201,169,98,0.15)",
+      delay: 0,
+    },
+    {
+      top: "60%",
+      left: "70%",
+      size: 500,
+      color: "rgba(139,157,195,0.12)",
+      delay: 2,
+    },
+    {
+      top: "30%",
+      left: "80%",
+      size: 300,
+      color: "rgba(201,169,98,0.08)",
+      delay: 4,
+    },
+    {
+      top: "80%",
+      left: "20%",
+      size: 350,
+      color: "rgba(139,157,195,0.1)",
+      delay: 1,
+    },
   ];
 
   return (

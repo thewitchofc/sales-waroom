@@ -22,7 +22,7 @@ function WaveformInner({
   const reduced = useReducedMotion();
   const barCount = isMobile ? Math.min(bars, Math.ceil(bars * 0.55)) : bars;
   const [heights, setHeights] = useState<number[]>(() =>
-    Array.from({ length: barCount }, () => 0.15)
+    Array.from({ length: barCount }, () => 0.15),
   );
 
   const intervalMs = useMemo(() => {
@@ -43,10 +43,12 @@ function WaveformInner({
         Array.from({ length: barCount }, (_, i) => {
           const center = barCount / 2;
           const dist = Math.abs(i - center) / center;
-          const base = intense ? 0.2 + (1 - dist) * 0.5 : 0.12 + (1 - dist) * 0.35;
+          const base = intense
+            ? 0.2 + (1 - dist) * 0.5
+            : 0.12 + (1 - dist) * 0.35;
           const spike = intense && Math.random() > 0.85 ? 0.3 : 0;
           return Math.min(base + Math.random() * 0.55 + spike, 1);
-        })
+        }),
       );
     }, intervalMs);
 
@@ -54,7 +56,9 @@ function WaveformInner({
   }, [active, barCount, intense, intervalMs, reduced]);
 
   return (
-    <div className={`flex h-16 items-end justify-center gap-[2px] ${className}`}>
+    <div
+      className={`flex h-16 items-end justify-center gap-[2px] ${className}`}
+    >
       {heights.map((h, i) => (
         <div
           key={i}
@@ -75,7 +79,13 @@ function WaveformInner({
 
 export const Waveform = memo(WaveformInner);
 
-export function VoiceUI({ className = "", active = true }: { className?: string; active?: boolean }) {
+export function VoiceUI({
+  className = "",
+  active = true,
+}: {
+  className?: string;
+  active?: boolean;
+}) {
   const reduced = useReducedMotion();
 
   return (
@@ -99,7 +109,11 @@ export function VoiceUI({ className = "", active = true }: { className?: string;
           animate={active && !reduced ? { scale: [1, 1.05, 1] } : {}}
           transition={{ duration: 1.5, repeat: Infinity }}
         >
-          <svg className="size-5 text-white sm:size-6" fill="currentColor" viewBox="0 0 24 24">
+          <svg
+            className="size-5 text-white sm:size-6"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
             <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z" />
             <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z" />
           </svg>

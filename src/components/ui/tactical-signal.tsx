@@ -4,7 +4,7 @@ interface TacticalSignalProps {
   className?: string;
 }
 
-/** Minimal signal bars — static telemetry only. */
+/** Minimal signal bars. static telemetry only. */
 export function TacticalSignalBars({
   active = true,
   intense = false,
@@ -18,7 +18,10 @@ export function TacticalSignalBars({
         <div
           key={i}
           className="w-0.5 bg-accent/40"
-          style={{ height: `${active ? h : h * 0.35}%`, opacity: active ? 0.7 : 0.25 }}
+          style={{
+            height: `${active ? h : h * 0.35}%`,
+            opacity: active ? 0.7 : 0.25,
+          }}
         />
       ))}
     </div>

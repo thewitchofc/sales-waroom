@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 
 interface BrandLinkProps {
   href: string;
-  variant?: "primary" | "secondary" | "ghost" | "command";
+  variant?: "primary" | "secondary" | "ghost" | "command" | "arena";
   size?: "sm" | "md" | "lg";
   className?: string;
   children: React.ReactNode;
@@ -28,6 +28,8 @@ export function BrandLink({
       "rounded-none text-muted-foreground hover:text-white hover:bg-white/[0.03] border border-transparent hover:border-white/5",
     command:
       "rounded-none bg-accent/10 text-accent border border-accent/30 hover:bg-accent hover:text-black hover:shadow-[0_0_50px_rgba(212,175,85,0.45)]",
+    arena:
+      "rounded-none bg-red-500/10 text-red-400 border border-red-500/25 hover:bg-red-500/15 hover:text-red-300 hover:border-red-500/40 hover:shadow-[0_0_32px_rgba(239,68,68,0.2)]",
   };
 
   const sizes = {
@@ -37,20 +39,26 @@ export function BrandLink({
   };
 
   return (
-    <motion.div whileHover={{ y: -2, scale: 1.01 }} whileTap={{ scale: 0.98 }} className="inline-flex">
+    <motion.div
+      whileHover={{ y: -2, scale: 1.01 }}
+      whileTap={{ scale: 0.98 }}
+      className="inline-flex"
+    >
       <Link
         href={href}
         className={cn(
           "relative inline-flex items-center justify-center font-semibold transition-all duration-500 overflow-hidden group",
           variants[variant],
           sizes[size],
-          className
+          className,
         )}
       >
-        {(variant === "primary" || variant === "command") && (
+        {(variant === "primary" || variant === "command" || variant === "arena") && (
           <span className="absolute inset-0 bg-gradient-to-l from-transparent via-white/40 to-transparent translate-x-[200%] group-hover:translate-x-[-200%] transition-transform duration-1000" />
         )}
-        <span className="relative z-10 flex items-center gap-2">{children}</span>
+        <span className="relative z-10 flex items-center gap-2">
+          {children}
+        </span>
       </Link>
     </motion.div>
   );

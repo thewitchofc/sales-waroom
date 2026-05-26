@@ -8,19 +8,31 @@ export function FinalCTA() {
           מוכנים להיכנס?
         </h2>
         <p className="mx-auto mt-4 max-w-md text-sm leading-relaxed text-white/45 sm:text-base">
-          התחילו מהדמו אם אתם לא בטוחים. כניסה למערכת — כשאתם מוכנים להימדד.
+          התחילו מהדמו אם אתם לא בטוחים. כניסה למערכת. כשאתם מוכנים להימדד.
         </p>
 
         <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
-          <BrandLink href="/demo" variant="command" size="lg" className="justify-center">
+          <BrandLink
+            href="/demo"
+            variant="command"
+            size="lg"
+            className="justify-center"
+          >
             צפו בדמו
           </BrandLink>
-          <BrandLink href="/dashboard" variant="secondary" size="lg" className="justify-center">
+          <BrandLink
+            href="/dashboard"
+            variant="secondary"
+            size="lg"
+            className="justify-center"
+          >
             כניסה למערכת
           </BrandLink>
         </div>
 
-        <p className="mt-4 text-[11px] text-white/35">14 יום ניסיון · ללא כרטיס אשראי</p>
+        <p className="mt-4 text-[11px] text-white/35">
+          14 יום ניסיון, ללא כרטיס אשראי
+        </p>
       </div>
     </section>
   );

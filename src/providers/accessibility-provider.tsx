@@ -26,7 +26,9 @@ interface AccessibilityContextValue {
   resetSettings: () => void;
 }
 
-const AccessibilityContext = createContext<AccessibilityContextValue | null>(null);
+const AccessibilityContext = createContext<AccessibilityContextValue | null>(
+  null,
+);
 
 function loadSettings(): AccessibilitySettings {
   if (typeof window === "undefined") return defaultAccessibilitySettings;
@@ -52,8 +54,14 @@ function applySettingsToDocument(settings: AccessibilitySettings) {
   root.classList.toggle("a11y-reduce-motion", settings.reduceMotion);
 }
 
-export function AccessibilityProvider({ children }: { children: React.ReactNode }) {
-  const [settings, setSettings] = useState<AccessibilitySettings>(defaultAccessibilitySettings);
+export function AccessibilityProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const [settings, setSettings] = useState<AccessibilitySettings>(
+    defaultAccessibilitySettings,
+  );
   const [panelOpen, setPanelOpen] = useState(false);
   const [hydrated, setHydrated] = useState(false);
 
@@ -75,18 +83,24 @@ export function AccessibilityProvider({ children }: { children: React.ReactNode 
   }, []);
 
   const increaseFont = useCallback(() => {
-    setSettings((s) => ({ ...s, fontScale: Math.min(2, s.fontScale + 1) as 0 | 1 | 2 }));
+    setSettings((s) => ({
+      ...s,
+      fontScale: Math.min(2, s.fontScale + 1) as 0 | 1 | 2,
+    }));
   }, []);
 
   const decreaseFont = useCallback(() => {
-    setSettings((s) => ({ ...s, fontScale: Math.max(0, s.fontScale - 1) as 0 | 1 | 2 }));
+    setSettings((s) => ({
+      ...s,
+      fontScale: Math.max(0, s.fontScale - 1) as 0 | 1 | 2,
+    }));
   }, []);
 
   const toggleSetting = useCallback(
     (key: keyof Omit<AccessibilitySettings, "fontScale">) => {
       setSettings((s) => ({ ...s, [key]: !s[key] }));
     },
-    []
+    [],
   );
 
   const resetSettings = useCallback(() => {
@@ -105,16 +119,28 @@ export function AccessibilityProvider({ children }: { children: React.ReactNode 
       toggleSetting,
       resetSettings,
     }),
-    [settings, panelOpen, increaseFont, decreaseFont, toggleSetting, resetSettings]
+    [
+      settings,
+      panelOpen,
+      increaseFont,
+      decreaseFont,
+      toggleSetting,
+      resetSettings,
+    ],
   );
 
   return (
-    <AccessibilityContext.Provider value={value}>{children}</AccessibilityContext.Provider>
+    <AccessibilityContext.Provider value={value}>
+      {children}
+    </AccessibilityContext.Provider>
   );
 }
 
 export function useAccessibility() {
   const ctx = useContext(AccessibilityContext);
-  if (!ctx) throw new Error("useAccessibility must be used within AccessibilityProvider");
+  if (!ctx)
+    throw new Error(
+      "useAccessibility must be used within AccessibilityProvider",
+    );
   return ctx;
 }

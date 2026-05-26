@@ -20,10 +20,39 @@ const voiceLines = [
 ];
 
 const baseMetrics = [
-  { id: "certainty", label: "ודאות", base: 88, suffix: "%", status: "יציב", color: "text-green-400" },
-  { id: "tonality", label: "טון · סמכות", base: 91, suffix: "", status: "דומיננטי", color: "text-accent" },
-  { id: "emotional", label: "שליטה רגשית", base: 94, suffix: "", status: "שליטה", color: "text-green-400" },
-  { id: "pressure", label: "תגובה ללחץ", base: 76, suffix: "", status: "תחת אש", color: "text-red-400", isEnergy: true },
+  {
+    id: "certainty",
+    label: "ודאות",
+    base: 88,
+    suffix: "%",
+    status: "יציב",
+    color: "text-green-400",
+  },
+  {
+    id: "tonality",
+    label: "טון, סמכות",
+    base: 91,
+    suffix: "",
+    status: "דומיננטי",
+    color: "text-accent",
+  },
+  {
+    id: "emotional",
+    label: "שליטה רגשית",
+    base: 94,
+    suffix: "",
+    status: "שליטה",
+    color: "text-green-400",
+  },
+  {
+    id: "pressure",
+    label: "תגובה ללחץ",
+    base: 76,
+    suffix: "",
+    status: "תחת אש",
+    color: "text-red-400",
+    isEnergy: true,
+  },
 ];
 
 export function VoiceTraining({ showHeader = true }: { showHeader?: boolean }) {
@@ -43,8 +72,19 @@ export function VoiceTraining({ showHeader = true }: { showHeader?: boolean }) {
         setCharIndex(0);
         setMetrics((prev) =>
           prev.map((v, i) =>
-            Math.max(40, Math.min(99, v + (i === 0 ? 3 : i === 3 ? -2 : Math.floor(Math.random() * 3 - 1))))
-          )
+            Math.max(
+              40,
+              Math.min(
+                99,
+                v +
+                  (i === 0
+                    ? 3
+                    : i === 3
+                      ? -2
+                      : Math.floor(Math.random() * 3 - 1)),
+              ),
+            ),
+          ),
         );
       }, 1200);
     }, 4500);
@@ -60,26 +100,38 @@ export function VoiceTraining({ showHeader = true }: { showHeader?: boolean }) {
   }, [currentLine, isAnalyzing]);
 
   return (
-    <Section id="voice" className="overflow-hidden border-t border-white/5 py-20 sm:py-28 md:py-32" atmosphere>
+    <Section
+      id="voice"
+      className="overflow-hidden border-t border-white/5 py-20 sm:py-28 md:py-32"
+      atmosphere
+    >
       <SectionAtmosphere />
       <div className="pointer-events-none absolute inset-0 analytics-radar-glow opacity-50" />
 
       {showHeader && (
         <div className="mb-12 text-center">
-          <p className="font-brand text-[10px] tracking-[0.2em] text-accent">אימון קולי</p>
+          <p className="font-brand text-[10px] tracking-[0.2em] text-accent">
+            אימון קולי
+          </p>
           <h2 className="mt-4 font-display text-3xl font-black text-white sm:text-4xl">
-            טון · ודאות · סמכות, תחת לחץ
+            טון, ודאות, סמכות, תחת לחץ
           </h2>
         </div>
       )}
 
       <div className="grid items-start gap-10 lg:grid-cols-2 lg:gap-16">
-        <GlassCard hover={false} premium className="relative overflow-hidden !p-0">
+        <GlassCard
+          hover={false}
+          premium
+          className="relative overflow-hidden !p-0"
+        >
           <div className="ai-scan-line pointer-events-none absolute inset-0 opacity-15" />
-          <HudFrame label="ממשק קולי · חי">
+          <HudFrame label="ממשק קולי, חי">
             <div className="relative flex flex-col items-center px-6 py-10 sm:px-8 sm:py-12">
               <div className="mb-6 flex w-full flex-wrap items-center justify-between gap-2">
-                <span className="font-brand text-[9px] text-white/40">{TRAINING_SESSION.label}</span>
+                <span className="font-brand text-[9px] text-white/40">
+                  {TRAINING_SESSION.label}
+                </span>
                 <motion.span
                   className="flex items-center gap-1.5 font-brand text-[9px] text-red-400"
                   animate={{ opacity: [1, 0.35, 1] }}
@@ -113,7 +165,9 @@ export function VoiceTraining({ showHeader = true }: { showHeader?: boolean }) {
                   >
                     ● תמלול חי
                   </motion.span>
-                  <span className="text-[10px] text-white/35">ניתוח בזמן אמת</span>
+                  <span className="text-[10px] text-white/35">
+                    ניתוח בזמן אמת
+                  </span>
                 </div>
                 <p className="min-h-[3rem] text-base leading-relaxed text-white/85">
                   &laquo;{currentLine.slice(0, charIndex)}
@@ -139,21 +193,23 @@ export function VoiceTraining({ showHeader = true }: { showHeader?: boolean }) {
               )}
 
               <div className="mt-6 flex flex-wrap justify-center gap-3">
-                {["פריים תחת לחץ", "פרסונה דומיננטית · קונה סמכותי"].map((tag) => (
-                  <span
-                    key={tag}
-                    className="border border-red-500/20 bg-red-500/5 px-3 py-1 text-[11px] text-red-400/90"
-                  >
-                    {tag}
-                  </span>
-                ))}
+                {["פריים תחת לחץ", "פרסונה דומיננטית, קונה סמכותי"].map(
+                  (tag) => (
+                    <span
+                      key={tag}
+                      className="border border-red-500/20 bg-red-500/5 px-3 py-1 text-[11px] text-red-400/90"
+                    >
+                      {tag}
+                    </span>
+                  ),
+                )}
               </div>
             </div>
           </HudFrame>
         </GlassCard>
 
         <div className="flex flex-col gap-6">
-          <TrainingCoachPresence active={!isAnalyzing} weakness="טון · ודאות" />
+          <TrainingCoachPresence active={!isAnalyzing} weakness="טון, ודאות" />
 
           {baseMetrics.map((metric, i) => (
             <motion.div
@@ -170,13 +226,22 @@ export function VoiceTraining({ showHeader = true }: { showHeader?: boolean }) {
                 {!metric.isEnergy && (
                   <div className="relative size-16 shrink-0">
                     <svg className="size-16 -rotate-90" viewBox="0 0 36 36">
-                      <circle cx="18" cy="18" r="15" fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="1.5" />
+                      <circle
+                        cx="18"
+                        cy="18"
+                        r="15"
+                        fill="none"
+                        stroke="rgba(255,255,255,0.06)"
+                        strokeWidth="1.5"
+                      />
                       <motion.circle
                         cx="18"
                         cy="18"
                         r="15"
                         fill="none"
-                        stroke={metric.color.includes("red") ? "#ef4444" : "#d4af55"}
+                        stroke={
+                          metric.color.includes("red") ? "#ef4444" : "#d4af55"
+                        }
                         strokeWidth="2"
                         strokeLinecap="round"
                         strokeDasharray={`${metrics[i]} 100`}
@@ -191,7 +256,9 @@ export function VoiceTraining({ showHeader = true }: { showHeader?: boolean }) {
                 )}
                 <div className="flex-1">
                   <div className="flex items-center justify-between gap-3">
-                    <span className={`font-brand text-[10px] ${metric.color}`}>{metric.status}</span>
+                    <span className={`font-brand text-[10px] ${metric.color}`}>
+                      {metric.status}
+                    </span>
                     <motion.span
                       key={metrics[i]}
                       initial={{ opacity: 0.5 }}
@@ -201,14 +268,18 @@ export function VoiceTraining({ showHeader = true }: { showHeader?: boolean }) {
                       חי
                     </motion.span>
                   </div>
-                  <div className="mt-1 text-sm text-white/45">{metric.label}</div>
+                  <div className="mt-1 text-sm text-white/45">
+                    {metric.label}
+                  </div>
                   <motion.div
                     key={metrics[i]}
                     initial={{ scale: 1.05 }}
                     animate={{ scale: 1 }}
                     className="mt-1 font-display text-3xl font-black text-white"
                   >
-                    {metric.isEnergy ? "אינטנסיבי" : `${metrics[i]}${metric.suffix}`}
+                    {metric.isEnergy
+                      ? "אינטנסיבי"
+                      : `${metrics[i]}${metric.suffix}`}
                   </motion.div>
                 </div>
               </div>
@@ -226,11 +297,15 @@ export function VoiceTraining({ showHeader = true }: { showHeader?: boolean }) {
           ))}
 
           <GlassCard delay={0.4} premium className="!p-6 sm:!p-8">
-            <div className="mb-2 font-brand text-[10px] text-red-400">סימולציית לחץ</div>
-            <h3 className="mb-4 font-display text-xl font-bold text-white">רמות לחץ פסיכולוגי</h3>
+            <div className="mb-2 font-brand text-[10px] text-red-400">
+              סימולציית לחץ
+            </div>
+            <h3 className="mb-4 font-display text-xl font-bold text-white">
+              רמות לחץ פסיכולוגי
+            </h3>
             <p className="mb-6 text-sm leading-relaxed text-white/45">
-              מבסיסי, דרך עילית ואינטנסיבי, ועד שטח. קונים דומיננטיים שבודקים פריים,
-              סמכות וודאות. אין מקום לריאקטיביות.
+              מבסיסי, דרך עילית ואינטנסיבי, ועד שטח. קונים דומיננטיים שבודקים
+              פריים, סמכות וודאות. אין מקום לריאקטיביות.
             </p>
             <div className="flex flex-wrap gap-2">
               {PRESSURE_LEVELS.map((level) => (

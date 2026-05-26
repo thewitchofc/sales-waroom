@@ -30,12 +30,19 @@ export function LoginPageContent() {
         transition={{ duration: 0.8 }}
         className="relative w-full max-w-md"
       >
-        <BrandLogoLink href="/" variant="login" className="mb-10 justify-center" />
+        <div className="mb-10 flex w-full justify-center">
+          <BrandLogoLink href="/" variant="login" />
+        </div>
 
-        <HudFrame label="גישה מאובטחת" className="panel-surface border border-white/10 bg-black/80 p-8">
-          <h1 className="mb-2 font-display text-2xl font-bold text-white">כניסה למערכת</h1>
+        <HudFrame
+          label="גישה מאובטחת"
+          className="panel-surface border border-white/10 bg-black/80 p-8"
+        >
+          <h1 className="mb-2 font-display text-2xl font-bold text-white">
+            כניסה למערכת
+          </h1>
           <p className="mb-8 text-sm text-muted-foreground">
-            הזינו פרטי גישה ל-מרכז פיקוד
+            הזינו פרטי גישה למרכז פיקוד
           </p>
 
           <form onSubmit={handleSubmit} className="space-y-5">
@@ -68,7 +75,7 @@ export function LoginPageContent() {
               className="w-full"
               disabled={loading}
             >
-              {loading ? "מתחבר..." : "כניסה ל-מרכז פיקוד"}
+              {loading ? "מתחבר..." : "כניסה למרכז פיקוד"}
             </BrandButton>
           </form>
 

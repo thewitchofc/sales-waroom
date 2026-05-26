@@ -8,7 +8,10 @@ import {
   getRankMovement,
   type ArenaPlayer,
 } from "@/config/arena-data";
-import { RankTierBadge, RankMovement } from "@/components/arena/rank-tier-badge";
+import {
+  RankTierBadge,
+  RankMovement,
+} from "@/components/arena/rank-tier-badge";
 import { RankingCard } from "@/components/arena/ranking-card";
 
 function BadgePills({ badgeIds }: { badgeIds: string[] }) {
@@ -38,7 +41,7 @@ export function LeaderboardTable({
   skipTop?: number;
 }) {
   const [scores, setScores] = useState(() =>
-    Object.fromEntries(players.map((p) => [p.id, p.score]))
+    Object.fromEntries(players.map((p) => [p.id, p.score])),
   );
 
   const tablePlayers = skipTop > 0 ? players.slice(skipTop) : players;
@@ -52,7 +55,10 @@ export function LeaderboardTable({
           .filter((p) => p.isLive)
           .forEach((p) => {
             const delta = Math.random() > 0.5 ? 1 : -1;
-            next[p.id] = Math.min(999, Math.max(700, (next[p.id] ?? p.score) + delta));
+            next[p.id] = Math.min(
+              999,
+              Math.max(700, (next[p.id] ?? p.score) + delta),
+            );
           });
         return next;
       });
@@ -76,7 +82,7 @@ export function LeaderboardTable({
                 לוח דירוג חי
               </div>
               <h3 className="font-display text-lg font-bold text-white">
-                הקלוזרים המובילים · השבוע
+                הזאבים המובילים, השבוע
               </h3>
             </div>
           </div>
@@ -88,26 +94,43 @@ export function LeaderboardTable({
           <thead>
             <tr className="border-b border-white/[0.04] text-[9px] uppercase tracking-wider text-white/30">
               <th className="px-4 py-2.5 text-start font-brand sm:px-5">#</th>
-              <th className="px-4 py-2.5 text-start font-brand sm:px-5">קלוזר</th>
-              {!minimal && <th className="px-4 py-2.5 text-start font-brand sm:px-5">דרגה</th>}
-              <th className="px-4 py-2.5 text-start font-brand sm:px-5">ציון</th>
-              <th className="px-4 py-2.5 text-start font-brand sm:px-5">תנועה</th>
+              <th className="px-4 py-2.5 text-start font-brand sm:px-5">זאב</th>
+              {!minimal && (
+                <th className="px-4 py-2.5 text-start font-brand sm:px-5">
+                  דרגה
+                </th>
+              )}
+              <th className="px-4 py-2.5 text-start font-brand sm:px-5">
+                ציון
+              </th>
+              <th className="px-4 py-2.5 text-start font-brand sm:px-5">
+                תנועה
+              </th>
               {minimal ? (
                 <th className="hidden px-4 py-2.5 text-start font-brand sm:table-cell sm:px-5">
                   רצף
                 </th>
               ) : (
                 <>
-                  <th className="px-4 py-2.5 text-start font-brand sm:px-5">רצף</th>
-                  <th className="px-4 py-2.5 text-start font-brand sm:px-5">תגים</th>
-                  <th className="px-4 py-2.5 text-start font-brand sm:px-5">סטטוס</th>
+                  <th className="px-4 py-2.5 text-start font-brand sm:px-5">
+                    רצף
+                  </th>
+                  <th className="px-4 py-2.5 text-start font-brand sm:px-5">
+                    תגים
+                  </th>
+                  <th className="px-4 py-2.5 text-start font-brand sm:px-5">
+                    סטטוס
+                  </th>
                 </>
               )}
             </tr>
           </thead>
           <tbody>
             {tablePlayers.map((player) => {
-              const movement = getRankMovement(player.rank, player.previousRank);
+              const movement = getRankMovement(
+                player.rank,
+                player.previousRank,
+              );
               const isHighlight = player.id === highlightId;
               const liveScore = scores[player.id] ?? player.score;
 
@@ -117,15 +140,19 @@ export function LeaderboardTable({
                   className={cn(
                     "leaderboard-table-row border-b border-white/[0.03] transition-colors last:border-0",
                     isHighlight ? "bg-white/[0.03]" : "hover:bg-white/[0.015]",
-                    !minimal && player.rank <= 3 && "arena-top-rank"
+                    !minimal && player.rank <= 3 && "arena-top-rank",
                   )}
                 >
                   <td className="px-4 py-3 sm:px-5 sm:py-3.5">
-                    <span className="font-brand text-sm text-white/50">#{player.rank}</span>
+                    <span className="font-brand text-sm text-white/50">
+                      #{player.rank}
+                    </span>
                   </td>
                   <td className="px-4 py-3 sm:px-5 sm:py-3.5">
                     <div className="flex flex-col gap-0.5">
-                      <span className="text-sm font-medium text-white/90">{player.name}</span>
+                      <span className="text-sm font-medium text-white/90">
+                        {player.name}
+                      </span>
                       {minimal && (
                         <RankTierBadge tier={player.tier} size="sm" plain />
                       )}
@@ -146,19 +173,25 @@ export function LeaderboardTable({
                   </td>
                   {minimal ? (
                     <td className="hidden px-4 py-3 sm:table-cell sm:px-5 sm:py-3.5">
-                      <span className="font-brand text-xs text-white/40">{player.streak}</span>
+                      <span className="font-brand text-xs text-white/40">
+                        {player.streak}
+                      </span>
                     </td>
                   ) : (
                     <>
                       <td className="px-4 py-3 sm:px-5 sm:py-3.5">
-                        <span className="font-brand text-sm text-green-400">{player.streak}🔥</span>
+                        <span className="font-brand text-sm text-green-400">
+                          {player.streak}🔥
+                        </span>
                       </td>
                       <td className="px-4 py-3 sm:px-5 sm:py-3.5">
                         <BadgePills badgeIds={player.badges} />
                       </td>
                       <td className="px-4 py-3 sm:px-5 sm:py-3.5">
                         {player.isLive ? (
-                          <span className="font-brand text-[9px] text-white/35">חי</span>
+                          <span className="font-brand text-[9px] text-white/35">
+                            חי
+                          </span>
                         ) : null}
                       </td>
                     </>
@@ -207,17 +240,15 @@ export function LeaderboardPodium({
 
   return (
     <div className="grid gap-4 md:grid-cols-3 md:gap-5">
-      {[second, first, third]
-        .filter(Boolean)
-        .map((player, i) => (
-          <RankingCard
-            key={player!.id}
-            player={player!}
-            rank={player!.rank}
-            highlight={i === 1}
-            minimal={minimal}
-          />
-        ))}
+      {[second, first, third].filter(Boolean).map((player, i) => (
+        <RankingCard
+          key={player!.id}
+          player={player!}
+          rank={player!.rank}
+          highlight={i === 1}
+          minimal={minimal}
+        />
+      ))}
     </div>
   );
 }

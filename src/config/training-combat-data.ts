@@ -53,22 +53,22 @@ export const SCENARIO_COMBAT_INTEL: Record<number, ScenarioCombatIntel> = {
   },
   3: {
     behavior: "פער סמכות",
-    threat: "היסוס · טון לא בטוח",
+    threat: "היסוס, טון לא בטוח",
     correction: "אמת סמכות החלטה לפני כל הצעה.",
   },
   4: {
     behavior: "כניעה לתחרות",
-    threat: "כישלון לחץ · ודאות נפלה",
+    threat: "כישלון לחץ, ודאות נפלה",
     correction: "אל תתפשר על פריים. הובל, אל תגיב.",
   },
 };
 
 export const COACH_COMMENTARY = [
-  "המאמן זיהה חולשה · סמכות",
+  "המאמן זיהה חולשה, סמכות",
   "תיקון מומלץ נטען",
-  "לחץ עולה · שמור על פריים",
-  "הלקוח בודק dominance · אל תיכנע",
-  "קפיצת ביטחון אפשרית · שאל עכשיו",
+  "לחץ עולה, שמור על פריים",
+  "הלקוח בודק dominance, אל תיכנע",
+  "קפיצת ביטחון אפשרית, שאל עכשיו",
 ];
 
 export const PSYCHOLOGY_ALERTS = [

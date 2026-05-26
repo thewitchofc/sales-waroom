@@ -3,13 +3,17 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Waveform } from "@/components/ui/waveform";
-import { HudFrame, StatusIndicator, ThreatMeter } from "@/components/ui/hud-elements";
+import {
+  HudFrame,
+  StatusIndicator,
+  ThreatMeter,
+} from "@/components/ui/hud-elements";
 import { cn } from "@/lib/utils";
 
 const liveMessages = [
   {
     role: "prospect",
-    text: "המחיר שלכם גבוה ב-40% מהמתחרה. למה שאשלם פרמיה?",
+    text: "המחיר שלכם גבוה ב 40% מהמתחרה. למה שאשלם פרמיה?",
     tag: "התנגדות: מחיר",
   },
   {
@@ -50,7 +54,10 @@ export function CommandDashboard() {
         className="relative"
       >
         <div className="glass-premium glass-reflection metallic-border relative overflow-hidden rounded-2xl p-[1px] glow-accent-strong">
-          <HudFrame label="חדר מלחמה // חי" className="rounded-2xl bg-black/80 p-5 md:p-6">
+          <HudFrame
+            label="חדר מלחמה // חי"
+            className="rounded-2xl bg-black/80 p-5 md:p-6"
+          >
             {/* Header bar */}
             <div className="mb-5 flex items-center justify-between border-b border-white/5 pb-4">
               <div className="flex items-center gap-2">
@@ -93,7 +100,7 @@ export function CommandDashboard() {
                         "size-1 rounded-full",
                         item.status === "active" && "bg-green-400",
                         item.status === "warning" && "bg-accent",
-                        item.status === "critical" && "bg-red-500"
+                        item.status === "critical" && "bg-red-500",
                       )}
                       animate={{ opacity: [1, 0.3, 1] }}
                       transition={{ duration: 1, repeat: Infinity }}
@@ -102,7 +109,9 @@ export function CommandDashboard() {
                       חי
                     </span>
                   </div>
-                  <p className="text-[11px] leading-snug text-white/80">{item.label}</p>
+                  <p className="text-[11px] leading-snug text-white/80">
+                    {item.label}
+                  </p>
                 </div>
               ))}
             </div>
@@ -134,15 +143,27 @@ export function CommandDashboard() {
                 <div className="flex items-center gap-2 ps-4">
                   <motion.div
                     className="flex size-8 items-center justify-center rounded-full border border-accent/30 bg-accent/10"
-                    animate={{ boxShadow: ["0 0 0 rgba(212,175,85,0)", "0 0 20px rgba(212,175,85,0.3)", "0 0 0 rgba(212,175,85,0)"] }}
+                    animate={{
+                      boxShadow: [
+                        "0 0 0 rgba(212,175,85,0)",
+                        "0 0 20px rgba(212,175,85,0.3)",
+                        "0 0 0 rgba(212,175,85,0)",
+                      ],
+                    }}
                     transition={{ duration: 2, repeat: Infinity }}
                   >
-                    <svg className="size-3.5 text-accent" fill="currentColor" viewBox="0 0 24 24">
+                    <svg
+                      className="size-3.5 text-accent"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
                       <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z" />
                     </svg>
                   </motion.div>
                   <div className="text-start">
-                    <div className="text-[10px] text-green-400">VOICE ACTIVE</div>
+                    <div className="text-[10px] text-green-400">
+                      VOICE ACTIVE
+                    </div>
                     <div className="font-brand text-xs text-white">87 ציון</div>
                   </div>
                 </div>
@@ -157,7 +178,11 @@ export function CommandDashboard() {
               <div className="space-y-0">
                 <StatusIndicator label="ביטחון" value="87%" status="active" />
                 <StatusIndicator label="אנרגיה" value="גבוה" status="warning" />
-                <StatusIndicator label="סגירה" value="AT RISK" status="critical" />
+                <StatusIndicator
+                  label="סגירה"
+                  value="AT RISK"
+                  status="critical"
+                />
               </div>
             </div>
           </HudFrame>
@@ -169,7 +194,9 @@ export function CommandDashboard() {
           animate={{ y: [0, -10, 0], x: [0, 5, 0] }}
           transition={{ duration: 5, repeat: Infinity }}
         >
-          <div className="font-brand text-[9px] text-red-400">THREAT DETECTED</div>
+          <div className="font-brand text-[9px] text-red-400">
+            THREAT DETECTED
+          </div>
           <div className="text-xs text-white">השוואת מחיר</div>
         </motion.div>
 
@@ -178,7 +205,9 @@ export function CommandDashboard() {
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 6, repeat: Infinity, delay: 1 }}
         >
-          <div className="font-brand text-[9px] text-green-400">+12% CONFIDENCE</div>
+          <div className="font-brand text-[9px] text-green-400">
+            +12% CONFIDENCE
+          </div>
           <div className="text-xs text-white">מסגור חזק</div>
         </motion.div>
       </motion.div>
@@ -186,7 +215,10 @@ export function CommandDashboard() {
       {/* Ground reflection */}
       <div
         className="absolute -bottom-8 start-1/2 h-16 w-3/4 -translate-x-1/2 rounded-full opacity-30 blur-2xl"
-        style={{ background: "radial-gradient(ellipse, rgba(212,175,85,0.3), transparent)" }}
+        style={{
+          background:
+            "radial-gradient(ellipse, rgba(212,175,85,0.3), transparent)",
+        }}
       />
     </motion.div>
   );

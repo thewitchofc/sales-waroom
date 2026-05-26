@@ -137,10 +137,13 @@ export interface Tournament {
   pressureLevel: number;
 }
 
-export const CURRENT_USER: ArenaPlayer & { isPremium: boolean; handle: string } = {
+export const CURRENT_USER: ArenaPlayer & {
+  isPremium: boolean;
+  handle: string;
+} = {
   id: "user-1",
   name: "דנה כהן",
-  handle: "DANA_קלוזר",
+  handle: "DANA_זאב",
   rank: 7,
   previousRank: 11,
   score: 847,
@@ -165,17 +168,17 @@ export const CURRENT_SEASON: Season = {
   id: 4,
   name: "פרוטוקול מלחמה",
   nameHe: "פרוטוקול מלחמה",
-  tagline: "עונה 4 · קלוזרים עילית בלבד",
+  tagline: "עונה 4, זאבים עילית בלבד",
   startDate: "2026-03-01",
   endDate: "2026-05-31",
   daysRemaining: 36,
   totalBattles: 12847,
   activePlayers: 2847,
   rewards: [
-    "תג אדון מלחמה · אגדי",
-    "פתיחת פרסונה עילית · קונה אומגה",
-    "אנליטיקה פרימיום · 90 יום",
-    "תואר אלוף הזירה · עונה 4",
+    "תג אדון מלחמה, אגדי",
+    "פתיחת פרסונה עילית, קונה אומגה",
+    "אנליטיקה פרימיום, 90 יום",
+    "תואר אלוף הזירה, עונה 4",
   ],
 };
 
@@ -198,13 +201,13 @@ function getTournamentStart(): Date {
 export const WEEKLY_CHALLENGE: WeeklyChallenge = {
   id: "wc-2026-w21",
   title: "אתגר שליטה בפריים",
-  titleHe: "אתגר שבועי · קונה דומיננטי",
+  titleHe: "אתגר שבועי, קונה דומיננטי",
   scenario:
     "אותו קונה סמכותי לכל המשתתפים. 12 דקות. אין תסריט. מי שומר פריים, מנצח.",
-  persona: "קונה סמכותי · דומיננטיות קריטית",
-  pressureLevel: "אינטנסיבי · רמה 4",
+  persona: "קונה סמכותי, דומיננטיות קריטית",
+  pressureLevel: "אינטנסיבי, רמה 4",
   participants: 847,
-  prize: "נקודות אדון מלחמה · 500 XP",
+  prize: "נקודות אדון מלחמה, 500 XP",
   endsAt: getWeekEnd(),
   metrics: [
     "authority",
@@ -218,9 +221,9 @@ export const WEEKLY_CHALLENGE: WeeklyChallenge = {
 
 export const LIVE_TOURNAMENT: Tournament = {
   id: "t-s4-elite",
-  name: "גביע הקלוזרים העילית",
-  nameHe: "גביע הקלוזרים העילית",
-  format: "נוקאאוט · 32 מקומות",
+  name: "גביע הזאבים העילית",
+  nameHe: "גביע הזאבים העילית",
+  format: "נוקאאוט, 32 מקומות",
   entryFee: "פרימיום",
   prizePool: "₪12,000 קרדיט",
   slots: 32,
@@ -245,7 +248,14 @@ export const LEADERBOARD_PLAYERS: ArenaPlayer[] = [
     badges: ["war-master", "frame-king", "closer-elite"],
     isLive: true,
     isPremium: true,
-    stats: { authority: 96, frameControl: 94, confidence: 97, objectionHandling: 92, pressureResponse: 91, closingPerformance: 95 },
+    stats: {
+      authority: 96,
+      frameControl: 94,
+      confidence: 97,
+      objectionHandling: 92,
+      pressureResponse: 91,
+      closingPerformance: 95,
+    },
   },
   {
     id: "p2",
@@ -261,7 +271,14 @@ export const LEADERBOARD_PLAYERS: ArenaPlayer[] = [
     badges: ["pressure-immune", "streak-10"],
     isLive: true,
     isPremium: true,
-    stats: { authority: 94, frameControl: 92, confidence: 95, objectionHandling: 90, pressureResponse: 93, closingPerformance: 91 },
+    stats: {
+      authority: 94,
+      frameControl: 92,
+      confidence: 95,
+      objectionHandling: 90,
+      pressureResponse: 93,
+      closingPerformance: 91,
+    },
   },
   {
     id: "p3",
@@ -277,7 +294,14 @@ export const LEADERBOARD_PLAYERS: ArenaPlayer[] = [
     badges: ["frame-king"],
     isLive: false,
     isPremium: true,
-    stats: { authority: 91, frameControl: 89, confidence: 92, objectionHandling: 88, pressureResponse: 85, closingPerformance: 87 },
+    stats: {
+      authority: 91,
+      frameControl: 89,
+      confidence: 92,
+      objectionHandling: 88,
+      pressureResponse: 85,
+      closingPerformance: 87,
+    },
   },
   {
     id: "p4",
@@ -293,7 +317,14 @@ export const LEADERBOARD_PLAYERS: ArenaPlayer[] = [
     badges: ["closer-elite"],
     isLive: true,
     isPremium: false,
-    stats: { authority: 89, frameControl: 87, confidence: 90, objectionHandling: 86, pressureResponse: 84, closingPerformance: 88 },
+    stats: {
+      authority: 89,
+      frameControl: 87,
+      confidence: 90,
+      objectionHandling: 86,
+      pressureResponse: 84,
+      closingPerformance: 88,
+    },
   },
   {
     id: "p5",
@@ -309,7 +340,14 @@ export const LEADERBOARD_PLAYERS: ArenaPlayer[] = [
     badges: [],
     isLive: false,
     isPremium: true,
-    stats: { authority: 87, frameControl: 85, confidence: 88, objectionHandling: 84, pressureResponse: 82, closingPerformance: 85 },
+    stats: {
+      authority: 87,
+      frameControl: 85,
+      confidence: 88,
+      objectionHandling: 84,
+      pressureResponse: 82,
+      closingPerformance: 85,
+    },
   },
   {
     id: "p6",
@@ -325,7 +363,14 @@ export const LEADERBOARD_PLAYERS: ArenaPlayer[] = [
     badges: ["streak-10"],
     isLive: true,
     isPremium: true,
-    stats: { authority: 85, frameControl: 83, confidence: 86, objectionHandling: 82, pressureResponse: 80, closingPerformance: 83 },
+    stats: {
+      authority: 85,
+      frameControl: 83,
+      confidence: 86,
+      objectionHandling: 82,
+      pressureResponse: 80,
+      closingPerformance: 83,
+    },
   },
   CURRENT_USER,
   {
@@ -342,7 +387,14 @@ export const LEADERBOARD_PLAYERS: ArenaPlayer[] = [
     badges: [],
     isLive: false,
     isPremium: false,
-    stats: { authority: 82, frameControl: 80, confidence: 84, objectionHandling: 79, pressureResponse: 77, closingPerformance: 80 },
+    stats: {
+      authority: 82,
+      frameControl: 80,
+      confidence: 84,
+      objectionHandling: 79,
+      pressureResponse: 77,
+      closingPerformance: 80,
+    },
   },
   {
     id: "p9",
@@ -358,7 +410,14 @@ export const LEADERBOARD_PLAYERS: ArenaPlayer[] = [
     badges: [],
     isLive: false,
     isPremium: true,
-    stats: { authority: 80, frameControl: 78, confidence: 82, objectionHandling: 77, pressureResponse: 75, closingPerformance: 78 },
+    stats: {
+      authority: 80,
+      frameControl: 78,
+      confidence: 82,
+      objectionHandling: 77,
+      pressureResponse: 75,
+      closingPerformance: 78,
+    },
   },
   {
     id: "p10",
@@ -374,19 +433,54 @@ export const LEADERBOARD_PLAYERS: ArenaPlayer[] = [
     badges: [],
     isLive: true,
     isPremium: false,
-    stats: { authority: 76, frameControl: 74, confidence: 78, objectionHandling: 72, pressureResponse: 70, closingPerformance: 74 },
+    stats: {
+      authority: 76,
+      frameControl: 74,
+      confidence: 78,
+      objectionHandling: 72,
+      pressureResponse: 70,
+      closingPerformance: 74,
+    },
   },
 ];
 
 export const ARENA_BADGES: Record<string, ArenaBadge> = {
-  "frame-king": { id: "frame-king", label: "מלך הפריים", icon: "FK", rarity: "rare" },
-  "pressure-immune": { id: "pressure-immune", label: "חסין ללחץ", icon: "PI", rarity: "rare" },
-  "closer-elite": { id: "closer-elite", label: "קלוזר עילית", icon: "CE", rarity: "legendary" },
-  "streak-10": { id: "streak-10", label: "רצף 10 ניצחונות", icon: "S10", rarity: "common" },
-  "war-master": { id: "war-master", label: "אדון מלחמה", icon: "WM", rarity: "legendary" },
+  "frame-king": {
+    id: "frame-king",
+    label: "מלך הפריים",
+    icon: "FK",
+    rarity: "rare",
+  },
+  "pressure-immune": {
+    id: "pressure-immune",
+    label: "חסין ללחץ",
+    icon: "PI",
+    rarity: "rare",
+  },
+  "closer-elite": {
+    id: "closer-elite",
+    label: "זאב עילית",
+    icon: "CE",
+    rarity: "legendary",
+  },
+  "streak-10": {
+    id: "streak-10",
+    label: "רצף 10 ניצחונות",
+    icon: "S10",
+    rarity: "common",
+  },
+  "war-master": {
+    id: "war-master",
+    label: "אדון מלחמה",
+    icon: "WM",
+    rarity: "legendary",
+  },
 };
 
-export const STAT_LABELS: Record<keyof BattleStats, { label: string; labelHe: string }> = {
+export const STAT_LABELS: Record<
+  keyof BattleStats,
+  { label: string; labelHe: string }
+> = {
   authority: { label: "סמכות", labelHe: "סמכות" },
   frameControl: { label: "שליטה בפריים", labelHe: "שליטה בפריים" },
   confidence: { label: "ביטחון", labelHe: "ביטחון" },
@@ -412,13 +506,21 @@ export function getTierConfig(tier: RankTier): RankTierConfig {
   return RANK_TIERS.find((t) => t.id === tier) ?? RANK_TIERS[0];
 }
 
-export function getXpProgress(xp: number): { current: number; next: number; pct: number } {
+export function getXpProgress(xp: number): {
+  current: number;
+  next: number;
+  pct: number;
+} {
   const tier = getTierForXp(xp);
   const nextTier = RANK_TIERS[RANK_TIERS.indexOf(tier) + 1];
   if (!nextTier) return { current: xp, next: tier.maxXp, pct: 100 };
   const range = nextTier.minXp - tier.minXp;
   const progress = xp - tier.minXp;
-  return { current: xp, next: nextTier.minXp, pct: Math.min((progress / range) * 100, 100) };
+  return {
+    current: xp,
+    next: nextTier.minXp,
+    pct: Math.min((progress / range) * 100, 100),
+  };
 }
 
 export function getRankMovement(rank: number, previousRank: number): number {
