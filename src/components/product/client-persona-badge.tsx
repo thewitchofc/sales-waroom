@@ -9,12 +9,17 @@ const dominanceStyles = {
   CRIT: "border-red-500/50 bg-red-500/15 text-red-500",
 };
 
+const dominanceLabels = {
+  HIGH: "גבוה",
+  CRIT: "קריטי",
+};
+
 export function ClientPersonaBadge({ persona }: { persona: ClientPersona }) {
   return (
     <div className="flex flex-wrap items-center gap-2">
       <div className="border border-white/10 bg-black/60 px-3 py-1.5">
         <div className="font-brand text-[8px] tracking-widest text-muted-foreground">
-          DOMINANT PERSONA
+          פרסונה דומיננטית
         </div>
         <div className="text-xs font-semibold text-white">{persona.name}</div>
       </div>
@@ -24,7 +29,7 @@ export function ClientPersonaBadge({ persona }: { persona: ClientPersona }) {
           dominanceStyles[persona.dominance]
         )}
       >
-        {persona.dominance}
+        {dominanceLabels[persona.dominance]}
       </span>
     </div>
   );
@@ -48,9 +53,9 @@ export function PressureLevelBadge({ level }: { level: PressureLevel }) {
       }
       transition={{ duration: 2, repeat: Infinity }}
     >
-      <div className="font-brand text-[8px] text-muted-foreground">PRESSURE</div>
+      <div className="font-brand text-[8px] text-muted-foreground">לחץ</div>
       <div className={cn("text-xs font-bold", isIntense ? "text-red-400" : "text-accent")}>
-        {level.label} · {level.code}
+        {level.label}
       </div>
     </motion.div>
   );

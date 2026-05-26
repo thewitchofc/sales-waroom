@@ -101,6 +101,182 @@ body {
     0 0 80px rgba(212, 175, 85, 0.05);
 }
 
+.hero-preview-shell {
+  position: relative;
+  isolation: isolate;
+}
+
+.hero-preview-shell::before {
+  content: "";
+  position: absolute;
+  inset: -20% -10%;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse 70% 60% at 50% 40%, rgba(212, 175, 85, 0.12) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 40% at 80% 20%, rgba(239, 68, 68, 0.06) 0%, transparent 65%);
+  filter: blur(40px);
+  pointer-events: none;
+}
+
+.hero-preview-card {
+  background:
+    linear-gradient(165deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 40%, rgba(0, 0, 0, 0.85) 100%);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.08),
+    0 1px 0 rgba(255, 255, 255, 0.06) inset,
+    0 32px 80px rgba(0, 0, 0, 0.75),
+    0 0 60px rgba(212, 175, 85, 0.08);
+}
+
+.hero-preview-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 40%, rgba(255, 255, 255, 0.03) 50%, transparent 60%);
+  pointer-events: none;
+}
+
+.hero-headline-accent {
+  background: linear-gradient(135deg, #fff 0%, #d4af55 55%, #fff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.cta-exclusivity-panel {
+  background:
+    linear-gradient(160deg, rgba(212, 175, 85, 0.06) 0%, rgba(0, 0, 0, 0.92) 45%, rgba(0, 0, 0, 1) 100%);
+  box-shadow:
+    0 0 0 1px rgba(212, 175, 85, 0.15),
+    0 40px 100px rgba(0, 0, 0, 0.8),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.manifesto-panel {
+  background:
+    linear-gradient(165deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 45%, rgba(0, 0, 0, 0.9) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 32px 80px rgba(0, 0, 0, 0.6),
+    0 0 40px rgba(212, 175, 85, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.manifesto-quote {
+  border-inline-start: 2px solid rgba(212, 175, 85, 0.35);
+  padding-inline-start: 1.5rem;
+}
+
+.manifesto-principle-cell::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, transparent, rgba(212, 175, 85, 0.4), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.manifesto-principle-cell:hover::before {
+  opacity: 1;
+}
+
+.manifesto-arena-panel {
+  background:
+    linear-gradient(160deg, rgba(255, 255, 255, 0.03) 0%, rgba(0, 0, 0, 0.95) 100%);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.06),
+    0 40px 100px rgba(0, 0, 0, 0.7),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.about-operator-ghost {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 35% 50% at 75% 35%, rgba(212, 175, 85, 0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 25% 40% at 70% 40%, rgba(255, 255, 255, 0.04) 0%, transparent 65%);
+  filter: blur(48px);
+  opacity: 0.7;
+}
+
+.about-operator-ghost--arena {
+  background:
+    radial-gradient(ellipse 40% 55% at 60% 30%, rgba(212, 175, 85, 0.12) 0%, transparent 70%),
+    radial-gradient(ellipse 30% 45% at 55% 35%, rgba(239, 68, 68, 0.06) 0%, transparent 65%);
+  filter: blur(56px);
+}
+
+.footer-premium {
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(5, 5, 5, 1) 50%, rgba(0, 0, 0, 1) 100%);
+}
+
+.footer-premium-bar {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.02) 50%, transparent);
+}
+
+.pricing-hud-cell {
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+.pricing-tier-active {
+  position: relative;
+  isolation: isolate;
+}
+
+.pricing-tier-sweep {
+  background: linear-gradient(
+    105deg,
+    transparent 35%,
+    rgba(212, 175, 85, 0.08) 50%,
+    transparent 65%
+  );
+  animation: pricing-sweep 5s ease-in-out infinite;
+}
+
+@keyframes pricing-sweep {
+  0%,
+  100% {
+    transform: translateX(-30%);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translateX(30%);
+    opacity: 0.8;
+  }
+}
+
+.pricing-tier-active::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  z-index: -1;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(212, 175, 85, 0.35),
+    transparent
+  );
+  background-size: 200% 100%;
+  animation: pricing-border-flow 3s linear infinite;
+  opacity: 0.6;
+}
+
+@keyframes pricing-border-flow {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
 @keyframes pressure-pulse {
   0%,
   100% {
@@ -260,7 +436,9 @@ body {
 
   .glass-shimmer::after,
   .ai-scan-line,
-  .gradient-text {
+  .gradient-text,
+  .pricing-tier-sweep,
+  .pricing-tier-active::before {
     animation: none !important;
   }
 }

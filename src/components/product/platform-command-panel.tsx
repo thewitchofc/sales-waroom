@@ -28,19 +28,19 @@ export function PlatformCommandPanel() {
 
       <div className="grid flex-1 gap-5 md:grid-cols-2">
         <HudFrame
-          label="TIMELINE"
+          label="ציר זמן"
           className="glass-premium metallic-border os-panel-glow min-h-[220px] bg-black/60 p-5"
         >
           <ConversationTimeline events={TIMELINE_EVENTS} activeIndex={timelineIndex} />
         </HudFrame>
 
         <HudFrame
-          label="TRANSCRIPT"
+          label="תמלול"
           className="glass-premium metallic-border os-panel-glow flex min-h-[220px] flex-col bg-black/60 p-5"
         >
           <div className="mb-4 flex items-center justify-between">
             <span className="font-brand text-[10px] tracking-widest text-muted-foreground">
-              KEY MOMENTS
+              רגעי מפתח
             </span>
             <motion.span
               className="text-[10px] text-accent"
@@ -90,14 +90,14 @@ export function PlatformCommandPanel() {
       <div className="border border-white/5 bg-black/40 px-4 py-3">
         <div className="mb-2 flex items-center justify-between">
           <span className="font-brand text-[9px] text-muted-foreground">
-            AUDIO SIGNATURE
+            חתימה קולית
           </span>
           <motion.span
             className="text-[10px] text-green-400"
             animate={{ opacity: [1, 0.4, 1] }}
             transition={{ duration: 1.5, repeat: Infinity }}
           >
-            ● LIVE ANALYSIS
+            ● חי ANALYSIS
           </motion.span>
         </div>
         <Waveform

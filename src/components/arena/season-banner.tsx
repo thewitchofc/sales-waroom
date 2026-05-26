@@ -69,7 +69,7 @@ function StatBlock({
 
 export function TournamentCountdown({
   target,
-  label = "TOURNAMENT STARTS",
+  label = "הטורניר מתחיל",
 }: {
   target: Date;
   label?: string;
@@ -102,13 +102,13 @@ export function WeeklyCountdown() {
   return (
     <div className="border border-white/5 bg-black/50 p-4">
       <div className="mb-2 font-brand text-[9px] text-muted-foreground">
-        WEEKLY CHALLENGE ENDS
+        אתגר שבועי ENDS
       </div>
       <motion.div
         key={remaining.total}
         className="font-display text-2xl font-black text-accent"
       >
-        {remaining.expired ? "CLOSED" : formatCountdown(remaining)}
+        {remaining.expired ? "סגור" : formatCountdown(remaining)}
       </motion.div>
     </div>
   );

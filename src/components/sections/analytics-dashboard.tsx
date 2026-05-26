@@ -18,11 +18,11 @@ const skills = [
 
 export function AnalyticsDashboard({ showHeader = true }: { showHeader?: boolean }) {
   return (
-    <Section id="analytics" atmosphere>
+    <Section id="אנליטיקה" atmosphere>
       <SectionAtmosphere />
       {showHeader && (
         <SectionHeader
-          label="PERFORMANCE COMMAND"
+          label="פיקוד ביצועים"
           title="מרכז הפיקוד לשליטה מוחלטת"
           description="כל מדד. כל חולשה. כל הזדמנות. לפני שהיא הופכת לעסקה אבודה."
         />
@@ -30,7 +30,7 @@ export function AnalyticsDashboard({ showHeader = true }: { showHeader?: boolean
 
       <div className="grid gap-8 lg:grid-cols-3">
         <GlassCard className="lg:col-span-2" hover={false} premium>
-          <HudFrame label="CONFIDENCE TREND">
+          <HudFrame label="מגמת ביטחון">
             <div className="mb-8 flex items-start justify-between">
               <div>
                 <h3 className="font-display text-2xl font-bold text-white">מגמת ביטחון</h3>
@@ -38,7 +38,7 @@ export function AnalyticsDashboard({ showHeader = true }: { showHeader?: boolean
               </div>
               <div className="text-start">
                 <div className="font-display text-4xl font-black text-accent">+34%</div>
-                <div className="font-brand text-[10px] text-green-400">VS LAST MONTH</div>
+                <div className="font-brand text-[10px] text-green-400">לעומת חודש שעבר</div>
               </div>
             </div>
 

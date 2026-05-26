@@ -86,7 +86,7 @@ export function RankingCard({
           >
             {player.score}
           </motion.div>
-          <div className="font-brand text-[9px] text-muted-foreground">BATTLE SCORE</div>
+          <div className="font-brand text-[9px] text-muted-foreground">ציון קרב</div>
         </div>
       </div>
 
@@ -95,8 +95,8 @@ export function RankingCard({
       </div>
 
       <div className="relative mt-4 flex flex-wrap gap-4 text-[10px]">
-        <span className="text-green-400">🔥 {player.streak} streak</span>
-        <span className="text-white/50">{player.wins}W · {player.losses}L</span>
+        <span className="text-green-400">🔥 {player.streak} רצף</span>
+        <span className="text-white/50">{player.wins} ניצחונות · {player.losses} הפסדים</span>
       </div>
     </motion.div>
   );

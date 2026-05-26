@@ -6,8 +6,8 @@ import { BrandLink } from "@/components/brand/brand-link";
 import { PREMIUM_ARENA_FEATURES } from "@/config/arena-data";
 
 export function PremiumGate({
-  title = "PREMIUM ARENA",
-  description = "תחרויות דירוג, טורנירים שבועיים ו-personas עילית, רק למנויי חדר מלחמה.",
+  title = "הזירה פרימיום",
+  description = "תחרויות דירוג, טורנירים שבועיים ו-פרסונות עילית, רק למנויי חדר מלחמה.",
   children,
   blur = true,
 }: {
@@ -32,7 +32,7 @@ export function PremiumGate({
           <div className="mb-3 font-brand text-[10px] tracking-[0.3em] text-accent">
             🔒 {title}
           </div>
-          <h3 className="font-display text-xl font-black text-white">Premium Required</h3>
+          <h3 className="font-display text-xl font-black text-white">נדרש פרימיום</h3>
           <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{description}</p>
           <ul className="mt-4 space-y-1.5 text-start text-xs text-white/60">
             {PREMIUM_ARENA_FEATURES.slice(0, 4).map((f) => (
@@ -43,7 +43,7 @@ export function PremiumGate({
           </ul>
           <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-center">
             <BrandLink href="/pricing" variant="command" size="sm">
-              שדרג ל-Premium
+              שדרג לפרימיום
             </BrandLink>
             <Link
               href="/login"
@@ -61,7 +61,7 @@ export function PremiumGate({
 export function PremiumBadge() {
   return (
     <span className="border border-accent/40 bg-accent/10 px-2 py-0.5 font-brand text-[8px] text-accent">
-      PREMIUM
+      פרימיום
     </span>
   );
 }

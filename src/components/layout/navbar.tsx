@@ -7,7 +7,11 @@ import { useState, useEffect } from "react";
 import { BrandLink } from "@/components/brand/brand-link";
 import { BrandLogoLink } from "@/components/brand/brand-logo";
 import { siteConfig } from "@/config/site";
-import { footerNav } from "@/config/navigation";
+import {
+  footerAccessLinks,
+  footerCommandLinks,
+  footerPlatformLinks,
+} from "@/config/navigation";
 import { cn } from "@/lib/utils";
 
 const navLinks = siteConfig.nav;
@@ -161,29 +165,56 @@ export function Navbar() {
 
 export function Footer() {
   return (
-    <footer className="relative border-t border-white/5 px-6 py-16 lg:px-10">
+    <footer className="footer-premium relative overflow-hidden border-t border-white/5">
       <div className="section-divider absolute inset-x-0 top-0" />
-      <div className="mx-auto flex max-w-7xl flex-col gap-10">
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          <div>
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(ellipse 70% 50% at 50% 100%, rgba(212,175,85,0.05) 0%, transparent 60%)",
+        }}
+      />
+      <div className="pointer-events-none absolute inset-0 command-grid opacity-[0.04]" />
+
+      <div className="relative mx-auto max-w-7xl px-6 py-20 sm:px-8 lg:px-12 lg:py-24">
+        <div className="grid gap-12 lg:grid-cols-12 lg:gap-10 xl:gap-16">
+          <div className="lg:col-span-4 xl:col-span-5">
             <BrandLogoLink href="/" variant="footer" hoverGlow />
-            <div className="mt-3 text-[10px] text-muted-foreground">מערכת הפעלה למכירות עילית</div>
+            <p className="mt-6 max-w-xs font-display text-lg font-bold text-white">
+              {siteConfig.tagline}
+            </p>
+            <p className="mt-3 max-w-sm text-sm leading-relaxed text-white/40">
+              מערכת הפעלה AI לקלוזרים שמתאמנים ברצינות. סימולציות, לחץ, דירוגים, תרבות
+              עילית.
+            </p>
+            <div className="mt-8 inline-flex items-center gap-2.5 border border-white/8 bg-white/[0.02] px-4 py-2.5">
+              <span className="pressure-pulse size-1.5 rounded-full bg-accent" />
+              <span className="font-brand text-[9px] tracking-[0.15em] text-white/45">
+                847 לוחמים פעילים · הזירה חיה
+              </span>
+            </div>
           </div>
-          {footerNav.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="text-sm text-muted-foreground transition-colors hover:text-accent"
-            >
-              {item.label}
-            </Link>
-          ))}
+
+          <div className="grid gap-10 sm:grid-cols-3 lg:col-span-8 xl:col-span-7">
+            <FooterLinkGroup title="פלטפורמה" links={footerPlatformLinks} />
+            <FooterLinkGroup title="מרכז פיקוד" links={footerCommandLinks} />
+            <FooterLinkGroup title="גישה" links={footerAccessLinks} />
+          </div>
         </div>
-        <div className="flex flex-col items-center justify-between gap-4 border-t border-white/5 pt-8 md:flex-row">
-          <p className="text-sm text-muted-foreground">© 2026 Sales waroom</p>
-          <div className="flex gap-8">
+
+        <div className="footer-premium-bar mt-16 flex flex-col gap-6 border-t border-white/5 pt-10 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex flex-col gap-1">
+            <p className="font-brand text-[10px] tracking-[0.12em] text-white/30">
+              © 2026 SALES WAROOM
+            </p>
+            <p className="text-xs text-white/25">כל הזכויות שמורות</p>
+          </div>
+          <div className="flex flex-wrap gap-x-8 gap-y-3">
             {["פרטיות", "תנאים", "צור קשר"].map((item) => (
-              <span key={item} className="text-sm text-muted-foreground">
+              <span
+                key={item}
+                className="text-sm text-white/35 transition-colors hover:text-accent/80"
+              >
                 {item}
               </span>
             ))}
@@ -191,5 +222,25 @@ export function Footer() {
         </div>
       </div>
     </footer>
+  );
+}
+
+function FooterLinkGroup({ title, links }: { title: string; links: { label: string; href: string }[] }) {
+  return (
+    <div>
+      <p className="mb-5 font-brand text-[9px] tracking-[0.2em] text-accent/70">{title}</p>
+      <ul className="space-y-3.5">
+        {links.map((item) => (
+          <li key={item.href}>
+            <Link
+              href={item.href}
+              className="text-sm text-white/45 transition-colors hover:text-white"
+            >
+              {item.label}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }

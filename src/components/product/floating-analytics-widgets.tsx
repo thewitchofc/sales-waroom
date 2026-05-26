@@ -4,9 +4,9 @@ import { motion } from "framer-motion";
 import { useSimulationOptional } from "@/components/product/simulation-provider";
 
 const widgets = [
-  { id: "frame", label: "Frame Control", suffix: "", trend: "↓" },
-  { id: "authority", label: "Authority", suffix: "", trend: "+6" },
-  { id: "certainty", label: "Certainty", suffix: "", trend: "-18" },
+  { id: "frame", label: "שליטה בפריים", suffix: "", trend: "↓" },
+  { id: "סמכות", label: "סמכות", suffix: "", trend: "+6" },
+  { id: "ודאות", label: "ודאות", suffix: "", trend: "-18" },
 ];
 
 export function FloatingAnalyticsWidgets() {
@@ -36,7 +36,7 @@ export function FloatingAnalyticsWidgets() {
           transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
           className="glass-premium metallic-border border border-accent/20 px-4 py-3 backdrop-blur-xl"
         >
-          <div className="font-brand text-[9px] text-muted-foreground">FRAME CONTROL</div>
+          <div className="font-brand text-[9px] text-muted-foreground">שליטה בפריים</div>
           <motion.div
             key={frameControl}
             initial={{ scale: 1.1 }}
@@ -74,7 +74,7 @@ export function FloatingAnalyticsWidgets() {
               animate={{ opacity: [1, 0.3, 1] }}
               transition={{ duration: 1, repeat: Infinity }}
             />
-            <span className="font-brand text-[9px] text-muted-foreground">PRESSURE</span>
+            <span className="font-brand text-[9px] text-muted-foreground">לחץ</span>
           </div>
           <motion.div
             key={pressure}
@@ -90,7 +90,7 @@ export function FloatingAnalyticsWidgets() {
               animate={{ opacity: 1 }}
               className="text-[9px] text-red-400"
             >
-              FRAME COLLAPSE RISK
+              סיכון קריסת פריים
             </motion.span>
           )}
         </motion.div>
@@ -111,7 +111,7 @@ export function FloatingAnalyticsWidgets() {
                 {metricValues[w.id]}
                 {w.suffix}
               </span>
-              <span className={`text-[9px] ${w.id === "frame" || w.id === "certainty" ? "text-red-400" : "text-green-400"}`}>
+              <span className={`text-[9px] ${w.id === "frame" || w.id === "ודאות" ? "text-red-400" : "text-green-400"}`}>
                 {w.trend}
               </span>
             </div>

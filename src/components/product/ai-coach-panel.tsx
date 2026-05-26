@@ -29,7 +29,7 @@ export function AICoachPanel({ feedback }: { feedback: CoachFeedback[] }) {
     <div className="flex flex-col gap-3">
       <div className="flex items-center justify-between">
         <span className="font-brand text-[10px] tracking-widest text-red-400">
-          FIELD COACH
+          מאמן שטח
         </span>
         <motion.span
           className="text-[10px] text-red-400"
@@ -42,9 +42,9 @@ export function AICoachPanel({ feedback }: { feedback: CoachFeedback[] }) {
 
       {feedback.length === 0 ? (
         <PremiumEmptyState
-          status="FIELD COACH ARMED"
+          status="מאמן שטח ARבינוני"
           title="אין מקום לרכות בשיחה"
-          description="משוב חד יופיע ברגע שתאבד פריים, certainty, או שליטה רגשית. ה-Coach לא יעודד, הוא יחשוף."
+          description="משוב חד יופיע ברגע שתאבד פריים, ודאות, או שליטה רגשית. ה-מאמן לא יעודד, הוא יחשוף."
         />
       ) : (
         feedback.map((item, i) => (

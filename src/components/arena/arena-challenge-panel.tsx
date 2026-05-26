@@ -30,37 +30,36 @@ export function ArenaChallengePanel() {
           <div className="relative mb-5 flex flex-wrap items-start justify-between gap-4">
             <div>
               <div className="flex items-center gap-3">
-                <LiveIndicator label="WEEKLY CHALLENGE" />
+                <LiveIndicator label="אתגר שבועי" />
                 {!isPremium && <PremiumBadge />}
               </div>
               <h2 className="mt-2 font-display text-2xl font-black text-white md:text-3xl">
                 {WEEKLY_CHALLENGE.titleHe}
               </h2>
-              <p className="mt-1 font-brand text-[10px] text-accent">{WEEKLY_CHALLENGE.title}</p>
             </div>
             <WeeklyCountdown />
           </div>
 
           <div className="relative space-y-4">
             <div className="border border-white/5 bg-black/50 p-4">
-              <div className="mb-2 font-brand text-[9px] text-muted-foreground">SCENARIO · SAME FOR ALL</div>
+              <div className="mb-2 font-brand text-[9px] text-muted-foreground">תרחיש · זהה לכולם</div>
               <p className="text-sm leading-relaxed text-white/85">{WEEKLY_CHALLENGE.scenario}</p>
             </div>
 
             <div className="grid gap-3 sm:grid-cols-2">
               <div className="border border-white/5 p-3">
-                <div className="font-brand text-[9px] text-muted-foreground">PERSONA</div>
+                <div className="font-brand text-[9px] text-muted-foreground">פרסונה</div>
                 <div className="mt-1 text-sm text-red-400">{WEEKLY_CHALLENGE.persona}</div>
               </div>
               <div className="border border-white/5 p-3">
-                <div className="mb-2 font-brand text-[9px] text-muted-foreground">PRESSURE</div>
+                <div className="mb-2 font-brand text-[9px] text-muted-foreground">לחץ</div>
                 <PressureLevelVisual level={4} />
               </div>
             </div>
 
             <div className="flex flex-wrap items-center justify-between gap-4 border border-white/5 p-4">
               <div>
-                <div className="font-brand text-[9px] text-muted-foreground">PARTICIPANTS</div>
+                <div className="font-brand text-[9px] text-muted-foreground">משתתפים</div>
                 <motion.div
                   key={WEEKLY_CHALLENGE.participants}
                   className="font-display text-2xl font-black text-white"
@@ -69,20 +68,20 @@ export function ArenaChallengePanel() {
                 </motion.div>
               </div>
               <div>
-                <div className="font-brand text-[9px] text-muted-foreground">PRIZE</div>
+                <div className="font-brand text-[9px] text-muted-foreground">פרס</div>
                 <div className="text-sm text-accent">{WEEKLY_CHALLENGE.prize}</div>
               </div>
             </div>
 
             <div>
-              <div className="mb-2 font-brand text-[9px] text-muted-foreground">SCORED METRICS</div>
+              <div className="mb-2 font-brand text-[9px] text-muted-foreground">מדדים שנבדקים</div>
               <div className="flex flex-wrap gap-2">
                 {WEEKLY_CHALLENGE.metrics.map((m) => (
                   <span
                     key={m}
                     className="border border-accent/20 bg-accent/5 px-2 py-1 font-brand text-[9px] text-accent"
                   >
-                    {STAT_LABELS[m].label}
+                    {STAT_LABELS[m].labelHe}
                   </span>
                 ))}
               </div>
@@ -92,15 +91,15 @@ export function ArenaChallengePanel() {
           {!isPremium ? (
             <div className="relative mt-6 min-h-[120px]">
               <PremiumGate
-                title="RANKED ARENA LOCKED"
-                description="כניסה לתחרות השבועית, דירוג חי וטורנירים, Premium בלבד."
+                title="הזירה המדורגת נעולה"
+                description="כניסה לתחרות השבועית, דירוג חי וטורנירים, פרימיום בלבד."
                 blur={false}
               />
             </div>
           ) : (
             <div className="relative mt-6 flex flex-wrap gap-3">
               <BrandLink href="/dashboard" variant="command" size="lg">
-                ENTER BATTLE
+                כניסה לקרב
               </BrandLink>
             </div>
           )}
@@ -111,7 +110,7 @@ export function ArenaChallengePanel() {
         <RankingCard player={CURRENT_USER} highlight />
 
         <div className="border border-white/5 bg-black/60 p-5">
-          <div className="mb-4 font-brand text-[10px] text-accent">YOUR BATTLE STATS</div>
+          <div className="mb-4 font-brand text-[10px] text-accent">סטטיסטיקות הקרב שלך</div>
           <BattleStatsGrid stats={CURRENT_USER.stats} />
         </div>
       </div>
@@ -126,7 +125,7 @@ export function TournamentPanel() {
     <div className="relative min-h-[280px] overflow-hidden border border-accent/20 bg-black/60 p-5 md:p-6">
       <div className="mb-4 flex items-center justify-between">
         <div>
-          <div className="font-brand text-[10px] text-accent">PREMIUM TOURNAMENT</div>
+          <div className="font-brand text-[10px] text-accent">טורניר פרימיום</div>
           <h3 className="font-display text-xl font-bold text-white">{tournament.nameHe}</h3>
         </div>
         <PremiumBadge />
@@ -136,14 +135,14 @@ export function TournamentPanel() {
         <div className="grid gap-4 md:grid-cols-2">
           <TournamentCountdown target={tournament.startsAt} />
           <div className="space-y-3">
-            <InfoRow label="FORMAT" value={tournament.format} />
-            <InfoRow label="PRIZE POOL" value={tournament.prizePool} accent />
+            <InfoRow label="פורמט" value={tournament.format} />
+            <InfoRow label="פרס POOL" value={tournament.prizePool} accent />
             <InfoRow
-              label="SLOTS"
+              label="מקומות"
               value={`${tournament.filled}/${tournament.slots}`}
             />
             <div>
-              <div className="mb-2 font-brand text-[9px] text-muted-foreground">PRESSURE</div>
+              <div className="mb-2 font-brand text-[9px] text-muted-foreground">לחץ</div>
               <PressureLevelVisual level={tournament.pressureLevel} />
             </div>
           </div>
@@ -178,11 +177,11 @@ export function LiveArenaStatus() {
       className="flex flex-wrap items-center justify-between gap-4 border border-red-500/20 bg-red-500/5 px-4 py-3"
     >
       <div className="flex items-center gap-3">
-        <LiveIndicator label="847 IN BATTLE" />
-        <span className="text-sm text-white/70">Weekly CFO Challenge · Live Now</span>
+        <LiveIndicator label="847 בקרב" />
+        <span className="text-sm text-white/70">אתגר CFO שבועי · חי עכשיו</span>
       </div>
       <span className="font-brand text-[10px] text-muted-foreground">
-        AI CHALLENGE TIMER ACTIVE
+        טיימר אתגר AI פעיל
       </span>
     </motion.div>
   );

@@ -50,7 +50,7 @@ export function CommandDashboard() {
         className="relative"
       >
         <div className="glass-premium glass-reflection metallic-border relative overflow-hidden rounded-2xl p-[1px] glow-accent-strong">
-          <HudFrame label="WAR ROOM // LIVE" className="rounded-2xl bg-black/80 p-5 md:p-6">
+          <HudFrame label="חדר מלחמה // חי" className="rounded-2xl bg-black/80 p-5 md:p-6">
             {/* Header bar */}
             <div className="mb-5 flex items-center justify-between border-b border-white/5 pb-4">
               <div className="flex items-center gap-2">
@@ -99,7 +99,7 @@ export function CommandDashboard() {
                       transition={{ duration: 1, repeat: Infinity }}
                     />
                     <span className="font-brand text-[8px] text-muted-foreground">
-                      LIVE
+                      חי
                     </span>
                   </div>
                   <p className="text-[11px] leading-snug text-white/80">{item.label}</p>
@@ -114,7 +114,7 @@ export function CommandDashboard() {
                   {current.tag}
                 </span>
                 <span className="font-brand text-[9px] text-muted-foreground">
-                  SESSION #2847
+                  סשן #2847
                 </span>
               </div>
               <motion.p
@@ -143,7 +143,7 @@ export function CommandDashboard() {
                   </motion.div>
                   <div className="text-start">
                     <div className="text-[10px] text-green-400">VOICE ACTIVE</div>
-                    <div className="font-brand text-xs text-white">87 SCORE</div>
+                    <div className="font-brand text-xs text-white">87 ציון</div>
                   </div>
                 </div>
               </div>
@@ -156,7 +156,7 @@ export function CommandDashboard() {
               </div>
               <div className="space-y-0">
                 <StatusIndicator label="ביטחון" value="87%" status="active" />
-                <StatusIndicator label="אנרגיה" value="HIGH" status="warning" />
+                <StatusIndicator label="אנרגיה" value="גבוה" status="warning" />
                 <StatusIndicator label="סגירה" value="AT RISK" status="critical" />
               </div>
             </div>

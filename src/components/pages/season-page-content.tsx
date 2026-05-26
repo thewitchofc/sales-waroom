@@ -43,27 +43,27 @@ export function SeasonPageContent() {
 
       <div className="grid gap-6 lg:grid-cols-3">
         <div className="lg:col-span-2">
-          <div className="mb-4 font-brand text-[10px] text-accent">SEASON STANDINGS</div>
+          <div className="mb-4 font-brand text-[10px] text-accent">דירוג העונה</div>
           <LeaderboardTable players={seasonStandings} highlightId={CURRENT_USER.id} />
         </div>
 
         <div className="space-y-5">
           <TournamentCountdown
             target={LIVE_TOURNAMENT.startsAt}
-            label="CHAMPIONSHIP ROUND"
+            label="סיבוב אליפות"
           />
 
           <div className="border border-white/5 bg-black/60 p-5">
-            <div className="mb-4 font-brand text-[10px] text-accent">YOUR SEASON PROGRESS</div>
+            <div className="mb-4 font-brand text-[10px] text-accent">ההתקדמות שלך בעונה</div>
             <XpProgressBar xp={CURRENT_USER.xp} />
             <div className="mt-4 flex items-center justify-between">
               <RankTierBadge tier={CURRENT_USER.tier} />
-              <span className="font-brand text-sm text-white">Rank #{CURRENT_USER.rank}</span>
+              <span className="font-brand text-sm text-white">דירוג #{CURRENT_USER.rank}</span>
             </div>
           </div>
 
           <div className="border border-accent/20 bg-accent/5 p-5">
-            <div className="mb-3 font-brand text-[10px] text-accent">SEASON REWARDS</div>
+            <div className="mb-3 font-brand text-[10px] text-accent">פרסי העונה</div>
             <ul className="space-y-2">
               {CURRENT_SEASON.rewards.map((reward) => (
                 <li key={reward} className="flex items-start gap-2 text-sm text-white/75">
@@ -77,7 +77,7 @@ export function SeasonPageContent() {
       </div>
 
       <div>
-        <div className="mb-4 font-brand text-[10px] text-muted-foreground">RANK TIERS</div>
+        <div className="mb-4 font-brand text-[10px] text-muted-foreground">דרגות דירוג</div>
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
           {RANK_TIERS.map((tier, i) => (
             <motion.div
@@ -100,8 +100,8 @@ export function SeasonPageContent() {
       {!CURRENT_USER.isPremium && (
         <div className="relative min-h-[180px]">
           <PremiumGate
-            title="SEASON CHAMPIONSHIP"
-            description="כניסה לטורניר העונה, פרסים בלעדיים ו-personas עילית, Premium בלבד."
+            title="אליפות העונה"
+            description="כניסה לטורניר העונה, פרסים בלעדיים ו-פרסונות עילית, פרימיום בלבד."
           />
         </div>
       )}

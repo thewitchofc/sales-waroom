@@ -21,7 +21,7 @@ function DashboardContent() {
             מרכז פיקוד
           </h1>
           <p className="mt-2 text-sm text-muted-foreground">
-            Frame control · Authority · Pressure simulation · FIELD COACH
+            שליטה בפריים · סמכות · סימולציית לחץ · מאמן שטח
           </p>
         </div>
         <ActiveUsersBar />

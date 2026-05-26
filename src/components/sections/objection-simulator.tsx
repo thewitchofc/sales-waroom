@@ -13,18 +13,18 @@ import { cn } from "@/lib/utils";
 
 const features = [
   {
-    title: "Objection Psychology",
-    description: "כל התנגדות היא frame test. ה-AI חושף אם אתה מוביל או מגיב, לפני שהלקוח מרגיש.",
+    title: "פסיכולוגיית התנגדות",
+    description: "כל התנגדות היא בדיקת פריים. ה-AI חושף אם אתה מוביל או מגיב, לפני שהלקוח מרגיש.",
     icon: "01",
   },
   {
-    title: "Authority Analysis",
-    description: "Tonality, certainty, emotional control, חולשה נחשפת בשנייה. לא אחרי שהעסקה מתה.",
+    title: "ניתוח סמכות",
+    description: "Tonality, ודאות, שליטה רגשית, חולשה נחשפת בשנייה. לא אחרי שהעסקה מתה.",
     icon: "02",
   },
   {
-    title: "Dominant Personas",
-    description: "CFO סקепטי, רכש עוין, Founder עייף, לקוחות ששולטים בפריים ומחפשים חולשה.",
+    title: "פרסונות דומיננטיות",
+    description: "CFO סקепטי, רכש עוין, יזם עייף, לקוחות ששולטים בפריים ומחפשים חולשה.",
     icon: "03",
   },
 ];
@@ -46,9 +46,9 @@ export function ObjectionSimulator({ showHeader = true }: { showHeader?: boolean
       <SectionAtmosphere />
       {showHeader && (
         <SectionHeader
-          label="OBJECTION SIMULATOR"
+          label="סימולטור התנגדויות"
           title="כל התנגדות היא בדיקת פריים, לא טיעון"
-          description="ה-AI מנתח frame dominance, authority ו-pressure response. משוב חד. לא עידוד."
+          description="ה-AI מנתח שליטה בפריים, סמכות ו-תגובה ללחץ. משוב חד. לא עידוד."
         />
       )}
 
@@ -62,10 +62,10 @@ export function ObjectionSimulator({ showHeader = true }: { showHeader?: boolean
                 transition={{ duration: 2, repeat: Infinity }}
               >
                 <span className="size-1.5 rounded-full bg-green-400" />
-                SIMULATION ACTIVE
+                סימולציה פעילה
               </motion.span>
               <span className="font-brand text-[10px] tracking-widest text-accent">
-                OBJECTION STREAM
+                זרם התנגדויות
               </span>
             </div>
 

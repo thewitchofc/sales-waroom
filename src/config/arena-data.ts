@@ -14,7 +14,7 @@ export interface RankTierConfig {
 export const RANK_TIERS: RankTierConfig[] = [
   {
     id: "bronze",
-    label: "BRONZE",
+    label: "ברונזה",
     labelHe: "ברונזה",
     minXp: 0,
     maxXp: 999,
@@ -24,7 +24,7 @@ export const RANK_TIERS: RankTierConfig[] = [
   },
   {
     id: "silver",
-    label: "SILVER",
+    label: "כסף",
     labelHe: "כסף",
     minXp: 1000,
     maxXp: 2499,
@@ -34,7 +34,7 @@ export const RANK_TIERS: RankTierConfig[] = [
   },
   {
     id: "gold",
-    label: "GOLD",
+    label: "זהב",
     labelHe: "זהב",
     minXp: 2500,
     maxXp: 4999,
@@ -44,7 +44,7 @@ export const RANK_TIERS: RankTierConfig[] = [
   },
   {
     id: "elite",
-    label: "ELITE",
+    label: "עילית",
     labelHe: "עילית",
     minXp: 5000,
     maxXp: 7999,
@@ -54,7 +54,7 @@ export const RANK_TIERS: RankTierConfig[] = [
   },
   {
     id: "war_master",
-    label: "WAR MASTER",
+    label: "אדון מלחמה",
     labelHe: "אדון מלחמה",
     minXp: 8000,
     maxXp: 99999,
@@ -140,7 +140,7 @@ export interface Tournament {
 export const CURRENT_USER: ArenaPlayer & { isPremium: boolean; handle: string } = {
   id: "user-1",
   name: "דנה כהן",
-  handle: "DANA_CLOSER",
+  handle: "DANA_קלוזר",
   rank: 7,
   previousRank: 11,
   score: 847,
@@ -163,19 +163,19 @@ export const CURRENT_USER: ArenaPlayer & { isPremium: boolean; handle: string } 
 
 export const CURRENT_SEASON: Season = {
   id: 4,
-  name: "WAR PROTOCOL",
+  name: "פרוטוקול מלחמה",
   nameHe: "פרוטוקול מלחמה",
-  tagline: "Season 4 · Elite Closers Only",
+  tagline: "עונה 4 · קלוזרים עילית בלבד",
   startDate: "2026-03-01",
   endDate: "2026-05-31",
   daysRemaining: 36,
   totalBattles: 12847,
   activePlayers: 2847,
   rewards: [
-    "War Master Badge · Legendary",
-    "Elite Persona Unlock · CFO Omega",
-    "Premium Analytics · 90 Days",
-    "Arena Champion Title · Season 4",
+    "תג אדון מלחמה · אגדי",
+    "פתיחת פרסונה עילית · CFO אומגה",
+    "אנליטיקה פרימיום · 90 יום",
+    "תואר אלוף הזירה · עונה 4",
   ],
 };
 
@@ -197,14 +197,14 @@ function getTournamentStart(): Date {
 
 export const WEEKLY_CHALLENGE: WeeklyChallenge = {
   id: "wc-2026-w21",
-  title: "CFO DOMINANCE CHALLENGE",
+  title: "אתגר שליטת CFO",
   titleHe: "אתגר שליטה · CFO דומיננטי",
   scenario:
-    "אותו לקוח CFO סקепטי לכל המשתתפים. 12 דקות. אין תסריט. מי שומר frame, מנצח.",
-  persona: "CFO סקепטי · CRIT Dominance",
-  pressureLevel: "INTENSE · Level 4",
+    "אותו לקוח CFO סקепטי לכל המשתתפים. 12 דקות. אין תסריט. מי שומר פריים, מנצח.",
+  persona: "CFO סקепטי · דומיננטיות קריטית",
+  pressureLevel: "אינטנסיבי · רמה 4",
   participants: 847,
-  prize: "War Master Points · 500 XP",
+  prize: "נקודות אדון מלחמה · 500 XP",
   endsAt: getWeekEnd(),
   metrics: [
     "authority",
@@ -218,11 +218,11 @@ export const WEEKLY_CHALLENGE: WeeklyChallenge = {
 
 export const LIVE_TOURNAMENT: Tournament = {
   id: "t-s4-elite",
-  name: "ELITE CLOSER CUP",
+  name: "גביע הקלוזרים העילית",
   nameHe: "גביע הקלוזרים העילית",
-  format: "Single Elimination · 32 Slots",
-  entryFee: "Premium",
-  prizePool: "₪12,000 Credits",
+  format: "נוקאאוט · 32 מקומות",
+  entryFee: "פרימיום",
+  prizePool: "₪12,000 קרדיט",
   slots: 32,
   filled: 28,
   startsAt: getTournamentStart(),
@@ -379,29 +379,29 @@ export const LEADERBOARD_PLAYERS: ArenaPlayer[] = [
 ];
 
 export const ARENA_BADGES: Record<string, ArenaBadge> = {
-  "frame-king": { id: "frame-king", label: "Frame King", icon: "FK", rarity: "rare" },
-  "pressure-immune": { id: "pressure-immune", label: "Pressure Immune", icon: "PI", rarity: "rare" },
-  "closer-elite": { id: "closer-elite", label: "Closer Elite", icon: "CE", rarity: "legendary" },
-  "streak-10": { id: "streak-10", label: "10-Win Streak", icon: "S10", rarity: "common" },
-  "war-master": { id: "war-master", label: "War Master", icon: "WM", rarity: "legendary" },
+  "frame-king": { id: "frame-king", label: "מלך הפריים", icon: "FK", rarity: "rare" },
+  "pressure-immune": { id: "pressure-immune", label: "חסין ללחץ", icon: "PI", rarity: "rare" },
+  "closer-elite": { id: "closer-elite", label: "קלוזר עילית", icon: "CE", rarity: "legendary" },
+  "streak-10": { id: "streak-10", label: "רצף 10 ניצחונות", icon: "S10", rarity: "common" },
+  "war-master": { id: "war-master", label: "אדון מלחמה", icon: "WM", rarity: "legendary" },
 };
 
 export const STAT_LABELS: Record<keyof BattleStats, { label: string; labelHe: string }> = {
-  authority: { label: "AUTHORITY", labelHe: "סמכות" },
-  frameControl: { label: "FRAME", labelHe: "שליטה בפריים" },
-  confidence: { label: "CONFIDENCE", labelHe: "ביטחון" },
-  objectionHandling: { label: "OBJECTION", labelHe: "התנגדויות" },
-  pressureResponse: { label: "PRESSURE", labelHe: "תגובה ללחץ" },
-  closingPerformance: { label: "CLOSING", labelHe: "סגירה" },
+  authority: { label: "סמכות", labelHe: "סמכות" },
+  frameControl: { label: "שליטה בפריים", labelHe: "שליטה בפריים" },
+  confidence: { label: "ביטחון", labelHe: "ביטחון" },
+  objectionHandling: { label: "התנגדויות", labelHe: "התנגדויות" },
+  pressureResponse: { label: "לחץ", labelHe: "תגובה ללחץ" },
+  closingPerformance: { label: "סגירה", labelHe: "סגירה" },
 };
 
 export const PREMIUM_ARENA_FEATURES = [
-  "Weekly ranked tournaments",
-  "Live competitive arena",
-  "Elite dominant personas",
-  "Advanced battle analytics",
-  "Real-time rank tracking",
-  "Season championship entry",
+  "טורנירים מדורגים שבועיים",
+  "הזירה התחרותית החיה",
+  "פרסונות דומיננטיות עילית",
+  "אנליטיקת קרב מתקדמת",
+  "מעקב דירוג בזמן אמת",
+  "כניסה לאליפות העונה",
 ];
 
 export function getTierForXp(xp: number): RankTierConfig {

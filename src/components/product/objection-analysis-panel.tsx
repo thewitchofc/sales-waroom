@@ -11,6 +11,12 @@ const severityColors = {
   CRIT: "text-red-500 border-red-500/50",
 };
 
+const severityLabels = {
+  HIGH: "גבוה",
+  MED: "בינוני",
+  CRIT: "קריטי",
+};
+
 interface ObjectionAnalysisPanelProps {
   scenario?: ObjectionScenario | null;
   live?: boolean;
@@ -28,7 +34,7 @@ export function ObjectionAnalysisPanel({ scenario, live = false }: ObjectionAnal
       <div className="relative">
         <div className="mb-5 flex items-center justify-between">
           <span className="font-brand text-[10px] tracking-widest text-accent">
-            OBJECTION PSYCHOLOGY
+            פסיכולוגיית התנגדות
           </span>
           <motion.span
             className={cn(
@@ -69,28 +75,28 @@ export function ObjectionAnalysisPanel({ scenario, live = false }: ObjectionAnal
                     severityColors[scenario.severity]
                   )}
                 >
-                  {scenario.severity}
+                  {severityLabels[scenario.severity]}
                 </span>
               </div>
             </div>
 
             <div>
               <div className="mb-2 font-brand text-[9px] text-muted-foreground">
-                PSYCHOLOGY
+                פסיכולוגיה
               </div>
               <p className="text-sm leading-relaxed text-red-400/90">{scenario.psychology}</p>
             </div>
 
             <div>
               <div className="mb-2 font-brand text-[9px] text-muted-foreground">
-                AUTHORITY ANALYSIS
+                ניתוח סמכות
               </div>
               <p className="text-sm leading-relaxed text-white/75">{scenario.analysis}</p>
             </div>
 
             <div className="border border-green-500/20 bg-green-500/5 p-4">
               <div className="mb-2 font-brand text-[9px] text-green-400">
-                SUGGESTED RESPONSE
+                תגובה מומלצת
               </div>
               <p className="text-sm leading-relaxed text-white/85">
                 {scenario.suggestedResponse}
@@ -127,7 +133,7 @@ export function ObjectionAnalysisPanel({ scenario, live = false }: ObjectionAnal
             </div>
             <p className="text-sm text-white/60">
               {isAnalyzing
-                ? "מנתח frame test ו-pressure response..."
+                ? "מנתח בדיקת פריים ו-תגובה ללחץ..."
                 : "מעקב אחר התנגדות פעילה · בדיקת dominance"}
             </p>
           </motion.div>

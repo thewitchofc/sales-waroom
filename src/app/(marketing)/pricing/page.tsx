@@ -1,21 +1,25 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/pages/page-hero";
 import { Pricing } from "@/components/sections/pricing";
+import { PricingLiveHud } from "@/components/sections/pricing-live-hud";
+import { PricingArenaSection } from "@/components/sections/pricing-arena-section";
 
 export const metadata: Metadata = {
-  title: "תמחור",
-  description: "תוכניות Sales Waroom, מסוכן עצמאי ועד enterprise.",
+  title: "חבילות",
+  description: "רמות גישה ל-Sales Waroom, ממפעיל עצמאי ועד מרכז פיקוד ארגוני.",
 };
 
 export default function PricingPage() {
   return (
     <>
       <PageHero
-        label="PRICING"
-        title="השקיעו במיומנות שמדפיסה הכנסות"
-        description="14 יום ניסיון חינם. גישה מיידית ל-Command Center."
+        label="חבילות · SALES WAROOM"
+        title="לא קונים תוכנה. מקבלים סיווג."
+        description="שלוש רמות גישה. הזירה פתוחה למנויים. הדירוג מתעדכן כל שבוע."
       />
+      <PricingLiveHud />
       <Pricing showHeader={false} />
+      <PricingArenaSection />
     </>
   );
 }

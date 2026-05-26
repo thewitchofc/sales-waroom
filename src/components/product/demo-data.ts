@@ -64,7 +64,7 @@ export const CLIENT_PERSONAS: ClientPersona[] = [
   {
     id: "dominant-cfo",
     name: "CFO סקепטי",
-    title: "קונה דומיננטי · High-Ticket",
+    title: "קונה דומיננטי · עסקה גבוהה",
     dominance: "CRIT",
     traits: ["שולט בפריים", "בוחן סמכות", "לוחץ על מחיר", "מחפש חולשה"],
     pressureLevel: 4,
@@ -72,15 +72,15 @@ export const CLIENT_PERSONAS: ClientPersona[] = [
   {
     id: "procurement",
     name: "רכש עוין",
-    title: "מנהל רכש · Enterprise",
+    title: "מנהל רכש · ארגוני",
     dominance: "HIGH",
     traits: ["מתנגד מוקדם", "מושווה תחרות", "מאיץ החלטות"],
     pressureLevel: 3,
   },
   {
     id: "founder",
-    name: "Founder עייף",
-    title: "יזם · Series B",
+    name: "יזם עייף",
+    title: "יזם · סדרה B",
     dominance: "HIGH",
     traits: ["חסר סבלנות", "מחפש ROI", "לא סובל הסברים ארוכים"],
     pressureLevel: 3,
@@ -94,7 +94,7 @@ export const PRESSURE_LEVELS: PressureLevel[] = [
   { id: 2, label: "מתקדם", code: "ADV", description: "התנגדויות מובנות, שמירת פריים" },
   { id: 3, label: "עילית", code: "ELITE", description: "לחץ פסיכולוגי, בדיקת סמכות" },
   { id: 4, label: "אינטנסיבי", code: "INTENSE", description: "קונה דומיננטי, אין מקום לחולשה" },
-  { id: 5, label: "שטח", code: "COMBAT", description: "סימולציית סגירה תחת אש, zero margin" },
+  { id: 5, label: "שטח", code: "COMBAT", description: "סימולציית סגירה תחת אש, אפס מרווח" },
 ];
 
 export const DEMO_TRANSCRIPT: TranscriptMessage[] = [
@@ -122,7 +122,7 @@ export const DEMO_TRANSCRIPT: TranscriptMessage[] = [
   {
     id: 4,
     type: "coach",
-    speaker: "FIELD COACH",
+    speaker: "מאמן שטח",
     text: "הלקוח הוביל אותך למחיר. ענית מתוך צורך להוכיח, לא מתוך שליטה.",
     timestamp: "01:06",
   },
@@ -143,7 +143,7 @@ export const DEMO_TRANSCRIPT: TranscriptMessage[] = [
   {
     id: 7,
     type: "analysis",
-    speaker: "PSYCH ANALYSIS",
+    speaker: "ניתוח פסיכולוגי",
     text: "איבדת שליטה בפריים ברגע שהתחלת להסביר. נשמעת לא בטוח, הלקוח הרגיש את זה.",
     timestamp: "01:44",
   },
@@ -168,13 +168,13 @@ export const COACH_FEEDBACK: CoachFeedback[] = [
     id: 3,
     type: "warning",
     title: "ויתור על פריים",
-    body: "הלקוח סגר אותך ב'תשלח פרטים'. לא ביקשת commitment, נתת לו בריחה.",
+    body: "הלקוח סגר אותך ב'תשלח פרטים'. לא ביקשת מחויבות, נתת לו בריחה.",
     time: "01:44",
   },
   {
     id: 4,
     type: "info",
-    title: "טונality · Certainty",
+    title: "טונality · ודאות",
     body: "נשמעת לא בטוחה כשהתחלת להסביר. האטה בקצב = חשיפת חולשה ללקוח.",
     time: "01:44",
   },
@@ -184,9 +184,9 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
   { id: 1, label: "פתיחה · בדיקת סמכות", time: "00:00", type: "recovery" },
   { id: 2, label: "פריים: שאלת כאב", time: "00:28", type: "recovery", active: true },
   { id: 3, label: "התנגדות · מחיר", time: "01:04", type: "objection" },
-  { id: 4, label: "Coach · איבוד פריים", time: "01:06", type: "coach" },
-  { id: 5, label: "ירידת Certainty", time: "01:18", type: "drop" },
-  { id: 6, label: "נכנעות · Reactive", time: "01:44", type: "drop" },
+  { id: 4, label: "מאמן · איבוד פריים", time: "01:06", type: "coach" },
+  { id: 5, label: "ירידת ודאות", time: "01:18", type: "drop" },
+  { id: 6, label: "נכנעות · ריאקטיבי", time: "01:44", type: "drop" },
 ];
 
 export interface CoachingInsight {
@@ -201,7 +201,7 @@ export interface CoachingInsight {
 export const COACHING_INSIGHTS: CoachingInsight[] = [
   {
     id: 1,
-    category: "Frame Dominance",
+    category: "שליטה בפריים",
     insight: "הלקוח העלה מחיר, אתה הגנת במקום להחזיר שליטה לשיחה",
     action: "אל תגן. שאל: 'מה העלות של לא לפתור את זה עכשיו?'",
     priority: "high",
@@ -209,24 +209,24 @@ export const COACHING_INSIGHTS: CoachingInsight[] = [
   },
   {
     id: 2,
-    category: "Emotional Control",
-    insight: "הלקוח ביקש 'תשלח פרטים', סימן שקנית reactive behavior",
-    action: "החזר authority: 'לפני שאשלח, מה חייב להיות בפתרון?'",
+    category: "שליטה רגשית",
+    insight: "הלקוח ביקש 'תשלח פרטים', סימן שקנית התנהגות ריאקטיבית",
+    action: "החזר סמכות: 'לפני שאשלח, מה חייב להיות בפתרון?'",
     priority: "high",
     time: "01:44",
   },
   {
     id: 3,
-    category: "Authority Analysis",
-    insight: "לא בדקת סמכות החלטה לפני הצעת מחיר, הלקוח לא היה committed",
+    category: "ניתוח סמכות",
+    insight: "לא בדקת סמכות החלטה לפני הצעת מחיר, הלקוח לא היה מחויב",
     action: "בשיחה הבאה: גלה מי חותם ומה קритריון ההחלטה",
     priority: "medium",
     time: "01:50",
   },
   {
     id: 4,
-    category: "Certainty Level",
-    insight: "נשמעת לא בטוחה כשהתחלת להסביר, tonality ירד ב-34%",
+    category: "רמת ודאות",
+    insight: "נשמעת לא בטוחה כשהתחלת להסביר, טונality ירד ב-34%",
     action: "קצר. שאל. אל תמלא שקט בהסברים.",
     priority: "high",
     time: "01:18",
@@ -244,12 +244,12 @@ export interface TeamMember {
 }
 
 export const TEAM_MEMBERS: TeamMember[] = [
-  { id: 1, name: "דנה כהן", role: "Senior AE", status: "live", score: 94, sessions: 12, trend: "+8" },
-  { id: 2, name: "יוסי לוי", role: "AE", status: "training", score: 78, sessions: 8, trend: "+14" },
+  { id: 1, name: "דנה כהן", role: "מנהל/ת מכירות בכיר/ה", status: "live", score: 94, sessions: 12, trend: "+8" },
+  { id: 2, name: "יוסי לוי", role: "נציג/ת מכירות", status: "training", score: 78, sessions: 8, trend: "+14" },
   { id: 3, name: "מיכל אברהם", role: "SDR", status: "reviewing", score: 86, sessions: 15, trend: "+6" },
-  { id: 4, name: "אורי שפירא", role: "AE", status: "live", score: 91, sessions: 10, trend: "+11" },
-  { id: 5, name: "נועה גולד", role: "Team Lead", status: "reviewing", score: 97, sessions: 6, trend: "+3" },
-  { id: 6, name: "עמית רוזן", role: "AE", status: "idle", score: 72, sessions: 4, trend: "+19" },
+  { id: 4, name: "אורי שפירא", role: "נציג/ת מכירות", status: "live", score: 91, sessions: 10, trend: "+11" },
+  { id: 5, name: "נועה גולד", role: "ראש צוות", status: "reviewing", score: 97, sessions: 6, trend: "+3" },
+  { id: 6, name: "עמית רוזן", role: "נציג/ת מכירות", status: "idle", score: 72, sessions: 4, trend: "+19" },
 ];
 
 export interface ObjectionScenario {
@@ -269,8 +269,8 @@ export const OBJECTION_SCENARIOS: ObjectionScenario[] = [
     type: "מחיר",
     text: "זה נשמע יקר מדי כרגע",
     severity: "HIGH",
-    analysis: "הלקוח בודק אם תיגע, לא באמת על מחיר. זו בדיקת frame.",
-    psychology: "Frame test · הלקוח מחפש מי מוביל את השיחה",
+    analysis: "הלקוח בודק אם תיגע, לא באמת על מחיר. זו בדיקת פריים.",
+    psychology: "בדיקת פריים · הלקוח מחפש מי מוביל את השיחה",
     suggestedResponse: "מובן. לפני מחיר, מה העלות של להמשיך עם הבעיה?",
     scoreImpact: -18,
   },
@@ -280,7 +280,7 @@ export const OBJECTION_SCENARIOS: ObjectionScenario[] = [
     text: "אנחנו לא מוכנים לקבל החלטה ברבעון הזה",
     severity: "MED",
     analysis: "התנגדות תזמון, לרוב מסווה חוסר conviction או חוסר ROI",
-    psychology: "Avoidance · הלקוח בורח מ-commitment",
+    psychology: "הימנעות · הלקוח בורח מ-מחויבות",
     suggestedResponse: "מה צריך לקרות כדי שזה יהיה עדיפות, לא רבעון הבא?",
     scoreImpact: -8,
   },
@@ -289,8 +289,8 @@ export const OBJECTION_SCENARIOS: ObjectionScenario[] = [
     type: "סמכות",
     text: "אני צריך להעביר את זה ל-CEO לפני שממשיכים",
     severity: "HIGH",
-    analysis: "בדיקת authority, האם אתה מדבר עם decision maker אמיתי?",
-    psychology: "Authority gap · אתה מאבד leverage",
+    analysis: "בדיקת סמכות, האם אתה מדבר עם מקבל החלטות אמיתי?",
+    psychology: "פער סמכות · אתה מאבד מינוף",
     suggestedResponse: "מעולה. מה ה-CEO חייב לראה, ומה יהרוס את העסקה?",
     scoreImpact: -12,
   },
@@ -299,8 +299,8 @@ export const OBJECTION_SCENARIOS: ObjectionScenario[] = [
     type: "תחרות",
     text: "אנחנו כבר מדברים עם המתחרה שלכם",
     severity: "CRIT",
-    analysis: "איום תחרותי, הלקוח בודק certainty ו-confidence שלך",
-    psychology: "Dominance play · אל תתפשר על frame",
+    analysis: "איום תחרותי, הלקוח בודק ודאות ו-confidence שלך",
+    psychology: "משחק דומיננטיות · אל תתפשר על פריים",
     suggestedResponse: "טוב שאתם בודקים. מה חסר לכם שם, שאנחנו חייבים לפתור?",
     scoreImpact: -22,
   },
@@ -310,7 +310,7 @@ export const BEHAVIOR_LABELS: Record<
   BehaviorMode,
   { label: string; labelHe: string; color: string }
 > = {
-  leading: { label: "LEADING", labelHe: "מוביל", color: "text-green-400" },
-  neutral: { label: "NEUTRAL", labelHe: "ניטרלי", color: "text-accent" },
-  reactive: { label: "REACTIVE", labelHe: "ריאקטיבי", color: "text-red-400" },
+  leading: { label: "מוביל", labelHe: "מוביל", color: "text-green-400" },
+  neutral: { label: "ניטרלי", labelHe: "ניטרלי", color: "text-accent" },
+  reactive: { label: "ריאקטיבי", labelHe: "ריאקטיבי", color: "text-red-400" },
 };

@@ -11,7 +11,7 @@ interface PremiumEmptyStateProps {
 export function PremiumEmptyState({
   title,
   description,
-  status = "STANDBY",
+  status = "המתנה",
 }: PremiumEmptyStateProps) {
   return (
     <div className="relative overflow-hidden border border-dashed border-white/10 bg-black/30 px-6 py-10 text-center">

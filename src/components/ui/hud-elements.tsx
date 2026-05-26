@@ -63,7 +63,7 @@ export function ThreatMeter({ level = 87 }: { level?: number }) {
     <div className="space-y-2">
       <div className="flex items-center justify-between">
         <span className="font-brand text-[10px] text-accent">{level}%</span>
-        <span className="text-[10px] text-red-400/80">PRESSURE INDEX</span>
+        <span className="text-[10px] text-red-400/80">לחץ INDEX</span>
       </div>
       <div className="relative h-1.5 overflow-hidden rounded-full bg-white/5">
         <motion.div
@@ -97,7 +97,7 @@ export function ClassifiedBadge() {
         transition={{ duration: 1.5, repeat: Infinity }}
       />
       <span className="font-brand text-[9px] tracking-[0.3em] text-accent">
-        CLASSIFIED // ELITE ACCESS ONLY
+        סודי // גישת עילית בלבד
       </span>
     </motion.div>
   );

@@ -36,7 +36,7 @@ export function ActiveUsersBar() {
           transition={{ duration: 2, repeat: Infinity }}
         />
         <span className="font-brand text-[10px] tracking-widest text-green-400">
-          PLATFORM LIVE
+          PLATFORM חי
         </span>
       </div>
 

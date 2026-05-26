@@ -11,9 +11,9 @@ export default function AnalyticsPage() {
   return (
     <>
       <PageHero
-        label="ANALYTICS"
+        label="אנליטיקה"
         title="כל מדד. כל חולשה. לפני שזה עולה ביוק."
-        description="מגמות ביטחון, מיומנויות, coaching insights ודוחות ביצועים, בזמן אמת."
+        description="מגמות ביטחון, מיומנויות, תובנות אימון ודוחות ביצועים, בזמן אמת."
       />
       <AnalyticsDashboard showHeader={false} />
     </>

@@ -22,7 +22,7 @@ export function ConversationTimeline({
     <div>
       <div className="mb-4 flex items-center justify-between">
         <span className="font-brand text-[10px] tracking-widest text-muted-foreground">
-          CONVERSATION TIMELINE
+          ציר זמן שיחה
         </span>
         <span className="text-[10px] text-white/40">ציר זמן שיחה</span>
       </div>

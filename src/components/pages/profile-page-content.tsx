@@ -32,7 +32,7 @@ export function ProfilePageContent() {
               animate={{ opacity: 1 }}
               className="mb-2 font-brand text-[10px] tracking-widest text-accent"
             >
-              OPERATOR PROFILE · {user.handle}
+              לוחם PROFILE · {user.handle}
             </motion.div>
             <h1 className="font-display text-3xl font-black text-white sm:text-4xl">
               {user.name}
@@ -42,16 +42,16 @@ export function ProfilePageContent() {
               <RankMovement delta={movement} />
               {!user.isPremium && (
                 <BrandLink href="/pricing" variant="secondary" size="sm">
-                  Upgrade Premium
+                  שדרוג פרימיום
                 </BrandLink>
               )}
             </div>
           </div>
         </div>
         <div className="flex gap-6 text-center">
-          <StatBox label="Rank" value={`#${user.rank}`} accent />
-          <StatBox label="Score" value={String(user.score)} />
-          <StatBox label="Streak" value={`${user.streak}🔥`} green />
+          <StatBox label="דירוג" value={`#${user.rank}`} accent />
+          <StatBox label="ציון" value={String(user.score)} />
+          <StatBox label="רצף" value={`${user.streak}🔥`} green />
         </div>
       </div>
 
@@ -60,38 +60,38 @@ export function ProfilePageContent() {
       <div className="grid gap-6 lg:grid-cols-3">
         <div className="lg:col-span-2 space-y-6">
           <section className="border border-white/5 bg-black/60 p-5 md:p-6">
-            <div className="mb-4 font-brand text-[10px] text-accent">BATTLE STATISTICS</div>
+            <div className="mb-4 font-brand text-[10px] text-accent">סטטיסטיקות קרב</div>
             <BattleStatsGrid stats={user.stats} />
           </section>
 
           <section className="border border-white/5 bg-black/60 p-5 md:p-6">
             <div className="mb-4 flex items-center justify-between">
-              <div className="font-brand text-[10px] text-accent">COMBAT RECORD</div>
+              <div className="font-brand text-[10px] text-accent">תיק קרב</div>
               <Link href="/leaderboard" className="text-[10px] text-accent hover:underline">
-                LEADERBOARD →
+                לוח דירוג ←
               </Link>
             </div>
             <div className="grid grid-cols-3 gap-4">
-              <StatBox label="Wins" value={String(user.wins)} green large />
-              <StatBox label="Losses" value={String(user.losses)} large />
-              <StatBox label="Win Rate" value={`${Math.round((user.wins / (user.wins + user.losses)) * 100)}%`} accent large />
+              <StatBox label="ניצחונות" value={String(user.wins)} green large />
+              <StatBox label="הפסדים" value={String(user.losses)} large />
+              <StatBox label="אחוז ניצחון" value={`${Math.round((user.wins / (user.wins + user.losses)) * 100)}%`} accent large />
             </div>
           </section>
         </div>
 
         <div className="space-y-5">
           <section className="border border-white/5 bg-black/60 p-5">
-            <div className="mb-4 font-brand text-[10px] text-accent">XP PROGRESSION</div>
+            <div className="mb-4 font-brand text-[10px] text-accent">התקדמות XP</div>
             <XpProgressBar xp={user.xp} />
             {nextTier && (
               <p className="mt-3 text-xs text-muted-foreground">
-                {(nextTier.minXp - user.xp).toLocaleString()} XP to {nextTier.labelHe}
+                {(nextTier.minXp - user.xp).toLocaleString()} XP עד {nextTier.labelHe}
               </p>
             )}
           </section>
 
           <section className="border border-white/5 bg-black/60 p-5">
-            <div className="mb-4 font-brand text-[10px] text-accent">BADGES · {user.badges.length}</div>
+            <div className="mb-4 font-brand text-[10px] text-accent">תגים · {user.badges.length}</div>
             <div className="grid grid-cols-2 gap-2">
               {user.badges.map((id) => {
                 const badge = ARENA_BADGES[id];
@@ -116,16 +116,16 @@ export function ProfilePageContent() {
           </section>
 
           <section className="border border-accent/20 bg-accent/5 p-5">
-            <div className="mb-3 font-brand text-[10px] text-accent">QUICK DEPLOY</div>
+            <div className="mb-3 font-brand text-[10px] text-accent">פריסה מהירה</div>
             <div className="flex flex-col gap-2">
               <BrandLink href="/arena" variant="command" size="sm">
-                Enter Arena
+                כניסה להזירה
               </BrandLink>
               <Link
                 href="/dashboard"
                 className="interactive-surface border border-white/10 px-4 py-2 text-center text-xs text-muted-foreground hover:text-white"
               >
-                Command Center
+                מרכז פיקוד
               </Link>
             </div>
           </section>
@@ -133,7 +133,7 @@ export function ProfilePageContent() {
       </div>
 
       <section className="border border-white/5 bg-black/40 p-5">
-        <div className="mb-4 font-brand text-[10px] text-muted-foreground">TIER LADDER</div>
+        <div className="mb-4 font-brand text-[10px] text-muted-foreground">סולם דרגות</div>
         <div className="flex flex-wrap gap-2">
           {RANK_TIERS.map((tier) => {
             const current = getTierForXp(user.xp).id === tier.id;
@@ -145,7 +145,7 @@ export function ProfilePageContent() {
                   current ? tier.border + " " + tier.color : "border-white/5 text-muted-foreground opacity-50"
                 )}
               >
-                {tier.label}
+                {tier.labelHe}
               </span>
             );
           })}

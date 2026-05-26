@@ -36,7 +36,7 @@ export function LiveCallInterface({ compact = false }: { compact?: boolean }) {
       >
         <div className="ai-scan-line pointer-events-none absolute inset-0 opacity-10" />
 
-        <HudFrame label="LIVE CALL INTERFACE" className="relative bg-black/90 p-5 md:p-6">
+        <HudFrame label="ממשק שיחה חיה" className="relative bg-black/90 p-5 md:p-6">
           {/* Call header */}
           <div className="mb-5 flex flex-wrap items-center justify-between gap-4 border-b border-white/5 pb-4">
             <div className="flex items-center gap-4">
@@ -56,15 +56,15 @@ export function LiveCallInterface({ compact = false }: { compact?: boolean }) {
                   animate={{ opacity: [1, 0.3, 1] }}
                   transition={{ duration: 1, repeat: Infinity }}
                 />
-                <span className="font-brand text-[10px] text-red-400">LIVE</span>
+                <span className="font-brand text-[10px] text-red-400">חי</span>
               </motion.div>
               <div>
                 <div className="text-sm font-semibold text-white">
-                  {demo.persona?.title ?? "סימולציה פסיכולוגית · High-Ticket"}
+                  {demo.persona?.title ?? "סימולציה פסיכולוגית · עסקה גבוהה"}
                 </div>
                 <div className="mt-1 flex flex-wrap items-center gap-2">
                   <span className="font-brand text-[10px] text-muted-foreground">
-                    SESSION #2847 · FIELD TRAINING
+                    סשן #2847 · FIELD TRAINING
                   </span>
                   {demo.behaviorMode && <BehaviorModeBadge mode={demo.behaviorMode} />}
                 </div>
@@ -113,13 +113,13 @@ export function LiveCallInterface({ compact = false }: { compact?: boolean }) {
             >
               <div className="shrink-0 border border-white/5 bg-black/50 p-4">
                 <div className="mb-3 flex items-center justify-between">
-                  <span className="text-[10px] text-muted-foreground">Tonality · Authority Analysis</span>
+                  <span className="text-[10px] text-muted-foreground">טונality · סמכות Analysis</span>
                   <motion.span
                     className="font-brand text-[9px] text-green-400"
                     animate={{ opacity: [1, 0.4, 1] }}
                     transition={{ duration: 1.5, repeat: Infinity }}
                   >
-                    ● MIC ACTIVE
+                    ● מיקרופון פעיל
                   </motion.span>
                 </div>
                 <Waveform

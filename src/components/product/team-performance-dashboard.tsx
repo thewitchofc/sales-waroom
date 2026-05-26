@@ -28,7 +28,7 @@ export function TeamPerformanceDashboard() {
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>
             <div className="font-brand text-[10px] tracking-widest text-accent">
-              TEAM COMMAND
+              פיקוד צוות
             </div>
             <h3 className="mt-1 font-display text-xl font-bold text-white md:text-2xl">
               דשבורד ביצועי צוות
@@ -51,11 +51,11 @@ export function TeamPerformanceDashboard() {
         <table className="w-full min-w-[640px]">
           <thead>
             <tr className="border-b border-white/5 text-[10px] text-muted-foreground">
-              <th className="px-5 py-3 text-start font-brand tracking-widest">REP</th>
-              <th className="px-5 py-3 text-start font-brand tracking-widest">STATUS</th>
-              <th className="px-5 py-3 text-start font-brand tracking-widest">SCORE</th>
-              <th className="px-5 py-3 text-start font-brand tracking-widest">SESSIONS</th>
-              <th className="px-5 py-3 text-start font-brand tracking-widest">TREND</th>
+              <th className="px-5 py-3 text-start font-brand tracking-widest">נציג</th>
+              <th className="px-5 py-3 text-start font-brand tracking-widest">סטטוס</th>
+              <th className="px-5 py-3 text-start font-brand tracking-widest">ציון</th>
+              <th className="px-5 py-3 text-start font-brand tracking-widest">סשנים</th>
+              <th className="px-5 py-3 text-start font-brand tracking-widest">מגמה</th>
             </tr>
           </thead>
           <tbody>

@@ -7,11 +7,9 @@ import { getTierConfig, type RankTier } from "@/config/arena-data";
 export function RankTierBadge({
   tier,
   size = "md",
-  showHe = true,
 }: {
   tier: RankTier;
   size?: "sm" | "md" | "lg";
-  showHe?: boolean;
 }) {
   const config = getTierConfig(tier);
 
@@ -27,8 +25,7 @@ export function RankTierBadge({
       )}
       style={{ boxShadow: `0 0 12px ${config.glow}` }}
     >
-      {config.label}
-      {showHe && <span className="opacity-70">· {config.labelHe}</span>}
+      {config.labelHe}
     </span>
   );
 }
@@ -52,7 +49,7 @@ export function RankMovement({ delta }: { delta: number }) {
   );
 }
 
-export function LiveIndicator({ label = "LIVE" }: { label?: string }) {
+export function LiveIndicator({ label = "חי" }: { label?: string }) {
   return (
     <span className="inline-flex items-center gap-1.5">
       <motion.span

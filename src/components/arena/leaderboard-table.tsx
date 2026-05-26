@@ -76,11 +76,11 @@ export function LeaderboardTable({
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
             <div className="font-brand text-[10px] tracking-widest text-accent">
-              LIVE LEADERBOARD
+              לוח דירוג חי
             </div>
-            <h3 className="font-display text-lg font-bold text-white">Top Closers · This Week</h3>
+            <h3 className="font-display text-lg font-bold text-white">הקלוזרים המובילים · השבוע</h3>
           </div>
-          <LiveIndicator label="SCORES LIVE" />
+          <LiveIndicator label="ציונים חיים" />
         </div>
       </div>
 
@@ -88,14 +88,14 @@ export function LeaderboardTable({
         <table className="w-full min-w-[720px]">
           <thead>
             <tr className="border-b border-white/5 text-[10px] text-muted-foreground">
-              <th className="px-4 py-3 text-start font-brand">RANK</th>
-              <th className="px-4 py-3 text-start font-brand">CLOSER</th>
-              <th className="px-4 py-3 text-start font-brand">TIER</th>
-              <th className="px-4 py-3 text-start font-brand">SCORE</th>
-              <th className="px-4 py-3 text-start font-brand">MOVE</th>
-              <th className="px-4 py-3 text-start font-brand">STREAK</th>
-              <th className="px-4 py-3 text-start font-brand">BADGES</th>
-              <th className="px-4 py-3 text-start font-brand">STATUS</th>
+              <th className="px-4 py-3 text-start font-brand">דירוג</th>
+              <th className="px-4 py-3 text-start font-brand">קלוזר</th>
+              <th className="px-4 py-3 text-start font-brand">דרגה</th>
+              <th className="px-4 py-3 text-start font-brand">ציון</th>
+              <th className="px-4 py-3 text-start font-brand">תנועה</th>
+              <th className="px-4 py-3 text-start font-brand">רצף</th>
+              <th className="px-4 py-3 text-start font-brand">תגים</th>
+              <th className="px-4 py-3 text-start font-brand">סטטוס</th>
             </tr>
           </thead>
           <tbody>
@@ -136,7 +136,7 @@ export function LeaderboardTable({
                     <div className="font-medium text-white">{player.name}</div>
                   </td>
                   <td className="px-4 py-4">
-                    <RankTierBadge tier={player.tier} size="sm" showHe={false} />
+                    <RankTierBadge tier={player.tier} size="sm" />
                   </td>
                   <td className="px-4 py-4">
                     <motion.span
@@ -161,7 +161,7 @@ export function LeaderboardTable({
                     {player.isLive ? (
                       <LiveIndicator />
                     ) : (
-                      <span className="font-brand text-[9px] text-muted-foreground">OFFLINE</span>
+                      <span className="font-brand text-[9px] text-muted-foreground">לא מחובר</span>
                     )}
                   </td>
                 </motion.tr>

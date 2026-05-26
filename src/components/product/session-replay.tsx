@@ -35,7 +35,7 @@ export function SessionReplay({ progress: externalProgress, synced = false }: Se
         <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
           <div>
             <div className="font-brand text-[10px] tracking-widest text-accent">
-              SESSION REPLAY
+              השמעת סשן
             </div>
             <div className="mt-1 text-base font-medium text-white">
               סימולציה #2847, לקוח קשה
@@ -49,7 +49,7 @@ export function SessionReplay({ progress: externalProgress, synced = false }: Se
                 transition={{ duration: 2, repeat: Infinity }}
               >
                 <span className="size-1 rounded-full bg-green-400" />
-                SYNCED
+                מסונכרן
               </motion.span>
             )}
             <button
@@ -97,7 +97,7 @@ export function SessionReplay({ progress: externalProgress, synced = false }: Se
         <div className="flex flex-wrap gap-2">
           {[
             { label: "התנגדות: מחיר", time: "01:04", color: "border-red-500/30 text-red-400", at: 60 },
-            { label: "משוב Coach", time: "01:06", color: "border-blue-400/30 text-blue-400", at: 62 },
+            { label: "משוב מאמן", time: "01:06", color: "border-blue-400/30 text-blue-400", at: 62 },
             { label: "איבוד פריים", time: "01:44", color: "border-accent/30 text-accent", at: 95 },
           ].map((marker) => (
             <span

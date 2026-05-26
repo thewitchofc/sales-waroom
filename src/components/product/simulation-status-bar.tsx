@@ -11,7 +11,7 @@ const phaseLabels = {
   connecting: { label: "מתחבר...", color: "text-yellow-400", dot: "bg-yellow-400" },
   live: { label: "סימולציה פעילה", color: "text-green-400", dot: "bg-green-400" },
   analyzing: { label: "ניתוח פסיכולוגי", color: "text-red-400", dot: "bg-red-400" },
-  coaching: { label: "FIELD COACH", color: "text-red-400", dot: "bg-red-400" },
+  coaching: { label: "מאמן שטח", color: "text-red-400", dot: "bg-red-400" },
   idle: { label: "ממתין לסימולציה", color: "text-muted-foreground", dot: "bg-muted-foreground" },
 };
 
@@ -93,7 +93,7 @@ export function SimulationStatusBar() {
               animate={{ opacity: 1 }}
               className="font-brand text-[9px] text-red-400"
             >
-              PSYCH ANALYSIS...
+              ניתוח פסיכולוגי...
             </motion.span>
           )}
           <span className={`hidden font-brand text-[9px] sm:inline ${behavior.color}`}>
@@ -111,7 +111,7 @@ export function SimulationStatusBar() {
               animate={{ opacity: [1, 0.2, 1] }}
               transition={{ duration: 1, repeat: Infinity }}
             />
-            <span className="text-[10px] text-green-400">247 LIVE</span>
+            <span className="text-[10px] text-green-400">247 חי</span>
           </div>
         </div>
       </div>

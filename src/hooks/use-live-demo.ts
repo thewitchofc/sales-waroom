@@ -21,7 +21,7 @@ export type SimulationPhase = "connecting" | "live" | "analyzing" | "coaching" |
 
 export type DemoScores = PsychologyScores;
 
-const INITIAL_PRESSURE = PRESSURE_LEVELS.find((p) => p.code === "INTENSE") ?? PRESSURE_LEVELS[3];
+const INITIAL_PRESSURE = PRESSURE_LEVELS.find((p) => p.code === "אינטנסיבי") ?? PRESSURE_LEVELS[3];
 
 export function useLiveDemo() {
   const [visibleMessages, setVisibleMessages] = useState<TranscriptMessage[]>([]);
@@ -118,7 +118,7 @@ export function useLiveDemo() {
           });
           setBehaviorMode("reactive");
           setTimelineIndex(5);
-          setActiveObjection("נכנעות · Reactive");
+          setActiveObjection("נכנעות · ריאקטיבי");
           setPhase("analyzing");
         }
         setMessageIndex((i) => i + 1);
@@ -139,7 +139,7 @@ export function useLiveDemo() {
         }));
         setBehaviorMode("neutral");
         setTimelineIndex(2);
-        setActiveObjection("Frame test · מחיר");
+        setActiveObjection("בדיקת פריים · מחיר");
       }
       if (msg.id === 5) {
         setScores((s) => ({
@@ -159,7 +159,7 @@ export function useLiveDemo() {
           return [...prev, COACHING_INSIGHTS[3]];
         });
         setTimelineIndex(4);
-        setActiveObjection("Certainty drop");
+        setActiveObjection("ירידת ודאות");
       }
       if (msg.id === 6) {
         setTimelineIndex(4);

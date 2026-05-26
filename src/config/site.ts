@@ -2,7 +2,7 @@ import { mainNav } from "@/config/navigation";
 
 export const BRAND_LOGO = {
   src: "/assets/sales-waroom-logo.png",
-  alt: "Sales waroom, The money is on the floor",
+  alt: "Sales Waroom",
   width: 1024,
   height: 1024,
 } as const;
@@ -10,7 +10,7 @@ export const BRAND_LOGO = {
 export const siteConfig = {
   name: "SALES WAROOM",
   nameHe: "SALES WAROOM",
-  tagline: "THE MONEY IS ON THE FLOOR",
+  tagline: "הכסף על הרצפה",
   logo: BRAND_LOGO,
   description:
     "סימולציות מכירה AI, אימון תחת לחץ, ודירוגים חיים, פלטפורמת SaaS לצוותי מכירות.",

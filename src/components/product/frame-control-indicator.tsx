@@ -40,7 +40,7 @@ export function FrameControlIndicator({
     >
       <div className="mb-3 flex items-center justify-between gap-2">
         <span className="font-brand text-[9px] tracking-widest text-muted-foreground">
-          FRAME CONTROL
+          שליטה בפריים
         </span>
         <div className="flex items-center gap-2">
           <span className={cn("font-brand text-[9px]", behavior.color)}>
@@ -87,8 +87,8 @@ export function FrameControlIndicator({
       </div>
 
       <div className="mt-2 flex justify-between text-[9px] text-muted-foreground">
-        <span>REP · {repDominance}%</span>
-        <span>CLIENT · {clientDominance}%</span>
+        <span>נציג · {repDominance}%</span>
+        <span>לקוח · {clientDominance}%</span>
       </div>
     </motion.div>
   );
@@ -109,7 +109,7 @@ export function BehaviorModeBadge({ mode }: { mode: BehaviorMode }) {
         behavior.color
       )}
     >
-      {behavior.label} · {behavior.labelHe}
+      {behavior.label}
     </span>
   );
 }

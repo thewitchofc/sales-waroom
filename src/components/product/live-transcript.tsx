@@ -24,13 +24,13 @@ const typeStyles: Record<
   coach: {
     border: "border-red-500/40",
     bg: "bg-red-500/8",
-    label: "FIELD COACH",
+    label: "מאמן שטח",
     labelColor: "text-red-400",
   },
   analysis: {
     border: "border-red-500/40",
     bg: "bg-red-500/8",
-    label: "PSYCH ANALYSIS",
+    label: "ניתוח פסיכולוגי",
     labelColor: "text-red-400",
   },
 };
@@ -57,7 +57,7 @@ export function LiveTranscript({
             animate={{ opacity: [1, 0.3, 1] }}
             transition={{ duration: 1.5, repeat: Infinity }}
           />
-          <span className="font-brand text-[10px] text-red-400">TRANSCRIPT LIVE</span>
+          <span className="font-brand text-[10px] text-red-400">תמלול חי</span>
         </div>
         <span className="text-[10px] text-muted-foreground">Frame · Authority · Certainty</span>
       </div>

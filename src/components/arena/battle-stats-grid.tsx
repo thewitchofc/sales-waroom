@@ -32,7 +32,7 @@ export function BattleStatsGrid({
             )}
           >
             <div className="mb-2 flex items-center justify-between">
-              <span className="font-brand text-[9px] text-muted-foreground">{label.label}</span>
+              <span className="font-brand text-[9px] text-muted-foreground">{label.labelHe}</span>
               <motion.span
                 key={value}
                 className={cn(
@@ -43,7 +43,6 @@ export function BattleStatsGrid({
                 {value}
               </motion.span>
             </div>
-            <p className="mb-3 text-xs text-white/50">{label.labelHe}</p>
             <div className="h-1.5 overflow-hidden bg-white/5">
               <motion.div
                 className={cn(
@@ -88,7 +87,7 @@ export function PressureLevelVisual({ level, max = 5 }: { level: number; max?: n
           transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.1 }}
         />
       ))}
-      <span className="font-brand text-[10px] text-red-400">L{level}</span>
+      <span className="font-brand text-[10px] text-red-400">ר{level}</span>
     </div>
   );
 }

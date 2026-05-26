@@ -11,57 +11,57 @@ import { Waveform } from "@/components/ui/waveform";
 
 const modules = [
   {
-    code: "SIM",
+    code: "סמ",
     title: "סימולציית לחץ",
-    description: "קונים דומיננטיים, רמות INTENSE/COMBAT, בדיקות frame ו-authority בזמן אמת.",
+    description: "קונים דומיננטיים, רמות אינטנסיבי/קרבי, בדיקות פריים ו-סמכות בזמן אמת.",
   },
   {
-    code: "PSYCH",
+    code: "פס",
     title: "ניתוח פסיכולוגי",
-    description: "Frame dominance, emotional control, reactive vs leading, מדידה חיה בשיחה.",
+    description: "שליטה בפריים, שליטה רגשית, ריאקטיבי מול מוביל, מדידה חיה בשיחה.",
   },
   {
-    code: "COACH",
-    title: "FIELD COACH",
-    description: "משוב חד ולא מתנחם. חושף איבוד פריים, certainty ו-tonality, ברגע שזה קורה.",
+    code: "מא",
+    title: "מאמן שטח",
+    description: "משוב חד ולא מתנחם. חושף איבוד פריים, ודאות ו-טונality, ברגע שזה קורה.",
   },
   {
-    code: "CMD",
+    code: "פק",
     title: "מרכז פיקוד",
-    description: "Authority metrics, pressure response, replay, ביצועי צוות תחת אש.",
+    description: "מדדי סמכות, תגובה ללחץ, השמעה חוזרת, ביצועי צוות תחת אש.",
   },
   {
-    code: "VOX",
-    title: "Tonality Engine",
-    description: "Certainty, authority ו-emotional control בקול, לפני שהלקוח מרגיש חולשה.",
+    code: "קו",
+    title: "מנוע טונality",
+    description: "ודאות, סמכות ו-שליטה רגשית בקול, לפני שהלקוח מרגיש חולשה.",
   },
   {
-    code: "INT",
+    code: "אי",
     title: "אינטגרציות",
-    description: "HubSpot, Salesforce, Gong, סנכרון pipeline ו-performance data.",
+    description: "HubSpot, Salesforce, Gong, סנכרון צינור ו-נתוני ביצועים.",
   },
 ];
 
 const stack = [
-  { layer: "L1", name: "Voice & Speech AI", status: "ACTIVE" },
-  { layer: "L2", name: "Conversation Intelligence", status: "ACTIVE" },
-  { layer: "L3", name: "Coaching Engine", status: "ACTIVE" },
-  { layer: "L4", name: "Command Analytics", status: "ACTIVE" },
+  { layer: "L1", name: "AI קול ודיבור", status: "פעיל" },
+  { layer: "L2", name: "אינטליגנציית שיחה", status: "פעיל" },
+  { layer: "L3", name: "מנוע אימון", status: "פעיל" },
+  { layer: "L4", name: "אנליטיקת פיקוד", status: "פעיל" },
 ];
 
 export function PlatformPageContent() {
   return (
     <>
       <PageHero
-        label="PLATFORM OVERVIEW"
+        label="סקירת פלטפורמה"
         title="מערכת הפעלה למכירות. לא עוד כלי."
-        description="Sales Waroom מחבר סימולציה, ניתוח, Coach ופיקוד, בפלטפורמה אחת שמרגישה כמו חדר מלחמה אמיתי."
+        description="Sales Waroom מחבר סימולציה, ניתוח, מאמן ופיקוד, בפלטפורמה אחת שמרגישה כמו חדר מלחמה אמיתי."
       />
 
       <Section atmosphere>
         <SectionAtmosphere />
         <SectionHeader
-          label="CORE MODULES"
+          label="מודולי ליבה"
           title="כל מה שקלוזר עילית צריך"
           description="שש שכבות. מערכת אחת. אפס פשרות."
         />
@@ -79,7 +79,7 @@ export function PlatformPageContent() {
       <Section className="py-24">
         <div className="grid gap-10 lg:grid-cols-2">
           <GlassCard hover={false} premium className="p-8">
-            <HudFrame label="ARCHITECTURE STACK">
+            <HudFrame label="מחסנית ארכיטקטורה">
               <div className="space-y-4">
                 {stack.map((item, i) => (
                   <motion.div
@@ -102,11 +102,11 @@ export function PlatformPageContent() {
           </GlassCard>
 
           <div className="glass-premium metallic-border flex flex-col justify-center p-8 md:p-10">
-            <span className="font-brand text-[10px] text-accent">LIVE SYSTEM</span>
+            <span className="font-brand text-[10px] text-accent">מערכת חיה</span>
             <Waveform bars={64} intense className="my-8 h-24" />
             <p className="text-lg leading-relaxed text-white/70">
-              הפלטפורמה רצה 24/7 עם סימולציות חיות, ניתוח AI ו-coaching בזמן אמת, כמו מוצר
-              enterprise שכבר בשימוש.
+              הפלטפורמה רצה 24/7 עם סימולציות חיות, ניתוח AI ואימון בזמן אמת, כמו מוצר
+              ארגוני שכבר בשימוש.
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
               <BrandLink href="/demo" variant="command">

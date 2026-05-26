@@ -18,10 +18,10 @@ const voiceLines = [
 ];
 
 const baseMetrics = [
-  { label: "Certainty", base: 88, suffix: "%", status: "יציב", color: "text-green-400" },
-  { label: "Tonality · Authority", base: 91, suffix: "", status: "Dominant", color: "text-accent" },
-  { label: "Emotional Control", base: 94, suffix: "", status: "שליטה", color: "text-green-400" },
-  { label: "Pressure Response", base: 76, suffix: "", status: "Under fire", color: "text-red-400", isEnergy: true },
+  { label: "ודאות", base: 88, suffix: "%", status: "יציב", color: "text-green-400" },
+  { label: "טונality · סמכות", base: 91, suffix: "", status: "דומיננטי", color: "text-accent" },
+  { label: "שליטה רגשית", base: 94, suffix: "", status: "שליטה", color: "text-green-400" },
+  { label: "תגובה ללחץ", base: 76, suffix: "", status: "תחת אש", color: "text-red-400", isEnergy: true },
 ];
 
 export function VoiceTraining({ showHeader = true }: { showHeader?: boolean }) {
@@ -48,8 +48,8 @@ export function VoiceTraining({ showHeader = true }: { showHeader?: boolean }) {
       <SectionAtmosphere />
       {showHeader && (
         <SectionHeader
-          label="VOICE TRAINING"
-          title="Tonality · Certainty · Authority, תחת לחץ"
+          label="אימון קולי"
+          title="Tonality · ודאות · סמכות, תחת לחץ"
           description="ה-AI מזהה חולשה בקול לפני שהלקוח שומע אותה. לא feedback ידידותי, חשיפה פסיכולוגית."
         />
       )}
@@ -57,7 +57,7 @@ export function VoiceTraining({ showHeader = true }: { showHeader?: boolean }) {
       <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
         <GlassCard hover={false} premium className="relative overflow-hidden">
           <div className="ai-scan-line pointer-events-none absolute inset-0 opacity-10" />
-          <HudFrame label="VOICE INTERFACE">
+          <HudFrame label="ממשק קולי">
             <div className="relative flex flex-col items-center py-10">
               <VoiceUI active={!isAnalyzing} />
 
@@ -80,7 +80,7 @@ export function VoiceTraining({ showHeader = true }: { showHeader?: boolean }) {
                     animate={{ opacity: [1, 0.4, 1] }}
                     transition={{ duration: 1.5, repeat: Infinity }}
                   >
-                    ● LIVE TRANSCRIPT
+                    ● חי TRANSCRIPT
                   </motion.span>
                   <span className="text-[10px] text-muted-foreground">ניתוח שיחה בזמן אמת</span>
                 </div>
@@ -100,7 +100,7 @@ export function VoiceTraining({ showHeader = true }: { showHeader?: boolean }) {
               )}
 
               <div className="mt-6 flex flex-wrap justify-center gap-3">
-                {["Frame under pressure", "Dominant persona · CFO"].map((tag) => (
+                {["פריים תחת לחץ", "פרסונה דומיננטית · CFO"].map((tag) => (
                   <span
                     key={tag}
                     className="border border-red-500/20 bg-red-500/5 px-3 py-1 text-[11px] text-red-400/90"
@@ -134,7 +134,7 @@ export function VoiceTraining({ showHeader = true }: { showHeader?: boolean }) {
                     animate={{ scale: 1 }}
                     className="mt-1 font-display text-3xl font-bold text-white"
                   >
-                    {metric.isEnergy ? "INTENSE" : `${metrics[i]}${metric.suffix}`}
+                    {metric.isEnergy ? "אינטנסיבי" : `${metrics[i]}${metric.suffix}`}
                   </motion.div>
                 </div>
               </div>
@@ -151,7 +151,7 @@ export function VoiceTraining({ showHeader = true }: { showHeader?: boolean }) {
           ))}
 
           <GlassCard delay={0.4} premium>
-            <div className="mb-2 font-brand text-[10px] text-red-400">PRESSURE SIMULATION</div>
+            <div className="mb-2 font-brand text-[10px] text-red-400">לחץ SIMULATION</div>
             <h3 className="mb-4 font-display text-xl font-bold text-white">רמות לחץ פסיכולוגי</h3>
             <p className="mb-6 text-sm leading-relaxed text-muted-foreground">
               מבסיסי, דרך עילית ואינטנסיבי, ועד COMBAT. קונים דומיננטיים

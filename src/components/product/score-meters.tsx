@@ -27,32 +27,32 @@ const variantStyles = {
   confidence: {
     gradient: "from-green-500 via-accent to-accent",
     glow: "rgba(34,197,94,0.3)",
-    label: "CONFIDENCE",
+    label: "ביטחון",
   },
   objection: {
     gradient: "from-accent-secondary via-accent to-accent",
     glow: "rgba(212,175,85,0.3)",
-    label: "OBJECTION",
+    label: "התנגדות",
   },
   pressure: {
     gradient: "from-red-500 via-orange-500 to-accent",
     glow: "rgba(239,68,68,0.3)",
-    label: "PRESSURE",
+    label: "לחץ",
   },
   frameControl: {
     gradient: "from-purple-500 via-accent to-green-500",
     glow: "rgba(168,85,247,0.25)",
-    label: "FRAME",
+    label: "פריים",
   },
   authority: {
     gradient: "from-accent via-yellow-500 to-accent-secondary",
     glow: "rgba(212,175,85,0.35)",
-    label: "AUTHORITY",
+    label: "סמכות",
   },
   certainty: {
     gradient: "from-blue-400 via-green-400 to-accent",
     glow: "rgba(96,165,250,0.25)",
-    label: "CERTAINTY",
+    label: "ודאות",
   },
 };
 
@@ -132,14 +132,14 @@ export function ScoreMetersPanel({
     <div className="flex flex-col gap-3">
       <FrameControlIndicator value={scores.frameControl} mode={behaviorMode} />
       <div className="flex items-center justify-between border border-white/5 bg-black/30 px-3 py-2">
-        <span className="font-brand text-[9px] text-muted-foreground">BEHAVIOR MODE</span>
+        <span className="font-brand text-[9px] text-muted-foreground">מצב התנהגות</span>
         <BehaviorModeBadge mode={behaviorMode} />
       </div>
-      <ScoreMeter label="סמכות בשיחה · Authority" value={scores.authority} variant="authority" delay={0.05} />
-      <ScoreMeter label="רמת Certainty · ביטחון פסיכולוגי" value={scores.certainty} variant="certainty" delay={0.1} />
-      <ScoreMeter label="ביטחון קולי · Confidence" value={scores.confidence} variant="confidence" delay={0.15} />
+      <ScoreMeter label="סמכות בשיחה" value={scores.authority} variant="authority" delay={0.05} />
+      <ScoreMeter label="רמת ודאות" value={scores.certainty} variant="certainty" delay={0.1} />
+      <ScoreMeter label="ביטחון קולי" value={scores.confidence} variant="confidence" delay={0.15} />
       <ScoreMeter label="טיפול בהתנגדויות" value={scores.objection} variant="objection" delay={0.2} />
-      <ScoreMeter label="לחץ פסיכולוגי · Pressure" value={scores.pressure} variant="pressure" delay={0.25} />
+      <ScoreMeter label="לחץ פסיכולוגי" value={scores.pressure} variant="pressure" delay={0.25} />
     </div>
   );
 }

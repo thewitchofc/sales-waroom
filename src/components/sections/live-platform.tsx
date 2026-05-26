@@ -35,9 +35,9 @@ export function LivePlatform({ showHeader = true }: { showHeader?: boolean }) {
 
       {showHeader && (
         <SectionHeader
-          label="COMMAND CENTER"
+          label="מרכז פיקוד"
           title="מערכת אימון פסיכולוגית לקלוזרים עילית"
-          description="שליטה בפריים, סמכות, certainty ו-pressure response, ניתוח חד בזמן אמת. לא מוטיבציה. אימון."
+          description="שליטה בפריים, סמכות, ודאות ו-תגובה ללחץ, ניתוח חד בזמן אמת. לא מוטיבציה. אימון."
         />
       )}
 

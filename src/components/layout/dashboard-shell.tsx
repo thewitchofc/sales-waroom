@@ -75,9 +75,9 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
             href="/profile"
             className="glass-premium glass-shimmer interactive-surface block border border-white/5 p-4 transition-all hover:border-accent/20"
           >
-            <div className="mb-2 font-brand text-[9px] text-muted-foreground">OPERATOR</div>
+            <div className="mb-2 font-brand text-[9px] text-muted-foreground">לוחם</div>
             <div className="text-sm font-medium text-white">דנה כהן</div>
-            <div className="text-xs text-muted-foreground">Elite · Rank #7</div>
+            <div className="text-xs text-muted-foreground">עילית · דירוג #7</div>
           </Link>
         </div>
       </aside>
@@ -129,11 +129,11 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
               transition={{ duration: 2, repeat: Infinity }}
             />
             <span className={`font-brand text-[9px] sm:text-[10px] ${isArena ? "text-red-400" : "text-green-400"}`}>
-              {isArena ? "הזירה · LIVE" : "COMMAND CENTER LIVE"}
+              {isArena ? "הזירה · חי" : "מרכז פיקוד חי"}
             </span>
           </div>
           <div className="flex items-center gap-3 sm:gap-4">
-            <span className="hidden text-xs text-muted-foreground md:block">SESSION #2847</span>
+            <span className="hidden text-xs text-muted-foreground md:block">סשן #2847</span>
             <Link
               href="/"
               className="interactive-surface border border-white/10 px-3 py-1.5 text-xs text-muted-foreground hover:border-accent/30 hover:text-white"

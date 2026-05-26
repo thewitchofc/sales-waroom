@@ -13,16 +13,16 @@ const LivePlatform = dynamic(
 
 export const metadata: Metadata = {
   title: "דמו חי",
-  description: "חוויית דמו אינטראקטיבית, שיחות AI, תמלול, Coach וניתוח בזמן אמת.",
+  description: "חוויית דמו אינטראקטיבית, שיחות AI, תמלול, מאמן וניתוח בזמן אמת.",
 };
 
 export default function DemoPage() {
   return (
     <>
       <PageHero
-        label="LIVE DEMO"
+        label="דמו חי"
         title="הדמו שמרגיש כמו שיחה אמיתית"
-        description="צפו בסימולציה חיה בעברית, transcript, waveform, scores ו-AI Coach שרצים ביחד."
+        description="צפו בסימולציה חיה בעברית, תמלול, גלי קול, ציונים ומאמן AI שרצים ביחד."
       />
       <LivePlatform showHeader={false} />
     </>

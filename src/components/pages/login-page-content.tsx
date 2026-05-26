@@ -32,16 +32,16 @@ export function LoginPageContent() {
       >
         <BrandLogoLink href="/" variant="login" animated hoverGlow shimmer className="mb-10 justify-center" />
 
-        <HudFrame label="SECURE ACCESS" className="panel-surface border border-white/10 bg-black/80 p-8">
+        <HudFrame label="גישה מאובטחת" className="panel-surface border border-white/10 bg-black/80 p-8">
           <h1 className="mb-2 font-display text-2xl font-bold text-white">כניסה למערכת</h1>
           <p className="mb-8 text-sm text-muted-foreground">
-            הזינו פרטי גישה ל-Command Center
+            הזינו פרטי גישה ל-מרכז פיקוד
           </p>
 
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
               <label className="mb-2 block font-brand text-[9px] text-muted-foreground">
-                EMAIL
+                אימייל
               </label>
               <input
                 type="email"
@@ -52,7 +52,7 @@ export function LoginPageContent() {
             </div>
             <div>
               <label className="mb-2 block font-brand text-[9px] text-muted-foreground">
-                PASSWORD
+                סיסמה
               </label>
               <input
                 type="password"
@@ -68,7 +68,7 @@ export function LoginPageContent() {
               className="w-full"
               disabled={loading}
             >
-              {loading ? "מתחבר..." : "כניסה ל-Command Center"}
+              {loading ? "מתחבר..." : "כניסה ל-מרכז פיקוד"}
             </BrandButton>
           </form>
 

@@ -5,6 +5,12 @@ import { PremiumEmptyState } from "@/components/ui/premium-empty-state";
 import { cn } from "@/lib/utils";
 import type { CoachingInsight } from "@/components/product/demo-data";
 
+const priorityLabels = {
+  high: "גבוה",
+  medium: "בינוני",
+  low: "נמוך",
+};
+
 const priorityStyles = {
   high: "border-red-500/30 bg-red-500/5 text-red-400",
   medium: "border-accent/30 bg-accent/5 text-accent",
@@ -16,23 +22,23 @@ export function CoachingInsightsPanel({ insights }: { insights: CoachingInsight[
     <div className="flex flex-col gap-3">
       <div className="flex items-center justify-between">
         <span className="font-brand text-[10px] tracking-widest text-accent">
-          PSYCH INTELLIGENCE
+          מודיעין פסיכולוגי
         </span>
         <motion.span
           className="text-[10px] text-red-400"
           animate={{ opacity: [1, 0.4, 1] }}
           transition={{ duration: 2, repeat: Infinity }}
         >
-          ● Authority · Frame · Pressure
+          ● סמכות · פריים · לחץ
         </motion.span>
       </div>
 
       <AnimatePresence initial={false}>
         {insights.length === 0 ? (
           <PremiumEmptyState
-            status="PSYCH ENGINE"
+            status="מנוע פסיכולוגי"
             title="מנוע ניתוח פסיכולוגי פעיל"
-            description="תובנות על frame dominance, emotional control, certainty ו-pressure response יופיעו כאן, חדות, ללא פילטר."
+            description="תובנות על שליטה בפריים, שליטה רגשית, ודאות ו-תגובה ללחץ יופיעו כאן, חדות, ללא פילטר."
           />
         ) : (
           insights.map((item, i) => (
@@ -52,7 +58,7 @@ export function CoachingInsightsPanel({ insights }: { insights: CoachingInsight[
                       priorityStyles[item.priority]
                     )}
                   >
-                    {item.priority.toUpperCase()}
+                    {priorityLabels[item.priority]}
                   </span>
                   <span className="font-brand text-[9px] text-muted-foreground">
                     {item.time}
@@ -61,7 +67,7 @@ export function CoachingInsightsPanel({ insights }: { insights: CoachingInsight[
               </div>
               <p className="mb-3 text-sm font-medium leading-relaxed text-white/80">{item.insight}</p>
               <div className="border border-red-500/10 bg-red-500/5 px-3 py-2">
-                <span className="font-brand text-[9px] text-red-400">CORRECTION →</span>
+                <span className="font-brand text-[9px] text-red-400">תיקון ←</span>
                 <p className="mt-1 text-xs leading-relaxed text-white/85">{item.action}</p>
               </div>
             </motion.div>
