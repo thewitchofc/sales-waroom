@@ -139,7 +139,7 @@ export function VoiceTraining({ showHeader = true }: { showHeader?: boolean }) {
               )}
 
               <div className="mt-6 flex flex-wrap justify-center gap-3">
-                {["פריים תחת לחץ", "פרסונה דומיננטית · CFO"].map((tag) => (
+                {["פריים תחת לחץ", "פרסונה דומיננטית · קונה סמכותי"].map((tag) => (
                   <span
                     key={tag}
                     className="border border-red-500/20 bg-red-500/5 px-3 py-1 text-[11px] text-red-400/90"

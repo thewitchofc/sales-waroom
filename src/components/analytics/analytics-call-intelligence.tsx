@@ -61,7 +61,7 @@ export function AnalyticsCallIntelligence() {
                 <div className="relative">
                   <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
                     <div>
-                      <p className="font-brand text-[9px] text-white/40">סימולציה · CFO עוין</p>
+                      <p className="font-brand text-[9px] text-white/40">סימולציה · קונה עוין</p>
                       <p className="mt-1 font-display text-lg font-bold text-white">
                         שיחה #{ANALYTICS_SESSION.id}
                       </p>

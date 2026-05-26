@@ -102,7 +102,7 @@ export function TrustedBy() {
               href="/arena"
               className="mt-4 block border border-red-500/20 bg-red-500/5 px-4 py-3 text-center text-xs text-red-400/90 transition-colors hover:border-red-500/35 hover:text-red-300"
             >
-              אתגר CFO שבועי · הזירה פתוחה
+              אתגר שבועי · שליטה בפריים · הזירה פתוחה
             </Link>
           </div>
 

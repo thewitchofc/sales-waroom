@@ -62,9 +62,9 @@ export const INITIAL_PSYCHOLOGY_SCORES: PsychologyScores = {
 
 export const CLIENT_PERSONAS: ClientPersona[] = [
   {
-    id: "dominant-cfo",
-    name: "CFO סקепטי",
-    title: "קונה דומיננטי · עסקה גבוהה",
+    id: "authority-buyer",
+    name: "קונה סמכותי",
+    title: "שולט בתקציב · סגירה גבוהה",
     dominance: "CRIT",
     traits: ["שולט בפריים", "בוחן סמכות", "לוחץ על מחיר", "מחפש חולשה"],
     pressureLevel: 4,
@@ -101,7 +101,7 @@ export const DEMO_TRANSCRIPT: TranscriptMessage[] = [
   {
     id: 1,
     type: "prospect",
-    speaker: "לקוח · CFO",
+    speaker: "לקוח · קונה סמכותי",
     text: "יש לי 12 דקות. תגיד לי מה אתם עושים, ולמה שאשקיע בזה.",
     timestamp: "00:12",
   },
@@ -115,7 +115,7 @@ export const DEMO_TRANSCRIPT: TranscriptMessage[] = [
   {
     id: 3,
     type: "prospect",
-    speaker: "לקוח · CFO",
+    speaker: "לקוח · קונה סמכותי",
     text: "זה נשמע יקר מדי כרגע.",
     timestamp: "01:04",
   },
@@ -136,7 +136,7 @@ export const DEMO_TRANSCRIPT: TranscriptMessage[] = [
   {
     id: 6,
     type: "prospect",
-    speaker: "לקוח · CFO",
+    speaker: "לקוח · קונה סמכותי",
     text: "תשלח לי פרטים. אני אחזור אליך.",
     timestamp: "01:42",
   },

@@ -1,7 +1,3 @@
-"use client";
-
-import { CinematicBackground } from "@/components/ui/cinematic-bg";
-
 interface PageHeroProps {
   label: string;
   title: string;
@@ -16,8 +12,7 @@ export function PageHero({ label, title, description, compact = false }: PageHer
         compact ? "pb-12 sm:pb-14" : "pb-16 sm:pb-20 md:pb-24"
       }`}
     >
-      <CinematicBackground />
-      <div className="relative mx-auto max-w-6xl px-5 sm:px-8 lg:px-12">
+      <div className="mx-auto max-w-6xl px-5 sm:px-8 lg:px-12">
         <p className="mb-4 font-brand text-[10px] tracking-[0.15em] text-accent/70">
           {label}
         </p>

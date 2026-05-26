@@ -173,7 +173,7 @@ export const CURRENT_SEASON: Season = {
   activePlayers: 2847,
   rewards: [
     "תג אדון מלחמה · אגדי",
-    "פתיחת פרסונה עילית · CFO אומגה",
+    "פתיחת פרסונה עילית · קונה אומגה",
     "אנליטיקה פרימיום · 90 יום",
     "תואר אלוף הזירה · עונה 4",
   ],
@@ -197,11 +197,11 @@ function getTournamentStart(): Date {
 
 export const WEEKLY_CHALLENGE: WeeklyChallenge = {
   id: "wc-2026-w21",
-  title: "אתגר שליטת CFO",
-  titleHe: "אתגר שליטה · CFO דומיננטי",
+  title: "אתגר שליטה בפריים",
+  titleHe: "אתגר שבועי · קונה דומיננטי",
   scenario:
-    "אותו לקוח CFO סקепטי לכל המשתתפים. 12 דקות. אין תסריט. מי שומר פריים, מנצח.",
-  persona: "CFO סקепטי · דומיננטיות קריטית",
+    "אותו קונה סמכותי לכל המשתתפים. 12 דקות. אין תסריט. מי שומר פריים, מנצח.",
+  persona: "קונה סמכותי · דומיננטיות קריטית",
   pressureLevel: "אינטנסיבי · רמה 4",
   participants: 847,
   prize: "נקודות אדון מלחמה · 500 XP",

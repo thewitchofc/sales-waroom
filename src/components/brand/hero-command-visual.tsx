@@ -64,7 +64,7 @@ export function HeroCommandVisual() {
                 href="/arena"
                 className="font-brand text-[9px] text-accent transition-colors hover:text-white"
               >
-                אתגר שבועי · CFO
+                אתגר שבועי · שליטה בפריים
               </Link>
               <span className="font-brand text-[10px] text-muted-foreground">סשן #2847</span>
             </div>
