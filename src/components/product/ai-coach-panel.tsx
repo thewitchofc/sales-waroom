@@ -44,7 +44,7 @@ export function AICoachPanel({ feedback }: { feedback: CoachFeedback[] }) {
         <PremiumEmptyState
           status="FIELD COACH ARMED"
           title="אין מקום לרכות בשיחה"
-          description="משוב חד יופיע ברגע שתאבד פריים, certainty, או שליטה רגשית. ה-Coach לא יעודד — הוא יחשוף."
+          description="משוב חד יופיע ברגע שתאבד פריים, certainty, או שליטה רגשית. ה-Coach לא יעודד, הוא יחשוף."
         />
       ) : (
         feedback.map((item, i) => (

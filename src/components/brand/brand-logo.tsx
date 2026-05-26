@@ -8,26 +8,27 @@ import { BRAND_LOGO } from "@/config/site";
 
 export { BRAND_LOGO };
 
+/** Height-led sizing, logo blends into site black via mix-blend-mode */
 const variantStyles = {
-  navbar: "h-11 w-11 sm:h-12 sm:w-12",
-  sidebar: "h-10 w-10",
-  footer: "h-16 w-16 sm:h-[4.5rem] sm:w-[4.5rem]",
-  intro: "h-32 w-32 sm:h-40 sm:w-40 md:h-44 md:w-44",
-  loading: "h-20 w-20 sm:h-24 sm:w-24",
-  login: "h-[4.5rem] w-[4.5rem] sm:h-20 sm:w-20",
-  arena: "h-9 w-9 opacity-80",
-  compact: "h-8 w-8",
+  navbar: "h-[4.25rem] w-[4.25rem] sm:h-20 sm:w-20 md:h-[5.5rem] md:w-[5.5rem]",
+  sidebar: "h-16 w-16 sm:h-[4.5rem] sm:w-[4.5rem]",
+  footer: "h-24 w-24 sm:h-28 sm:w-28",
+  intro: "h-64 w-64 sm:h-80 sm:w-80 md:h-[22rem] md:w-[22rem]",
+  loading: "h-56 w-56 sm:h-72 sm:w-72 md:h-80 md:w-80",
+  login: "h-32 w-32 sm:h-40 sm:w-40",
+  arena: "h-12 w-12 opacity-90",
+  compact: "h-10 w-10",
 } as const;
 
 const imageSizes: Record<keyof typeof variantStyles, string> = {
-  navbar: "48px",
-  sidebar: "40px",
-  footer: "72px",
-  intro: "176px",
-  loading: "96px",
-  login: "80px",
-  arena: "36px",
-  compact: "32px",
+  navbar: "88px",
+  sidebar: "72px",
+  footer: "112px",
+  intro: "352px",
+  loading: "320px",
+  login: "160px",
+  arena: "48px",
+  compact: "40px",
 };
 
 export type BrandLogoVariant = keyof typeof variantStyles;
@@ -52,7 +53,7 @@ export function BrandLogo({
   const content = (
     <div
       className={cn(
-        "brand-logo relative shrink-0",
+        "brand-logo relative shrink-0 bg-transparent",
         hoverGlow && "brand-logo-hover",
         shimmer && "brand-logo-shimmer-active",
         variantStyles[variant],
@@ -66,14 +67,14 @@ export function BrandLogo({
         height={BRAND_LOGO.height}
         priority={priority}
         draggable={false}
-        className="h-full w-full select-none object-contain object-center"
+        className="brand-logo-mark h-full w-full select-none object-contain object-center"
         sizes={imageSizes[variant]}
       />
       {hoverGlow && (
-        <span className="brand-logo-glow pointer-events-none absolute inset-0 rounded-sm" aria-hidden />
+        <span className="brand-logo-glow pointer-events-none absolute inset-0" aria-hidden />
       )}
       {shimmer && (
-        <span className="brand-logo-sweep pointer-events-none absolute inset-0 overflow-hidden rounded-sm" aria-hidden>
+        <span className="brand-logo-sweep pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
           <span className="brand-logo-sweep-line absolute inset-y-0 w-1/3" />
         </span>
       )}
@@ -108,7 +109,7 @@ export function BrandLogoLink({
     <Link
       href={href}
       className={cn(
-        "brand-logo-link inline-flex shrink-0 items-center p-1 transition-opacity duration-300",
+        "brand-logo-link inline-flex shrink-0 items-center bg-transparent transition-opacity duration-300",
         className
       )}
       aria-label={BRAND_LOGO.alt}

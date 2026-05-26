@@ -14,17 +14,17 @@ import { cn } from "@/lib/utils";
 const features = [
   {
     title: "Objection Psychology",
-    description: "כל התנגדות היא frame test. ה-AI חושף אם אתה מוביל או מגיב — לפני שהלקוח מרגיש.",
+    description: "כל התנגדות היא frame test. ה-AI חושף אם אתה מוביל או מגיב, לפני שהלקוח מרגיש.",
     icon: "01",
   },
   {
     title: "Authority Analysis",
-    description: "Tonality, certainty, emotional control — חולשה נחשפת בשנייה. לא אחרי שהעסקה מתה.",
+    description: "Tonality, certainty, emotional control, חולשה נחשפת בשנייה. לא אחרי שהעסקה מתה.",
     icon: "02",
   },
   {
     title: "Dominant Personas",
-    description: "CFO סקепטי, רכש עוין, Founder עייף — לקוחות ששולטים בפריים ומחפשים חולשה.",
+    description: "CFO סקепטי, רכש עוין, Founder עייף, לקוחות ששולטים בפריים ומחפשים חולשה.",
     icon: "03",
   },
 ];
@@ -47,7 +47,7 @@ export function ObjectionSimulator({ showHeader = true }: { showHeader?: boolean
       {showHeader && (
         <SectionHeader
           label="OBJECTION SIMULATOR"
-          title="כל התנגדות היא בדיקת פריים — לא טיעון"
+          title="כל התנגדות היא בדיקת פריים, לא טיעון"
           description="ה-AI מנתח frame dominance, authority ו-pressure response. משוב חד. לא עידוד."
         />
       )}

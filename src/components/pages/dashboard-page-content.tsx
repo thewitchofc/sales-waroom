@@ -4,8 +4,6 @@ import { SimulationProvider } from "@/components/product/simulation-provider";
 import { SimulationStatusBar } from "@/components/product/simulation-status-bar";
 import { LiveCallInterface } from "@/components/product/live-call-interface";
 import { PlatformCommandPanel } from "@/components/product/platform-command-panel";
-import { ScoreMetersPanel } from "@/components/product/score-meters";
-import { AICoachPanel } from "@/components/product/ai-coach-panel";
 import { CoachingInsightsPanel } from "@/components/product/coaching-insights-panel";
 import { TeamPerformanceDashboard } from "@/components/product/team-performance-dashboard";
 import { ActiveUsersBar } from "@/components/product/active-users-bar";
@@ -39,17 +37,8 @@ function DashboardContent() {
         <div className="xl:col-span-2">
           <PlatformCommandPanel />
         </div>
-        <div className="space-y-4 sm:space-y-6">
-          <div id="analytics" className="glass-premium glass-shimmer metallic-border os-panel-glow p-4 sm:p-5">
-            <div className="mb-4 font-brand text-[10px] text-accent">PSYCH METRICS</div>
-            <ScoreMetersPanel scores={demo.scores} behaviorMode={demo.behaviorMode} />
-          </div>
-          <div id="coaching" className="glass-premium glass-shimmer metallic-border os-panel-glow p-4 sm:p-5">
-            <AICoachPanel feedback={demo.visibleFeedback} />
-          </div>
-          <div className="glass-premium glass-shimmer metallic-border os-panel-glow p-4 sm:p-5">
-            <CoachingInsightsPanel insights={demo.visibleInsights} />
-          </div>
+        <div id="coaching" className="glass-premium glass-shimmer metallic-border os-panel-glow p-4 sm:p-5">
+          <CoachingInsightsPanel insights={demo.visibleInsights} />
         </div>
       </div>
 

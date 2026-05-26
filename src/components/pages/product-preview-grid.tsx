@@ -3,34 +3,46 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { Section } from "@/components/ui/section";
-import { BrandLink } from "@/components/brand/brand-link";
-import { productRoutes } from "@/config/navigation";
 import { fadeUp } from "@/components/ui/section";
+
+const entryPoints = [
+  {
+    title: "דמו חי",
+    href: "/demo",
+    label: "LIVE DEMO",
+    description: "שיחת AI בעברית, תמלול, Coach וניתוח בזמן אמת, בלי הרשמה.",
+  },
+  {
+    title: "מרכז פיקוד",
+    href: "/dashboard",
+    label: "COMMAND",
+    description: "סימולציות, פיקוד צוות ו-insights, לעבודה יומיומית.",
+  },
+  {
+    title: "סקירת פלטפורמה",
+    href: "/platform",
+    label: "OVERVIEW",
+    description: "ארכיטקטורה, מודולים ויכולות, לפני שמתחילים.",
+  },
+] as const;
 
 export function ProductPreviewGrid() {
   return (
-    <Section className="py-24 md:py-32">
-      <div className="mb-16 text-center">
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="mb-4 font-brand text-[10px] tracking-[0.3em] text-accent"
-        >
-          PLATFORM MODULES
-        </motion.p>
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="font-display text-3xl font-black text-white md:text-5xl"
-        >
-          מערכת הפעלה שלמה. לא עמוד אחד.
-        </motion.h2>
+    <Section className="border-t border-white/5 bg-black">
+      <div className="mb-10 max-w-2xl sm:mb-12">
+        <p className="mb-3 font-brand text-[10px] tracking-[0.2em] text-accent">
+          GET STARTED
+        </p>
+        <h2 className="font-display text-3xl font-black text-white sm:text-4xl">
+          איפה מתחילים?
+        </h2>
+        <p className="mt-3 text-base text-white/55">
+          שלוש נקודות כניסה, בלי לחזור על מה שכבר בניווט.
+        </p>
       </div>
 
-      <div className="grid gap-6 md:grid-cols-2">
-        {productRoutes.map((route, i) => (
+      <div className="grid gap-4 sm:grid-cols-3 sm:gap-5">
+        {entryPoints.map((route, i) => (
           <motion.div
             key={route.href}
             custom={i}
@@ -41,32 +53,20 @@ export function ProductPreviewGrid() {
           >
             <Link
               href={route.href}
-              className="group glass-premium metallic-border os-panel-glow block h-full border border-white/5 p-8 transition-all hover:border-accent/25"
+              className="panel-surface group block h-full border border-white/5 p-6 transition-colors hover:border-white/10 sm:p-7"
             >
-              <span className="font-brand text-[10px] tracking-widest text-accent">
+              <span className="font-brand text-[9px] tracking-widest text-accent">
                 {route.label}
               </span>
-              <h3 className="mt-4 font-display text-2xl font-bold text-white group-hover:text-accent transition-colors">
+              <h3 className="mt-3 font-display text-xl font-bold text-white sm:text-2xl">
                 {route.title}
               </h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                 {route.description}
               </p>
-              <span className="mt-6 inline-flex items-center gap-2 text-sm text-accent opacity-0 transition-opacity group-hover:opacity-100">
-                כניסה למודול
-                <svg className="size-4 rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                </svg>
-              </span>
             </Link>
           </motion.div>
         ))}
-      </div>
-
-      <div className="mt-12 flex justify-center">
-        <BrandLink href="/dashboard" variant="command" size="lg">
-          להיכנס לדשבורד
-        </BrandLink>
       </div>
     </Section>
   );

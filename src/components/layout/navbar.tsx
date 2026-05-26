@@ -52,8 +52,8 @@ export function Navbar() {
           scrolled || mobileOpen ? "opacity-100" : "opacity-0"
         )}
       />
-      <nav className="relative mx-auto flex max-w-7xl items-center justify-between py-4 sm:py-5">
-        <BrandLogoLink href="/" variant="navbar" priority hoverGlow shimmer />
+      <nav className="relative mx-auto flex max-w-7xl items-center justify-between py-3 sm:py-4">
+        <BrandLogoLink href="/" variant="navbar" priority hoverGlow shimmer className="-ms-1" />
 
         <div className="hidden items-center gap-8 lg:flex">
           {navLinks.map((link) => {
@@ -122,7 +122,7 @@ export function Navbar() {
             exit={{ opacity: 0, y: -8 }}
             className="glass-premium metallic-border relative z-50 mx-2 mb-3 max-h-[80vh] overflow-y-auto p-5 sm:mx-4 sm:p-6 lg:hidden"
           >
-            <div className="mb-5 flex justify-center border-b border-white/5 pb-5">
+            <div className="mb-6 flex justify-center border-b border-white/5 pb-6">
               <BrandLogoLink href="/" variant="login" animated hoverGlow />
             </div>
             <div className="flex flex-col gap-1">

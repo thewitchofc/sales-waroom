@@ -18,27 +18,27 @@ const modules = [
   {
     code: "PSYCH",
     title: "ניתוח פסיכולוגי",
-    description: "Frame dominance, emotional control, reactive vs leading — מדידה חיה בשיחה.",
+    description: "Frame dominance, emotional control, reactive vs leading, מדידה חיה בשיחה.",
   },
   {
     code: "COACH",
     title: "FIELD COACH",
-    description: "משוב חד ולא מתנחם. חושף איבוד פריים, certainty ו-tonality — ברגע שזה קורה.",
+    description: "משוב חד ולא מתנחם. חושף איבוד פריים, certainty ו-tonality, ברגע שזה קורה.",
   },
   {
     code: "CMD",
     title: "מרכז פיקוד",
-    description: "Authority metrics, pressure response, replay — ביצועי צוות תחת אש.",
+    description: "Authority metrics, pressure response, replay, ביצועי צוות תחת אש.",
   },
   {
     code: "VOX",
     title: "Tonality Engine",
-    description: "Certainty, authority ו-emotional control בקול — לפני שהלקוח מרגיש חולשה.",
+    description: "Certainty, authority ו-emotional control בקול, לפני שהלקוח מרגיש חולשה.",
   },
   {
     code: "INT",
     title: "אינטגרציות",
-    description: "HubSpot, Salesforce, Gong — סנכרון pipeline ו-performance data.",
+    description: "HubSpot, Salesforce, Gong, סנכרון pipeline ו-performance data.",
   },
 ];
 
@@ -55,7 +55,7 @@ export function PlatformPageContent() {
       <PageHero
         label="PLATFORM OVERVIEW"
         title="מערכת הפעלה למכירות. לא עוד כלי."
-        description="Sales Waroom מחבר סימולציה, ניתוח, Coach ופיקוד — בפלטפורמה אחת שמרגישה כמו חדר מלחמה אמיתי."
+        description="Sales Waroom מחבר סימולציה, ניתוח, Coach ופיקוד, בפלטפורמה אחת שמרגישה כמו חדר מלחמה אמיתי."
       />
 
       <Section atmosphere>
@@ -105,7 +105,7 @@ export function PlatformPageContent() {
             <span className="font-brand text-[10px] text-accent">LIVE SYSTEM</span>
             <Waveform bars={64} intense className="my-8 h-24" />
             <p className="text-lg leading-relaxed text-white/70">
-              הפלטפורמה רצה 24/7 עם סימולציות חיות, ניתוח AI ו-coaching בזמן אמת — כמו מוצר
+              הפלטפורמה רצה 24/7 עם סימולציות חיות, ניתוח AI ו-coaching בזמן אמת, כמו מוצר
               enterprise שכבר בשימוש.
             </p>
             <div className="mt-8 flex flex-wrap gap-4">

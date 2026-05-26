@@ -3,7 +3,7 @@ import { DashboardPageContent } from "@/components/pages/dashboard-page-content"
 
 export const metadata: Metadata = {
   title: "Command Center",
-  description: "דשבורד Sales Waroom — סימולציות, analytics, coaching ופיקוד צוות.",
+  description: "דשבורד Sales Waroom, סימולציות, analytics, coaching ופיקוד צוות.",
 };
 
 export default function DashboardPage() {

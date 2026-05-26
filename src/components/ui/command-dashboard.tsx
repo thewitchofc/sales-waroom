@@ -14,7 +14,7 @@ const liveMessages = [
   },
   {
     role: "ai",
-    text: "AI מזהה חולשות בסגירה — חוסר הצגת ROI מיידי",
+    text: "AI מזהה חולשות בסגירה, חוסר הצגת ROI מיידי",
     tag: "ניתוח AI",
   },
   {

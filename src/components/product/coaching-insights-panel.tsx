@@ -32,7 +32,7 @@ export function CoachingInsightsPanel({ insights }: { insights: CoachingInsight[
           <PremiumEmptyState
             status="PSYCH ENGINE"
             title="מנוע ניתוח פסיכולוגי פעיל"
-            description="תובנות על frame dominance, emotional control, certainty ו-pressure response יופיעו כאן — חדות, ללא פילטר."
+            description="תובנות על frame dominance, emotional control, certainty ו-pressure response יופיעו כאן, חדות, ללא פילטר."
           />
         ) : (
           insights.map((item, i) => (

@@ -86,9 +86,12 @@ body {
 }
 
 .hero-headline {
-  text-shadow:
-    0 0 80px rgba(212, 175, 85, 0.15),
-    0 4px 30px rgba(0, 0, 0, 0.8);
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+}
+
+.panel-surface {
+  background: rgba(255, 255, 255, 0.02);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
 .cinematic-depth {
@@ -540,6 +543,14 @@ body {
 }
 
 /* ── Brand Logo ── */
+.brand-logo {
+  background: transparent;
+}
+
+.brand-logo-mark {
+  mix-blend-mode: screen;
+}
+
 .brand-logo-link:focus-visible {
   outline: 1px solid rgba(212, 175, 85, 0.5);
   outline-offset: 4px;

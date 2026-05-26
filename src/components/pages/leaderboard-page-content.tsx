@@ -35,7 +35,7 @@ export function LeaderboardPageContent() {
           Leaderboard
         </h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          דירוג חי · תנועת rank · streaks · badges — כל קלוזר נמדד. כל שיחה נספרת.
+          דירוג חי · תנועת rank · streaks · badges, כל קלוזר נמדד. כל שיחה נספרת.
         </p>
           </div>
         </div>
@@ -68,7 +68,7 @@ export function LeaderboardPageContent() {
         <div className="relative min-h-[200px]">
           <PremiumGate
             title="LIVE RANK TRACKING"
-            description="עדכוני דירוג בזמן אמת, התראות עלירידה ב-rank ו-analytics מתקדם — Premium."
+            description="עדכוני דירוג בזמן אמת, התראות עלירידה ב-rank ו-analytics מתקדם, Premium."
           >
             <RankingCard player={CURRENT_USER} highlight />
           </PremiumGate>

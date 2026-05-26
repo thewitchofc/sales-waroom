@@ -5,25 +5,24 @@ import { motion, type Variants } from "framer-motion";
 const cinematicEase = [0.16, 1, 0.3, 1] as [number, number, number, number];
 
 export const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 60, filter: "blur(8px)" },
+  hidden: { opacity: 0, y: 24 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
     transition: {
-      delay: i * 0.14,
-      duration: 1,
+      delay: i * 0.1,
+      duration: 0.65,
       ease: cinematicEase,
     },
   }),
 };
 
 export const reveal: Variants = {
-  hidden: { opacity: 0, y: 40 },
+  hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.8, ease: cinematicEase },
+    transition: { duration: 0.6, ease: cinematicEase },
   },
 };
 
@@ -43,14 +42,14 @@ export function Section({
   return (
     <section
       id={id}
-      className={`relative px-4 py-20 sm:px-6 sm:py-28 md:py-36 lg:px-12 lg:py-44 ${className}`}
+      className={`relative px-5 py-16 sm:px-8 sm:py-24 md:py-28 lg:px-12 ${className}`}
     >
       {atmosphere && (
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black/80" />
         </div>
       )}
-      <div className="relative mx-auto max-w-7xl">{children}</div>
+      <div className="relative mx-auto max-w-6xl">{children}</div>
     </section>
   );
 }
@@ -75,22 +74,18 @@ export function SectionHeader({
     <motion.div
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-120px" }}
-      className={`mb-12 flex max-w-4xl flex-col sm:mb-16 md:mb-20 lg:mb-24 ${alignClass}`}
+      viewport={{ once: true, margin: "-80px" }}
+      className={`mb-10 flex max-w-3xl flex-col sm:mb-14 md:mb-16 ${alignClass}`}
     >
       {label && (
-        <motion.div custom={0} variants={fadeUp} className="mb-8 flex items-center gap-4">
-          <span className="h-px w-12 bg-gradient-to-l from-transparent to-accent/50" />
-          <span className="font-brand text-[10px] tracking-[0.25em] text-accent">
-            {label}
-          </span>
-          <span className="h-px w-12 bg-gradient-to-r from-transparent to-accent/50" />
-        </motion.div>
+        <motion.p custom={0} variants={fadeUp} className="mb-4 font-brand text-[10px] tracking-[0.2em] text-accent">
+          {label}
+        </motion.p>
       )}
       <motion.h2
         custom={1}
         variants={fadeUp}
-        className="font-display text-3xl font-black leading-[1.08] tracking-tight text-white sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-balance"
+        className="font-display text-3xl font-black leading-tight tracking-tight text-white sm:text-4xl md:text-5xl text-balance"
       >
         {title}
       </motion.h2>
@@ -98,7 +93,7 @@ export function SectionHeader({
         <motion.p
           custom={2}
           variants={fadeUp}
-          className="mt-8 max-w-2xl text-lg leading-[1.75] text-white/50 md:text-xl"
+          className="mt-4 max-w-2xl text-base leading-relaxed text-white/55 sm:mt-5 sm:text-lg"
         >
           {description}
         </motion.p>

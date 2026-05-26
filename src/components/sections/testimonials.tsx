@@ -3,12 +3,11 @@
 import { motion } from "framer-motion";
 import { Section, SectionHeader } from "@/components/ui/section";
 import { GlassCard } from "@/components/ui/glass-card";
-import { SectionAtmosphere } from "@/components/ui/cinematic-bg";
 
 const testimonials = [
   {
     quote:
-      "Sales Waroom קיצר לי את ההתאקלמות בחצי. מהיסוס על מחיר — לסגירת enterprise תוך 6 שבועות.",
+      "Sales Waroom קיצר לי את ההתאקלמות בחצי. מהיסוס על מחיר, לסגירת enterprise תוך 6 שבועות.",
     author: "מרקוס חן",
     role: "AE Enterprise",
     company: "SaaS Series B",
@@ -37,17 +36,16 @@ const testimonials = [
 
 export function Testimonials() {
   return (
-    <Section id="testimonials" atmosphere>
-      <SectionAtmosphere />
+    <Section id="testimonials" className="border-t border-white/5">
       <SectionHeader
-        label="FIELD REPORTS"
-        title="קלוזרים עילית לא מתאמנים לבד"
-        description="דוחות מהשטח. ממי שסגרו מיליונים אחרי שהכניסו את Sales Waroom לשגרה."
+        label="TESTIMONIALS"
+        title="מה אומרים צוותי מכירות"
+        description="תוצאות אמיתיות מצוותים שמתאמנים על הפלטפורמה."
       />
 
-      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3 md:gap-6">
         {testimonials.map((t, i) => (
-          <GlassCard key={t.author} delay={i * 0.15} premium className="flex flex-col">
+          <GlassCard key={t.author} delay={i * 0.1} className="flex flex-col border border-white/5">
             <div className="mb-6 flex items-center justify-between">
               <span className="font-brand text-[10px] text-accent">{t.metric}</span>
               <span className="border border-white/10 px-2 py-0.5 font-brand text-[9px] text-muted-foreground">

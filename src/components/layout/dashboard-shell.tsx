@@ -66,8 +66,8 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex min-h-screen bg-black">
       <aside className="fixed inset-y-0 start-0 z-40 hidden w-64 flex-col border-e border-white/5 bg-black/95 backdrop-blur-xl lg:flex">
-        <div className="border-b border-white/5 p-6">
-          <BrandLogoLink href="/" variant="sidebar" hoverGlow className="mx-auto" />
+        <div className="border-b border-white/5 px-4 py-6">
+          <BrandLogoLink href="/" variant="sidebar" hoverGlow className="mx-auto justify-center" />
         </div>
         <SidebarNav />
         <div className="border-t border-white/5 p-4">
@@ -129,7 +129,7 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
               transition={{ duration: 2, repeat: Infinity }}
             />
             <span className={`font-brand text-[9px] sm:text-[10px] ${isArena ? "text-red-400" : "text-green-400"}`}>
-              {isArena ? "ARENA LIVE" : "COMMAND CENTER LIVE"}
+              {isArena ? "הזירה · LIVE" : "COMMAND CENTER LIVE"}
             </span>
           </div>
           <div className="flex items-center gap-3 sm:gap-4">

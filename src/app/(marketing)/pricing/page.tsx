@@ -4,7 +4,7 @@ import { Pricing } from "@/components/sections/pricing";
 
 export const metadata: Metadata = {
   title: "תמחור",
-  description: "תוכניות Sales Waroom — מסוכן עצמאי ועד enterprise.",
+  description: "תוכניות Sales Waroom, מסוכן עצמאי ועד enterprise.",
 };
 
 export default function PricingPage() {

@@ -13,7 +13,7 @@ export default function AnalyticsPage() {
       <PageHero
         label="ANALYTICS"
         title="כל מדד. כל חולשה. לפני שזה עולה ביוק."
-        description="מגמות ביטחון, מיומנויות, coaching insights ודוחות ביצועים — בזמן אמת."
+        description="מגמות ביטחון, מיומנויות, coaching insights ודוחות ביצועים, בזמן אמת."
       />
       <AnalyticsDashboard showHeader={false} />
     </>

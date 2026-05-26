@@ -90,7 +90,7 @@ export function SeasonPageContent() {
             >
               <RankTierBadge tier={tier.id} size="md" />
               <div className="mt-3 font-brand text-[10px] text-muted-foreground">
-                {tier.minXp.toLocaleString()} — {tier.maxXp === 99999 ? "∞" : tier.maxXp.toLocaleString()} XP
+                {tier.minXp.toLocaleString()} עד {tier.maxXp === 99999 ? "∞" : tier.maxXp.toLocaleString()} XP
               </div>
             </motion.div>
           ))}
@@ -101,7 +101,7 @@ export function SeasonPageContent() {
         <div className="relative min-h-[180px]">
           <PremiumGate
             title="SEASON CHAMPIONSHIP"
-            description="כניסה לטורניר העונה, פרסים בלעדיים ו-personas עילית — Premium בלבד."
+            description="כניסה לטורניר העונה, פרסים בלעדיים ו-personas עילית, Premium בלבד."
           />
         </div>
       )}

@@ -35,7 +35,7 @@ export function RankTierBadge({
 
 export function RankMovement({ delta }: { delta: number }) {
   if (delta === 0) {
-    return <span className="font-brand text-[10px] text-muted-foreground">—</span>;
+    return <span className="font-brand text-[10px] text-muted-foreground">-</span>;
   }
   const up = delta > 0;
   return (

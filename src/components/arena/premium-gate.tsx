@@ -7,7 +7,7 @@ import { PREMIUM_ARENA_FEATURES } from "@/config/arena-data";
 
 export function PremiumGate({
   title = "PREMIUM ARENA",
-  description = "תחרויות דירוג, טורנירים שבועיים ו-personas עילית — רק למנויי חדר מלחמה.",
+  description = "תחרויות דירוג, טורנירים שבועיים ו-personas עילית, רק למנויי חדר מלחמה.",
   children,
   blur = true,
 }: {

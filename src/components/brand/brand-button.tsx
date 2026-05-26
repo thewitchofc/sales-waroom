@@ -9,7 +9,7 @@ interface BrandButtonProps extends HTMLMotionProps<"button"> {
   children: React.ReactNode;
 }
 
-/** Marketing / cinematic CTA button — separate from shadcn/ui Button */
+/** Marketing / cinematic CTA button, separate from shadcn/ui Button */
 export function BrandButton({
   variant = "primary",
   size = "md",

@@ -13,7 +13,7 @@ import { RankTierBadge, RankMovement, LiveIndicator } from "@/components/arena/r
 import { RankingCard } from "@/components/arena/ranking-card";
 
 function BadgePills({ badgeIds }: { badgeIds: string[] }) {
-  if (badgeIds.length === 0) return <span className="text-[10px] text-muted-foreground">—</span>;
+  if (badgeIds.length === 0) return <span className="text-[10px] text-muted-foreground">-</span>;
   return (
     <div className="flex flex-wrap gap-1">
       {badgeIds.slice(0, 2).map((id) => {

@@ -14,7 +14,7 @@ const values = [
   },
   {
     title: "AI שלא מקל",
-    body: "Coach שמזהה כל טעות — לפני שהלקוח מרגיש חולשה.",
+    body: "Coach שמזהה כל טעות, לפני שהלקוח מרגיש חולשה.",
   },
   {
     title: "DNA עילית",
@@ -23,10 +23,10 @@ const values = [
 ];
 
 const timeline = [
-  { year: "2023", event: "הקמת Sales Waroom — חזון: AI war room למכירות" },
+  { year: "2023", event: "הקמת Sales Waroom, חזון: AI war room למכירות" },
   { year: "2024", event: "100+ צוותי enterprise מאמנים על הפלטפורמה" },
   { year: "2025", event: "מנוע Coach בעברית + ניתוח פריים בזמן אמת" },
-  { year: "2026", event: "Command Center — מערכת הפעלה מלאה לקלוזרים" },
+  { year: "2026", event: "Command Center, מערכת הפעלה מלאה לקלוזרים" },
 ];
 
 export function AboutPageContent() {
@@ -35,7 +35,7 @@ export function AboutPageContent() {
       <PageHero
         label="ABOUT SALES WAROOM"
         title="בנינו את מה שחסר לנו בשטח"
-        description="Sales Waroom נולד מתוך frustration — כלים generic שלא מכינים אותך ללקוח עוין, לדדליין, או ל-'תשלח לי פרטים'."
+        description="Sales Waroom נולד מתוך תסכול, כלים כלליים שלא מכינים אותך ללקוח עוין, לדדליין, או ל-'תשלח לי פרטים'."
       />
 
       <Section atmosphere>

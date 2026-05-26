@@ -6,7 +6,7 @@ export interface NavItem {
 }
 
 export const mainNav: NavItem[] = [
-  { label: "ARENA", href: "/arena", description: "תחרות AI", badge: "LIVE" },
+  { label: "הזירה", href: "/arena", description: "תחרות AI", badge: "LIVE" },
   { label: "דמו", href: "/demo", description: "חוויה אינטראקטיבית" },
   { label: "פלטפורמה", href: "/platform", description: "סקירת מערכת" },
   { label: "אימון", href: "/training", description: "סימולטור AI" },
@@ -17,18 +17,17 @@ export const mainNav: NavItem[] = [
 
 export const dashboardNav: NavItem[] = [
   { label: "מרכז פיקוד", href: "/dashboard" },
-  { label: "⚔ ARENA", href: "/arena", badge: "LIVE" },
+  { label: "⚔ הזירה", href: "/arena", badge: "LIVE" },
   { label: "Leaderboard", href: "/leaderboard" },
   { label: "Season", href: "/season" },
   { label: "Profile", href: "/profile" },
   { label: "סימולציות", href: "/dashboard#simulations" },
-  { label: "אנליטיקה", href: "/dashboard#analytics" },
   { label: "Coach", href: "/dashboard#coaching" },
   { label: "צוות", href: "/dashboard#team" },
 ];
 
 export const footerNav: NavItem[] = [
-  { label: "ARENA", href: "/arena" },
+  { label: "הזירה", href: "/arena" },
   { label: "פלטפורמה", href: "/platform" },
   { label: "תמחור", href: "/pricing" },
   { label: "אודות", href: "/about" },
@@ -37,10 +36,10 @@ export const footerNav: NavItem[] = [
 
 export const productRoutes = [
   {
-    title: "ARENA",
+    title: "הזירה",
     href: "/arena",
     label: "COMPETITIVE",
-    description: "תחרות שבועית, leaderboard חי, seasons ו-tournaments — esports למכירות.",
+    description: "תחרות שבועית, leaderboard חי, seasons ו-tournaments, esports למכירות.",
   },
   {
     title: "דמו חי",
@@ -52,7 +51,7 @@ export const productRoutes = [
     title: "פלטפורמה",
     href: "/platform",
     label: "PLATFORM",
-    description: "ארכיטקטורת מערכת הפעלה למכירות — מהשיחה ועד הפיקוד.",
+    description: "ארכיטקטורת מערכת הפעלה למכירות, מהשיחה ועד הפיקוד.",
   },
   {
     title: "אימון",

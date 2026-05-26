@@ -38,7 +38,7 @@ export function SessionReplay({ progress: externalProgress, synced = false }: Se
               SESSION REPLAY
             </div>
             <div className="mt-1 text-base font-medium text-white">
-              סימולציה #2847 — לקוח קשה
+              סימולציה #2847, לקוח קשה
             </div>
           </div>
           <div className="flex items-center gap-3">

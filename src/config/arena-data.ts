@@ -200,7 +200,7 @@ export const WEEKLY_CHALLENGE: WeeklyChallenge = {
   title: "CFO DOMINANCE CHALLENGE",
   titleHe: "אתגר שליטה · CFO דומיננטי",
   scenario:
-    "אותו לקוח CFO סקепטי לכל המשתתפים. 12 דקות. אין תסריט. מי שומר frame — מנצח.",
+    "אותו לקוח CFO סקепטי לכל המשתתפים. 12 דקות. אין תסריט. מי שומר frame, מנצח.",
   persona: "CFO סקепטי · CRIT Dominance",
   pressureLevel: "INTENSE · Level 4",
   participants: 847,

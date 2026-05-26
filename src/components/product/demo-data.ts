@@ -90,11 +90,11 @@ export const CLIENT_PERSONAS: ClientPersona[] = [
 export const ACTIVE_PERSONA = CLIENT_PERSONAS[0];
 
 export const PRESSURE_LEVELS: PressureLevel[] = [
-  { id: 1, label: "בסיסי", code: "BASE", description: "לקוח ידידותי — בניית ביטחון" },
-  { id: 2, label: "מתקדם", code: "ADV", description: "התנגדויות מובנות — שמירת פריים" },
-  { id: 3, label: "עילית", code: "ELITE", description: "לחץ פסיכולוגי — בדיקת סמכות" },
-  { id: 4, label: "אינטנסיבי", code: "INTENSE", description: "קונה דומיננטי — אין מקום לחולשה" },
-  { id: 5, label: "שטח", code: "COMBAT", description: "סימולציית סגירה תחת אש — zero margin" },
+  { id: 1, label: "בסיסי", code: "BASE", description: "לקוח ידידותי, בניית ביטחון" },
+  { id: 2, label: "מתקדם", code: "ADV", description: "התנגדויות מובנות, שמירת פריים" },
+  { id: 3, label: "עילית", code: "ELITE", description: "לחץ פסיכולוגי, בדיקת סמכות" },
+  { id: 4, label: "אינטנסיבי", code: "INTENSE", description: "קונה דומיננטי, אין מקום לחולשה" },
+  { id: 5, label: "שטח", code: "COMBAT", description: "סימולציית סגירה תחת אש, zero margin" },
 ];
 
 export const DEMO_TRANSCRIPT: TranscriptMessage[] = [
@@ -102,14 +102,14 @@ export const DEMO_TRANSCRIPT: TranscriptMessage[] = [
     id: 1,
     type: "prospect",
     speaker: "לקוח · CFO",
-    text: "יש לי 12 דקות. תגיד לי מה אתם עושים — ולמה שאשקיע בזה.",
+    text: "יש לי 12 דקות. תגיד לי מה אתם עושים, ולמה שאשקיע בזה.",
     timestamp: "00:12",
   },
   {
     id: 2,
     type: "user",
     speaker: "אתה",
-    text: "מצוין. לפני שאני מסביר — מה הכי עולה לכם היום כשעסקה נופלת?",
+    text: "מצוין. לפני שאני מסביר, מה הכי עולה לכם היום כשעסקה נופלת?",
     timestamp: "00:28",
   },
   {
@@ -123,7 +123,7 @@ export const DEMO_TRANSCRIPT: TranscriptMessage[] = [
     id: 4,
     type: "coach",
     speaker: "FIELD COACH",
-    text: "הלקוח הוביל אותך למחיר. ענית מתוך צורך להוכיח — לא מתוך שליטה.",
+    text: "הלקוח הוביל אותך למחיר. ענית מתוך צורך להוכיח, לא מתוך שליטה.",
     timestamp: "01:06",
   },
   {
@@ -144,7 +144,7 @@ export const DEMO_TRANSCRIPT: TranscriptMessage[] = [
     id: 7,
     type: "analysis",
     speaker: "PSYCH ANALYSIS",
-    text: "איבדת שליטה בפריים ברגע שהתחלת להסביר. נשמעת לא בטוח — הלקוח הרגיש את זה.",
+    text: "איבדת שליטה בפריים ברגע שהתחלת להסביר. נשמעת לא בטוח, הלקוח הרגיש את זה.",
     timestamp: "01:44",
   },
 ];
@@ -154,21 +154,21 @@ export const COACH_FEEDBACK: CoachFeedback[] = [
     id: 1,
     type: "critical",
     title: "איבוד פריים · מחיר",
-    body: "הלקוח הוביל אותך למחיר. ענית מתוך צורך להוכיח את עצמך — לא מתוך סמכות.",
+    body: "הלקוח הוביל אותך למחיר. ענית מתוך צורך להוכיח את עצמך, לא מתוך סמכות.",
     time: "01:06",
   },
   {
     id: 2,
     type: "critical",
     title: "התנהגות ריאקטיבית",
-    body: "איבדת שליטה ברגע שהתחלת להסביר. מי שמסביר — מגיב. מי שמוביל — שואל.",
+    body: "איבדת שליטה ברגע שהתחלת להסביר. מי שמסביר, מגיב. מי שמוביל, שואל.",
     time: "01:18",
   },
   {
     id: 3,
     type: "warning",
     title: "ויתור על פריים",
-    body: "הלקוח סגר אותך ב'תשלח פרטים'. לא ביקשת commitment — נתת לו בריחה.",
+    body: "הלקוח סגר אותך ב'תשלח פרטים'. לא ביקשת commitment, נתת לו בריחה.",
     time: "01:44",
   },
   {
@@ -202,7 +202,7 @@ export const COACHING_INSIGHTS: CoachingInsight[] = [
   {
     id: 1,
     category: "Frame Dominance",
-    insight: "הלקוח העלה מחיר — אתה הגנת במקום להחזיר שליטה לשיחה",
+    insight: "הלקוח העלה מחיר, אתה הגנת במקום להחזיר שליטה לשיחה",
     action: "אל תגן. שאל: 'מה העלות של לא לפתור את זה עכשיו?'",
     priority: "high",
     time: "01:06",
@@ -210,15 +210,15 @@ export const COACHING_INSIGHTS: CoachingInsight[] = [
   {
     id: 2,
     category: "Emotional Control",
-    insight: "הלקוח ביקש 'תשלח פרטים' — סימן שקנית reactive behavior",
-    action: "החזר authority: 'לפני שאשלח — מה חייב להיות בפתרון?'",
+    insight: "הלקוח ביקש 'תשלח פרטים', סימן שקנית reactive behavior",
+    action: "החזר authority: 'לפני שאשלח, מה חייב להיות בפתרון?'",
     priority: "high",
     time: "01:44",
   },
   {
     id: 3,
     category: "Authority Analysis",
-    insight: "לא בדקת סמכות החלטה לפני הצעת מחיר — הלקוח לא היה committed",
+    insight: "לא בדקת סמכות החלטה לפני הצעת מחיר, הלקוח לא היה committed",
     action: "בשיחה הבאה: גלה מי חותם ומה קритריון ההחלטה",
     priority: "medium",
     time: "01:50",
@@ -226,7 +226,7 @@ export const COACHING_INSIGHTS: CoachingInsight[] = [
   {
     id: 4,
     category: "Certainty Level",
-    insight: "נשמעת לא בטוחה כשהתחלת להסביר — tonality ירד ב-34%",
+    insight: "נשמעת לא בטוחה כשהתחלת להסביר, tonality ירד ב-34%",
     action: "קצר. שאל. אל תמלא שקט בהסברים.",
     priority: "high",
     time: "01:18",
@@ -269,9 +269,9 @@ export const OBJECTION_SCENARIOS: ObjectionScenario[] = [
     type: "מחיר",
     text: "זה נשמע יקר מדי כרגע",
     severity: "HIGH",
-    analysis: "הלקוח בודק אם תיגע — לא באמת על מחיר. זו בדיקת frame.",
+    analysis: "הלקוח בודק אם תיגע, לא באמת על מחיר. זו בדיקת frame.",
     psychology: "Frame test · הלקוח מחפש מי מוביל את השיחה",
-    suggestedResponse: "מובן. לפני מחיר — מה העלות של להמשיך עם הבעיה?",
+    suggestedResponse: "מובן. לפני מחיר, מה העלות של להמשיך עם הבעיה?",
     scoreImpact: -18,
   },
   {
@@ -279,9 +279,9 @@ export const OBJECTION_SCENARIOS: ObjectionScenario[] = [
     type: "תזמון",
     text: "אנחנו לא מוכנים לקבל החלטה ברבעון הזה",
     severity: "MED",
-    analysis: "התנגדות תזמון — לרוב מסווה חוסר conviction או חוסר ROI",
+    analysis: "התנגדות תזמון, לרוב מסווה חוסר conviction או חוסר ROI",
     psychology: "Avoidance · הלקוח בורח מ-commitment",
-    suggestedResponse: "מה צריך לקרות כדי שזה יהיה עדיפות — לא רבעון הבא?",
+    suggestedResponse: "מה צריך לקרות כדי שזה יהיה עדיפות, לא רבעון הבא?",
     scoreImpact: -8,
   },
   {
@@ -289,9 +289,9 @@ export const OBJECTION_SCENARIOS: ObjectionScenario[] = [
     type: "סמכות",
     text: "אני צריך להעביר את זה ל-CEO לפני שממשיכים",
     severity: "HIGH",
-    analysis: "בדיקת authority — האם אתה מדבר עם decision maker אמיתי?",
+    analysis: "בדיקת authority, האם אתה מדבר עם decision maker אמיתי?",
     psychology: "Authority gap · אתה מאבד leverage",
-    suggestedResponse: "מעולה. מה ה-CEO חייב לראה — ומה יהרוס את העסקה?",
+    suggestedResponse: "מעולה. מה ה-CEO חייב לראה, ומה יהרוס את העסקה?",
     scoreImpact: -12,
   },
   {
@@ -299,9 +299,9 @@ export const OBJECTION_SCENARIOS: ObjectionScenario[] = [
     type: "תחרות",
     text: "אנחנו כבר מדברים עם המתחרה שלכם",
     severity: "CRIT",
-    analysis: "איום תחרותי — הלקוח בודק certainty ו-confidence שלך",
+    analysis: "איום תחרותי, הלקוח בודק certainty ו-confidence שלך",
     psychology: "Dominance play · אל תתפשר על frame",
-    suggestedResponse: "טוב שאתם בודקים. מה חסר לכם שם — שאנחנו חייבים לפתור?",
+    suggestedResponse: "טוב שאתם בודקים. מה חסר לכם שם, שאנחנו חייבים לפתור?",
     scoreImpact: -22,
   },
 ];

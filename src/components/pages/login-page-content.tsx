@@ -22,8 +22,7 @@ export function LoginPageContent() {
 
   return (
     <div className="relative flex min-h-screen items-center justify-center overflow-hidden px-6 py-20">
-      <CinematicBackground intense />
-      <div className="ai-scan-line pointer-events-none absolute inset-0 opacity-10" />
+      <CinematicBackground />
 
       <motion.div
         initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
@@ -33,7 +32,7 @@ export function LoginPageContent() {
       >
         <BrandLogoLink href="/" variant="login" animated hoverGlow shimmer className="mb-10 justify-center" />
 
-        <HudFrame label="SECURE ACCESS" className="glass-premium metallic-border bg-black/80 p-8">
+        <HudFrame label="SECURE ACCESS" className="panel-surface border border-white/10 bg-black/80 p-8">
           <h1 className="mb-2 font-display text-2xl font-bold text-white">כניסה למערכת</h1>
           <p className="mb-8 text-sm text-muted-foreground">
             הזינו פרטי גישה ל-Command Center
@@ -74,7 +73,7 @@ export function LoginPageContent() {
           </form>
 
           <div className="mt-6 border border-white/5 bg-black/40 p-3">
-            <Waveform bars={32} intense={loading} active className="h-8" />
+            <Waveform bars={32} active={loading} className="h-8" />
           </div>
 
           <p className="mt-6 text-center text-xs text-muted-foreground">

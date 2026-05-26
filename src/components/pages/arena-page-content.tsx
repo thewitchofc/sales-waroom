@@ -31,7 +31,7 @@ export function ArenaPageContent() {
             זירת המלחמה
           </h1>
           <p className="mt-2 max-w-xl text-sm text-muted-foreground">
-            אותו תרחיש. אותו לקוח דומיננטי. מי שומר frame — עולה בדירוג. מי נשבר — נופל.
+            אותו תרחיש. אותו לקוח דומיננטי. מי שומר frame, עולה בדירוג. מי נשבר, נופל.
           </p>
           </div>
         </div>

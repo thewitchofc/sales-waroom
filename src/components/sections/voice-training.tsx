@@ -12,7 +12,7 @@ import { AIThinkingIndicator } from "@/components/product/ai-thinking-indicator"
 import { PRESSURE_LEVELS } from "@/components/product/demo-data";
 
 const voiceLines = [
-  "לפני מחיר — מה העלות של לא לפתור את זה?",
+  "לפני מחיר, מה העלות של לא לפתור את זה?",
   "אני לא מסביר. אני שואל. מה חייב להשתנות?",
   "אתה לא צריך לשכנע אותי. אתה צריך להחליט.",
 ];
@@ -49,8 +49,8 @@ export function VoiceTraining({ showHeader = true }: { showHeader?: boolean }) {
       {showHeader && (
         <SectionHeader
           label="VOICE TRAINING"
-          title="Tonality · Certainty · Authority — תחת לחץ"
-          description="ה-AI מזהה חולשה בקול לפני שהלקוח שומע אותה. לא feedback ידידותי — חשיפה פסיכולוגית."
+          title="Tonality · Certainty · Authority, תחת לחץ"
+          description="ה-AI מזהה חולשה בקול לפני שהלקוח שומע אותה. לא feedback ידידותי, חשיפה פסיכולוגית."
         />
       )}
 
@@ -154,7 +154,7 @@ export function VoiceTraining({ showHeader = true }: { showHeader?: boolean }) {
             <div className="mb-2 font-brand text-[10px] text-red-400">PRESSURE SIMULATION</div>
             <h3 className="mb-4 font-display text-xl font-bold text-white">רמות לחץ פסיכולוגי</h3>
             <p className="mb-6 text-sm leading-relaxed text-muted-foreground">
-              מבסיסי — דרך עילית ואינטנסיבי — ועד COMBAT. קונים דומיננטיים
+              מבסיסי, דרך עילית ואינטנסיבי, ועד COMBAT. קונים דומיננטיים
               שבודקים frame, authority ו-certainty. אין מקום לריאקטיביות.
             </p>
             <div className="flex flex-wrap gap-2">

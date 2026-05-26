@@ -93,7 +93,7 @@ export function ArenaChallengePanel() {
             <div className="relative mt-6 min-h-[120px]">
               <PremiumGate
                 title="RANKED ARENA LOCKED"
-                description="כניסה לתחרות השבועית, דירוג חי וטורנירים — Premium בלבד."
+                description="כניסה לתחרות השבועית, דירוג חי וטורנירים, Premium בלבד."
                 blur={false}
               />
             </div>
