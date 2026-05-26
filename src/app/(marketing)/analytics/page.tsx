@@ -4,16 +4,16 @@ import { AnalyticsDashboard } from "@/components/sections/analytics-dashboard";
 
 export const metadata: Metadata = {
   title: "אנליטיקה",
-  description: "דשבורד ביצועים, מגמות, תובנות AI ודוחות צוות.",
+  description: "מרכז מודיעין AI לקלוזרים, ניתוח שיחות, תיקוני קרב ודירוג תחרותי בזמן אמת.",
 };
 
 export default function AnalyticsPage() {
   return (
     <>
       <PageHero
-        label="אנליטיקה"
-        title="כל מדד. כל חולשה. לפני שזה עולה ביוק."
-        description="מגמות ביטחון, מיומנויות, תובנות אימון ודוחות ביצועים, בזמן אמת."
+        label="מרכז מודיעין · SALES WAROOM"
+        title="AI מנתח את הפסיכולוגיה שלך. עכשיו."
+        description="העלאה. ניתוח. תיקון. כל שיחה היא קרב, וכל קרב נרשם."
       />
       <AnalyticsDashboard showHeader={false} />
     </>

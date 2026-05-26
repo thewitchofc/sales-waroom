@@ -3,7 +3,7 @@ import { PlatformPageContent } from "@/components/pages/platform-page-content";
 
 export const metadata: Metadata = {
   title: "פלטפורמה",
-  description: "סקירת מערכת Sales Waroom, מודולים, ארכיטקטורה ויכולות.",
+  description: "מערכת הפעלה AI למכירות, מודולים טקטיים, תשתית פיקוד חיה.",
 };
 
 export default function PlatformPage() {

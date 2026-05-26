@@ -70,11 +70,29 @@ function StatBlock({
 export function TournamentCountdown({
   target,
   label = "הטורניר מתחיל",
+  minimal = false,
 }: {
   target: Date;
   label?: string;
+  minimal?: boolean;
 }) {
   const remaining = useCountdown(target);
+
+  if (minimal) {
+    return (
+      <div>
+        <p className="font-brand text-[8px] text-red-400/80">{label}</p>
+        <motion.p
+          key={formatCountdown(remaining, true)}
+          initial={{ scale: 1.03 }}
+          animate={{ scale: 1 }}
+          className="mt-2 font-display text-3xl font-black tabular-nums text-white"
+        >
+          {formatCountdown(remaining, true)}
+        </motion.p>
+      </div>
+    );
+  }
 
   return (
     <div className="border border-red-500/30 bg-red-500/5 p-4">
@@ -96,8 +114,22 @@ export function TournamentCountdown({
   );
 }
 
-export function WeeklyCountdown() {
+export function WeeklyCountdown({ minimal = false }: { minimal?: boolean }) {
   const remaining = useCountdown(WEEKLY_CHALLENGE.endsAt);
+
+  if (minimal) {
+    return (
+      <div className="text-end">
+        <p className="font-brand text-[8px] text-white/35">נותר לסגירה</p>
+        <motion.p
+          key={remaining.total}
+          className="mt-1 font-display text-2xl font-black text-accent sm:text-3xl"
+        >
+          {remaining.expired ? "סגור" : formatCountdown(remaining)}
+        </motion.p>
+      </div>
+    );
+  }
 
   return (
     <div className="border border-white/5 bg-black/50 p-4">

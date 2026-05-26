@@ -7,11 +7,21 @@ import { getTierConfig, type RankTier } from "@/config/arena-data";
 export function RankTierBadge({
   tier,
   size = "md",
+  plain = false,
 }: {
   tier: RankTier;
   size?: "sm" | "md" | "lg";
+  plain?: boolean;
 }) {
   const config = getTierConfig(tier);
+
+  if (plain) {
+    return (
+      <span className={cn("text-xs text-white/40", config.color)}>
+        {config.labelHe}
+      </span>
+    );
+  }
 
   return (
     <span

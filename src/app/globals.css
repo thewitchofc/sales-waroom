@@ -277,6 +277,190 @@ body {
   }
 }
 
+.analytics-hud-cell {
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+.analytics-radar-glow {
+  background:
+    radial-gradient(ellipse 60% 40% at 50% 0%, rgba(212, 175, 85, 0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 30% at 20% 80%, rgba(239, 68, 68, 0.04) 0%, transparent 65%);
+}
+
+.analytics-replay-panel {
+  background:
+    linear-gradient(165deg, rgba(255, 255, 255, 0.03) 0%, rgba(0, 0, 0, 0.92) 100%);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.analytics-event-active {
+  box-shadow: 0 0 12px rgba(212, 175, 85, 0.15);
+}
+
+.analytics-comp-stat {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+.analytics-correction-card {
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.04),
+    0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.analytics-classified-scan {
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(239, 68, 68, 0.03) 3px,
+    rgba(239, 68, 68, 0.03) 6px
+  );
+  animation: scan-drift 6s linear infinite;
+}
+
+.analytics-flow-step {
+  transition:
+    border-color 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+.training-coach-panel {
+  box-shadow:
+    0 0 0 1px rgba(239, 68, 68, 0.08),
+    0 16px 48px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+.platform-os-shell {
+  position: relative;
+  isolation: isolate;
+}
+
+.platform-os-atmosphere {
+  background:
+    radial-gradient(ellipse 70% 45% at 50% 0%, rgba(212, 175, 85, 0.05) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 40% at 90% 60%, rgba(212, 175, 85, 0.03) 0%, transparent 60%);
+  z-index: 0;
+}
+
+.platform-os-atmosphere::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(212, 175, 85, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(212, 175, 85, 0.025) 1px, transparent 1px);
+  background-size: 80px 80px;
+  mask-image: linear-gradient(to bottom, black 0%, black 70%, transparent 100%);
+  opacity: 0.5;
+}
+
+.platform-section-bridge {
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(212, 175, 85, 0.03) 50%,
+    transparent 100%
+  );
+}
+
+.platform-module-card {
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(165deg, rgba(255, 255, 255, 0.035) 0%, rgba(255, 255, 255, 0.008) 45%, rgba(0, 0, 0, 0.85) 100%);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.06),
+    0 16px 48px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  transition:
+    box-shadow 0.45s ease,
+    border-color 0.35s ease,
+    transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.platform-module-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 40%, rgba(255, 255, 255, 0.04) 50%, transparent 62%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+
+.platform-module-card:hover {
+  box-shadow:
+    0 0 0 1px rgba(212, 175, 85, 0.15),
+    0 20px 60px rgba(0, 0, 0, 0.55),
+    0 0 40px rgba(212, 175, 85, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.platform-module-card:hover::after {
+  opacity: 1;
+}
+
+.platform-module-sheen {
+  background: linear-gradient(
+    115deg,
+    transparent 30%,
+    rgba(212, 175, 85, 0.06) 50%,
+    transparent 70%
+  );
+  animation: platform-sheen 8s ease-in-out infinite;
+}
+
+@keyframes platform-sheen {
+  0%,
+  100% {
+    transform: translateX(-20%);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translateX(20%);
+    opacity: 0.7;
+  }
+}
+
+.platform-waveform-center {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background:
+    linear-gradient(160deg, rgba(212, 175, 85, 0.05) 0%, rgba(0, 0, 0, 0.92) 40%, rgba(0, 0, 0, 1) 100%);
+  box-shadow:
+    0 0 0 1px rgba(212, 175, 85, 0.08),
+    0 32px 80px rgba(0, 0, 0, 0.65),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.demo-waveform-hero {
+  position: relative;
+  isolation: isolate;
+  box-shadow:
+    0 0 0 1px rgba(212, 175, 85, 0.12),
+    0 24px 64px rgba(0, 0, 0, 0.5),
+    0 0 48px rgba(212, 175, 85, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.demo-waveform-hero::before {
+  content: "";
+  position: absolute;
+  inset: -30% -10%;
+  z-index: -1;
+  background: radial-gradient(
+    ellipse 70% 60% at 50% 50%,
+    rgba(212, 175, 85, 0.1) 0%,
+    transparent 70%
+  );
+  filter: blur(32px);
+  pointer-events: none;
+}
+
 @keyframes pressure-pulse {
   0%,
   100% {
@@ -438,7 +622,9 @@ body {
   .ai-scan-line,
   .gradient-text,
   .pricing-tier-sweep,
-  .pricing-tier-active::before {
+  .pricing-tier-active::before,
+  .analytics-classified-scan,
+  .platform-module-sheen {
     animation: none !important;
   }
 }
@@ -712,6 +898,59 @@ body {
 
 .arena-top-rank {
   background: linear-gradient(90deg, rgba(212, 175, 85, 0.04), transparent);
+}
+
+.arena-hero-primary {
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: linear-gradient(165deg, rgba(239, 68, 68, 0.04) 0%, rgba(0, 0, 0, 0.95) 45%, rgba(0, 0, 0, 1) 100%);
+  padding: 1.75rem 1.5rem;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+@media (min-width: 640px) {
+  .arena-hero-primary {
+    padding: 2.25rem 2rem;
+  }
+}
+
+.arena-stat-strip {
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+.arena-panel-soft {
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.arena-page {
+  max-width: 72rem;
+}
+
+.leaderboard-podium-first {
+  border: 1px solid rgba(212, 175, 85, 0.12);
+  background: linear-gradient(
+    180deg,
+    rgba(212, 175, 85, 0.06) 0%,
+    rgba(0, 0, 0, 0.4) 55%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
+  box-shadow:
+    0 0 0 1px rgba(212, 175, 85, 0.06) inset,
+    0 24px 64px rgba(0, 0, 0, 0.45);
+}
+
+.leaderboard-podium-alt {
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.leaderboard-table-elite {
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.leaderboard-table-row:hover {
+  background: rgba(255, 255, 255, 0.015);
 }
 
 @media (prefers-reduced-motion: reduce) {

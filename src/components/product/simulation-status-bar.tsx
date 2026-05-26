@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { useSimulation } from "@/components/product/simulation-provider";
 import { Waveform } from "@/components/ui/waveform";
+import { TacticalScanLine, TacticalSignalBars } from "@/components/ui/tactical-signal";
 import { BehaviorModeBadge } from "@/components/product/frame-control-indicator";
 import { PressureLevelBadge } from "@/components/product/client-persona-badge";
 import { BEHAVIOR_LABELS } from "@/components/product/demo-data";
@@ -15,7 +16,7 @@ const phaseLabels = {
   idle: { label: "ממתין לסימולציה", color: "text-muted-foreground", dot: "bg-muted-foreground" },
 };
 
-export function SimulationStatusBar() {
+export function SimulationStatusBar({ minimalTelemetry = false }: { minimalTelemetry?: boolean }) {
   const demo = useSimulation();
   const phase = phaseLabels[demo.phase];
   const behavior = BEHAVIOR_LABELS[demo.behaviorMode];
@@ -99,12 +100,20 @@ export function SimulationStatusBar() {
           <span className={`hidden font-brand text-[9px] sm:inline ${behavior.color}`}>
             {behavior.label}
           </span>
-          <Waveform
-            bars={16}
-            intense={demo.isSpeaking || demo.isThinking}
-            active={demo.waveformActive}
-            className="h-6 w-20"
-          />
+          {minimalTelemetry ? (
+            <TacticalSignalBars
+              active={demo.waveformActive}
+              intense={demo.isSpeaking || demo.isThinking}
+              className="w-10"
+            />
+          ) : (
+            <Waveform
+              bars={16}
+              intense={demo.isSpeaking || demo.isThinking}
+              active={demo.waveformActive}
+              className="h-6 w-20"
+            />
+          )}
           <div className="flex items-center gap-2 border border-green-500/20 px-3 py-1">
             <motion.span
               className="size-1.5 rounded-full bg-green-400"
@@ -115,6 +124,7 @@ export function SimulationStatusBar() {
           </div>
         </div>
       </div>
+      {minimalTelemetry && <TacticalScanLine className="mt-4" />}
     </motion.div>
   );
 }

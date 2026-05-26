@@ -4,11 +4,12 @@ import { motion } from "framer-motion";
 import { SessionReplay } from "@/components/product/session-replay";
 import { ConversationTimeline } from "@/components/product/conversation-timeline";
 import { Waveform } from "@/components/ui/waveform";
+import { TacticalScanLine, TacticalStatusChip } from "@/components/ui/tactical-signal";
 import { HudFrame } from "@/components/ui/hud-elements";
 import { useSimulationOptional } from "@/components/product/simulation-provider";
 import { DEMO_TRANSCRIPT, TIMELINE_EVENTS } from "@/components/product/demo-data";
 
-export function PlatformCommandPanel() {
+export function PlatformCommandPanel({ minimalTelemetry = false }: { minimalTelemetry?: boolean }) {
   const simulation = useSimulationOptional();
   const timelineIndex = simulation?.timelineIndex ?? 0;
   const replayProgress = simulation?.replayProgress ?? 0;
@@ -24,7 +25,7 @@ export function PlatformCommandPanel() {
 
   return (
     <div className="flex min-h-[520px] flex-col gap-5">
-      <SessionReplay progress={replayProgress} synced />
+      <SessionReplay progress={replayProgress} synced compactTelemetry={minimalTelemetry} />
 
       <div className="grid flex-1 gap-5 md:grid-cols-2">
         <HudFrame
@@ -87,26 +88,38 @@ export function PlatformCommandPanel() {
         </HudFrame>
       </div>
 
-      <div className="border border-white/5 bg-black/40 px-4 py-3">
-        <div className="mb-2 flex items-center justify-between">
-          <span className="font-brand text-[9px] text-muted-foreground">
-            חתימה קולית
-          </span>
-          <motion.span
-            className="text-[10px] text-green-400"
-            animate={{ opacity: [1, 0.4, 1] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-          >
-            ● חי ANALYSIS
-          </motion.span>
+      {minimalTelemetry ? (
+        <div className="border border-white/5 bg-black/40 px-4 py-3">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <span className="font-brand text-[9px] text-white/35">טלמטריה · AI</span>
+            <div className="flex flex-wrap gap-2">
+              <TacticalStatusChip label="מאמן מחובר" active />
+              <TacticalStatusChip label="אות נעול" active variant="accent" />
+              <TacticalStatusChip label="ניתוח פעיל" active={!isThinking} variant="danger" />
+            </div>
+          </div>
+          <TacticalScanLine className="mt-3" />
         </div>
-        <Waveform
-          bars={72}
-          intense={simulation?.waveformActive ?? true}
-          active={simulation?.waveformActive ?? true}
-          className="h-10 opacity-70"
-        />
-      </div>
+      ) : (
+        <div className="border border-white/5 bg-black/40 px-4 py-3">
+          <div className="mb-2 flex items-center justify-between">
+            <span className="font-brand text-[9px] text-muted-foreground">חתימה קולית</span>
+            <motion.span
+              className="text-[10px] text-green-400"
+              animate={{ opacity: [1, 0.4, 1] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+            >
+              ● ניתוח חי
+            </motion.span>
+          </div>
+          <Waveform
+            bars={72}
+            intense={simulation?.waveformActive ?? true}
+            active={simulation?.waveformActive ?? true}
+            className="h-10 opacity-70"
+          />
+        </div>
+      )}
     </div>
   );
 }

@@ -14,12 +14,12 @@ function LivePlatformContent() {
 
   return (
     <>
-      <SimulationStatusBar />
+      <SimulationStatusBar minimalTelemetry />
 
-      <LiveCallInterface />
+      <LiveCallInterface focusedWaveform />
 
-      <div className="mt-10 grid gap-6 lg:grid-cols-2 lg:gap-8">
-        <PlatformCommandPanel />
+      <div className="mt-8 grid gap-5 lg:grid-cols-2 lg:gap-6">
+        <PlatformCommandPanel minimalTelemetry />
         <div className="glass-premium metallic-border os-panel-glow p-5 md:p-6">
           <CoachingInsightsPanel insights={demo.visibleInsights} />
         </div>
@@ -30,7 +30,7 @@ function LivePlatformContent() {
 
 export function LivePlatform({ showHeader = true }: { showHeader?: boolean }) {
   return (
-    <Section id="live-demo" className="overflow-hidden" atmosphere>
+    <Section id="live-demo" className="overflow-hidden py-16 sm:py-20" atmosphere>
       <SectionAtmosphere />
 
       {showHeader && (

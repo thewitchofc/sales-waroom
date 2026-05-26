@@ -1,58 +1,42 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
 import { LeaderboardTable, LeaderboardPodium } from "@/components/arena/leaderboard-table";
-import { SeasonBanner } from "@/components/arena/season-banner";
+import { CURRENT_USER, CURRENT_SEASON } from "@/config/arena-data";
 import { RankingCard } from "@/components/arena/ranking-card";
-import { CURRENT_USER } from "@/config/arena-data";
 import { PremiumGate } from "@/components/arena/premium-gate";
-import { BrandLogoLink } from "@/components/brand/brand-logo";
 
 const tabs = [
-  { id: "week", label: "השבוע", labelHe: "השבוע" },
-  { id: "season", label: "עונה", labelHe: "עונה" },
-  { id: "all", label: "כל הזמנים", labelHe: "כל הזמנים" },
+  { id: "week", label: "השבוע" },
+  { id: "season", label: "עונה" },
+  { id: "all", label: "כל הזמנים" },
 ] as const;
 
 export function LeaderboardPageContent() {
   const [tab, setTab] = useState<(typeof tabs)[number]["id"]>("week");
 
   return (
-    <div className="space-y-6 sm:space-y-8">
-      <div className="flex flex-wrap items-start justify-between gap-4">
-        <div className="flex items-start gap-4">
-          <BrandLogoLink href="/" variant="arena" hoverGlow className="mt-1 hidden md:inline-flex" />
-          <div>
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="mb-2 font-brand text-[10px] tracking-[0.3em] text-accent"
-        >
-          דירוגים גלובליים
-        </motion.div>
-          <h1 className="font-display text-3xl font-black text-white sm:text-4xl">
-            לוח דירוג
-          </h1>
-          <p className="mt-2 text-sm text-muted-foreground">
-            דירוג חי · תנועת דירוג · רצפים · תגים. כל קלוזר נמדד. כל שיחה נספרת.
-          </p>
-          </div>
-        </div>
-      </div>
+    <div className="arena-page pb-12">
+      <header className="mb-12 sm:mb-16">
+        <p className="font-brand text-[10px] tracking-[0.2em] text-accent/70">ליגת הזירה</p>
+        <h1 className="mt-4 font-display text-3xl font-black text-white sm:text-4xl md:text-5xl">
+          לוח דירוג
+        </h1>
+        <p className="mt-5 max-w-md text-sm leading-relaxed text-white/40">
+          {CURRENT_SEASON.nameHe} · דירוג חי
+        </p>
+      </header>
 
-      <SeasonBanner />
-
-      <div className="flex flex-wrap gap-2">
+      <div className="mb-14 flex flex-wrap gap-1 border-b border-white/[0.04] pb-px sm:mb-16">
         {tabs.map((t) => (
           <button
             key={t.id}
             type="button"
             onClick={() => setTab(t.id)}
-            className={`interactive-surface border px-4 py-2 text-xs font-semibold transition-all ${
+            className={`border-b-2 px-4 py-3 text-xs font-medium transition-colors ${
               tab === t.id
-                ? "border-accent/40 bg-accent/10 text-accent"
-                : "border-white/5 text-muted-foreground hover:text-white"
+                ? "border-accent/80 text-accent"
+                : "border-transparent text-white/35 hover:text-white/60"
             }`}
           >
             {t.label}
@@ -60,17 +44,33 @@ export function LeaderboardPageContent() {
         ))}
       </div>
 
-      <LeaderboardPodium />
+      <section className="mb-16 sm:mb-20 lg:mb-24">
+        <p className="mb-8 font-brand text-[9px] tracking-[0.15em] text-white/30">
+          אלופי השבוע
+        </p>
+        <LeaderboardPodium champion />
+      </section>
 
-      <LeaderboardTable highlightId={CURRENT_USER.id} liveScores />
+      <section>
+        <div className="mb-6 flex items-end justify-between gap-4">
+          <h2 className="font-display text-lg font-bold text-white/90 sm:text-xl">כל המפעילים</h2>
+          <span className="font-brand text-[9px] text-white/30">מדורג 4+</span>
+        </div>
+        <LeaderboardTable
+          highlightId={CURRENT_USER.id}
+          liveScores
+          minimal
+          skipTop={3}
+        />
+      </section>
 
       {!CURRENT_USER.isPremium && (
-        <div className="relative min-h-[200px]">
+        <div className="relative mt-16 min-h-[140px] sm:mt-20">
           <PremiumGate
             title="מעקב דירוג חי"
-            description="עדכוני דירוג בזמן אמת, התראות עלירידה ב-דירוג ו-אנליטיקה מתקדם, פרימיום."
+            description="עדכוני דירוג בזמן אמת והתראות ירידה — גישת Warroom."
           >
-            <RankingCard player={CURRENT_USER} highlight />
+            <RankingCard player={CURRENT_USER} highlight minimal />
           </PremiumGate>
         </div>
       )}

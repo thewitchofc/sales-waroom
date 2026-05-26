@@ -3,13 +3,19 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Waveform } from "@/components/ui/waveform";
+import { TacticalScanLine } from "@/components/ui/tactical-signal";
 
 interface SessionReplayProps {
   progress?: number;
   synced?: boolean;
+  compactTelemetry?: boolean;
 }
 
-export function SessionReplay({ progress: externalProgress, synced = false }: SessionReplayProps) {
+export function SessionReplay({
+  progress: externalProgress,
+  synced = false,
+  compactTelemetry = false,
+}: SessionReplayProps) {
   const [internalProgress, setInternalProgress] = useState(0);
   const [playing, setPlaying] = useState(true);
 
@@ -26,7 +32,11 @@ export function SessionReplay({ progress: externalProgress, synced = false }: Se
   const currentTime = formatTime(Math.floor((progress / 100) * 104));
 
   return (
-    <div className="glass-premium metallic-border os-panel-glow relative min-h-[280px] overflow-hidden p-6 md:p-8">
+    <div
+      className={`glass-premium metallic-border os-panel-glow relative overflow-hidden p-6 md:p-8 ${
+        compactTelemetry ? "min-h-[200px]" : "min-h-[280px]"
+      }`}
+    >
       <div className="pointer-events-none absolute inset-0 command-grid opacity-20" />
       <div className="ai-scan-line pointer-events-none absolute inset-0 opacity-15" />
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-accent/[0.03] via-transparent to-transparent" />
@@ -73,7 +83,11 @@ export function SessionReplay({ progress: externalProgress, synced = false }: Se
           </div>
         </div>
 
-        <Waveform bars={72} intense active={playing} className="mb-6 h-20 md:h-24" />
+        {compactTelemetry ? (
+          <TacticalScanLine className="mb-6" />
+        ) : (
+          <Waveform bars={72} intense active={playing} className="mb-6 h-20 md:h-24" />
+        )}
 
         <div className="relative mb-5 h-2 bg-white/5">
           <motion.div

@@ -7,11 +7,52 @@ import { STAT_LABELS, type BattleStats } from "@/config/arena-data";
 export function BattleStatsGrid({
   stats,
   animated = true,
+  compact = false,
 }: {
   stats: BattleStats;
   animated?: boolean;
+  compact?: boolean;
 }) {
   const entries = Object.entries(stats) as [keyof BattleStats, number][];
+
+  if (compact) {
+    return (
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {entries.map(([key, value], i) => {
+          const label = STAT_LABELS[key];
+          const isLow = value < 75;
+          const isHigh = value >= 90;
+
+          return (
+            <div key={key} className="border-b border-white/5 pb-3 last:border-0">
+              <div className="flex items-baseline justify-between gap-3">
+                <span className="text-xs text-white/40">{label.labelHe}</span>
+                <span
+                  className={cn(
+                    "font-display text-xl font-black",
+                    isLow ? "text-red-400" : isHigh ? "text-green-400" : "text-white"
+                  )}
+                >
+                  {value}
+                </span>
+              </div>
+              <div className="mt-2 h-1 overflow-hidden bg-white/5">
+                <motion.div
+                  className={cn(
+                    "h-full",
+                    isLow ? "bg-red-500/70" : isHigh ? "bg-green-500/70" : "bg-accent/60"
+                  )}
+                  initial={animated ? { width: 0 } : false}
+                  animate={{ width: `${value}%` }}
+                  transition={{ duration: 0.8, delay: i * 0.04 }}
+                />
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    );
+  }
 
   return (
     <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">

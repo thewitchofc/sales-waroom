@@ -8,11 +8,16 @@ interface PageHeroProps {
   label: string;
   title: string;
   description: string;
+  compact?: boolean;
 }
 
-export function PageHero({ label, title, description }: PageHeroProps) {
+export function PageHero({ label, title, description, compact = false }: PageHeroProps) {
   return (
-    <section className="relative overflow-hidden border-b border-white/5 pt-28 pb-14 sm:pt-32 sm:pb-16 md:pb-20">
+    <section
+      className={`relative overflow-hidden border-b border-white/5 pt-28 sm:pt-32 ${
+        compact ? "pb-10 sm:pb-12" : "pb-14 sm:pb-16 md:pb-20"
+      }`}
+    >
       <CinematicBackground />
       <div className="relative mx-auto max-w-6xl px-5 sm:px-8 lg:px-12">
         <motion.p

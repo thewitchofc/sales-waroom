@@ -20,9 +20,10 @@ export default function DemoPage() {
   return (
     <>
       <PageHero
-        label="דמו חי"
+        compact
+        label="דמו חי · SALES WAROOM"
         title="הדמו שמרגיש כמו שיחה אמיתית"
-        description="צפו בסימולציה חיה בעברית, תמלול, גלי קול, ציונים ומאמן AI שרצים ביחד."
+        description="סימולציה חיה בעברית, תמלול, ניתוח AI, ציונים ומאמן, במערכת פיקוד אחת."
       />
       <LivePlatform showHeader={false} />
     </>

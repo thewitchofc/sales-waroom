@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Waveform } from "@/components/ui/waveform";
+import { TacticalStatusChip } from "@/components/ui/tactical-signal";
 import { HudFrame } from "@/components/ui/hud-elements";
 import { LiveTranscript } from "@/components/product/live-transcript";
 import { ScoreMetersPanel } from "@/components/product/score-meters";
@@ -19,7 +20,13 @@ import { useSimulationOptional } from "@/components/product/simulation-provider"
 import { useLiveDemo } from "@/hooks/use-live-demo";
 import { TIMELINE_EVENTS } from "@/components/product/demo-data";
 
-export function LiveCallInterface({ compact = false }: { compact?: boolean }) {
+export function LiveCallInterface({
+  compact = false,
+  focusedWaveform = false,
+}: {
+  compact?: boolean;
+  focusedWaveform?: boolean;
+}) {
   const contextDemo = useSimulationOptional();
   const localDemo = useLiveDemo();
   const demo = contextDemo ?? localDemo;
@@ -82,14 +89,25 @@ export function LiveCallInterface({ compact = false }: { compact?: boolean }) {
                 </motion.div>
                 <div className="text-[10px] text-muted-foreground">משך שיחה</div>
               </div>
-              <div className="flex size-12 items-center justify-center border border-accent/20 bg-accent/5">
-                <Waveform
-                  bars={8}
-                  intense={demo.isSpeaking || demo.isThinking}
-                  active={demo.waveformActive}
-                  className="h-6 w-12"
-                />
-              </div>
+              {focusedWaveform ? (
+                <div className="flex flex-col items-center gap-1 border border-white/8 bg-black/50 px-2 py-1.5">
+                  <span
+                    className={`size-2 rounded-full ${
+                      demo.waveformActive ? "bg-accent pressure-pulse" : "bg-white/25"
+                    }`}
+                  />
+                  <span className="font-brand text-[7px] text-white/40">אות</span>
+                </div>
+              ) : (
+                <div className="flex size-12 items-center justify-center border border-accent/20 bg-accent/5">
+                  <Waveform
+                    bars={8}
+                    intense={demo.isSpeaking || demo.isThinking}
+                    active={demo.waveformActive}
+                    className="h-6 w-12"
+                  />
+                </div>
+              )}
             </div>
           </div>
 
@@ -111,23 +129,43 @@ export function LiveCallInterface({ compact = false }: { compact?: boolean }) {
                 compact ? "" : "flex flex-col gap-5 lg:col-span-3 lg:min-h-[520px]"
               }
             >
-              <div className="shrink-0 border border-white/5 bg-black/50 p-4">
+              <div
+                className={
+                  focusedWaveform
+                    ? "demo-waveform-hero shrink-0 border border-white/8 bg-black/60 p-5 md:p-6"
+                    : "shrink-0 border border-white/5 bg-black/50 p-4"
+                }
+              >
                 <div className="mb-3 flex items-center justify-between">
-                  <span className="text-[10px] text-muted-foreground">טונality · סמכות Analysis</span>
+                  <span className="font-brand text-[9px] text-white/40">
+                    {focusedWaveform ? "ניתוח קול · AI" : "טון · סמכות"}
+                  </span>
                   <motion.span
                     className="font-brand text-[9px] text-green-400"
                     animate={{ opacity: [1, 0.4, 1] }}
                     transition={{ duration: 1.5, repeat: Infinity }}
                   >
-                    ● מיקרופון פעיל
+                    ● {focusedWaveform ? "ניתוח חי" : "מיקרופון פעיל"}
                   </motion.span>
                 </div>
                 <Waveform
-                  bars={compact ? 40 : 56}
+                  bars={focusedWaveform ? 64 : compact ? 40 : 56}
                   intense={demo.isSpeaking || demo.isThinking}
                   active={demo.waveformActive}
-                  className="h-16 md:h-20"
+                  className={
+                    focusedWaveform ? "h-24 md:h-32 lg:h-36" : "h-16 md:h-20"
+                  }
                 />
+                {focusedWaveform && (
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    <TacticalStatusChip label="קול מזוהה" active={demo.waveformActive} />
+                    <TacticalStatusChip
+                      label="לחץ מנוטר"
+                      active={demo.isSpeaking}
+                      variant="danger"
+                    />
+                  </div>
+                )}
               </div>
 
               <div className="flex min-h-[280px] flex-1 flex-col border border-white/5 bg-black/50 p-4 sm:min-h-[320px]">

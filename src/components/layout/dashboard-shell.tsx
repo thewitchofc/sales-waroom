@@ -9,11 +9,11 @@ import { arenaRoutes } from "@/config/routes";
 import { BrandLogoLink } from "@/components/brand/brand-logo";
 import { cn } from "@/lib/utils";
 
-function SidebarNav({ onNavigate }: { onNavigate?: () => void }) {
+function SidebarNav({ onNavigate, quiet = false }: { onNavigate?: () => void; quiet?: boolean }) {
   const pathname = usePathname();
 
   return (
-    <nav className="flex-1 space-y-1 p-4">
+    <nav className="flex-1 space-y-0.5 p-3">
       {dashboardNav.map((item) => {
         const isHash = item.href.includes("#");
         const isArena = arenaRoutes.some((r) => item.href === r);
@@ -24,25 +24,35 @@ function SidebarNav({ onNavigate }: { onNavigate?: () => void }) {
             href={item.href}
             onClick={onNavigate}
             className={cn(
-              "interactive-surface flex items-center justify-between gap-3 border px-4 py-3 text-sm",
-              active
-                ? isArena
-                  ? "border-red-500/30 bg-red-500/10 text-red-400"
-                  : "border-accent/30 bg-accent/10 text-accent"
-                : "border-transparent text-muted-foreground hover:border-white/5 hover:bg-white/[0.02] hover:text-white"
+              "flex items-center justify-between gap-3 px-3 py-2.5 text-sm transition-colors",
+              quiet
+                ? active
+                  ? "border-s-2 border-white/20 bg-white/[0.02] text-white/85"
+                  : "border-s-2 border-transparent text-white/40 hover:text-white/65"
+                : cn(
+                    "interactive-surface border px-4 py-3",
+                    active
+                      ? isArena
+                        ? "border-red-500/30 bg-red-500/10 text-red-400"
+                        : "border-accent/30 bg-accent/10 text-accent"
+                      : "border-transparent text-muted-foreground hover:border-white/5 hover:bg-white/[0.02] hover:text-white"
+                  )
             )}
           >
-            <span className="flex items-center gap-3">
-              {active && (
+            <span className="flex items-center gap-2.5">
+              {active && !quiet && (
                 <motion.span
                   layoutId="dash-nav"
                   className={cn("size-1.5 rounded-full", isArena ? "bg-red-500" : "bg-accent")}
                 />
               )}
+              {active && quiet && (
+                <span className="size-1 rounded-full bg-white/40" />
+              )}
               {item.label}
             </span>
-            {item.badge && (
-              <span className="font-brand text-[8px] text-red-400">{item.badge}</span>
+            {item.badge && !quiet && (
+              <span className="font-brand text-[8px] text-red-400/80">{item.badge}</span>
             )}
           </Link>
         );
@@ -55,6 +65,7 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
   const isArena = (arenaRoutes as readonly string[]).includes(pathname);
+  const quietSidebar = pathname === "/leaderboard";
 
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
@@ -65,19 +76,36 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="flex min-h-screen bg-black">
-      <aside className="fixed inset-y-0 start-0 z-40 hidden w-64 flex-col border-e border-white/5 bg-black/95 backdrop-blur-xl lg:flex">
-        <div className="border-b border-white/5 px-4 py-6">
-          <BrandLogoLink href="/" variant="sidebar" hoverGlow className="mx-auto justify-center" />
+      <aside
+        className={cn(
+          "fixed inset-y-0 start-0 z-40 hidden w-60 flex-col border-e lg:flex",
+          quietSidebar
+            ? "border-white/[0.04] bg-black/90"
+            : "border-white/5 bg-black/95 backdrop-blur-xl"
+        )}
+      >
+        <div className={cn("px-4 py-6", quietSidebar ? "border-b border-white/[0.04]" : "border-b border-white/5")}>
+          <BrandLogoLink
+            href="/"
+            variant="sidebar"
+            hoverGlow={!quietSidebar}
+            className="mx-auto justify-center"
+          />
         </div>
-        <SidebarNav />
-        <div className="border-t border-white/5 p-4">
+        <SidebarNav quiet={quietSidebar} />
+        <div className={cn("p-3", quietSidebar ? "border-t border-white/[0.04]" : "border-t border-white/5")}>
           <Link
             href="/profile"
-            className="glass-premium glass-shimmer interactive-surface block border border-white/5 p-4 transition-all hover:border-accent/20"
+            className={cn(
+              "block p-3 transition-colors",
+              quietSidebar
+                ? "border border-transparent hover:border-white/[0.06] hover:bg-white/[0.02]"
+                : "glass-premium glass-shimmer interactive-surface border border-white/5 p-4 hover:border-accent/20"
+            )}
           >
-            <div className="mb-2 font-brand text-[9px] text-muted-foreground">לוחם</div>
-            <div className="text-sm font-medium text-white">דנה כהן</div>
-            <div className="text-xs text-muted-foreground">עילית · דירוג #7</div>
+            <div className="mb-1.5 font-brand text-[8px] text-white/30">לוחם</div>
+            <div className="text-sm font-medium text-white/85">דנה כהן</div>
+            <div className="text-xs text-white/35">עילית · #7</div>
           </Link>
         </div>
       </aside>
@@ -104,13 +132,13 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
               <div className="border-b border-white/5 p-5">
                 <BrandLogoLink href="/" variant="sidebar" hoverGlow className="mx-auto" />
               </div>
-              <SidebarNav onNavigate={() => setMobileOpen(false)} />
+              <SidebarNav onNavigate={() => setMobileOpen(false)} quiet={quietSidebar} />
             </motion.aside>
           </>
         )}
       </AnimatePresence>
 
-      <div className="flex flex-1 flex-col lg:ms-64">
+      <div className="flex flex-1 flex-col lg:ms-60">
         <header className="sticky top-0 z-30 flex items-center justify-between border-b border-white/5 bg-black/85 px-4 py-3 backdrop-blur-xl sm:px-6 sm:py-4">
           <div className="flex items-center gap-3">
             <button

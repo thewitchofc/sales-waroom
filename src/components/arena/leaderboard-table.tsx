@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import {
   LEADERBOARD_PLAYERS,
@@ -9,34 +8,19 @@ import {
   getRankMovement,
   type ArenaPlayer,
 } from "@/config/arena-data";
-import { RankTierBadge, RankMovement, LiveIndicator } from "@/components/arena/rank-tier-badge";
+import { RankTierBadge, RankMovement } from "@/components/arena/rank-tier-badge";
 import { RankingCard } from "@/components/arena/ranking-card";
 
 function BadgePills({ badgeIds }: { badgeIds: string[] }) {
-  if (badgeIds.length === 0) return <span className="text-[10px] text-muted-foreground">-</span>;
+  if (badgeIds.length === 0) return null;
   return (
-    <div className="flex flex-wrap gap-1">
-      {badgeIds.slice(0, 2).map((id) => {
-        const badge = ARENA_BADGES[id];
-        if (!badge) return null;
-        return (
-          <span
-            key={id}
-            className={cn(
-              "border px-1.5 py-0.5 font-brand text-[8px]",
-              badge.rarity === "legendary"
-                ? "border-red-500/30 text-red-400"
-                : badge.rarity === "rare"
-                  ? "border-accent/30 text-accent"
-                  : "border-white/10 text-white/50"
-            )}
-            title={badge.label}
-          >
-            {badge.icon}
-          </span>
-        );
-      })}
-    </div>
+    <span className="font-brand text-[9px] text-white/30">
+      {badgeIds
+        .slice(0, 1)
+        .map((id) => ARENA_BADGES[id]?.icon)
+        .filter(Boolean)
+        .join("")}
+    </span>
   );
 }
 
@@ -44,14 +28,20 @@ export function LeaderboardTable({
   players = LEADERBOARD_PLAYERS,
   highlightId,
   liveScores = true,
+  minimal = false,
+  skipTop = 0,
 }: {
   players?: ArenaPlayer[];
   highlightId?: string;
   liveScores?: boolean;
+  minimal?: boolean;
+  skipTop?: number;
 }) {
   const [scores, setScores] = useState(() =>
     Object.fromEntries(players.map((p) => [p.id, p.score]))
   );
+
+  const tablePlayers = skipTop > 0 ? players.slice(skipTop) : players;
 
   useEffect(() => {
     if (!liveScores) return;
@@ -71,100 +61,109 @@ export function LeaderboardTable({
   }, [players, liveScores]);
 
   return (
-    <div className="glass-premium metallic-border overflow-hidden bg-black/60">
-      <div className="border-b border-white/5 p-4 md:p-5">
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <div>
-            <div className="font-brand text-[10px] tracking-widest text-accent">
-              לוח דירוג חי
+    <div
+      className={
+        minimal
+          ? "leaderboard-table-elite overflow-hidden"
+          : "glass-premium metallic-border overflow-hidden bg-black/60"
+      }
+    >
+      {!minimal && (
+        <div className="border-b border-white/5 p-4 md:p-5">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <div className="font-brand text-[10px] tracking-widest text-accent">
+                לוח דירוג חי
+              </div>
+              <h3 className="font-display text-lg font-bold text-white">
+                הקלוזרים המובילים · השבוע
+              </h3>
             </div>
-            <h3 className="font-display text-lg font-bold text-white">הקלוזרים המובילים · השבוע</h3>
           </div>
-          <LiveIndicator label="ציונים חיים" />
         </div>
-      </div>
+      )}
 
       <div className="overflow-x-auto">
-        <table className="w-full min-w-[720px]">
+        <table className="w-full min-w-[520px]">
           <thead>
-            <tr className="border-b border-white/5 text-[10px] text-muted-foreground">
-              <th className="px-4 py-3 text-start font-brand">דירוג</th>
-              <th className="px-4 py-3 text-start font-brand">קלוזר</th>
-              <th className="px-4 py-3 text-start font-brand">דרגה</th>
-              <th className="px-4 py-3 text-start font-brand">ציון</th>
-              <th className="px-4 py-3 text-start font-brand">תנועה</th>
-              <th className="px-4 py-3 text-start font-brand">רצף</th>
-              <th className="px-4 py-3 text-start font-brand">תגים</th>
-              <th className="px-4 py-3 text-start font-brand">סטטוס</th>
+            <tr className="border-b border-white/[0.04] text-[9px] uppercase tracking-wider text-white/30">
+              <th className="px-4 py-2.5 text-start font-brand sm:px-5">#</th>
+              <th className="px-4 py-2.5 text-start font-brand sm:px-5">קלוזר</th>
+              {!minimal && <th className="px-4 py-2.5 text-start font-brand sm:px-5">דרגה</th>}
+              <th className="px-4 py-2.5 text-start font-brand sm:px-5">ציון</th>
+              <th className="px-4 py-2.5 text-start font-brand sm:px-5">תנועה</th>
+              {minimal ? (
+                <th className="hidden px-4 py-2.5 text-start font-brand sm:table-cell sm:px-5">
+                  רצף
+                </th>
+              ) : (
+                <>
+                  <th className="px-4 py-2.5 text-start font-brand sm:px-5">רצף</th>
+                  <th className="px-4 py-2.5 text-start font-brand sm:px-5">תגים</th>
+                  <th className="px-4 py-2.5 text-start font-brand sm:px-5">סטטוס</th>
+                </>
+              )}
             </tr>
           </thead>
           <tbody>
-            {players.map((player, i) => {
+            {tablePlayers.map((player) => {
               const movement = getRankMovement(player.rank, player.previousRank);
               const isHighlight = player.id === highlightId;
               const liveScore = scores[player.id] ?? player.score;
 
               return (
-                <motion.tr
+                <tr
                   key={player.id}
-                  initial={{ opacity: 0, x: -8 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.04 }}
                   className={cn(
-                    "border-b border-white/[0.03] transition-colors",
-                    isHighlight ? "bg-accent/10 ring-1 ring-inset ring-accent/20" : "hover:bg-white/[0.02]",
-                    player.rank <= 3 && "arena-top-rank"
+                    "leaderboard-table-row border-b border-white/[0.03] transition-colors last:border-0",
+                    isHighlight ? "bg-white/[0.03]" : "hover:bg-white/[0.015]",
+                    !minimal && player.rank <= 3 && "arena-top-rank"
                   )}
                 >
-                  <td className="px-4 py-4">
-                    <span
-                      className={cn(
-                        "font-display text-xl font-black",
-                        player.rank === 1
-                          ? "text-accent"
-                          : player.rank === 2
-                            ? "text-slate-300"
-                            : player.rank === 3
-                              ? "text-amber-600"
-                              : "text-white"
+                  <td className="px-4 py-3 sm:px-5 sm:py-3.5">
+                    <span className="font-brand text-sm text-white/50">#{player.rank}</span>
+                  </td>
+                  <td className="px-4 py-3 sm:px-5 sm:py-3.5">
+                    <div className="flex flex-col gap-0.5">
+                      <span className="text-sm font-medium text-white/90">{player.name}</span>
+                      {minimal && (
+                        <RankTierBadge tier={player.tier} size="sm" plain />
                       )}
-                    >
-                      #{player.rank}
+                    </div>
+                  </td>
+                  {!minimal && (
+                    <td className="px-4 py-3 sm:px-5 sm:py-3.5">
+                      <RankTierBadge tier={player.tier} size="sm" />
+                    </td>
+                  )}
+                  <td className="px-4 py-3 sm:px-5 sm:py-3.5">
+                    <span className="font-display text-base font-bold text-white/90">
+                      {liveScore}
                     </span>
                   </td>
-                  <td className="px-4 py-4">
-                    <div className="font-medium text-white">{player.name}</div>
-                  </td>
-                  <td className="px-4 py-4">
-                    <RankTierBadge tier={player.tier} size="sm" />
-                  </td>
-                  <td className="px-4 py-4">
-                    <motion.span
-                      key={liveScore}
-                      initial={{ scale: 1.08, color: "#fff" }}
-                      animate={{ scale: 1 }}
-                      className="font-display text-lg font-bold text-white"
-                    >
-                      {liveScore}
-                    </motion.span>
-                  </td>
-                  <td className="px-4 py-4">
+                  <td className="px-4 py-3 sm:px-5 sm:py-3.5">
                     <RankMovement delta={movement} />
                   </td>
-                  <td className="px-4 py-4">
-                    <span className="font-brand text-sm text-green-400">{player.streak}🔥</span>
-                  </td>
-                  <td className="px-4 py-4">
-                    <BadgePills badgeIds={player.badges} />
-                  </td>
-                  <td className="px-4 py-4">
-                    {player.isLive ? (
-                      <LiveIndicator />
-                    ) : (
-                      <span className="font-brand text-[9px] text-muted-foreground">לא מחובר</span>
-                    )}
-                  </td>
-                </motion.tr>
+                  {minimal ? (
+                    <td className="hidden px-4 py-3 sm:table-cell sm:px-5 sm:py-3.5">
+                      <span className="font-brand text-xs text-white/40">{player.streak}</span>
+                    </td>
+                  ) : (
+                    <>
+                      <td className="px-4 py-3 sm:px-5 sm:py-3.5">
+                        <span className="font-brand text-sm text-green-400">{player.streak}🔥</span>
+                      </td>
+                      <td className="px-4 py-3 sm:px-5 sm:py-3.5">
+                        <BadgePills badgeIds={player.badges} />
+                      </td>
+                      <td className="px-4 py-3 sm:px-5 sm:py-3.5">
+                        {player.isLive ? (
+                          <span className="font-brand text-[9px] text-white/35">חי</span>
+                        ) : null}
+                      </td>
+                    </>
+                  )}
+                </tr>
               );
             })}
           </tbody>
@@ -174,20 +173,51 @@ export function LeaderboardTable({
   );
 }
 
-export function LeaderboardPodium({ players }: { players?: ArenaPlayer[] }) {
+export function LeaderboardPodium({
+  players,
+  minimal = false,
+  champion = false,
+}: {
+  players?: ArenaPlayer[];
+  minimal?: boolean;
+  champion?: boolean;
+}) {
   const top3 = (players ?? LEADERBOARD_PLAYERS).slice(0, 3);
-  const order = [top3[1], top3[0], top3[2]].filter(Boolean);
+  const [second, first, third] = [top3[1], top3[0], top3[2]].filter(Boolean);
+
+  if (champion && first) {
+    return (
+      <div className="leaderboard-podium-grid grid grid-cols-1 gap-4 md:grid-cols-12 md:items-end md:gap-5 lg:gap-6">
+        {second && (
+          <div className="md:col-span-3 md:order-1">
+            <RankingCard player={second} rank={2} podium={2} minimal />
+          </div>
+        )}
+        <div className="md:col-span-6 md:order-2">
+          <RankingCard player={first} rank={1} podium={1} minimal />
+        </div>
+        {third && (
+          <div className="md:col-span-3 md:order-3">
+            <RankingCard player={third} rank={3} podium={3} minimal />
+          </div>
+        )}
+      </div>
+    );
+  }
 
   return (
-    <div className="grid gap-4 md:grid-cols-3">
-      {order.map((player, i) => (
-        <RankingCard
-          key={player.id}
-          player={player}
-          rank={player.rank}
-          highlight={i === 1}
-        />
-      ))}
+    <div className="grid gap-4 md:grid-cols-3 md:gap-5">
+      {[second, first, third]
+        .filter(Boolean)
+        .map((player, i) => (
+          <RankingCard
+            key={player!.id}
+            player={player!}
+            rank={player!.rank}
+            highlight={i === 1}
+            minimal={minimal}
+          />
+        ))}
     </div>
   );
 }

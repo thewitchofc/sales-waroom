@@ -20,7 +20,7 @@ const principles = [
   {
     num: "03",
     title: "דירוג או דעיכה",
-    body: "בהזירה אין מקום לאמצע. אתה עולה, או שאתה נעלם מהלוח.",
+    body: "בזירה, אין מקום לאמצע. אתה עולה, או שאתה נעלם מהלוח.",
   },
   {
     num: "04",
@@ -264,9 +264,9 @@ export function AboutPageContent() {
         <div className="relative mx-auto max-w-6xl">
           <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
             <div>
-              <p className="font-brand text-[10px] tracking-[0.2em] text-accent">הזירה</p>
+              <p className="font-brand text-[10px] tracking-[0.2em] text-accent">אודות</p>
               <h2 className="mt-4 font-display text-3xl font-black text-white sm:text-4xl md:text-5xl">
-                בתוך הזירה
+                באודות
               </h2>
               <p className="mt-6 text-base leading-relaxed text-white/55 sm:text-lg">
                 הזירה היא לא משחק. היא לחץ חברתי שמכריח אותך להשתפר.

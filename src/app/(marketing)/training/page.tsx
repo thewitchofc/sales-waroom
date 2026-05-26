@@ -2,20 +2,22 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/pages/page-hero";
 import { ObjectionSimulator } from "@/components/sections/objection-simulator";
 import { VoiceTraining } from "@/components/sections/voice-training";
+import { TrainingLiveHud } from "@/components/training/training-live-hud";
 
 export const metadata: Metadata = {
   title: "אימון AI",
-  description: "סימולטור התנגדויות ואימון קולי תחת לחץ, תצוגה מקדימה.",
+  description: "סימולטור קרב פסיכולוגי, מאמן AI חי, והתנגדויות תחת לחץ.",
 };
 
 export default function TrainingPage() {
   return (
     <>
       <PageHero
-        label="אימון AI"
-        title="אימון שמכין לשטח. לא למבחן."
-        description="התנגדויות אמיתיות, ניתוח AI, אימון קולי, הכל במקום אחד."
+        label="אימון AI · SALES WAROOM"
+        title="AI מאמן אותך לשלוט בשיחות מכירה."
+        description="לא קורס. לא דשבורד. סימולטור קרב פסיכולוגי עם מאמן שרואה כל חולשה."
       />
+      <TrainingLiveHud />
       <ObjectionSimulator showHeader={false} />
       <VoiceTraining showHeader={false} />
     </>
