@@ -1,9 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
 import { Section } from "@/components/ui/section";
-import { GlassCard } from "@/components/ui/glass-card";
 import { BrandLink } from "@/components/brand/brand-link";
 import { cn } from "@/lib/utils";
 import { SectionAtmosphere } from "@/components/ui/cinematic-bg";
@@ -42,7 +39,7 @@ const plans = [
     ],
     cta: "כניסה ל-Warroom",
     highlighted: true,
-    liveUsers: true,
+    liveUsers: 847,
   },
   {
     id: "command",
@@ -78,26 +75,6 @@ function HudChip({ children, accent }: { children: React.ReactNode; accent?: boo
   );
 }
 
-function LiveUsersCounter() {
-  const [count, setCount] = useState(847);
-
-  useEffect(() => {
-    const id = setInterval(() => {
-      setCount(840 + Math.floor(Math.random() * 18));
-    }, 3500);
-    return () => clearInterval(id);
-  }, []);
-
-  return (
-    <div className="mt-5 flex items-center gap-2 border-t border-accent/15 pt-4">
-      <span className="pressure-pulse size-1.5 rounded-full bg-accent" />
-      <span className="font-brand text-[9px] text-accent/90">
-        {count} מפעילים פעילים עכשיו
-      </span>
-    </div>
-  );
-}
-
 export function Pricing({ showHeader = true }: { showHeader?: boolean }) {
   return (
     <Section id="pricing" atmosphere className="py-20 sm:py-28 md:py-36">
@@ -119,45 +96,22 @@ export function Pricing({ showHeader = true }: { showHeader?: boolean }) {
         <HudChip>חטיבה עילית</HudChip>
       </div>
 
-      <div className="grid items-stretch gap-10 lg:grid-cols-3 lg:gap-8 xl:gap-10">
-        {plans.map((plan, i) => (
-          <GlassCard
+      <div className="grid items-center gap-6 lg:grid-cols-3 lg:gap-8 xl:gap-10">
+        {plans.map((plan) => (
+          <div
             key={plan.id}
-            delay={i * 0.12}
-            hover={!plan.highlighted}
-            premium={plan.highlighted}
             className={cn(
-              "relative flex flex-col !p-8 sm:!p-10",
-              plan.highlighted &&
-                "pricing-tier-active z-10 lg:scale-[1.05] glow-accent-strong border-accent/35 lg:-my-4"
+              "relative flex flex-col border border-white/[0.06] p-8 transition-all sm:p-10",
+              plan.highlighted
+                ? "pricing-tier-active z-10 lg:scale-[1.06] lg:-my-2"
+                : "pricing-tier-muted"
             )}
           >
             {plan.highlighted && (
-              <>
-                <div className="pricing-tier-sweep pointer-events-none absolute inset-0" aria-hidden />
-                <motion.div
-                  className="absolute -top-px inset-x-0 h-px bg-gradient-to-r from-transparent via-accent to-transparent"
-                  animate={{ opacity: [0.4, 1, 0.4] }}
-                  transition={{ duration: 2.5, repeat: Infinity }}
-                />
-                <motion.div
-                  className="absolute -top-4 start-1/2 -translate-x-1/2 border border-accent/40 bg-accent px-4 py-1 font-brand text-[9px] text-black"
-                  animate={{
-                    boxShadow: [
-                      "0 0 16px rgba(212,175,85,0.35)",
-                      "0 0 40px rgba(212,175,85,0.55)",
-                      "0 0 16px rgba(212,175,85,0.35)",
-                    ],
-                  }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                >
-                  הכי פעיל
-                </motion.div>
-                <div className="absolute end-4 top-4 flex items-center gap-1.5">
-                  <span className="pressure-pulse size-1.5 rounded-full bg-accent" />
-                  <span className="font-brand text-[8px] text-accent/80">חי</span>
-                </div>
-              </>
+              <div className="absolute end-4 top-4 flex items-center gap-1.5">
+                <span className="size-1.5 rounded-full bg-accent/80" />
+                <span className="font-brand text-[8px] text-accent/80">חי</span>
+              </div>
             )}
 
             <div className="mb-6 flex flex-wrap gap-2">
@@ -165,43 +119,94 @@ export function Pricing({ showHeader = true }: { showHeader?: boolean }) {
               <HudChip>{plan.operatorClass}</HudChip>
             </div>
 
-            <p className="font-brand text-[9px] tracking-[0.15em] text-white/30" dir="ltr">
+            <p
+              className={cn(
+                "font-brand text-[9px] tracking-[0.15em]",
+                plan.highlighted ? "text-white/45" : "text-white/25"
+              )}
+              dir="ltr"
+            >
               {plan.subtitle}
             </p>
-            <h3 className="mt-2 font-display text-2xl font-black text-white sm:text-3xl">
+            <h3
+              className={cn(
+                "mt-2 font-display text-2xl font-black sm:text-3xl",
+                plan.highlighted ? "text-white" : "text-white/55"
+              )}
+            >
               {plan.name}
             </h3>
-            <p className="mt-4 text-sm leading-relaxed text-white/45">{plan.description}</p>
+            <p
+              className={cn(
+                "mt-4 text-sm leading-relaxed",
+                plan.highlighted ? "text-white/55" : "text-white/30"
+              )}
+            >
+              {plan.description}
+            </p>
 
-            <div className="my-8 flex items-baseline gap-1 border-b border-white/5 pb-8 sm:my-10">
-              <span className="font-display text-4xl font-black text-white sm:text-5xl">
+            <div
+              className={cn(
+                "my-8 flex items-baseline gap-1 border-b pb-8 sm:my-10",
+                plan.highlighted ? "border-white/10" : "border-white/[0.04]"
+              )}
+            >
+              <span
+                className={cn(
+                  "font-display text-4xl font-black sm:text-5xl",
+                  plan.highlighted ? "text-white" : "text-white/45"
+                )}
+              >
                 {plan.price}
               </span>
               {plan.period && (
-                <span className="text-sm text-white/35">{plan.period}</span>
+                <span className={plan.highlighted ? "text-white/40" : "text-white/25"}>
+                  {plan.period}
+                </span>
               )}
             </div>
 
             <ul className="mb-10 flex flex-1 flex-col gap-5 sm:mb-12">
               {plan.features.map((feature) => (
-                <li key={feature} className="flex items-start gap-3 text-base text-white/80">
-                  <span className="mt-2 size-1.5 shrink-0 bg-accent" />
+                <li
+                  key={feature}
+                  className={cn(
+                    "flex items-start gap-3 text-base",
+                    plan.highlighted ? "text-white/85" : "text-white/35"
+                  )}
+                >
+                  <span
+                    className={cn(
+                      "mt-2 size-1.5 shrink-0",
+                      plan.highlighted ? "bg-accent" : "bg-white/20"
+                    )}
+                  />
                   {feature}
                 </li>
               ))}
             </ul>
 
-            {plan.liveUsers && <LiveUsersCounter />}
+            {plan.liveUsers && (
+              <div className="mt-5 flex items-center gap-2 border-t border-accent/15 pt-4">
+                <span className="size-1.5 rounded-full bg-accent/80" />
+                <span className="font-brand text-[9px] text-accent/90">
+                  {plan.liveUsers} מפעילים פעילים עכשיו
+                </span>
+              </div>
+            )}
 
             <BrandLink
-              href={plan.highlighted ? "/dashboard" : plan.id === "command" ? "/login" : "/login"}
+              href={plan.highlighted ? "/dashboard" : "/login"}
               variant={plan.highlighted ? "command" : "secondary"}
               size="lg"
-              className="mt-6 w-full justify-center"
+              className={cn(
+                "mt-6 w-full justify-center",
+                !plan.highlighted && "opacity-70"
+              )}
             >
               {plan.cta}
             </BrandLink>
-          </GlassCard>
+          </div>
         ))}
       </div>
     </Section>

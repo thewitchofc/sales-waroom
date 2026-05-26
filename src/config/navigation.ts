@@ -43,6 +43,8 @@ export const footerCommandLinks: NavItem[] = [
 export const footerAccessLinks: NavItem[] = [
   { label: "חבילות", href: "/pricing" },
   { label: "התחברות", href: "/login" },
+  { label: "פרטיות", href: "/privacy" },
+  { label: "נגישות", href: "/accessibility" },
   { label: "אודות", href: "/about" },
 ];
 

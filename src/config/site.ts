@@ -3,8 +3,8 @@ import { mainNav } from "@/config/navigation";
 export const BRAND_LOGO = {
   src: "/assets/sales-waroom-logo.png",
   alt: "Sales Waroom",
-  width: 1024,
-  height: 1024,
+  width: 734,
+  height: 553,
 } as const;
 
 export const siteConfig = {

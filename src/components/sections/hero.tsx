@@ -1,6 +1,7 @@
 "use client";
 
 import { BrandLink } from "@/components/brand/brand-link";
+import { BrandLogo } from "@/components/brand/brand-logo";
 import { CinematicBackground } from "@/components/ui/cinematic-bg";
 
 const steps = [
@@ -11,20 +12,24 @@ const steps = [
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden pt-28 pb-20 sm:pt-32 sm:pb-28">
-      <CinematicBackground />
+    <section className="relative overflow-hidden pt-24 pb-20 sm:pt-28 sm:pb-28 md:pt-32">
+      <CinematicBackground intense />
 
-      <div className="relative mx-auto max-w-2xl px-5 text-center sm:px-8">
-        <p className="mb-4 text-sm text-accent/80">Sales Waroom</p>
+      <div
+        className="pointer-events-none absolute inset-x-0 top-1/3 h-64 -translate-y-1/2"
+        style={{
+          background:
+            "radial-gradient(ellipse 50% 60% at 50% 50%, rgba(212,175,85,0.06) 0%, transparent 70%)",
+        }}
+      />
 
-        <h1 className="font-display text-4xl font-black leading-tight text-white sm:text-5xl">
-          תרגלו שיחות מכירה
-          <span className="mt-2 block text-white/70">עם AI שמאמן אתכם</span>
-        </h1>
+      <div className="relative mx-auto max-w-3xl px-5 text-center sm:px-8">
+        <div className="mb-10 flex justify-center sm:mb-12 md:mb-14">
+          <BrandLogo variant="hero" priority className="mx-auto" />
+        </div>
 
-        <p className="mx-auto mt-6 max-w-lg text-base leading-relaxed text-white/50 sm:text-lg">
-          לא עוד סרטונים או תיאוריה. כאן מתרגלים שיחה אמיתית, מקבלים תיקונים,
-          ורואים איך אתם משתפרים.
+        <p className="mx-auto max-w-lg text-base leading-relaxed text-white/50 sm:text-lg">
+          תרגלו שיחות מכירה עם AI, קבלו משוב בזמן אמת, והתחרו בדירוג.
         </p>
 
         <ul className="mx-auto mt-10 max-w-md space-y-3 text-start text-sm text-white/55">

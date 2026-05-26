@@ -3,7 +3,7 @@ import { productRoutes } from "@/config/navigation";
 
 export function ProductPreviewGrid() {
   return (
-    <section className="border-t border-white/[0.04] bg-black py-16 sm:py-20">
+    <section className="border-t border-white/[0.04] py-16 sm:py-20">
       <div className="mx-auto max-w-3xl px-5 sm:px-8">
         <h2 className="text-center font-display text-2xl font-black text-white sm:text-3xl">
           לאן ללכת?

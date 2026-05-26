@@ -29,7 +29,7 @@ const companies = [
 
 export function TrustedBy() {
   return (
-    <Section className="border-t border-white/5 bg-black py-14 sm:py-20">
+    <Section className="border-t border-white/5 py-14 sm:py-20">
       <div className="grid gap-10 lg:grid-cols-12 lg:items-start lg:gap-8">
         <div className="lg:col-span-5">
           <p className="mb-2 font-brand text-[10px] tracking-[0.2em] text-accent">מערכת חיה</p>

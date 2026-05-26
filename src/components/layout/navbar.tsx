@@ -57,7 +57,11 @@ export function Navbar() {
         )}
       />
       <nav className="relative mx-auto flex max-w-7xl items-center justify-between py-3 sm:py-4">
-        <BrandLogoLink href="/" variant="navbar" priority hoverGlow shimmer className="-ms-1" />
+        {pathname === "/" ? (
+          <div className="w-24 shrink-0 sm:w-28" aria-hidden />
+        ) : (
+          <BrandLogoLink href="/" variant="navbar" priority className="-ms-1" />
+        )}
 
         <div className="hidden items-center gap-8 lg:flex">
           {navLinks.map((link) => {
@@ -127,7 +131,7 @@ export function Navbar() {
             className="glass-premium metallic-border relative z-50 mx-2 mb-3 max-h-[80vh] overflow-y-auto p-5 sm:mx-4 sm:p-6 lg:hidden"
           >
             <div className="mb-6 flex justify-center border-b border-white/5 pb-6">
-              <BrandLogoLink href="/" variant="login" animated hoverGlow />
+              <BrandLogoLink href="/" variant="login" />
             </div>
             <div className="flex flex-col gap-1">
               {navLinks.map((link) => {
@@ -179,7 +183,7 @@ export function Footer() {
       <div className="relative mx-auto max-w-7xl px-6 py-20 sm:px-8 lg:px-12 lg:py-24">
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-10 xl:gap-16">
           <div className="lg:col-span-4 xl:col-span-5">
-            <BrandLogoLink href="/" variant="footer" hoverGlow />
+            <BrandLogoLink href="/" variant="footer" />
             <p className="mt-6 max-w-xs font-display text-lg font-bold text-white">
               {siteConfig.tagline}
             </p>
@@ -210,13 +214,19 @@ export function Footer() {
             <p className="text-xs text-white/25">כל הזכויות שמורות</p>
           </div>
           <div className="flex flex-wrap gap-x-8 gap-y-3">
-            {["פרטיות", "תנאים", "צור קשר"].map((item) => (
-              <span
-                key={item}
+            {[
+              { label: "פרטיות", href: "/privacy" },
+              { label: "תנאים", href: "#" },
+              { label: "נגישות", href: "/accessibility" },
+              { label: "צור קשר", href: "#" },
+            ].map((item) => (
+              <Link
+                key={item.label}
+                href={item.href}
                 className="text-sm text-white/35 transition-colors hover:text-accent/80"
               >
-                {item}
-              </span>
+                {item.label}
+              </Link>
             ))}
           </div>
         </div>

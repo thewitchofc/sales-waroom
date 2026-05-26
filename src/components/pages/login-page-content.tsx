@@ -30,7 +30,7 @@ export function LoginPageContent() {
         transition={{ duration: 0.8 }}
         className="relative w-full max-w-md"
       >
-        <BrandLogoLink href="/" variant="login" animated hoverGlow shimmer className="mb-10 justify-center" />
+        <BrandLogoLink href="/" variant="login" className="mb-10 justify-center" />
 
         <HudFrame label="גישה מאובטחת" className="panel-surface border border-white/10 bg-black/80 p-8">
           <h1 className="mb-2 font-display text-2xl font-bold text-white">כניסה למערכת</h1>

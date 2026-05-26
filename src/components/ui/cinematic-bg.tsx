@@ -3,22 +3,22 @@
 import { useIsMobile } from "@/hooks/use-is-mobile";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 
+/** Section-level accent — stacks on global SiteAtmosphere */
 export function CinematicBackground({ intense: _intense = false }: { intense?: boolean }) {
   const isMobile = useIsMobile();
   const reduced = useReducedMotion();
 
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden">
-      <div className="absolute inset-0 bg-black" />
       {!reduced && !isMobile && (
         <div
-          className="absolute start-1/2 top-1/3 size-[min(80vw,640px)] -translate-x-1/2 rounded-full opacity-30"
+          className="absolute start-1/2 top-1/4 size-[min(70vw,560px)] -translate-x-1/2 rounded-full opacity-40"
           style={{
-            background: "radial-gradient(circle, rgba(212,175,85,0.04) 0%, transparent 65%)",
+            background: "radial-gradient(circle, rgba(212,175,85,0.06) 0%, transparent 65%)",
           }}
         />
       )}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/40" />
     </div>
   );
 }
@@ -34,7 +34,7 @@ export function FloatingGlows() {
 export function SectionAtmosphere() {
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/10 to-black/40" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/5 to-black/30" />
     </div>
   );
 }

@@ -16,6 +16,8 @@ export const appRoutes = {
   analytics: "/analytics",
   pricing: "/pricing",
   about: "/about",
+  accessibility: "/accessibility",
+  privacy: "/privacy",
   login: "/login",
   dashboard: "/dashboard",
   arena: "/arena",

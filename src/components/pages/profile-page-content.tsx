@@ -25,7 +25,7 @@ export function ProfilePageContent() {
     <div className="space-y-6 sm:space-y-8">
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div className="flex items-start gap-4">
-          <BrandLogoLink href="/" variant="arena" hoverGlow className="mt-1 hidden md:inline-flex" />
+          <BrandLogoLink href="/" variant="arena" className="mt-1 hidden md:inline-flex" />
           <div>
             <motion.div
               initial={{ opacity: 0 }}

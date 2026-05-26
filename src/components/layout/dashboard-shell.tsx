@@ -75,7 +75,7 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
   }, [mobileOpen]);
 
   return (
-    <div className="flex min-h-screen bg-black">
+    <div className="flex min-h-screen">
       <aside
         className={cn(
           "fixed inset-y-0 start-0 z-40 hidden w-60 flex-col border-e lg:flex",
@@ -88,7 +88,6 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
           <BrandLogoLink
             href="/"
             variant="sidebar"
-            hoverGlow={!quietSidebar}
             className="mx-auto justify-center"
           />
         </div>
@@ -130,7 +129,7 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
               className="fixed inset-y-0 end-0 z-50 flex w-[min(100%,280px)] flex-col border-s border-white/10 bg-black/95 backdrop-blur-xl lg:hidden"
             >
               <div className="border-b border-white/5 p-5">
-                <BrandLogoLink href="/" variant="sidebar" hoverGlow className="mx-auto" />
+                <BrandLogoLink href="/" variant="sidebar" className="mx-auto" />
               </div>
               <SidebarNav onNavigate={() => setMobileOpen(false)} quiet={quietSidebar} />
             </motion.aside>
@@ -163,7 +162,7 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
             </Link>
           </div>
         </header>
-        <main className="flex-1 p-4 sm:p-6 lg:p-8">{children}</main>
+        <main id="main-content" className="flex-1 p-4 sm:p-6 lg:p-8">{children}</main>
       </div>
     </div>
   );
