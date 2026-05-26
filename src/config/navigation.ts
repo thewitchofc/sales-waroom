@@ -5,47 +5,39 @@ export interface NavItem {
   badge?: string;
 }
 
+/** תפריט ראשי — רק מה שצריך להחלטה ראשונה */
 export const mainNav: NavItem[] = [
-  { label: "הזירה", href: "/arena", description: "תחרות AI", badge: "חי" },
-  { label: "דמו", href: "/demo", description: "חוויה אינטראקטיבית" },
-  { label: "פלטפורמה", href: "/platform", description: "סקירת מערכת" },
-  { label: "אימון", href: "/training", description: "סימולטור AI" },
-  { label: "אנליטיקה", href: "/analytics", description: "מרכז ביצועים" },
-  { label: "חבילות", href: "/pricing", description: "תוכניות" },
-  { label: "אודות", href: "/about", description: "הסיפור שלנו" },
+  { label: "דמו", href: "/demo", description: "לנסות שיחה עם AI" },
+  { label: "חבילות", href: "/pricing", description: "מחירים ותוכניות" },
+  { label: "אודות", href: "/about", description: "מה זה Sales Waroom" },
 ];
 
 export const dashboardNav: NavItem[] = [
-  { label: "מרכז פיקוד", href: "/dashboard" },
-  { label: "⚔ הזירה", href: "/arena", badge: "חי" },
-  { label: "לוח דירוג", href: "/leaderboard" },
+  { label: "תרגול", href: "/dashboard" },
+  { label: "הזירה", href: "/arena" },
+  { label: "דירוג", href: "/leaderboard" },
   { label: "עונה", href: "/season" },
   { label: "פרופיל", href: "/profile" },
-  { label: "סימולציות", href: "/dashboard#simulations" },
-  { label: "מאמן", href: "/dashboard#coaching" },
-  { label: "צוות", href: "/dashboard#team" },
 ];
 
 export const footerNav: NavItem[] = [
-  { label: "הזירה", href: "/arena" },
-  { label: "פלטפורמה", href: "/platform" },
+  { label: "דמו", href: "/demo" },
   { label: "חבילות", href: "/pricing" },
   { label: "אודות", href: "/about" },
   { label: "התחברות", href: "/login" },
 ];
 
 export const footerPlatformLinks: NavItem[] = [
-  { label: "דמו חי", href: "/demo" },
-  { label: "פלטפורמה", href: "/platform" },
+  { label: "תרגול", href: "/dashboard" },
   { label: "אימון", href: "/training" },
   { label: "אנליטיקה", href: "/analytics" },
+  { label: "פלטפורמה", href: "/platform" },
 ];
 
 export const footerCommandLinks: NavItem[] = [
   { label: "הזירה", href: "/arena" },
-  { label: "לוח דירוג", href: "/leaderboard" },
+  { label: "דירוג", href: "/leaderboard" },
   { label: "עונה", href: "/season" },
-  { label: "מרכז פיקוד", href: "/dashboard" },
 ];
 
 export const footerAccessLinks: NavItem[] = [
@@ -56,33 +48,21 @@ export const footerAccessLinks: NavItem[] = [
 
 export const productRoutes = [
   {
+    title: "דמו",
+    href: "/demo",
+    label: "התחלה",
+    description: "שיחת AI קצרה — רואים איך זה עובד.",
+  },
+  {
+    title: "תרגול",
+    href: "/dashboard",
+    label: "יומיומי",
+    description: "מתרגלים שיחות ומקבלים משוב מהמאמן.",
+  },
+  {
     title: "הזירה",
     href: "/arena",
-    label: "תחרותי",
-    description: "תחרות שבועית, לוח דירוג חי, עונות וטורנירים, אי-ספורט למכירות.",
-  },
-  {
-    title: "דמו חי",
-    href: "/demo",
-    label: "דמו חי",
-    description: "שיחת AI בעברית, תמלול, מאמן וניתוח בזמן אמת.",
-  },
-  {
-    title: "פלטפורמה",
-    href: "/platform",
-    label: "פלטפורמה",
-    description: "ארכיטקטורת מערכת הפעלה למכירות, מהשיחה ועד הפיקוד.",
-  },
-  {
-    title: "אימון",
-    href: "/training",
-    label: "אימון",
-    description: "סימולטור התנגדויות ואימון קולי תחת לחץ.",
-  },
-  {
-    title: "אנליטיקה",
-    href: "/analytics",
-    label: "אנליטיקה",
-    description: "דשבורד ביצועים, מגמות ותובנות AI.",
+    label: "תחרות",
+    description: "אתגרים שבועיים ודירוג מול אחרים.",
   },
 ] as const;

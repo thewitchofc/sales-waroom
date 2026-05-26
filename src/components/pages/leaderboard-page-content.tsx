@@ -2,60 +2,31 @@
 
 import { useState } from "react";
 import { LeaderboardTable, LeaderboardPodium } from "@/components/arena/leaderboard-table";
-import { CURRENT_USER, CURRENT_SEASON } from "@/config/arena-data";
+import { CURRENT_USER } from "@/config/arena-data";
 import { RankingCard } from "@/components/arena/ranking-card";
 import { PremiumGate } from "@/components/arena/premium-gate";
-
-const tabs = [
-  { id: "week", label: "השבוע" },
-  { id: "season", label: "עונה" },
-  { id: "all", label: "כל הזמנים" },
-] as const;
+import { PageGuide } from "@/components/ui/page-guide";
 
 export function LeaderboardPageContent() {
-  const [tab, setTab] = useState<(typeof tabs)[number]["id"]>("week");
-
   return (
-    <div className="arena-page pb-12">
-      <header className="mb-12 sm:mb-16">
-        <p className="font-brand text-[10px] tracking-[0.2em] text-accent/70">ליגת הזירה</p>
-        <h1 className="mt-4 font-display text-3xl font-black text-white sm:text-4xl md:text-5xl">
-          לוח דירוג
+    <div className="arena-page mx-auto max-w-4xl pb-12">
+      <header className="mb-10">
+        <h1 className="font-display text-2xl font-black text-white sm:text-3xl">
+          דירוג
         </h1>
-        <p className="mt-5 max-w-md text-sm leading-relaxed text-white/40">
-          {CURRENT_SEASON.nameHe} · דירוג חי
-        </p>
+        <PageGuide title="מה זה?">
+          רשימת כל המתרגלים לפי ציון. למעלה — שלושת המובילים השבוע. הטבלה
+          מראה את שאר המשתתפים. השורה שלך מסומנת.
+        </PageGuide>
       </header>
 
-      <div className="mb-14 flex flex-wrap gap-1 border-b border-white/[0.04] pb-px sm:mb-16">
-        {tabs.map((t) => (
-          <button
-            key={t.id}
-            type="button"
-            onClick={() => setTab(t.id)}
-            className={`border-b-2 px-4 py-3 text-xs font-medium transition-colors ${
-              tab === t.id
-                ? "border-accent/80 text-accent"
-                : "border-transparent text-white/35 hover:text-white/60"
-            }`}
-          >
-            {t.label}
-          </button>
-        ))}
-      </div>
-
-      <section className="mb-16 sm:mb-20 lg:mb-24">
-        <p className="mb-8 font-brand text-[9px] tracking-[0.15em] text-white/30">
-          אלופי השבוע
-        </p>
+      <section className="mb-12">
+        <h2 className="mb-6 text-sm font-medium text-white/60">שלושה ראשונים</h2>
         <LeaderboardPodium champion />
       </section>
 
       <section>
-        <div className="mb-6 flex items-end justify-between gap-4">
-          <h2 className="font-display text-lg font-bold text-white/90 sm:text-xl">כל המפעילים</h2>
-          <span className="font-brand text-[9px] text-white/30">מדורג 4+</span>
-        </div>
+        <h2 className="mb-6 text-sm font-medium text-white/60">כל המשתתפים</h2>
         <LeaderboardTable
           highlightId={CURRENT_USER.id}
           liveScores
@@ -65,10 +36,10 @@ export function LeaderboardPageContent() {
       </section>
 
       {!CURRENT_USER.isPremium && (
-        <div className="relative mt-16 min-h-[140px] sm:mt-20">
+        <div className="relative mt-12 min-h-[120px]">
           <PremiumGate
-            title="מעקב דירוג חי"
-            description="עדכוני דירוג בזמן אמת והתראות ירידה — גישת Warroom."
+            title="עדכוני דירוג בזמן אמת"
+            description="זמין במנוי פרימיום."
           >
             <RankingCard player={CURRENT_USER} highlight minimal />
           </PremiumGate>

@@ -5,6 +5,7 @@ import { ArenaHeroChallenge, ArenaPersonalPerformance, TournamentPanel } from "@
 import { LeaderboardPodium } from "@/components/arena/leaderboard-table";
 import { LEADERBOARD_PLAYERS, CURRENT_SEASON } from "@/config/arena-data";
 import { BrandLink } from "@/components/brand/brand-link";
+import { PageGuide } from "@/components/ui/page-guide";
 
 function ArenaSectionLabel({
   children,
@@ -23,7 +24,15 @@ function ArenaSectionLabel({
 
 export function ArenaPageContent() {
   return (
-    <div className="arena-page pb-8">
+    <div className="arena-page mx-auto max-w-4xl pb-8">
+      <header className="mb-10">
+        <h1 className="font-display text-2xl font-black text-white sm:text-3xl">הזירה</h1>
+        <PageGuide title="מה זה?">
+          כאן מתחרים מול אחרים. יש אתגר שבועי, רואים את הדירוג שלכם, ויכולים
+          להצטרף לטורניר. לא חובה — רק אם אתם רוצים תחרות.
+        </PageGuide>
+      </header>
+
       <ArenaHeroChallenge />
 
       <section className="mt-14 sm:mt-16 lg:mt-20">

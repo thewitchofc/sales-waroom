@@ -10,12 +10,21 @@ import { LeaderboardTable } from "@/components/arena/leaderboard-table";
 import { XpProgressBar } from "@/components/arena/ranking-card";
 import { RankTierBadge } from "@/components/arena/rank-tier-badge";
 import { PremiumGate } from "@/components/arena/premium-gate";
+import { PageGuide } from "@/components/ui/page-guide";
 
 export function SeasonPageContent() {
   const seasonStandings = LEADERBOARD_PLAYERS.slice(0, 8);
 
   return (
-    <div className="arena-page season-page pb-12">
+    <div className="arena-page season-page mx-auto max-w-4xl pb-12">
+      <header className="mb-8">
+        <h1 className="font-display text-2xl font-black text-white sm:text-3xl">עונה</h1>
+        <PageGuide title="מה זה?">
+          כל כמה חודשים יש &quot;עונה&quot; חדשה. צוברים נקודות, עולים בדרגות,
+          ורואים מי מוביל. למטה — ההתקדמות שלכם והדירוג הנוכחי.
+        </PageGuide>
+      </header>
+
       <SeasonHero />
 
       <section className="mt-16 sm:mt-20 lg:mt-24">

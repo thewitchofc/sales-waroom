@@ -1,15 +1,11 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { Waveform } from "@/components/ui/waveform";
-import { TacticalStatusChip } from "@/components/ui/tactical-signal";
-import { HudFrame } from "@/components/ui/hud-elements";
 import { LiveTranscript } from "@/components/product/live-transcript";
 import { ScoreMetersPanel } from "@/components/product/score-meters";
 import { AICoachPanel } from "@/components/product/ai-coach-panel";
 import { ConversationTimeline } from "@/components/product/conversation-timeline";
 import { ObjectionAnalysisPanel } from "@/components/product/objection-analysis-panel";
-import { FloatingActiveStats } from "@/components/product/active-users-bar";
 import {
   ClientPersonaBadge,
   PressureLevelBadge,
@@ -23,26 +19,45 @@ import { TIMELINE_EVENTS } from "@/components/product/demo-data";
 export function LiveCallInterface({
   compact = false,
   focusedWaveform = false,
+  simple = false,
 }: {
   compact?: boolean;
   focusedWaveform?: boolean;
+  simple?: boolean;
 }) {
   const contextDemo = useSimulationOptional();
   const localDemo = useLiveDemo();
   const demo = contextDemo ?? localDemo;
+  const isCompact = compact || simple;
+
+  if (simple) {
+    return (
+      <div className="border border-white/[0.06] bg-black/40">
+        <div className="flex items-center justify-between border-b border-white/[0.04] px-4 py-3 sm:px-5">
+          <div>
+            <p className="text-sm font-medium text-white">שיחת תרגול</p>
+            <p className="text-xs text-white/40">
+              {demo.persona?.title ?? "לקוח AI · עסקה לדוגמה"}
+            </p>
+          </div>
+          <p className="font-brand text-lg text-white/80">{demo.formatElapsed()}</p>
+        </div>
+        <div className="min-h-[320px] p-4 sm:p-5">
+          <p className="mb-3 text-xs text-white/35">תמלול השיחה</p>
+          <LiveTranscript
+            messages={demo.visibleMessages}
+            isThinking={demo.isThinking}
+            activeId={demo.activeId}
+          />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="relative">
-      {!contextDemo && <FloatingActiveStats />}
-
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: [0.21, 0.47, 0.32, 0.98] }}
-        className="glass-premium relative overflow-hidden"
-      >
-        <HudFrame className="relative bg-black/90 p-5 md:p-6">
-          {/* Call header */}
+      <div className="glass-premium relative overflow-hidden">
+        <div className="relative bg-black/90 p-5 md:p-6">
           <div className="mb-5 flex flex-wrap items-center justify-between gap-4 border-b border-white/[0.04] pb-4">
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2 border border-red-500/15 bg-red-500/5 px-3 py-1.5">
@@ -51,12 +66,9 @@ export function LiveCallInterface({
               </div>
               <div>
                 <div className="text-sm font-semibold text-white">
-                  {demo.persona?.title ?? "סימולציה פסיכולוגית · עסקה גבוהה"}
+                  {demo.persona?.title ?? "סימולציה · עסקה גבוהה"}
                 </div>
                 <div className="mt-1 flex flex-wrap items-center gap-2">
-                  <span className="font-brand text-[10px] text-muted-foreground">
-                    סשן #2847 · FIELD TRAINING
-                  </span>
                   {demo.behaviorMode && <BehaviorModeBadge mode={demo.behaviorMode} />}
                 </div>
               </div>
@@ -65,25 +77,21 @@ export function LiveCallInterface({
               {demo.persona && <ClientPersonaBadge persona={demo.persona} />}
               {demo.pressureLevel && <PressureLevelBadge level={demo.pressureLevel} />}
               <div className="text-start">
-                <motion.div
-                  key={demo.formatElapsed()}
-                  className="font-brand text-2xl font-bold text-white"
-                >
+                <div className="font-brand text-2xl font-bold text-white">
                   {demo.formatElapsed()}
-                </motion.div>
-                <div className="text-[10px] text-muted-foreground">משך שיחה</div>
+                </div>
+                <div className="text-[10px] text-white/35">משך שיחה</div>
               </div>
               {focusedWaveform ? (
                 <div className="flex flex-col items-center gap-1 border border-white/8 bg-black/50 px-2 py-1.5">
                   <span
                     className={`size-2 rounded-full ${
-                      demo.waveformActive ? "bg-accent pressure-pulse" : "bg-white/25"
+                      demo.waveformActive ? "bg-accent/70" : "bg-white/25"
                     }`}
                   />
-                  <span className="font-brand text-[7px] text-white/40">אות</span>
                 </div>
               ) : (
-                <div className="flex size-12 items-center justify-center border border-accent/20 bg-accent/5">
+                <div className="flex size-12 items-center justify-center border border-white/[0.08]">
                   <Waveform
                     bars={8}
                     intense={demo.isSpeaking || demo.isThinking}
@@ -95,60 +103,44 @@ export function LiveCallInterface({
             </div>
           </div>
 
-          {demo.persona && (
-            <div className="mb-5 border border-white/5 bg-black/40 px-4 py-3">
+          {demo.persona && !isCompact && (
+            <div className="mb-5 border border-white/[0.05] bg-black/40 px-4 py-3">
               <PersonaTraits persona={demo.persona} />
             </div>
           )}
 
           <div
             className={
-              compact
+              isCompact
                 ? "space-y-5"
                 : "grid gap-5 lg:grid-cols-5 lg:items-stretch lg:gap-6"
             }
           >
             <div
               className={
-                compact ? "" : "flex flex-col gap-5 lg:col-span-3 lg:min-h-[520px]"
+                isCompact ? "" : "flex flex-col gap-5 lg:col-span-3 lg:min-h-[520px]"
               }
             >
-              <div
-                className={
-                  focusedWaveform
-                    ? "demo-waveform-hero shrink-0 border border-white/[0.06] bg-black/50 p-5 md:p-6"
-                    : "shrink-0 border border-white/5 bg-black/50 p-4"
-                }
-              >
-                <div className="mb-3 flex items-center justify-between">
-                  <span className="font-brand text-[9px] text-white/40">
-                    {focusedWaveform ? "ניתוח קול · AI" : "טון · סמכות"}
-                  </span>
-                  <span className="font-brand text-[9px] text-white/35">
-                    {focusedWaveform ? "ניתוח חי" : "מיקרופון פעיל"}
-                  </span>
-                </div>
-                <Waveform
-                  bars={focusedWaveform ? 64 : compact ? 40 : 56}
-                  intense={demo.isSpeaking || demo.isThinking}
-                  active={demo.waveformActive}
+              {!isCompact && (
+                <div
                   className={
-                    focusedWaveform ? "h-24 md:h-32 lg:h-36" : "h-16 md:h-20"
+                    focusedWaveform
+                      ? "demo-waveform-hero shrink-0 border border-white/[0.06] bg-black/50 p-5 md:p-6"
+                      : "shrink-0 border border-white/[0.05] bg-black/50 p-4"
                   }
-                />
-                {focusedWaveform && (
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    <TacticalStatusChip label="קול מזוהה" active={demo.waveformActive} />
-                    <TacticalStatusChip
-                      label="לחץ מנוטר"
-                      active={demo.isSpeaking}
-                      variant="danger"
-                    />
-                  </div>
-                )}
-              </div>
+                >
+                  <Waveform
+                    bars={focusedWaveform ? 64 : 56}
+                    intense={demo.isSpeaking || demo.isThinking}
+                    active={demo.waveformActive}
+                    className={
+                      focusedWaveform ? "h-24 md:h-32 lg:h-36" : "h-16 md:h-20"
+                    }
+                  />
+                </div>
+              )}
 
-              <div className="flex min-h-[280px] flex-1 flex-col border border-white/5 bg-black/50 p-4 sm:min-h-[320px]">
+              <div className="flex min-h-[280px] flex-1 flex-col border border-white/[0.05] bg-black/50 p-4 sm:min-h-[320px]">
                 <LiveTranscript
                   messages={demo.visibleMessages}
                   isThinking={demo.isThinking}
@@ -157,11 +149,11 @@ export function LiveCallInterface({
               </div>
             </div>
 
-            {!compact && (
+            {!isCompact && (
               <div className="flex flex-col gap-5 lg:col-span-2 lg:min-h-[520px]">
                 <ScoreMetersPanel scores={demo.scores} behaviorMode={demo.behaviorMode ?? "leading"} />
                 <ObjectionAnalysisPanel live />
-                <div className="flex min-h-[180px] flex-1 flex-col border border-white/5 bg-black/40 p-4">
+                <div className="flex min-h-[180px] flex-1 flex-col border border-white/[0.05] bg-black/40 p-4">
                   <ConversationTimeline
                     events={TIMELINE_EVENTS}
                     activeIndex={demo.timelineIndex}
@@ -171,17 +163,13 @@ export function LiveCallInterface({
             )}
           </div>
 
-          {!compact && demo.visibleFeedback.length > 0 && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              className="mt-5 border-t border-white/5 pt-5"
-            >
+          {!isCompact && demo.visibleFeedback.length > 0 && (
+            <div className="mt-5 border-t border-white/[0.05] pt-5">
               <AICoachPanel feedback={demo.visibleFeedback} />
-            </motion.div>
+            </div>
           )}
-        </HudFrame>
-      </motion.div>
+        </div>
+      </div>
     </div>
   );
 }

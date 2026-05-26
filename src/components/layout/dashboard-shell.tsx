@@ -151,13 +151,10 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
               <span className="block h-px w-5 bg-white" />
               <span className="block h-px w-5 bg-white" />
             </button>
-            <span className="size-2 rounded-full bg-accent/60" />
-            <span className="font-brand text-[9px] text-white/45 sm:text-[10px]">
-              {isArena ? "הזירה" : "מרכז פיקוד"}
-            </span>
+            <span className="text-xs text-white/40">Sales Waroom</span>
           </div>
           <div className="flex items-center gap-3 sm:gap-4">
-            <span className="hidden text-xs text-muted-foreground md:block">סשן #2847</span>
+            <span className="hidden text-xs text-white/35 md:block">דנה כהן</span>
             <Link
               href="/"
               className="interactive-surface border border-white/10 px-3 py-1.5 text-xs text-muted-foreground hover:border-accent/30 hover:text-white"

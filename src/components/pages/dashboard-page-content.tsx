@@ -1,45 +1,36 @@
 "use client";
 
 import { SimulationProvider } from "@/components/product/simulation-provider";
-import { SimulationStatusBar } from "@/components/product/simulation-status-bar";
 import { LiveCallInterface } from "@/components/product/live-call-interface";
-import { PlatformCommandPanel } from "@/components/product/platform-command-panel";
 import { CoachingInsightsPanel } from "@/components/product/coaching-insights-panel";
-import { TeamPerformanceDashboard } from "@/components/product/team-performance-dashboard";
 import { useSimulation } from "@/components/product/simulation-provider";
+import { PageGuide } from "@/components/ui/page-guide";
 
 function DashboardContent() {
   const demo = useSimulation();
 
   return (
-    <div className="space-y-10 sm:space-y-12">
+    <div className="mx-auto max-w-4xl space-y-10">
       <header>
-        <h1 className="font-display text-2xl font-black text-white sm:text-3xl md:text-4xl">
-          מרכז פיקוד
+        <h1 className="font-display text-2xl font-black text-white sm:text-3xl">
+          תרגול שיחה
         </h1>
-        <p className="mt-3 text-sm text-white/45">
-          סימולציית שיחה חיה · ניתוח AI · מאמן שטח
-        </p>
+        <PageGuide title="מה קורה כאן?">
+          ה-AI משחק לקוח. אתם מדברים איתו כמו בשיחת מכירה אמיתית. למטה רואים
+          את התמלול — ומימין (במסך רחב) טיפים מהמאמן.
+        </PageGuide>
       </header>
 
       <section id="simulations">
-        <LiveCallInterface />
+        <LiveCallInterface compact simple />
       </section>
 
-      <SimulationStatusBar minimalTelemetry />
-
-      <div className="grid gap-8 xl:grid-cols-3">
-        <div className="xl:col-span-2">
-          <PlatformCommandPanel />
-        </div>
-        <div id="coaching" className="panel-surface border border-white/[0.06] p-4 sm:p-5">
+      {demo.visibleInsights.length > 0 && (
+        <section id="coaching" className="border border-white/[0.06] p-4 sm:p-5">
+          <h2 className="mb-4 text-sm font-medium text-white/70">משוב מהמאמן</h2>
           <CoachingInsightsPanel insights={demo.visibleInsights} />
-        </div>
-      </div>
-
-      <section id="team">
-        <TeamPerformanceDashboard />
-      </section>
+        </section>
+      )}
     </div>
   );
 }
