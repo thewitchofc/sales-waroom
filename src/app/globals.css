@@ -97,8 +97,7 @@ body {
 .cinematic-depth {
   box-shadow:
     0 0 0 1px rgba(255, 255, 255, 0.04),
-    0 40px 120px rgba(0, 0, 0, 0.8),
-    0 0 80px rgba(212, 175, 85, 0.05);
+    0 24px 64px rgba(0, 0, 0, 0.5);
 }
 
 .hero-preview-shell {
@@ -231,13 +230,7 @@ body {
 }
 
 .pricing-tier-sweep {
-  background: linear-gradient(
-    105deg,
-    transparent 35%,
-    rgba(212, 175, 85, 0.08) 50%,
-    transparent 65%
-  );
-  animation: pricing-sweep 5s ease-in-out infinite;
+  display: none;
 }
 
 @keyframes pricing-sweep {
@@ -257,15 +250,8 @@ body {
   position: absolute;
   inset: -1px;
   z-index: -1;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(212, 175, 85, 0.35),
-    transparent
-  );
-  background-size: 200% 100%;
-  animation: pricing-border-flow 3s linear infinite;
-  opacity: 0.6;
+  border: 1px solid rgba(212, 175, 85, 0.15);
+  opacity: 1;
 }
 
 @keyframes pricing-border-flow {
@@ -284,9 +270,7 @@ body {
 }
 
 .analytics-radar-glow {
-  background:
-    radial-gradient(ellipse 60% 40% at 50% 0%, rgba(212, 175, 85, 0.06) 0%, transparent 70%),
-    radial-gradient(ellipse 40% 30% at 20% 80%, rgba(239, 68, 68, 0.04) 0%, transparent 65%);
+  background: radial-gradient(ellipse 70% 50% at 50% 0%, rgba(212, 175, 85, 0.03) 0%, transparent 70%);
 }
 
 .analytics-replay-panel {
@@ -312,14 +296,7 @@ body {
 }
 
 .analytics-classified-scan {
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 3px,
-    rgba(239, 68, 68, 0.03) 3px,
-    rgba(239, 68, 68, 0.03) 6px
-  );
-  animation: scan-drift 6s linear infinite;
+  display: none;
 }
 
 .analytics-flow-step {
@@ -406,13 +383,7 @@ body {
 }
 
 .platform-module-sheen {
-  background: linear-gradient(
-    115deg,
-    transparent 30%,
-    rgba(212, 175, 85, 0.06) 50%,
-    transparent 70%
-  );
-  animation: platform-sheen 8s ease-in-out infinite;
+  display: none;
 }
 
 @keyframes platform-sheen {
@@ -440,25 +411,11 @@ body {
 .demo-waveform-hero {
   position: relative;
   isolation: isolate;
-  box-shadow:
-    0 0 0 1px rgba(212, 175, 85, 0.12),
-    0 24px 64px rgba(0, 0, 0, 0.5),
-    0 0 48px rgba(212, 175, 85, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
 .demo-waveform-hero::before {
-  content: "";
-  position: absolute;
-  inset: -30% -10%;
-  z-index: -1;
-  background: radial-gradient(
-    ellipse 70% 60% at 50% 50%,
-    rgba(212, 175, 85, 0.1) 0%,
-    transparent 70%
-  );
-  filter: blur(32px);
-  pointer-events: none;
+  display: none;
 }
 
 @keyframes pressure-pulse {
@@ -472,7 +429,7 @@ body {
 }
 
 .pressure-pulse {
-  animation: pressure-pulse 2s ease-in-out infinite;
+  opacity: 0.75;
 }
 
 ::selection {
@@ -481,19 +438,10 @@ body {
 }
 
 .gradient-text {
-  background: linear-gradient(
-    120deg,
-    #ffffff 0%,
-    #d4af55 35%,
-    #c9a962 55%,
-    #7a8fb5 80%,
-    #ffffff 100%
-  );
-  background-size: 200% auto;
+  background: linear-gradient(120deg, #ffffff 0%, #d4af55 50%, #ffffff 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: shimmer 10s ease-in-out infinite;
 }
 
 .gradient-text-danger {
@@ -530,21 +478,11 @@ body {
 }
 
 .glass-premium {
-  background: linear-gradient(
-    160deg,
-    rgba(255, 255, 255, 0.08) 0%,
-    rgba(255, 255, 255, 0.02) 30%,
-    rgba(212, 175, 85, 0.03) 100%
-  );
-  backdrop-filter: blur(40px) saturate(160%);
-  -webkit-backdrop-filter: blur(40px) saturate(160%);
-  border: 1px solid rgba(212, 175, 85, 0.12);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.1),
-    inset 0 -20px 40px rgba(0, 0, 0, 0.3),
-    0 0 0 1px rgba(255, 255, 255, 0.03),
-    0 32px 100px rgba(0, 0, 0, 0.7),
-    0 0 60px rgba(212, 175, 85, 0.04);
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
 .glass-reflection::after {
@@ -563,7 +501,7 @@ body {
 }
 
 .glass-shimmer::after {
-  animation: glass-sweep 7s ease-in-out infinite;
+  display: none;
 }
 
 @keyframes glass-sweep {
@@ -590,10 +528,7 @@ body {
 }
 
 .interactive-surface:hover {
-  transform: translateY(-1px);
-  box-shadow:
-    0 12px 40px rgba(0, 0, 0, 0.45),
-    0 0 24px rgba(212, 175, 85, 0.08);
+  border-color: rgba(255, 255, 255, 0.08);
 }
 
 .depth-elevated {
@@ -634,27 +569,7 @@ body {
 }
 
 .metallic-border::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1px;
-  background: linear-gradient(
-    135deg,
-    rgba(212, 175, 85, 0.55),
-    rgba(255, 255, 255, 0.08) 40%,
-    rgba(122, 143, 181, 0.35) 70%,
-    rgba(212, 175, 85, 0.2)
-  );
-  -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
+  display: none;
 }
 
 .command-grid {
@@ -692,11 +607,7 @@ body {
 }
 
 .hud-corner {
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  border-color: rgba(212, 175, 85, 0.4);
-  border-style: solid;
+  display: none;
 }
 
 .hud-corner-tl {
@@ -724,16 +635,11 @@ body {
 }
 
 .glow-accent {
-  box-shadow:
-    0 0 20px rgba(212, 175, 85, 0.15),
-    0 0 60px rgba(212, 175, 85, 0.08);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
 .glow-accent-strong {
-  box-shadow:
-    0 0 30px rgba(212, 175, 85, 0.25),
-    0 0 80px rgba(212, 175, 85, 0.12),
-    inset 0 0 30px rgba(212, 175, 85, 0.05);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 .section-divider {
@@ -756,14 +662,7 @@ body {
 }
 
 .ai-scan-line {
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    rgba(212, 175, 85, 0.03) 2px,
-    rgba(212, 175, 85, 0.03) 4px
-  );
-  animation: scan-drift 8s linear infinite;
+  display: none;
 }
 
 @keyframes scan-drift {
@@ -780,10 +679,7 @@ body {
 }
 
 .os-panel-glow:hover {
-  box-shadow:
-    0 0 30px rgba(212, 175, 85, 0.12),
-    0 0 60px rgba(212, 175, 85, 0.06),
-    inset 0 0 20px rgba(212, 175, 85, 0.03);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 :root {
@@ -873,14 +769,7 @@ body {
 }
 
 .arena-scan {
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    rgba(212, 175, 85, 0.03) 2px,
-    rgba(212, 175, 85, 0.03) 4px
-  );
-  animation: arena-scan-move 8s linear infinite;
+  display: none;
 }
 
 @keyframes arena-scan-move {
@@ -951,6 +840,94 @@ body {
 
 .leaderboard-table-row:hover {
   background: rgba(255, 255, 255, 0.015);
+}
+
+/* ── Season command center ── */
+.season-page {
+  position: relative;
+}
+
+.season-hero {
+  padding: 1.75rem 0 0;
+}
+
+@media (min-width: 640px) {
+  .season-hero {
+    padding-top: 2rem;
+  }
+}
+
+.season-hero-rank-panel {
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: linear-gradient(
+    165deg,
+    rgba(255, 255, 255, 0.03) 0%,
+    rgba(0, 0, 0, 0.35) 40%,
+    rgba(0, 0, 0, 0.55) 100%
+  );
+  padding: 1.5rem;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 24px 48px rgba(0, 0, 0, 0.35);
+}
+
+@media (min-width: 640px) {
+  .season-hero-rank-panel {
+    padding: 1.75rem 2rem;
+  }
+}
+
+.season-ladder-segment-complete {
+  background: rgba(212, 175, 85, 0.35);
+}
+
+.season-ladder-segment-active {
+  background: linear-gradient(90deg, rgba(212, 175, 85, 0.5), rgba(212, 175, 85, 0.85));
+}
+
+.season-ladder-segment-future {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.season-panel {
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, rgba(0, 0, 0, 0.25) 100%);
+  padding: 1.25rem 1.5rem;
+}
+
+.season-panel-accent {
+  border-color: rgba(212, 175, 85, 0.08);
+  background: linear-gradient(
+    165deg,
+    rgba(212, 175, 85, 0.04) 0%,
+    rgba(0, 0, 0, 0.3) 100%
+  );
+}
+
+.season-tier-card {
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  background: rgba(0, 0, 0, 0.2);
+  padding: 1.25rem 1rem;
+  transition: border-color 0.25s ease, background 0.25s ease;
+}
+
+.season-tier-card:hover {
+  border-color: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.season-tier-card-active {
+  border-color: rgba(212, 175, 85, 0.15);
+  background: linear-gradient(
+    180deg,
+    rgba(212, 175, 85, 0.05) 0%,
+    rgba(0, 0, 0, 0.35) 100%
+  );
+}
+
+.season-tier-sigil {
+  opacity: 0.85;
+  line-height: 1;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { getTierConfig, type RankTier } from "@/config/arena-data";
 
@@ -33,7 +32,6 @@ export function RankTierBadge({
         size === "md" && "px-2.5 py-1 text-[9px]",
         size === "lg" && "px-3 py-1.5 text-[10px]"
       )}
-      style={{ boxShadow: `0 0 12px ${config.glow}` }}
     >
       {config.labelHe}
     </span>
@@ -42,32 +40,26 @@ export function RankTierBadge({
 
 export function RankMovement({ delta }: { delta: number }) {
   if (delta === 0) {
-    return <span className="font-brand text-[10px] text-muted-foreground">-</span>;
+    return <span className="font-brand text-[10px] text-white/30">-</span>;
   }
   const up = delta > 0;
   return (
-    <motion.span
-      initial={{ opacity: 0, y: up ? 4 : -4 }}
-      animate={{ opacity: 1, y: 0 }}
+    <span
       className={cn(
-        "font-brand text-[10px] font-bold",
-        up ? "text-green-400" : "text-red-400"
+        "font-brand text-[10px]",
+        up ? "text-white/60" : "text-red-400/80"
       )}
     >
       {up ? "▲" : "▼"} {Math.abs(delta)}
-    </motion.span>
+    </span>
   );
 }
 
 export function LiveIndicator({ label = "חי" }: { label?: string }) {
   return (
     <span className="inline-flex items-center gap-1.5">
-      <motion.span
-        className="size-1.5 rounded-full bg-red-500"
-        animate={{ opacity: [1, 0.2, 1], scale: [1, 1.4, 1] }}
-        transition={{ duration: 1.2, repeat: Infinity }}
-      />
-      <span className="font-brand text-[9px] text-red-400">{label}</span>
+      <span className="size-1.5 rounded-full bg-red-500/70" />
+      <span className="font-brand text-[9px] text-red-400/70">{label}</span>
     </span>
   );
 }

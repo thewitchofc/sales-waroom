@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { getXpProgress, getTierForXp, getTierConfig, type ArenaPlayer } from "@/config/arena-data";
 import { RankTierBadge } from "@/components/arena/rank-tier-badge";
@@ -23,22 +22,16 @@ export function XpProgressBar({
         <div className="mb-2 flex items-center justify-between">
           <RankTierBadge tier={tierCfg.id} size="sm" plain={subtle} />
           {!subtle && (
-            <span className="font-brand text-[10px] text-muted-foreground">
+            <span className="font-brand text-[10px] text-white/35">
               {progress.current.toLocaleString()} / {progress.next.toLocaleString()} XP
             </span>
           )}
         </div>
       )}
-      <div className="relative h-1.5 overflow-hidden bg-white/5">
-        <motion.div
-          className={cn(
-            "h-full bg-gradient-to-l from-accent/80 to-accent/40",
-            !subtle && "via-accent-secondary"
-          )}
-          initial={{ width: 0 }}
-          animate={{ width: `${progress.pct}%` }}
-          transition={{ duration: 1.2, ease: [0.21, 0.47, 0.32, 0.98] }}
-          style={subtle ? undefined : { boxShadow: `0 0 16px ${tierCfg.glow}` }}
+      <div className="relative h-1 overflow-hidden bg-white/5">
+        <div
+          className="h-full bg-accent/50"
+          style={{ width: `${progress.pct}%` }}
         />
       </div>
     </div>
@@ -64,12 +57,9 @@ export function RankingCard({
   const isPodium = podium !== undefined;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: isChampion ? 12 : 8 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: isChampion ? 0.05 : 0.12 }}
+    <div
       className={cn(
-        "relative overflow-hidden transition-all",
+        "relative overflow-hidden",
         isChampion && "leaderboard-podium-first px-6 py-8 sm:px-8 sm:py-10",
         podium === 2 && "leaderboard-podium-alt px-5 py-5 sm:py-6",
         podium === 3 && "leaderboard-podium-alt px-5 py-5 sm:py-6",
@@ -78,28 +68,23 @@ export function RankingCard({
             "p-5 sm:p-6",
             minimal
               ? highlight
-                ? "border border-accent/15 bg-accent/[0.02]"
-                : "border border-white/5 bg-black/30"
+                ? "border border-accent/10 bg-accent/[0.02]"
+                : "border border-white/[0.05] bg-black/25"
               : cn(
-                  "arena-rank-card border",
+                  "border",
                   highlight
-                    ? "border-accent/40 bg-accent/5 glow-accent"
-                    : cn(tierCfg.border, "bg-black/60 hover:border-white/20")
+                    ? "border-accent/15 bg-accent/[0.02]"
+                    : cn(tierCfg.border, "border-white/[0.05] bg-black/30")
                 )
           )
       )}
-      style={!isPodium && !minimal && !highlight ? { boxShadow: `0 0 20px ${tierCfg.glow}` } : undefined}
     >
-      {!isPodium && !minimal && (
-        <div className="arena-scan pointer-events-none absolute inset-0 opacity-20" />
-      )}
-
       {isChampion && (
         <div
           className="pointer-events-none absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(212,175,85,0.1) 0%, transparent 70%)",
+              "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(212,175,85,0.06) 0%, transparent 70%)",
           }}
         />
       )}
@@ -110,14 +95,10 @@ export function RankingCard({
             className={cn(
               "flex shrink-0 items-center justify-center font-display font-black",
               isChampion
-                ? "size-16 border border-accent/25 text-3xl text-accent sm:size-20 sm:text-4xl"
+                ? "size-16 border border-accent/20 text-3xl text-accent sm:size-20 sm:text-4xl"
                 : isPodium
-                  ? "size-11 border border-white/10 text-lg text-white/70"
-                  : cn(
-                      "size-14 border-2 text-2xl",
-                      tierCfg.border,
-                      tierCfg.color
-                    )
+                  ? "size-11 border border-white/[0.08] text-lg text-white/70"
+                  : cn("size-14 border text-2xl", tierCfg.border, tierCfg.color)
             )}
           >
             #{displayRank}
@@ -165,6 +146,6 @@ export function RankingCard({
           </span>
         </div>
       )}
-    </motion.div>
+    </div>
   );
 }

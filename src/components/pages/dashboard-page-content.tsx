@@ -6,51 +6,40 @@ import { LiveCallInterface } from "@/components/product/live-call-interface";
 import { PlatformCommandPanel } from "@/components/product/platform-command-panel";
 import { CoachingInsightsPanel } from "@/components/product/coaching-insights-panel";
 import { TeamPerformanceDashboard } from "@/components/product/team-performance-dashboard";
-import { ActiveUsersBar } from "@/components/product/active-users-bar";
 import { useSimulation } from "@/components/product/simulation-provider";
-import { motion } from "framer-motion";
 
 function DashboardContent() {
   const demo = useSimulation();
 
   return (
-    <div className="space-y-6 sm:space-y-8">
-      <div className="space-y-4">
-        <div>
-          <h1 className="font-display text-2xl font-black text-white sm:text-3xl md:text-4xl">
-            מרכז פיקוד
-          </h1>
-          <p className="mt-2 text-sm text-muted-foreground">
-            שליטה בפריים · סמכות · סימולציית לחץ · מאמן שטח
-          </p>
-        </div>
-        <ActiveUsersBar />
-      </div>
+    <div className="space-y-10 sm:space-y-12">
+      <header>
+        <h1 className="font-display text-2xl font-black text-white sm:text-3xl md:text-4xl">
+          מרכז פיקוד
+        </h1>
+        <p className="mt-3 text-sm text-white/45">
+          סימולציית שיחה חיה · ניתוח AI · מאמן שטח
+        </p>
+      </header>
 
-      <SimulationStatusBar />
-
-      <section id="simulations" className="depth-elevated">
+      <section id="simulations">
         <LiveCallInterface />
       </section>
 
-      <div className="grid gap-6 xl:grid-cols-3">
+      <SimulationStatusBar minimalTelemetry />
+
+      <div className="grid gap-8 xl:grid-cols-3">
         <div className="xl:col-span-2">
           <PlatformCommandPanel />
         </div>
-        <div id="coaching" className="glass-premium glass-shimmer metallic-border os-panel-glow p-4 sm:p-5">
+        <div id="coaching" className="panel-surface border border-white/[0.06] p-4 sm:p-5">
           <CoachingInsightsPanel insights={demo.visibleInsights} />
         </div>
       </div>
 
-      <motion.section
-        id="team"
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-40px" }}
-        transition={{ duration: 0.6 }}
-      >
+      <section id="team">
         <TeamPerformanceDashboard />
-      </motion.section>
+      </section>
     </div>
   );
 }

@@ -38,33 +38,17 @@ export function LiveCallInterface({
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, ease: [0.21, 0.47, 0.32, 0.98] }}
-        className="glass-premium glass-reflection glass-shimmer metallic-border glow-accent-strong os-panel-glow relative overflow-hidden"
+        transition={{ duration: 0.6, ease: [0.21, 0.47, 0.32, 0.98] }}
+        className="glass-premium relative overflow-hidden"
       >
-        <div className="ai-scan-line pointer-events-none absolute inset-0 opacity-10" />
-
-        <HudFrame label="ממשק שיחה חיה" className="relative bg-black/90 p-5 md:p-6">
+        <HudFrame className="relative bg-black/90 p-5 md:p-6">
           {/* Call header */}
-          <div className="mb-5 flex flex-wrap items-center justify-between gap-4 border-b border-white/5 pb-4">
+          <div className="mb-5 flex flex-wrap items-center justify-between gap-4 border-b border-white/[0.04] pb-4">
             <div className="flex items-center gap-4">
-              <motion.div
-                className="flex items-center gap-2 border border-red-500/30 bg-red-500/10 px-3 py-1.5"
-                animate={{
-                  boxShadow: [
-                    "0 0 0 rgba(239,68,68,0)",
-                    "0 0 20px rgba(239,68,68,0.2)",
-                    "0 0 0 rgba(239,68,68,0)",
-                  ],
-                }}
-                transition={{ duration: 2, repeat: Infinity }}
-              >
-                <motion.span
-                  className="size-2 rounded-full bg-red-500"
-                  animate={{ opacity: [1, 0.3, 1] }}
-                  transition={{ duration: 1, repeat: Infinity }}
-                />
-                <span className="font-brand text-[10px] text-red-400">חי</span>
-              </motion.div>
+              <div className="flex items-center gap-2 border border-red-500/15 bg-red-500/5 px-3 py-1.5">
+                <span className="size-2 rounded-full bg-red-500/70" />
+                <span className="font-brand text-[10px] text-red-400/80">חי</span>
+              </div>
               <div>
                 <div className="text-sm font-semibold text-white">
                   {demo.persona?.title ?? "סימולציה פסיכולוגית · עסקה גבוהה"}
@@ -132,7 +116,7 @@ export function LiveCallInterface({
               <div
                 className={
                   focusedWaveform
-                    ? "demo-waveform-hero shrink-0 border border-white/8 bg-black/60 p-5 md:p-6"
+                    ? "demo-waveform-hero shrink-0 border border-white/[0.06] bg-black/50 p-5 md:p-6"
                     : "shrink-0 border border-white/5 bg-black/50 p-4"
                 }
               >
@@ -140,13 +124,9 @@ export function LiveCallInterface({
                   <span className="font-brand text-[9px] text-white/40">
                     {focusedWaveform ? "ניתוח קול · AI" : "טון · סמכות"}
                   </span>
-                  <motion.span
-                    className="font-brand text-[9px] text-green-400"
-                    animate={{ opacity: [1, 0.4, 1] }}
-                    transition={{ duration: 1.5, repeat: Infinity }}
-                  >
-                    ● {focusedWaveform ? "ניתוח חי" : "מיקרופון פעיל"}
-                  </motion.span>
+                  <span className="font-brand text-[9px] text-white/35">
+                    {focusedWaveform ? "ניתוח חי" : "מיקרופון פעיל"}
+                  </span>
                 </div>
                 <Waveform
                   bars={focusedWaveform ? 64 : compact ? 40 : 56}

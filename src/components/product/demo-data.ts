@@ -310,7 +310,7 @@ export const BEHAVIOR_LABELS: Record<
   BehaviorMode,
   { label: string; labelHe: string; color: string }
 > = {
-  leading: { label: "מוביל", labelHe: "מוביל", color: "text-green-400" },
-  neutral: { label: "ניטרלי", labelHe: "ניטרלי", color: "text-accent" },
-  reactive: { label: "ריאקטיבי", labelHe: "ריאקטיבי", color: "text-red-400" },
+  leading: { label: "מוביל", labelHe: "מוביל", color: "text-white/70" },
+  neutral: { label: "ניטרלי", labelHe: "ניטרלי", color: "text-accent/80" },
+  reactive: { label: "ריאקטיבי", labelHe: "ריאקטיבי", color: "text-red-400/80" },
 };

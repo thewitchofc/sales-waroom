@@ -71,12 +71,35 @@ export function TournamentCountdown({
   target,
   label = "הטורניר מתחיל",
   minimal = false,
+  atmospheric = false,
 }: {
   target: Date;
   label?: string;
   minimal?: boolean;
+  atmospheric?: boolean;
 }) {
   const remaining = useCountdown(target);
+
+  if (atmospheric) {
+    return (
+      <div>
+        <p className="font-brand text-[9px] tracking-[0.1em] text-white/30">{label}</p>
+        <motion.p
+          key={formatCountdown(remaining, true)}
+          initial={{ opacity: 0.7 }}
+          animate={{ opacity: 1 }}
+          className="mt-2 font-display text-3xl font-black tabular-nums tracking-tight text-white sm:text-4xl"
+        >
+          {remaining.expired ? "התחיל" : formatCountdown(remaining, true)}
+        </motion.p>
+        {!remaining.expired && (
+          <p className="mt-1.5 font-brand text-[9px] text-white/25">
+            {formatCountdown(remaining)}
+          </p>
+        )}
+      </div>
+    );
+  }
 
   if (minimal) {
     return (

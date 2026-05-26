@@ -1,107 +1,97 @@
 "use client";
 
-import { motion } from "framer-motion";
 import {
-  CURRENT_SEASON,
-  RANK_TIERS,
   LEADERBOARD_PLAYERS,
   CURRENT_USER,
+  CURRENT_SEASON,
 } from "@/config/arena-data";
-import { SeasonBanner, TournamentCountdown } from "@/components/arena/season-banner";
+import { SeasonHero, SeasonTierGrid } from "@/components/arena/season-hero";
 import { LeaderboardTable } from "@/components/arena/leaderboard-table";
-import { RankTierBadge } from "@/components/arena/rank-tier-badge";
 import { XpProgressBar } from "@/components/arena/ranking-card";
-import { LIVE_TOURNAMENT } from "@/config/arena-data";
+import { RankTierBadge } from "@/components/arena/rank-tier-badge";
 import { PremiumGate } from "@/components/arena/premium-gate";
-import { BrandLogoLink } from "@/components/brand/brand-logo";
 
 export function SeasonPageContent() {
   const seasonStandings = LEADERBOARD_PLAYERS.slice(0, 8);
 
   return (
-    <div className="space-y-6 sm:space-y-8">
-      <div className="flex flex-wrap items-start justify-between gap-4">
-        <div className="flex items-start gap-4">
-          <BrandLogoLink href="/" variant="arena" hoverGlow className="mt-1 hidden md:inline-flex" />
-          <div>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="mb-2 font-brand text-[10px] tracking-[0.3em] text-red-400"
-            >
-              SEASON {CURRENT_SEASON.id}
-            </motion.div>
-            <h1 className="font-display text-3xl font-black text-white sm:text-4xl md:text-5xl">
-              {CURRENT_SEASON.nameHe}
-            </h1>
-            <p className="mt-2 text-sm text-muted-foreground">{CURRENT_SEASON.tagline}</p>
-          </div>
-        </div>
-      </div>
+    <div className="arena-page season-page pb-12">
+      <SeasonHero />
 
-      <SeasonBanner />
-
-      <div className="grid gap-6 lg:grid-cols-3">
-        <div className="lg:col-span-2">
-          <div className="mb-4 font-brand text-[10px] text-accent">דירוג העונה</div>
-          <LeaderboardTable players={seasonStandings} highlightId={CURRENT_USER.id} />
-        </div>
-
-        <div className="space-y-5">
-          <TournamentCountdown
-            target={LIVE_TOURNAMENT.startsAt}
-            label="סיבוב אליפות"
-          />
-
-          <div className="border border-white/5 bg-black/60 p-5">
-            <div className="mb-4 font-brand text-[10px] text-accent">ההתקדמות שלך בעונה</div>
-            <XpProgressBar xp={CURRENT_USER.xp} />
-            <div className="mt-4 flex items-center justify-between">
-              <RankTierBadge tier={CURRENT_USER.tier} />
-              <span className="font-brand text-sm text-white">דירוג #{CURRENT_USER.rank}</span>
-            </div>
-          </div>
-
-          <div className="border border-accent/20 bg-accent/5 p-5">
-            <div className="mb-3 font-brand text-[10px] text-accent">פרסי העונה</div>
-            <ul className="space-y-2">
-              {CURRENT_SEASON.rewards.map((reward) => (
-                <li key={reward} className="flex items-start gap-2 text-sm text-white/75">
-                  <span className="text-accent">◆</span>
-                  {reward}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div>
-        <div className="mb-4 font-brand text-[10px] text-muted-foreground">דרגות דירוג</div>
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
-          {RANK_TIERS.map((tier, i) => (
-            <motion.div
-              key={tier.id}
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.06 }}
-              className={`arena-rank-card border p-4 ${tier.border}`}
-              style={{ boxShadow: `0 0 16px ${tier.glow}` }}
-            >
-              <RankTierBadge tier={tier.id} size="md" />
-              <div className="mt-3 font-brand text-[10px] text-muted-foreground">
-                {tier.minXp.toLocaleString()} עד {tier.maxXp === 99999 ? "∞" : tier.maxXp.toLocaleString()} XP
+      <section className="mt-16 sm:mt-20 lg:mt-24">
+        <div className="grid gap-8 lg:grid-cols-12 lg:gap-10">
+          <div className="lg:col-span-8">
+            <div className="mb-6 flex items-end justify-between gap-4">
+              <div>
+                <p className="font-brand text-[9px] tracking-[0.12em] text-white/30">
+                  דירוג עונתי
+                </p>
+                <h2 className="mt-2 font-display text-lg font-bold text-white/90 sm:text-xl">
+                  מובילי העונה
+                </h2>
               </div>
-            </motion.div>
-          ))}
+              <span className="font-brand text-[9px] text-white/25">עדכון חי</span>
+            </div>
+            <LeaderboardTable
+              players={seasonStandings}
+              highlightId={CURRENT_USER.id}
+              minimal
+            />
+          </div>
+
+          <aside className="space-y-5 lg:col-span-4">
+            <div className="season-panel">
+              <p className="font-brand text-[9px] tracking-[0.1em] text-white/30">
+                התקדמות אישית
+              </p>
+              <div className="mt-4">
+                <XpProgressBar xp={CURRENT_USER.xp} subtle />
+              </div>
+              <div className="mt-5 flex items-center justify-between gap-3">
+                <RankTierBadge tier={CURRENT_USER.tier} plain />
+                <span className="font-brand text-xs text-white/50">
+                  דירוג #{CURRENT_USER.rank}
+                </span>
+              </div>
+            </div>
+
+            <div className="season-panel season-panel-accent">
+              <p className="font-brand text-[9px] tracking-[0.1em] text-accent/70">
+                פרסי העונה
+              </p>
+              <ul className="mt-4 space-y-3">
+                {CURRENT_SEASON.rewards.map((reward) => (
+                  <li
+                    key={reward}
+                    className="flex items-start gap-2.5 text-sm leading-relaxed text-white/60"
+                  >
+                    <span className="mt-0.5 text-accent/60">·</span>
+                    {reward}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </aside>
         </div>
-      </div>
+      </section>
+
+      <section className="mt-16 sm:mt-20 lg:mt-24">
+        <div className="mb-8">
+          <p className="font-brand text-[9px] tracking-[0.12em] text-white/30">
+            מערכת דירוג
+          </p>
+          <h2 className="mt-2 font-display text-lg font-bold text-white/90 sm:text-xl">
+            דרגות העונה
+          </h2>
+        </div>
+        <SeasonTierGrid />
+      </section>
 
       {!CURRENT_USER.isPremium && (
-        <div className="relative min-h-[180px]">
+        <div className="relative mt-16 min-h-[140px] sm:mt-20">
           <PremiumGate
             title="אליפות העונה"
-            description="כניסה לטורניר העונה, פרסים בלעדיים ו-פרסונות עילית, פרימיום בלבד."
+            description="כניסה לטורניר העונה, פרסים בלעדיים ופרסונות עילית — פרימיום בלבד."
           />
         </div>
       )}

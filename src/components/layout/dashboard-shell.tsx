@@ -65,7 +65,7 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
   const isArena = (arenaRoutes as readonly string[]).includes(pathname);
-  const quietSidebar = pathname === "/leaderboard";
+  const quietSidebar = true;
 
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
@@ -151,13 +151,9 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
               <span className="block h-px w-5 bg-white" />
               <span className="block h-px w-5 bg-white" />
             </button>
-            <motion.span
-              className={`size-2 rounded-full ${isArena ? "bg-red-500" : "bg-green-400"}`}
-              animate={{ opacity: [1, 0.3, 1] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            />
-            <span className={`font-brand text-[9px] sm:text-[10px] ${isArena ? "text-red-400" : "text-green-400"}`}>
-              {isArena ? "הזירה · חי" : "מרכז פיקוד חי"}
+            <span className="size-2 rounded-full bg-accent/60" />
+            <span className="font-brand text-[9px] text-white/45 sm:text-[10px]">
+              {isArena ? "הזירה" : "מרכז פיקוד"}
             </span>
           </div>
           <div className="flex items-center gap-3 sm:gap-4">
