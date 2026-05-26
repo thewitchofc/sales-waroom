@@ -16,15 +16,17 @@ const skills = [
   { name: "הצגת ערך", score: 82, trend: "+6%" },
 ];
 
-export function AnalyticsDashboard() {
+export function AnalyticsDashboard({ showHeader = true }: { showHeader?: boolean }) {
   return (
     <Section id="analytics" atmosphere>
       <SectionAtmosphere />
-      <SectionHeader
-        label="PERFORMANCE COMMAND"
-        title="מרכז הפיקוד לשליטה מוחלטת"
-        description="כל מדד. כל חולשה. כל הזדמנות. לפני שהיא הופכת לעסקה אבודה."
-      />
+      {showHeader && (
+        <SectionHeader
+          label="PERFORMANCE COMMAND"
+          title="מרכז הפיקוד לשליטה מוחלטת"
+          description="כל מדד. כל חולשה. כל הזדמנות. לפני שהיא הופכת לעסקה אבודה."
+        />
+      )}
 
       <div className="grid gap-8 lg:grid-cols-3">
         <GlassCard className="lg:col-span-2" hover={false} premium>

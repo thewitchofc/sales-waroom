@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { BrandButton } from "@/components/brand/brand-button";
+import { BrandLink } from "@/components/brand/brand-link";
 import { HeroCommandVisual } from "@/components/brand/hero-command-visual";
 import { CinematicBackground } from "@/components/ui/cinematic-bg";
 import { ClassifiedBadge, HudFrame } from "@/components/ui/hud-elements";
@@ -100,24 +100,18 @@ export function Hero() {
               animate="visible"
               className="mt-14 flex flex-wrap items-center gap-5"
             >
-              <BrandButton variant="command" size="lg">
+              <BrandLink href="/dashboard" variant="command" size="lg">
                 להיכנס לחדר המלחמה
                 <svg className="size-4 rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                 </svg>
-              </BrandButton>
-              <BrandButton
-                variant="secondary"
-                size="lg"
-                onClick={() =>
-                  document.getElementById("live-demo")?.scrollIntoView({ behavior: "smooth" })
-                }
-              >
+              </BrandLink>
+              <BrandLink href="/demo" variant="secondary" size="lg">
                 <svg className="size-4" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M8 5v14l11-7z" />
                 </svg>
                 לצפייה בדמו
-              </BrandButton>
+              </BrandLink>
             </motion.div>
 
             {/* Stats — command readout style */}

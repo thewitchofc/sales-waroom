@@ -23,7 +23,7 @@ const baseMetrics = [
   { label: "אנרגיה", base: 94, suffix: "", status: "שיא", color: "text-red-400", isEnergy: true },
 ];
 
-export function VoiceTraining() {
+export function VoiceTraining({ showHeader = true }: { showHeader?: boolean }) {
   const [lineIndex, setLineIndex] = useState(0);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [metrics, setMetrics] = useState(baseMetrics.map((m) => m.base));
@@ -45,11 +45,13 @@ export function VoiceTraining() {
   return (
     <Section id="voice" className="overflow-hidden" atmosphere>
       <SectionAtmosphere />
-      <SectionHeader
-        label="VOICE TRAINING"
-        title="אימון קולי שקורא את הביטחון שלכם"
-        description="דברו בטבעיות. ה-AI מנתח טון, קצב, מילות מילוי ותהודה רגשית — משוב מיידי על כל מילה."
-      />
+      {showHeader && (
+        <SectionHeader
+          label="VOICE TRAINING"
+          title="אימון קולי שקורא את הביטחון שלכם"
+          description="דברו בטבעיות. ה-AI מנתח טון, קצב, מילות מילוי ותהודה רגשית — משוב מיידי על כל מילה."
+        />
+      )}
 
       <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
         <GlassCard hover={false} premium className="relative overflow-hidden">

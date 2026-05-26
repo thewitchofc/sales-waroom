@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { Section, SectionHeader } from "@/components/ui/section";
 import { GlassCard } from "@/components/ui/glass-card";
-import { BrandButton } from "@/components/brand/brand-button";
+import { BrandLink } from "@/components/brand/brand-link";
 import { cn } from "@/lib/utils";
 import { SectionAtmosphere } from "@/components/ui/cinematic-bg";
 
@@ -60,15 +60,17 @@ const plans = [
   },
 ];
 
-export function Pricing() {
+export function Pricing({ showHeader = true }: { showHeader?: boolean }) {
   return (
     <Section id="pricing" atmosphere>
       <SectionAtmosphere />
-      <SectionHeader
-        label="ACCESS LEVELS"
-        title="השקיעו במיומנות שמדפיסה הכנסות"
-        description="14 יום ניסיון חינם. ללא כרטיס אשראי. גישה מיידית למערכת."
-      />
+      {showHeader && (
+        <SectionHeader
+          label="ACCESS LEVELS"
+          title="השקיעו במיומנות שמדפיסה הכנסות"
+          description="14 יום ניסיון חינם. ללא כרטיס אשראי. גישה מיידית למערכת."
+        />
+      )}
 
       <div className="grid gap-8 lg:grid-cols-3">
         {plans.map((plan, i) => (
@@ -131,13 +133,14 @@ export function Pricing() {
               ))}
             </ul>
 
-            <BrandButton
+            <BrandLink
+              href={plan.highlighted ? "/dashboard" : "/login"}
               variant={plan.highlighted ? "command" : "secondary"}
               size="lg"
-              className="w-full"
+              className="w-full justify-center"
             >
               {plan.cta}
-            </BrandButton>
+            </BrandLink>
           </GlassCard>
         ))}
       </div>

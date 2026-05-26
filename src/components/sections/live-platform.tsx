@@ -105,16 +105,18 @@ function LivePlatformContent() {
   );
 }
 
-export function LivePlatform() {
+export function LivePlatform({ showHeader = true }: { showHeader?: boolean }) {
   return (
     <Section id="live-demo" className="overflow-hidden" atmosphere>
       <SectionAtmosphere />
 
-      <SectionHeader
-        label="COMMAND CENTER"
-        title="מערכת ההפעלה של קלוזרים עילית"
-        description="שיחות AI חיות, תמלול בזמן אמת, ניתוח התנגדויות, משוב Coach — הכל רץ. עכשיו."
-      />
+      {showHeader && (
+        <SectionHeader
+          label="COMMAND CENTER"
+          title="מערכת ההפעלה של קלוזרים עילית"
+          description="שיחות AI חיות, תמלול בזמן אמת, ניתוח התנגדויות, משוב Coach — הכל רץ. עכשיו."
+        />
+      )}
 
       <SimulationProvider>
         <LivePlatformContent />

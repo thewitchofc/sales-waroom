@@ -29,7 +29,7 @@ const features = [
   },
 ];
 
-export function ObjectionSimulator() {
+export function ObjectionSimulator({ showHeader = true }: { showHeader?: boolean }) {
   const [selected, setSelected] = useState<ObjectionScenario>(OBJECTION_SCENARIOS[0]);
   const [analyzing, setAnalyzing] = useState(false);
   const [responseScore, setResponseScore] = useState(92);
@@ -44,11 +44,13 @@ export function ObjectionSimulator() {
   return (
     <Section id="simulator" atmosphere>
       <SectionAtmosphere />
-      <SectionHeader
-        label="OBJECTION SIMULATOR"
-        title="אתגרו כל התנגדות לפני שהיא הורגת עסקה"
-        description="לחצו על התנגדות — ה-AI מנתח, מדרג, ומציע תגובה. בזמן אמת."
-      />
+      {showHeader && (
+        <SectionHeader
+          label="OBJECTION SIMULATOR"
+          title="אתגרו כל התנגדות לפני שהיא הורגת עסקה"
+          description="לחצו על התנגדות — ה-AI מנתח, מדרג, ומציע תגובה. בזמן אמת."
+        />
+      )}
 
       <div className="grid gap-8 lg:grid-cols-5">
         <div className="lg:col-span-2">
