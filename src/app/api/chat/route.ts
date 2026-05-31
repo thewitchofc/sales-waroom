@@ -1,5 +1,6 @@
 import OpenAI from "openai";
 import {
+  OPENAI_COACH_MAX_TOKENS,
   OPENAI_MODEL,
   SALES_WARROOM_AI_COACH_FORMAT_PROMPT,
   SALES_WARROOM_AI_COACH_PROMPT,
@@ -59,6 +60,7 @@ export async function POST(request: Request) {
     const stream = await openai.chat.completions.create({
       model: OPENAI_MODEL,
       stream: true,
+      max_tokens: OPENAI_COACH_MAX_TOKENS,
       messages: [
         { role: "system", content: SALES_WARROOM_AI_COACH_PROMPT },
         { role: "system", content: SALES_WARROOM_AI_PHILOSOPHY_PROMPT },

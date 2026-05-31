@@ -1,4 +1,6 @@
+import type { ArenaDynamicScenario } from "@/config/arena-dynamic-scenario";
 import type { ArenaSimulationLevel } from "@/config/arena-simulation-prompt";
+import type { UserTrainingProfile } from "@/config/user-training-profile";
 
 export type ArenaChatRole = "user" | "assistant";
 
@@ -46,6 +48,22 @@ export function createArenaMessageId() {
   return `arena-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
 }
 
+export function extractStreamingCustomer(content: string) {
+  const match = content.match(
+    /### CUSTOMER\s*([\s\S]*?)(?=### ANALYSIS|$)/i,
+  );
+  if (!match?.[1]) return "";
+
+  const text = match[1].trim();
+  if (!text || /^\[[\s\S]*\]$/.test(text)) return "";
+
+  return text;
+}
+
+export function isCustomerSectionComplete(content: string) {
+  return /### ANALYSIS/i.test(content);
+}
+
 export function parseArenaTurn(content: string): ArenaParsedTurn {
   const customerMatch = content.match(
     /### CUSTOMER\s*([\s\S]*?)(?=### ANALYSIS|$)/i,
@@ -80,7 +98,10 @@ export async function streamArenaSimulation({
   messages,
   level,
   start,
+  scenario,
+  userProfile,
   onDelta,
+  onScenario,
   onDone,
   onError,
   signal,
@@ -88,7 +109,10 @@ export async function streamArenaSimulation({
   messages: Pick<ArenaChatMessage, "role" | "content">[];
   level: ArenaSimulationLevel;
   start?: boolean;
+  scenario?: ArenaDynamicScenario | null;
+  userProfile?: UserTrainingProfile;
   onDelta: (text: string) => void;
+  onScenario?: (scenario: ArenaDynamicScenario) => void;
   onDone?: () => void;
   onError?: (message: string) => void;
   signal?: AbortSignal;
@@ -96,7 +120,7 @@ export async function streamArenaSimulation({
   const response = await fetch("/api/arena", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ messages, level, start }),
+    body: JSON.stringify({ messages, level, start, scenario, userProfile }),
     signal,
   });
 
@@ -136,11 +160,16 @@ export async function streamArenaSimulation({
       if (!payload || payload === "[DONE]") continue;
 
       try {
-        const parsed = JSON.parse(payload) as { text?: string; error?: string };
+        const parsed = JSON.parse(payload) as {
+          text?: string;
+          error?: string;
+          scenario?: ArenaDynamicScenario;
+        };
         if (parsed.error) {
           onError?.(parsed.error);
           throw new Error(parsed.error);
         }
+        if (parsed.scenario) onScenario?.(parsed.scenario);
         if (parsed.text) onDelta(parsed.text);
       } catch (error) {
         if (error instanceof SyntaxError) continue;

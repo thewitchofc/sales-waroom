@@ -4,6 +4,7 @@ import { useCallback, useMemo, useRef, useState } from "react";
 import {
   createCoachMessageId,
   getCoachSpeechText,
+  isCoachSpeechReady,
   parseCoachSections,
   streamCoachChat,
   type CoachChatMessage,
@@ -16,6 +17,7 @@ export function useAICoach() {
   const [streaming, setStreaming] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const abortRef = useRef<AbortController | null>(null);
+  const speechStartedRef = useRef(false);
 
   const latestAssistant = useMemo(() => {
     return [...messages]
@@ -48,6 +50,7 @@ export function useAICoach() {
       ]);
       setInput("");
       setStreaming(true);
+      speechStartedRef.current = false;
 
       abortRef.current?.abort();
       abortRef.current = new AbortController();
@@ -67,11 +70,19 @@ export function useAICoach() {
                   : message,
               ),
             );
+
+            if (!speechStartedRef.current && isCoachSpeechReady(fullContent)) {
+              speechStartedRef.current = true;
+              const speechText = getCoachSpeechText(fullContent);
+              if (speechText) void speakHebrew(speechText, "coach");
+            }
           },
         });
 
-        const speechText = getCoachSpeechText(fullContent);
-        if (speechText) void speakHebrew(speechText, "coach");
+        if (!speechStartedRef.current) {
+          const speechText = getCoachSpeechText(fullContent);
+          if (speechText) void speakHebrew(speechText, "coach");
+        }
       } catch (err) {
         if (err instanceof Error && err.name === "AbortError") return;
         const message =

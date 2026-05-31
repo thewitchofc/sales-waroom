@@ -17,6 +17,7 @@ import {
 } from "@/components/arena/rank-tier-badge";
 import { BrandLink } from "@/components/brand/brand-link";
 import { BrandLogoLink } from "@/components/brand/brand-logo";
+import { TrainingProfileForm } from "@/components/profile/training-profile-form";
 import { cn } from "@/lib/utils";
 
 export function ProfilePageContent() {
@@ -67,6 +68,13 @@ export function ProfilePageContent() {
 
       <div className="grid gap-6 lg:grid-cols-3">
         <div className="lg:col-span-2 space-y-6">
+          <section className="border border-white/5 bg-black/60 p-5 md:p-6">
+            <div className="mb-4 font-brand text-[10px] text-accent">
+              פרופיל אימון AI
+            </div>
+            <TrainingProfileForm />
+          </section>
+
           <section className="border border-white/5 bg-black/60 p-5 md:p-6">
             <div className="mb-4 font-brand text-[10px] text-accent">
               סטטיסטיקות קרב

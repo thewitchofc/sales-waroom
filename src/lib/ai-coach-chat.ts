@@ -110,3 +110,8 @@ export function getCoachSpeechText(content: string) {
   const { coaching, response } = parseCoachSections(content);
   return [coaching, response].filter(Boolean).join("\n\n");
 }
+
+export function isCoachSpeechReady(content: string) {
+  if (!/### SCORES/i.test(content)) return false;
+  return getCoachSpeechText(content).length > 0;
+}

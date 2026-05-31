@@ -132,3 +132,5 @@ procrastination_handling: [0-100. did they expose delay or info-escape as commit
 info_escape_handling: [0-100. did they investigate "send me info" or surrender to passive file handoff?]`;
 
 export const OPENAI_MODEL = process.env.OPENAI_MODEL ?? "gpt-5.5";
+
+export const OPENAI_COACH_MAX_TOKENS = 1600;

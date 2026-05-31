@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { useArenaSimulation } from "@/hooks/use-arena-simulation";
+import Link from "next/link";
 import {
   ARENA_SIMULATION_LEVELS,
   type ArenaSimulationLevel,
@@ -68,8 +69,16 @@ export function ArenaSimulationDashboard() {
               חדר האימון
             </h1>
             <p className="mt-2 text-base leading-relaxed text-white/50">
-              שיחה אחת במרכז. לקוח קשה. ניתוח רק כשצריך.
+              כל שיחה = לקוח חדש, סיטואציה חדשה, כאוס אמיתי.
             </p>
+            {!sessionActive && (
+              <Link
+                href="/profile"
+                className="mt-3 inline-block text-xs text-red-400/80 hover:text-red-400"
+              >
+                התאמת תחום וחולשות בפרופיל ←
+              </Link>
+            )}
           </div>
 
           <div className="flex flex-wrap items-center gap-3 sm:gap-4">
@@ -124,6 +133,32 @@ export function ArenaSimulationDashboard() {
           </div>
         </div>
 
+        {sim.scenario && sessionActive && (
+          <div className="mt-4 border border-white/[0.08] bg-white/[0.02] p-4 sm:p-5">
+            <p className="text-xs text-red-400/90">סיטואציה חיה</p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {sim.scenarioTags.map((tag) => (
+                <span
+                  key={tag}
+                  className="border border-white/10 px-2.5 py-1 text-xs text-white/70"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+            <p className="mt-3 text-sm leading-relaxed text-white/55">
+              {sim.scenario.situation} · טון: {sim.scenario.speechTone}
+            </p>
+            <div className="mt-3 grid grid-cols-2 gap-2 text-xs text-white/40 sm:grid-cols-5">
+              <Trait label="לחץ" value={sim.scenario.pressure} />
+              <Trait label="עצבנות" value={sim.scenario.irritability} />
+              <Trait label="חשדנות" value={sim.scenario.skepticism} />
+              <Trait label="סבלנות" value={sim.scenario.patience} />
+              <Trait label="אנרגיה" value={sim.scenario.energy} />
+            </div>
+          </div>
+        )}
+
         <div className="mt-5 flex gap-2 lg:hidden">
           <button
             type="button"
@@ -177,8 +212,8 @@ export function ArenaSimulationDashboard() {
               {!sessionActive && sim.transcript.length === 0 && (
                 <div className="flex h-full min-h-[280px] flex-col items-center justify-center px-4 text-center">
                   <p className="max-w-sm text-lg leading-relaxed text-white/55">
-                    לחצי &quot;התחילי שיחה&quot;. הלקוח יפתח קשה. את עונים קצר
-                    ומוביל.
+                    לחצי &quot;התחילי שיחה&quot;. המערכת תיצור לקוח רנדומלי —
+                    סיטואציה, מצב רגשי, ופתיח קשה.
                   </p>
                 </div>
               )}
@@ -225,7 +260,7 @@ export function ArenaSimulationDashboard() {
                 value={sim.input}
                 onChange={(event) => sim.setInput(event.target.value)}
                 rows={2}
-                disabled={!sessionActive || sim.status === "thinking"}
+                disabled={!sessionActive || !sim.canType}
                 placeholder={
                   sessionActive
                     ? "כתבי את התשובה שלך..."
@@ -241,7 +276,7 @@ export function ArenaSimulationDashboard() {
                   type="submit"
                   disabled={
                     !sessionActive ||
-                    sim.status === "thinking" ||
+                    !sim.canType ||
                     !sim.input.trim()
                   }
                   className="bg-white px-5 py-2.5 text-sm font-medium text-black disabled:opacity-30"
@@ -263,8 +298,12 @@ export function ArenaSimulationDashboard() {
 
           <div className="flex flex-col gap-4">
             {!sessionActive ? (
-              <div className="border border-white/[0.08] p-5 text-sm leading-relaxed text-white/50">
-                {sim.levelMeta.description}
+              <div className="space-y-4 border border-white/[0.08] p-5 text-sm leading-relaxed text-white/50">
+                <p>{sim.levelMeta.description}</p>
+                <p className="text-xs text-white/35">
+                  כל התחלה = סיטואציה חדשה: מוסך, נהיגה, ילדים, קניות, עייפות,
+                  ועוד.
+                </p>
               </div>
             ) : (
               <div className="border border-white/[0.08] p-4 sm:p-5">
@@ -308,6 +347,15 @@ export function ArenaSimulationDashboard() {
           </div>
         </aside>
       </div>
+    </div>
+  );
+}
+
+function Trait({ label, value }: { label: string; value: number }) {
+  return (
+    <div className="border border-white/[0.06] px-2 py-1.5">
+      <span className="text-white/35">{label}</span>{" "}
+      <span className="font-display text-white/70">{value}/10</span>
     </div>
   );
 }

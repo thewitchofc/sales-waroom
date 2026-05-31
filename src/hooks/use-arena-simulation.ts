@@ -2,18 +2,26 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
+  generateArenaDynamicScenario,
+  getScenarioDisplayTags,
+  type ArenaDynamicScenario,
+} from "@/config/arena-dynamic-scenario";
+import {
   ARENA_SIMULATION_LEVELS,
   type ArenaSimulationLevel,
 } from "@/config/arena-simulation-prompt";
 import {
   createArenaMessageId,
   DEFAULT_ARENA_SCORES,
+  extractStreamingCustomer,
+  isCustomerSectionComplete,
   parseArenaTurn,
   streamArenaSimulation,
   type ArenaChatMessage,
   type ArenaLiveScores,
 } from "@/lib/arena-simulation";
 import { speakHebrew, stopHebrewSpeech } from "@/lib/speak-hebrew";
+import { useUserTrainingProfile } from "@/hooks/use-user-training-profile";
 
 export type ArenaSessionStatus = "idle" | "live" | "thinking";
 
@@ -31,6 +39,7 @@ function formatTimer(totalSeconds: number) {
 }
 
 export function useArenaSimulation(initialLevel: ArenaSimulationLevel = "hard") {
+  const { profile } = useUserTrainingProfile();
   const [level, setLevel] = useState<ArenaSimulationLevel>(initialLevel);
   const [status, setStatus] = useState<ArenaSessionStatus>("idle");
   const [messages, setMessages] = useState<ArenaChatMessage[]>([]);
@@ -41,8 +50,17 @@ export function useArenaSimulation(initialLevel: ArenaSimulationLevel = "hard") 
   const [objection, setObjection] = useState("");
   const [correction, setCorrection] = useState("");
   const [elapsed, setElapsed] = useState(0);
+  const [scenario, setScenario] = useState<ArenaDynamicScenario | null>(null);
   const abortRef = useRef<AbortController | null>(null);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const ttsStartedRef = useRef(false);
+  const customerTranscriptIdRef = useRef<string | null>(null);
+  const activeScenarioRef = useRef<ArenaDynamicScenario | null>(null);
+
+  const scenarioTags = useMemo(
+    () => (scenario ? getScenarioDisplayTags(scenario) : []),
+    [scenario],
+  );
 
   const latestTurn = useMemo(() => {
     const lastAssistant = [...messages]
@@ -53,7 +71,7 @@ export function useArenaSimulation(initialLevel: ArenaSimulationLevel = "hard") 
   }, [messages]);
 
   useEffect(() => {
-    if (status === "live") {
+    if (status === "live" || status === "thinking") {
       timerRef.current = setInterval(() => setElapsed((v) => v + 1), 1000);
       return () => {
         if (timerRef.current) clearInterval(timerRef.current);
@@ -62,6 +80,33 @@ export function useArenaSimulation(initialLevel: ArenaSimulationLevel = "hard") 
     if (timerRef.current) clearInterval(timerRef.current);
     return undefined;
   }, [status]);
+
+  const upsertCustomerTranscript = useCallback(
+    (text: string) => {
+      setTranscript((prev) => {
+        if (customerTranscriptIdRef.current) {
+          return prev.map((entry) =>
+            entry.id === customerTranscriptIdRef.current
+              ? { ...entry, text }
+              : entry,
+          );
+        }
+
+        const id = createArenaMessageId();
+        customerTranscriptIdRef.current = id;
+        return [
+          ...prev,
+          {
+            id,
+            speaker: "customer" as const,
+            text,
+            time: formatTimer(elapsed),
+          },
+        ];
+      });
+    },
+    [elapsed],
+  );
 
   const pushTranscript = useCallback(
     (speaker: "user" | "customer", text: string) => {
@@ -83,13 +128,17 @@ export function useArenaSimulation(initialLevel: ArenaSimulationLevel = "hard") 
       nextMessages,
       start = false,
       userLine,
+      turnScenario,
     }: {
       nextMessages: ArenaChatMessage[];
       start?: boolean;
       userLine?: string;
+      turnScenario?: ArenaDynamicScenario | null;
     }) => {
       setError(null);
       setStatus("thinking");
+      ttsStartedRef.current = false;
+      customerTranscriptIdRef.current = null;
 
       const assistantId = createArenaMessageId();
       setMessages([
@@ -102,6 +151,9 @@ export function useArenaSimulation(initialLevel: ArenaSimulationLevel = "hard") 
 
       if (userLine) pushTranscript("user", userLine);
 
+      const scenarioForTurn =
+        turnScenario ?? activeScenarioRef.current ?? scenario;
+
       let fullContent = "";
 
       try {
@@ -109,7 +161,13 @@ export function useArenaSimulation(initialLevel: ArenaSimulationLevel = "hard") 
           messages: nextMessages.map(({ role, content }) => ({ role, content })),
           level,
           start,
+          scenario: scenarioForTurn,
+          userProfile: profile,
           signal: abortRef.current.signal,
+          onScenario: (nextScenario) => {
+            activeScenarioRef.current = nextScenario;
+            setScenario(nextScenario);
+          },
           onDelta: (delta) => {
             fullContent += delta;
             setMessages((current) =>
@@ -119,6 +177,23 @@ export function useArenaSimulation(initialLevel: ArenaSimulationLevel = "hard") 
                   : message,
               ),
             );
+
+            const customerText = extractStreamingCustomer(fullContent);
+            if (customerText) {
+              upsertCustomerTranscript(customerText);
+            }
+
+            if (
+              isCustomerSectionComplete(fullContent) &&
+              !ttsStartedRef.current
+            ) {
+              const parsed = parseArenaTurn(fullContent);
+              ttsStartedRef.current = true;
+              setStatus("live");
+              if (parsed.customer) {
+                void speakHebrew(parsed.customer, "customer");
+              }
+            }
           },
         });
 
@@ -127,8 +202,14 @@ export function useArenaSimulation(initialLevel: ArenaSimulationLevel = "hard") 
           setScores(parsed.scores);
           setObjection(parsed.objection);
           setCorrection(parsed.correction);
-          pushTranscript("customer", parsed.customer);
-          void speakHebrew(parsed.customer, "customer");
+
+          if (!customerTranscriptIdRef.current && parsed.customer) {
+            pushTranscript("customer", parsed.customer);
+          }
+
+          if (!ttsStartedRef.current && parsed.customer) {
+            void speakHebrew(parsed.customer, "customer");
+          }
         }
 
         setStatus("live");
@@ -140,19 +221,26 @@ export function useArenaSimulation(initialLevel: ArenaSimulationLevel = "hard") 
         setStatus("live");
       }
     },
-    [level, pushTranscript],
+    [level, profile, pushTranscript, scenario, upsertCustomerTranscript],
   );
 
   const startSession = useCallback(async () => {
+    const nextScenario = generateArenaDynamicScenario({ level, profile });
+    activeScenarioRef.current = nextScenario;
+    setScenario(nextScenario);
     setMessages([]);
     setTranscript([]);
     setScores(DEFAULT_ARENA_SCORES);
     setObjection("");
     setCorrection("");
     setElapsed(0);
-    setStatus("live");
-    await runTurn({ nextMessages: [], start: true });
-  }, [runTurn]);
+    setStatus("thinking");
+    await runTurn({
+      nextMessages: [],
+      start: true,
+      turnScenario: nextScenario,
+    });
+  }, [level, profile, runTurn]);
 
   const sendMessage = useCallback(
     async (rawText: string) => {
@@ -181,6 +269,8 @@ export function useArenaSimulation(initialLevel: ArenaSimulationLevel = "hard") 
   const resetSession = useCallback(() => {
     abortRef.current?.abort();
     stopHebrewSpeech();
+    activeScenarioRef.current = null;
+    setScenario(null);
     setMessages([]);
     setTranscript([]);
     setScores(DEFAULT_ARENA_SCORES);
@@ -191,6 +281,11 @@ export function useArenaSimulation(initialLevel: ArenaSimulationLevel = "hard") 
     setError(null);
     setStatus("idle");
   }, []);
+
+  const canType =
+    status === "live" ||
+    (status === "thinking" &&
+      transcript.some((entry) => entry.speaker === "customer"));
 
   return {
     level,
@@ -206,7 +301,10 @@ export function useArenaSimulation(initialLevel: ArenaSimulationLevel = "hard") 
     objection,
     correction,
     latestTurn,
+    scenario,
+    scenarioTags,
     elapsed,
+    canType,
     formatTimer: () => formatTimer(elapsed),
     startSession,
     sendMessage,

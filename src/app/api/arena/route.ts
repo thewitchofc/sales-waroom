@@ -1,11 +1,18 @@
 import OpenAI from "openai";
 import {
+  buildArenaScenarioPrompt,
+  buildArenaSessionOpenPrompt,
+  generateArenaDynamicScenario,
+  sanitizeArenaDynamicScenario,
+} from "@/config/arena-dynamic-scenario";
+import {
   ARENA_CUSTOMER_SYSTEM_PROMPT,
-  ARENA_SESSION_OPEN_PROMPT,
-  buildArenaFormatPrompt,
+  buildArenaScenarioSystemPrompt,
+  OPENAI_ARENA_MAX_TOKENS,
+  OPENAI_ARENA_MODEL,
   type ArenaSimulationLevel,
 } from "@/config/arena-simulation-prompt";
-import { OPENAI_MODEL } from "@/config/ai-coach-prompt";
+import { sanitizeUserTrainingProfile } from "@/config/user-training-profile";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
@@ -60,28 +67,41 @@ export async function POST(request: Request) {
       messages?: unknown;
       level?: unknown;
       start?: boolean;
+      scenario?: unknown;
+      userProfile?: unknown;
     };
 
     const level = sanitizeLevel(body.level);
     const start = body.start === true;
     const messages = sanitizeMessages(body.messages);
+    const profile = sanitizeUserTrainingProfile(body.userProfile);
 
     if (!start && messages.length === 0) {
       return Response.json({ error: "Messages are required" }, { status: 400 });
     }
 
+    let scenario = sanitizeArenaDynamicScenario(body.scenario);
+    if (!scenario) {
+      scenario = generateArenaDynamicScenario({ level, profile });
+    }
+
     const conversation: ChatMessage[] = start
-      ? [{ role: "user", content: ARENA_SESSION_OPEN_PROMPT }]
+      ? [{ role: "user", content: buildArenaSessionOpenPrompt(scenario) }]
       : messages;
 
     const openai = getOpenAIClient();
+    const scenarioPrompt = buildArenaScenarioPrompt(scenario, profile);
 
     const stream = await openai.chat.completions.create({
-      model: OPENAI_MODEL,
+      model: OPENAI_ARENA_MODEL,
       stream: true,
+      max_tokens: OPENAI_ARENA_MAX_TOKENS,
       messages: [
         { role: "system", content: ARENA_CUSTOMER_SYSTEM_PROMPT },
-        { role: "system", content: buildArenaFormatPrompt(level) },
+        {
+          role: "system",
+          content: buildArenaScenarioSystemPrompt(scenarioPrompt, level),
+        },
         ...conversation,
       ],
     });
@@ -91,6 +111,12 @@ export async function POST(request: Request) {
     const readable = new ReadableStream({
       async start(controller) {
         try {
+          controller.enqueue(
+            encoder.encode(
+              `data: ${JSON.stringify({ scenario })}\n\n`,
+            ),
+          );
+
           for await (const chunk of stream) {
             const text = chunk.choices[0]?.delta?.content;
             if (text) {

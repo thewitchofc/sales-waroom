@@ -1,7 +1,7 @@
 export type TtsRole = "customer" | "coach";
 
 export const OPENAI_TTS_MODEL =
-  process.env.OPENAI_TTS_MODEL?.trim() || "tts-1-hd";
+  process.env.OPENAI_TTS_MODEL?.trim() || "tts-1";
 
 export const TTS_VOICES: Record<TtsRole, string> = {
   customer: process.env.OPENAI_TTS_VOICE_CUSTOMER?.trim() || "coral",

@@ -1,6 +1,9 @@
-import { buildSalesCoachPhilosophyPrompt } from "@/config/sales-coach-philosophy";
-
 export type ArenaSimulationLevel = "entry" | "medium" | "hard" | "elite";
+
+export const OPENAI_ARENA_MODEL =
+  process.env.OPENAI_ARENA_MODEL?.trim() || "gpt-4o-mini";
+
+export const OPENAI_ARENA_MAX_TOKENS = 900;
 
 export const ARENA_SIMULATION_LEVELS: Record<
   ArenaSimulationLevel,
@@ -24,7 +27,24 @@ export const ARENA_SIMULATION_LEVELS: Record<
   },
 };
 
-export const ARENA_COACH_PHILOSOPHY_PROMPT = buildSalesCoachPhilosophyPrompt();
+export const ARENA_ANALYSIS_RUBRIC = `Analyze the salesperson briefly using elite psychology. No generic praise.
+
+Score lenses:
+- authority: lower if they appease, defer, or fear losing the client
+- pressure: handled pressure without folding
+- qualification: qualified before pitching or conceding
+- tonality: leading, not pleading
+- emotional_control: calm command under fire
+- positioning: premium frame, filter budget-only buyers
+- pricing_confidence: no panic discounts or fear-based pricing
+- follow_up_authority: movement and status, not begging
+- urgency: real urgency without chasing
+- procrastination_handling: delay, info-escape, price-frame collapse
+
+OBJECTION: type + psychological root in human Hebrew.
+CORRECTION: one sharp coach line with wit when useful. Sound human, not robotic.
+Use commitment-before-approach, delay-is-commitment, send-info-escape, price-positioning,
+fear-pricing, premium-client fit, authoritative-follow-up, and cant-afford-objection when relevant.`;
 
 export const ARENA_CUSTOMER_SYSTEM_PROMPT = `You are the SALES WARROOM AI Simulation Engine.
 
@@ -60,6 +80,13 @@ Rules:
 - If they say "אשלח לך מידע", "אשלח PDF", "אשלח בוואצאפ" without investigation, treat it as surrender — go colder or ask for another "send me" escape.
 - If they follow up with weak lines like "רק בודק", "אשמח לשמוע", "רציתי לבדוק אם ראית", treat it as desperate chasing — stay cold or ignore.
 - Respond in Hebrew when the user writes in Hebrew.
+- Every call is a UNIQUE live scenario — never reuse the same opening or objection twice.
+- You are a real human in a real moment: distracted, imperfect, interrupted.
+- Cut the salesperson off mid-sentence when impatient ("רגע", "חכה", "מה?").
+- Use short replies, silences ("...מממ"), confusion, cynicism, indifference.
+- Shift energy during the call — colder if they fold, slightly warmer only if they lead well.
+- Reference your physical situation (driving, kids, queue, work) when distracted.
+- Never sound like a bot, script, or repeating template.
 
 After each salesperson message, evaluate THEIR performance using elite coach psychology.
 Apply commitment-before-approach, delay-is-commitment, send-info-escape, price-positioning, fear-based-pricing, premium-vs-budget-client, authoritative-follow-up, and cant-afford-objection analysis in CORRECTION and OBJECTION.
@@ -69,11 +96,11 @@ Never give generic motivational feedback.`;
 export function buildArenaFormatPrompt(level: ArenaSimulationLevel) {
   const levelCopy = ARENA_SIMULATION_LEVELS[level];
 
-  return `${ARENA_COACH_PHILOSOPHY_PROMPT}
+  return `${ARENA_ANALYSIS_RUBRIC}
 
 Simulation level: ${levelCopy.label}. ${levelCopy.description}
 
-Format EVERY reply exactly like this:
+Format EVERY reply exactly like this. CUSTOMER first — keep it short (1-3 sentences).
 
 ### CUSTOMER
 [what the customer says next. sharp. realistic. natural spoken Hebrew. exploit weakness if present.]
@@ -107,5 +134,11 @@ procrastination_handling: [0-100 did they investigate delay, info-escape, or pri
  sound alive — not like a template. no generic praise.]`;
 }
 
-export const ARENA_SESSION_OPEN_PROMPT =
-  "פתח את השיחה. אתה הלקוח. ענה כאילו נציג מכירות התקשר אליך. התחל קשה.";
+export function buildArenaScenarioSystemPrompt(
+  scenarioPrompt: string,
+  level: ArenaSimulationLevel,
+) {
+  return `${scenarioPrompt}
+
+${buildArenaFormatPrompt(level)}`;
+}
