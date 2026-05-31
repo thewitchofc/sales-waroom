@@ -80,7 +80,7 @@ export async function POST(request: Request) {
       return Response.json({ error: "Messages are required" }, { status: 400 });
     }
 
-    let scenario = sanitizeArenaDynamicScenario(body.scenario);
+    let scenario = sanitizeArenaDynamicScenario(body.scenario, level);
     if (!scenario) {
       scenario = generateArenaDynamicScenario({ level, profile });
     }

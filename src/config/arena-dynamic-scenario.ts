@@ -1,4 +1,5 @@
 import type { ArenaSimulationLevel } from "@/config/arena-simulation-prompt";
+import { ARENA_SIMULATION_LEVELS } from "@/config/arena-simulation-prompt";
 import {
   TRAINING_INDUSTRY_OPTIONS,
   TRAINING_SALE_TYPE_OPTIONS,
@@ -7,26 +8,45 @@ import {
   type UserTrainingProfile,
 } from "@/config/user-training-profile";
 
-export interface ArenaDynamicScenario {
-  id: string;
+export interface ArenaDifficultyLayer {
+  level: ArenaSimulationLevel;
+  label: string;
+  styleLabel: string;
+  styleDescription: string;
+  objectionLevel: number;
+  pressure: number;
+  control: number;
+  sophistication: number;
+  manipulation: number;
+  speechSpeed: number;
+  interruptions: number;
+  patience: number;
+  behaviors: string[];
+  openingTone: string;
+}
+
+export interface ArenaSituationLayer {
   situation: string;
   situationLabel: string;
-  emotionalState: string;
-  personality: string;
-  personalityLabel: string;
-  speechTone: string;
-  openingLine: string;
-  pressure: number;
-  irritability: number;
-  skepticism: number;
-  patience: number;
+  environment: string;
+  mood: string;
+  availability: number;
   energy: number;
+  situationalOpening: string;
   chaosBehaviors: string[];
+}
+
+export interface ArenaDynamicScenario {
+  id: string;
+  level: ArenaSimulationLevel;
+  difficultyLabel: string;
+  difficulty: ArenaDifficultyLayer;
+  situationLayer: ArenaSituationLayer;
+  openingLine: string;
   industryLabel: string;
   industryObjections: string[];
   saleContext: string;
   weaknessFocus: string[];
-  difficultyLabel: string;
 }
 
 const SITUATIONS = [
@@ -34,158 +54,265 @@ const SITUATIONS = [
     id: "garage",
     label: "באמצע מוסך",
     context: "אתה במוסך, רעש של כלים, לא באמת יכול לדבר.",
+    environment: "רעש כלים, מכונית על הרampa, מוסך עמוס.",
+    moods: ["עצבני מהרעש", "ממהר לסיים", "מוסח ולא מתרכז"],
+    availability: { min: 2, max: 4 },
+    energy: { min: 4, max: 7 },
+    openings: [
+      "רגע— אני במוסך, דבר מהר.",
+      "שומע? יש פה רעש, מה אתה רוצה?",
+      "שנייה, אני באמצע תיקון.",
+    ],
   },
   {
     id: "kids",
     label: "ילדים בבית",
-    context: "ילדים צורחים ברקע, אתה מוסה את הטלפון.",
+    context: "ילדים צורחים ברקע, אתה מושך את הטלפון.",
+    environment: "ילדים צורחים, בית רועש, מולטי-טאסקינג.",
+    moods: ["מוסח", "עייף", "לחוץ מהרעש בבית"],
+    availability: { min: 2, max: 5 },
+    energy: { min: 3, max: 6 },
+    openings: [
+      "רגע שנייה הילדים פה צורחים.",
+      "שמע, יש פה בלגן— מה?",
+      "תדבר מהר, אין לי שקט פה.",
+    ],
   },
   {
     id: "driving",
     label: "באמצע נהיגה",
-    context: "אתה נוהג, חצי תשומת לב, רוצה לנתק מהר.",
+    context: "אתה נוהג, חצי תשומת לב.",
+    environment: "על הכביש, תשומת לב מפוצלת.",
+    moods: ["ממהר", "מוסח", "לחוץ בזמן"],
+    availability: { min: 1, max: 3 },
+    energy: { min: 5, max: 8 },
+    openings: [
+      "רגע— אני נוהג.",
+      "כן? תדבר מהר, אני על הכביש.",
+      "שנייה, יש לי יציאה.",
+    ],
   },
   {
     id: "shopping",
     label: "באמצע קניות",
-    context: "אתה בתור בקופה או בסuper, לחץ זמן.",
+    context: "אתה בתור בקופה או בסופר.",
+    environment: "תור, עגלת קניות, אנשים מסביב.",
+    moods: ["עסוק", "מהיר", "ממורמר מהתור"],
+    availability: { min: 3, max: 6 },
+    energy: { min: 4, max: 7 },
+    openings: [
+      "אני באמצע קופה— דבר מהר.",
+      "רגע, אני בתור, מה?",
+      "כן? יש לי דקה.",
+    ],
   },
   {
     id: "work",
     label: "באמצע עבודה",
-    context: "באמצע יום עבודה עמוס, קולleagues ברקע.",
+    context: "באמצע יום עבודה עמוס.",
+    environment: "משרד/עבודה, קולleagues, מיילים פתוחים.",
+    moods: ["עסוק", "ממוקד", "חשדן לגבי הפרעה"],
+    availability: { min: 2, max: 5 },
+    energy: { min: 5, max: 8 },
+    openings: [
+      "אני בעבודה, מה אתה רוצה?",
+      "יש לי דקה— דבר.",
+      "כן? אני באמצע משהו.",
+    ],
   },
   {
     id: "tired",
     label: "עייף/עייפה",
-    context: "סוף יום ארוך, אין לך כוח לשיחות.",
+    context: "סוף יום ארוך, אין כוח לשיחות.",
+    environment: "בבית אחרי יום ארוך, על הספה או במיטה.",
+    moods: ["עייף", "אדיש", "רוצה לנוח"],
+    availability: { min: 4, max: 7 },
+    energy: { min: 2, max: 4 },
+    openings: [
+      "...כן? מי זה?",
+      "שמע, יום ארוך. מה?",
+      "רגע, לא בזמן הכי טוב.",
+    ],
   },
   {
     id: "stressed",
     label: "לחוץ/לחוצה בזמן",
-    context: "יש לך פגישה בעוד 5 דקות.",
+    context: "יש לך פגישה בעוד כמה דקות.",
+    environment: "ספירה לאחור לפגישה, שעון לוחץ.",
+    moods: ["לחוץ", "מהיר", "חסר סבלנות לזמן"],
+    availability: { min: 2, max: 4 },
+    energy: { min: 6, max: 9 },
+    openings: [
+      "תקשיב יש לי בדיוק דקה.",
+      "יש לי פגישה עוד 5 דקות— דבר.",
+      "מהר, אין לי זמן.",
+    ],
   },
   {
     id: "home_quiet",
     label: "בבית בשקט",
-    context: "פתאום שיחה לא צפויה — מעורר חשד.",
+    context: "שיחה לא צפויה בבית.",
+    environment: "בבית, שקט יחסי, לא ציפית לשיחה.",
+    moods: ["מופתע", "חשדן", "לא בטוח למה מתקשרים"],
+    availability: { min: 5, max: 8 },
+    energy: { min: 4, max: 6 },
+    openings: [
+      "מאיפה יש לכם את המספר שלי?",
+      "כן? מי זה?",
+      "לא בטוח שביקשתי שיחזרו אליי.",
+    ],
   },
 ] as const;
 
-const PERSONALITIES = [
-  {
-    id: "angry",
-    label: "עצבני/עצבנית",
-    traits: "קצר fuse, מתעצבן מהר, לא סובל בזבוז זמן.",
-  },
-  {
-    id: "impatient",
-    label: "חסר/ת סבלנות",
-    traits: "קוצר, מקטע משפטים, רוצה תכל'ס.",
-  },
-  {
-    id: "skeptic",
-    label: "חשדן/ית",
-    traits: "לא מאמין למילים, בודק כל משפט.",
-  },
-  {
-    id: "anti_sales",
-    label: "אנטי-מכירות",
-    traits: "שונא שיחות מכירה, מחפש סיבה לנתק.",
-  },
-  {
-    id: "indifferent",
-    label: "אדיש/ה",
-    traits: "לא ממש אכפת, עונה בקצרה, אולי יתנתק.",
-  },
-  {
-    id: "high_ego",
-    label: "אגו גבוה",
-    traits: "חושב שאתה יודע הכל, מזלזל בנציג.",
-  },
-  {
-    id: "cynical",
-    label: "ציני/ת",
-    traits: "לועג, סרקסטי, לא נותן קרדיט.",
-  },
-  {
-    id: "confused",
-    label: "מבולבל/ת",
-    traits: "לא בטוח למה התקשרו, שואל שאלות לא קשורות.",
-  },
+const SITUATIONAL_CHAOS = [
+  "הזכר את הסביבה — רעש, תור, ילדים, נהיגה, עבודה",
+  "הראה שאתה לא 100% פנוי — 'רגע', 'שנייה', 'תחזור על זה'",
+  "ענה לפעמים במילה אחת כי אתה עסוק",
+  "שתיקה קצרה — '...מממ', '...רגע'",
+  "בלבול רגעי — 'על מה מדובר?'",
+  "אל תהיה מושלם — תגובות לא מלוטשות",
 ] as const;
 
-const EMOTIONAL_STATES = [
-  "עצבני",
-  "לחוץ",
-  "עייף",
-  "חשדן",
-  "אדיש",
-  "מבולבל",
-  "ציני",
-  "עצבני ועייף",
-  "לחוץ וחסר סבלנות",
-  "רגוע אבל סקפטי",
-] as const;
-
-const SPEECH_TONES = [
-  "קצר וחתוך",
-  "מרגיז ולוחץ",
-  "קר ומנוכר",
-  "סרקסטי",
-  "ממהר",
-  "מלמול ולא בטוח",
-  "אגרסיבי אבל לא צועק",
-  "משעמם ולא מעוניין",
-] as const;
-
-const OPENINGS = [
-  "הלוווו מי זה עכשיו??",
-  "רגע שנייה הילדים פה צורחים.",
-  "תקשיב יש לי בדיוק דקה.",
-  "מאיפה יש לכם את המספר שלי?",
-  "אם זאת שיחת מכירה אני מנתק.",
-  "אני באמצע קופה עכשיו דבר מהר.",
-  "מה? מי זה?",
-  "לא תפסו אותי בזמן גרוע.",
-  "אני עסוק, מה אתה רוצה?",
-  "שמע, יש לי שתי דקות וזהו.",
-  "עוד שיחת מכירה? רציני?",
-  "כן? דבר מהר.",
-  "רגע— אני נוהג.",
-  "אני לא בטוח שביקשתי שיחזרו אליי.",
-  "...כן?",
-] as const;
-
-const CHAOS_BEHAVIORS = [
-  "קטע את הנציג באמצע משפט — 'רגע', 'חכה', 'מה?'",
-  "הזכר הפרעה מהסיטואציה — ילדים, רעש, תור, נהיגה",
-  "ענה במילה אחת לפעמים: 'כן', 'לא', 'אולי', 'לא יודע'",
-  "שתיקה קצרה לפני תשובה — '...מממ', '...רגע'",
-  "שנה אנרגיה תוך כדי השיחה — מעצבן לציני או מאדיש ללחוץ",
-  "בלבול — 'על מה מדובר?', 'מי אתם בכלל?'",
-  "ציניות — 'יפה, עוד אחד', 'שמעתי את זה'",
-  "אל תהיה מושלם — תגובות לא מלוטשות, לא מסודרות",
-  "אל תחזור על אותה התנגדות — גוון כל פעם",
-  "הראה שאתה עסוק — 'רגע', 'שנייה', 'תחזור על זה'",
-] as const;
-
-const LEVEL_BANDS: Record<
+const DIFFICULTY_CONFIG: Record<
   ArenaSimulationLevel,
-  { min: number; max: number; label: string }
+  {
+    styleLabel: string;
+    styleDescription: string;
+    openingTone: string;
+    openings: string[];
+    behaviors: string[];
+    traits: {
+      objectionLevel: { min: number; max: number };
+      pressure: { min: number; max: number };
+      control: { min: number; max: number };
+      sophistication: { min: number; max: number };
+      manipulation: { min: number; max: number };
+      speechSpeed: { min: number; max: number };
+      interruptions: { min: number; max: number };
+      patience: { min: number; max: number };
+    };
+  }
 > = {
-  entry: { min: 2, max: 5, label: "רמה 1 — סקפטי אבל עדיין מקשיב" },
-  medium: { min: 4, max: 7, label: "רמה 2 — לחץ בינוני, פחות סבלנות" },
-  hard: { min: 6, max: 9, label: "רמה 3 — אגרסיבי, קצר רוח" },
-  elite: { min: 7, max: 10, label: "עילית — cynical, בודק גבולות" },
+  entry: {
+    styleLabel: "מנומס אבל סקפטי",
+    styleDescription:
+      "עדיין מקשיב, לא אגרסивי. התנגדויות קלות. לא שולט בשיחה — אבל גם לא נכנע מהר.",
+    openingTone: "מנומס, קצר, סקפטי — לא תוקפני",
+    openings: [
+      "כן? מי זה?",
+      "שלום, על מה השיחה?",
+      "רגע, ספרו לי בקצרה.",
+      "כן, יש לי רגע.",
+    ],
+    behaviors: [
+      "התנגדויות קלות — 'צריך לחשוב', 'יקר לי'",
+      "לא מניפולציה — שאל שאלות פשוטות",
+      "עדיין נותן מרחב לנציג לדבר",
+      "לא קוטע באגרסיביות",
+    ],
+    traits: {
+      objectionLevel: { min: 2, max: 4 },
+      pressure: { min: 2, max: 4 },
+      control: { min: 2, max: 4 },
+      sophistication: { min: 2, max: 4 },
+      manipulation: { min: 1, max: 3 },
+      speechSpeed: { min: 3, max: 5 },
+      interruptions: { min: 1, max: 3 },
+      patience: { min: 6, max: 9 },
+    },
+  },
+  medium: {
+    styleLabel: "לחץ בינוני",
+    styleDescription:
+      "פחות סבלנות, מתנגד יותר, מתחיל לבדוק. מפריע לפעמים.",
+    openingTone: "ישיר, לא סבלני, לא מנומס מדי",
+    openings: [
+      "כן? מה אתה רוצה?",
+      "יש לי דקה— דבר.",
+      "שמע, מה זה?",
+      "לא תפסו אותי בזמן הכי טוב.",
+    ],
+    behaviors: [
+      "התנגדויות ברורות — מחיר, זמן, 'תשלחי פרטים'",
+      "קוטע לפעמים — 'רגע', 'מה?'",
+      "בודק אם הנציג מוביל או נמאס",
+      "מעלה התנגדות כל 2-3 תורות",
+    ],
+    traits: {
+      objectionLevel: { min: 4, max: 6 },
+      pressure: { min: 4, max: 6 },
+      control: { min: 4, max: 6 },
+      sophistication: { min: 4, max: 6 },
+      manipulation: { min: 3, max: 5 },
+      speechSpeed: { min: 5, max: 7 },
+      interruptions: { min: 3, max: 5 },
+      patience: { min: 4, max: 6 },
+    },
+  },
+  hard: {
+    styleLabel: "אגרסיבי וחד",
+    styleDescription:
+      "קצר רוח, בודק פריים, שולט בשיחה, חשדן, לא נותן לנציג להוביל בקלות.",
+    openingTone: "חד, לחוץ, בודק גבולות מהשנייה הראשונה",
+    openings: [
+      "אני עסוק, מה אתה רוצה?",
+      "שמע, יש לי שתי דקות וזהו.",
+      "עוד שיחת מכירה? רציני?",
+      "אם זאת מכירה— תדבר מהר.",
+    ],
+    behaviors: [
+      "שולט בקצב — 'לא, רגע', 'עצור'",
+      "התנגדויות חזקות — מחיר, מתחרים, אמון",
+      "מניפולציה קלה — 'יש לי הצעה אחרת', 'אין לי זמן'",
+      "קוטע באמצע אם הנציג מפשט",
+    ],
+    traits: {
+      objectionLevel: { min: 6, max: 8 },
+      pressure: { min: 6, max: 8 },
+      control: { min: 6, max: 8 },
+      sophistication: { min: 6, max: 8 },
+      manipulation: { min: 5, max: 7 },
+      speechSpeed: { min: 6, max: 8 },
+      interruptions: { min: 5, max: 7 },
+      patience: { min: 2, max: 4 },
+    },
+  },
+  elite: {
+    styleLabel: "עילית — cynical ואפס סבלנות",
+    styleDescription:
+      "מתנגד לכל דבר, מניפולטיבי, חד, ציני, בודק גבולות ומחויבות. שולט בשיחה לגמרי.",
+    openingTone: "עצבני/ציני, אפס סבלנות, על הגנתי",
+    openings: [
+      "הלוווו מי זה עכשיו??",
+      "אם זאת שיחת מכירה אני מנתק.",
+      "מאיפה יש לכם את המספר שלי?",
+      "עוד אחד? תן לי סיבה שלא לנתק.",
+    ],
+    behaviors: [
+      "מתנגד לכל דבר — גם כשיש ערך",
+      "מניפולציה פסיכולוגית — guilt, comparison, fake urgency reversal",
+      "קוטע כל הזמן, משנה נושא, ציני",
+      "בודק מחויבות — 'תשלח PDF' כמלכודת",
+      "אפס סבלנות — ניתוק אם הנציג נחלש",
+    ],
+    traits: {
+      objectionLevel: { min: 8, max: 10 },
+      pressure: { min: 8, max: 10 },
+      control: { min: 8, max: 10 },
+      sophistication: { min: 8, max: 10 },
+      manipulation: { min: 7, max: 10 },
+      speechSpeed: { min: 7, max: 10 },
+      interruptions: { min: 7, max: 10 },
+      patience: { min: 1, max: 3 },
+    },
+  },
 };
 
-const EXPERIENCE_OFFSET: Record<UserTrainingProfile["experienceLevel"], number> =
-  {
-    beginner: -1,
-    intermediate: 0,
-    advanced: 1,
-  };
+const EXPERIENCE_NUDGE: Record<UserTrainingProfile["experienceLevel"], number> = {
+  beginner: -1,
+  intermediate: 0,
+  advanced: 1,
+};
 
 function pickRandom<T>(items: readonly T[]): T {
   return items[Math.floor(Math.random() * items.length)];
@@ -209,29 +336,84 @@ function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function scaleTrait(
-  level: ArenaSimulationLevel,
+function scaleDifficultyTrait(
+  range: { min: number; max: number },
   experienceLevel: UserTrainingProfile["experienceLevel"],
-  key: "pressure" | "irritability" | "skepticism" | "patience" | "energy",
+  invertNudge = false,
 ) {
-  const band = LEVEL_BANDS[level];
-  const offset = EXPERIENCE_OFFSET[experienceLevel];
-  let min = band.min + offset;
-  let max = band.max + offset;
-
-  if (key === "patience") {
-    min = 11 - max - 1;
-    max = 11 - band.min - offset;
-  }
-
-  if (key === "energy") {
-    min = Math.max(2, band.min + offset - 1);
-    max = Math.min(10, band.max + offset);
-  }
-
-  min = clamp(min, 1, 10);
-  max = clamp(max, min, 10);
+  const nudge = invertNudge
+    ? -EXPERIENCE_NUDGE[experienceLevel]
+    : EXPERIENCE_NUDGE[experienceLevel];
+  const min = clamp(range.min + nudge, 1, 10);
+  const max = clamp(range.max + nudge, min, 10);
   return randomInt(min, max);
+}
+
+function buildDifficultyLayer(
+  level: ArenaSimulationLevel,
+  profile: UserTrainingProfile,
+): ArenaDifficultyLayer {
+  const config = DIFFICULTY_CONFIG[level];
+  const meta = ARENA_SIMULATION_LEVELS[level];
+
+  return {
+    level,
+    label: meta.label,
+    styleLabel: config.styleLabel,
+    styleDescription: config.styleDescription,
+    objectionLevel: scaleDifficultyTrait(
+      config.traits.objectionLevel,
+      profile.experienceLevel,
+    ),
+    pressure: scaleDifficultyTrait(config.traits.pressure, profile.experienceLevel),
+    control: scaleDifficultyTrait(config.traits.control, profile.experienceLevel),
+    sophistication: scaleDifficultyTrait(
+      config.traits.sophistication,
+      profile.experienceLevel,
+    ),
+    manipulation: scaleDifficultyTrait(
+      config.traits.manipulation,
+      profile.experienceLevel,
+    ),
+    speechSpeed: scaleDifficultyTrait(
+      config.traits.speechSpeed,
+      profile.experienceLevel,
+    ),
+    interruptions: scaleDifficultyTrait(
+      config.traits.interruptions,
+      profile.experienceLevel,
+    ),
+    patience: scaleDifficultyTrait(
+      config.traits.patience,
+      profile.experienceLevel,
+      true,
+    ),
+    behaviors: [...config.behaviors],
+    openingTone: config.openingTone,
+  };
+}
+
+function buildSituationLayer(): ArenaSituationLayer {
+  const situation = pickRandom(SITUATIONS);
+
+  return {
+    situation: situation.context,
+    situationLabel: situation.label,
+    environment: situation.environment,
+    mood: pickRandom(situation.moods),
+    availability: randomInt(situation.availability.min, situation.availability.max),
+    energy: randomInt(situation.energy.min, situation.energy.max),
+    situationalOpening: pickRandom(situation.openings),
+    chaosBehaviors: pickRandomMany(SITUATIONAL_CHAOS, 2),
+  };
+}
+
+function buildCombinedOpening(
+  level: ArenaSimulationLevel,
+  situationLayer: ArenaSituationLayer,
+): string {
+  const difficultyOpening = pickRandom(DIFFICULTY_CONFIG[level].openings);
+  return `${situationLayer.situationalOpening} / ${difficultyOpening}`;
 }
 
 function buildWeaknessFocus(profile: UserTrainingProfile) {
@@ -243,6 +425,19 @@ function buildWeaknessFocus(profile: UserTrainingProfile) {
   return selected.map((weakness) => TRAINING_WEAKNESS_OPTIONS[weakness].coachFocus);
 }
 
+function getDifficultyExample(
+  level: ArenaSimulationLevel,
+  situationLabel: string,
+): string {
+  const examples: Record<ArenaSimulationLevel, string> = {
+    entry: `רמה 1 + ${situationLabel} = לקוח מנומס אבל סקפטי, עדיין מקשיב.`,
+    medium: `רמה 2 + ${situationLabel} = לקוח עם הפרעות מהסביבה + לחץ בינוני.`,
+    hard: `רמה 3 + ${situationLabel} = לקוח חשדן שמנסה לשלוט בשיחה.`,
+    elite: `עילית + ${situationLabel} = לקוח עצבני עם אפס סבלנות שמתנגד לכל דבר.`,
+  };
+  return examples[level];
+}
+
 export function generateArenaDynamicScenario({
   level,
   profile,
@@ -250,32 +445,22 @@ export function generateArenaDynamicScenario({
   level: ArenaSimulationLevel;
   profile: UserTrainingProfile;
 }): ArenaDynamicScenario {
-  const situation = pickRandom(SITUATIONS);
-  const personality = pickRandom(PERSONALITIES);
+  const difficulty = buildDifficultyLayer(level, profile);
+  const situationLayer = buildSituationLayer();
   const industry = TRAINING_INDUSTRY_OPTIONS[profile.industry];
   const sale = TRAINING_SALE_TYPE_OPTIONS[profile.saleType];
-  const weaknessFocus = buildWeaknessFocus(profile);
 
   return {
     id: `scenario-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
-    situation: situation.context,
-    situationLabel: situation.label,
-    emotionalState: pickRandom(EMOTIONAL_STATES),
-    personality: personality.traits,
-    personalityLabel: personality.label,
-    speechTone: pickRandom(SPEECH_TONES),
-    openingLine: pickRandom(OPENINGS),
-    pressure: scaleTrait(level, profile.experienceLevel, "pressure"),
-    irritability: scaleTrait(level, profile.experienceLevel, "irritability"),
-    skepticism: scaleTrait(level, profile.experienceLevel, "skepticism"),
-    patience: scaleTrait(level, profile.experienceLevel, "patience"),
-    energy: scaleTrait(level, profile.experienceLevel, "energy"),
-    chaosBehaviors: pickRandomMany(CHAOS_BEHAVIORS, 3),
+    level,
+    difficultyLabel: `${difficulty.label} · ${difficulty.styleLabel}`,
+    difficulty,
+    situationLayer,
+    openingLine: buildCombinedOpening(level, situationLayer),
     industryLabel: industry.label,
     industryObjections: pickRandomMany(industry.objections, 3),
     saleContext: sale.callContext,
-    weaknessFocus,
-    difficultyLabel: LEVEL_BANDS[level].label,
+    weaknessFocus: buildWeaknessFocus(profile),
   };
 }
 
@@ -284,96 +469,211 @@ export function buildArenaScenarioPrompt(
   profile: UserTrainingProfile,
 ) {
   const industry = TRAINING_INDUSTRY_OPTIONS[profile.industry];
+  const { difficulty, situationLayer } = scenario;
 
-  return `LIVE SCENARIO — treat this as a real call, not a chatbot roleplay.
+  return `LIVE SCENARIO — two independent layers. Combine them. Never ignore the user's chosen difficulty level.
 
-Current situation: ${scenario.situation} (${scenario.situationLabel})
-Emotional state: ${scenario.emotionalState}
-Personality: ${scenario.personalityLabel} — ${scenario.personality}
-Speech tone: ${scenario.speechTone}
-Call context: ${scenario.saleContext}
+=== LAYER 1: DIFFICULTY (user chose ${difficulty.label}) ===
+This controls HOW hard the customer fights — professional sales resistance.
+Style: ${difficulty.styleLabel} — ${difficulty.styleDescription}
+Opening tone: ${difficulty.openingTone}
+
+Difficulty traits (1-10):
+- objection level: ${difficulty.objectionLevel}
+- pressure on salesperson: ${difficulty.pressure}
+- conversation control: ${difficulty.control}
+- sophistication: ${difficulty.sophistication}
+- manipulation: ${difficulty.manipulation}
+- speech speed (higher = shorter/faster): ${difficulty.speechSpeed}
+- interruptions (higher = more cuts): ${difficulty.interruptions}
+- patience (higher = more patient): ${difficulty.patience}
+
+Difficulty behaviors:
+${difficulty.behaviors.map((item) => `- ${item}`).join("\n")}
+
+Example blend: ${getDifficultyExample(scenario.level, situationLayer.situationLabel)}
+
+=== LAYER 2: SITUATION (random chaos — where/what/mood) ===
+This controls WHERE the customer is and human mess — NOT how skilled they are at resisting.
+Location: ${situationLayer.situationLabel} — ${situationLayer.situation}
+Environment: ${situationLayer.environment}
+Mood (situational): ${situationLayer.mood}
+Availability/distraction (1-10, lower = less available): ${situationLayer.availability}
+Energy (situational): ${situationLayer.energy}
+
+Situational chaos:
+${situationLayer.chaosBehaviors.map((item) => `- ${item}`).join("\n")}
+
+=== CONTEXT ===
+Call: ${scenario.saleContext}
 Industry: ${scenario.industryLabel}
 Buyer mindset: ${industry.buyerMindset}
 
-Trait levels (1-10): pressure ${scenario.pressure}, irritability ${scenario.irritability}, skepticism ${scenario.skepticism}, patience ${scenario.patience}, energy ${scenario.energy}
-Difficulty: ${scenario.difficultyLabel}
-
-Industry-relevant objections to weave in naturally:
+Industry objections (weave naturally):
 ${scenario.industryObjections.map((item) => `- ${item}`).join("\n")}
 
-Salesperson weaknesses to exploit if they show up in the call:
+Exploit salesperson weaknesses if shown:
 ${scenario.weaknessFocus.map((item) => `- ${item}`).join("\n")}
 
-Chaos behaviors — use 1-2 per turn, stay human and messy:
-${scenario.chaosBehaviors.map((item) => `- ${item}`).join("\n")}
-
-Opening inspiration (adapt to situation, do not copy robotically):
+Opening inspiration (adapt — merge situation + difficulty tone):
 "${scenario.openingLine}"
 
-Human realism rules:
-- Sound like a real Israeli on the phone — imperfect, distracted, interrupted.
-- Vary length: sometimes one word, sometimes two sentences.
-- Change mood mid-call if the salesperson is weak or strong.
-- Never repeat the same objection phrasing twice in one call.
-- Reference your situation when distracted (kids, driving, work, queue).
-- This is live sales chaos training — not a polite assistant.`;
+Rules:
+- Difficulty level ALWAYS wins for objection strength, control, manipulation, patience.
+- Situation ALWAYS wins for environment, distraction, mood, energy.
+- Same location can feel easy or brutal depending on difficulty — both layers must show.
+- Sound like a real Israeli on the phone. Never repeat phrasing. Never sound like a bot.`;
 }
 
 export function buildArenaSessionOpenPrompt(scenario: ArenaDynamicScenario) {
+  const { difficulty, situationLayer } = scenario;
+
   return `פתח את השיחה עכשיו. אתה הלקוח.
-הסיטואציה: ${scenario.situationLabel} — ${scenario.situation}
-מצב רגשי: ${scenario.emotionalState}
-פתח בטון: ${scenario.speechTone}
-השראה לפתיחה (התאם טבעית): "${scenario.openingLine}"
-התחל מיד. קצר. אנושי. לא מושלם.`;
+
+רמת קושי (חובה): ${difficulty.label} — ${difficulty.styleLabel}
+סיטואציה (רנדומלית): ${situationLayer.situationLabel} — ${situationLayer.situation}
+מצב רוח מהסיטואציה: ${situationLayer.mood}
+טון פתיחה לפי קושי: ${difficulty.openingTone}
+השראה לפתיחה: "${scenario.openingLine}"
+
+התחל מיד. שילוב של קושי מקצועי + כאוס אנושי. קצר. לא מושלם.`;
+}
+
+function number(value: unknown, fallback: number) {
+  return typeof value === "number" && value >= 1 && value <= 10 ? value : fallback;
+}
+
+function sanitizeDifficultyLayer(
+  raw: Partial<ArenaDifficultyLayer> | undefined,
+  level: ArenaSimulationLevel,
+): ArenaDifficultyLayer {
+  const defaults = buildDifficultyLayer(level, {
+    industry: "general",
+    experienceLevel: "intermediate",
+    saleType: "b2c_phone",
+    weaknesses: [],
+  });
+
+  if (!raw) return defaults;
+
+  return {
+    level,
+    label: String(raw.label ?? defaults.label),
+    styleLabel: String(raw.styleLabel ?? defaults.styleLabel),
+    styleDescription: String(raw.styleDescription ?? defaults.styleDescription),
+    objectionLevel: number(raw.objectionLevel, defaults.objectionLevel),
+    pressure: number(raw.pressure, defaults.pressure),
+    control: number(raw.control, defaults.control),
+    sophistication: number(raw.sophistication, defaults.sophistication),
+    manipulation: number(raw.manipulation, defaults.manipulation),
+    speechSpeed: number(raw.speechSpeed, defaults.speechSpeed),
+    interruptions: number(raw.interruptions, defaults.interruptions),
+    patience: number(raw.patience, defaults.patience),
+    behaviors: Array.isArray(raw.behaviors)
+      ? raw.behaviors.filter((item) => typeof item === "string")
+      : defaults.behaviors,
+    openingTone: String(raw.openingTone ?? defaults.openingTone),
+  };
+}
+
+function sanitizeSituationLayer(
+  raw: Partial<ArenaSituationLayer> | undefined,
+): ArenaSituationLayer {
+  const fallback = buildSituationLayer();
+
+  if (!raw) return fallback;
+
+  return {
+    situation: String(raw.situation ?? fallback.situation),
+    situationLabel: String(raw.situationLabel ?? fallback.situationLabel),
+    environment: String(raw.environment ?? fallback.environment),
+    mood: String(raw.mood ?? fallback.mood),
+    availability: number(raw.availability, fallback.availability),
+    energy: number(raw.energy, fallback.energy),
+    situationalOpening: String(
+      raw.situationalOpening ?? fallback.situationalOpening,
+    ),
+    chaosBehaviors: Array.isArray(raw.chaosBehaviors)
+      ? raw.chaosBehaviors.filter((item) => typeof item === "string").slice(0, 5)
+      : fallback.chaosBehaviors,
+  };
 }
 
 export function sanitizeArenaDynamicScenario(
   input: unknown,
+  fallbackLevel: ArenaSimulationLevel = "hard",
 ): ArenaDynamicScenario | null {
   if (!input || typeof input !== "object") return null;
-  const raw = input as Partial<ArenaDynamicScenario>;
+  const raw = input as Partial<ArenaDynamicScenario> & {
+    situation?: string;
+    situationLabel?: string;
+    pressure?: number;
+    patience?: number;
+    emotionalState?: string;
+    energy?: number;
+  };
+
+  const level =
+    raw.level && raw.level in ARENA_SIMULATION_LEVELS
+      ? raw.level
+      : fallbackLevel;
+
+  if (raw.difficulty && raw.situationLayer && typeof raw.id === "string") {
+    return {
+      id: raw.id,
+      level,
+      difficultyLabel: String(
+        raw.difficultyLabel ?? ARENA_SIMULATION_LEVELS[level].label,
+      ),
+      difficulty: sanitizeDifficultyLayer(raw.difficulty, level),
+      situationLayer: sanitizeSituationLayer(raw.situationLayer),
+      openingLine: String(raw.openingLine ?? "כן? מי זה?"),
+      industryLabel: String(raw.industryLabel ?? "כללי"),
+      industryObjections: Array.isArray(raw.industryObjections)
+        ? raw.industryObjections.filter((item) => typeof item === "string")
+        : [],
+      saleContext: String(raw.saleContext ?? "שיחת מכירה"),
+      weaknessFocus: Array.isArray(raw.weaknessFocus)
+        ? raw.weaknessFocus.filter((item) => typeof item === "string")
+        : [],
+    };
+  }
+
   if (typeof raw.id !== "string" || typeof raw.situation !== "string") {
     return null;
   }
 
-  const number = (value: unknown, fallback: number) =>
-    typeof value === "number" && value >= 1 && value <= 10 ? value : fallback;
-
   return {
     id: raw.id,
-    situation: raw.situation,
-    situationLabel: String(raw.situationLabel ?? "שיחה חיה"),
-    emotionalState: String(raw.emotionalState ?? "סקפטי"),
-    personality: String(raw.personality ?? "קשה"),
-    personalityLabel: String(raw.personalityLabel ?? "לקוח קשה"),
-    speechTone: String(raw.speechTone ?? "קצר"),
+    level,
+    difficultyLabel: String(raw.difficultyLabel ?? ARENA_SIMULATION_LEVELS[level].label),
+    difficulty: sanitizeDifficultyLayer(
+      { pressure: raw.pressure, patience: raw.patience },
+      level,
+    ),
+    situationLayer: sanitizeSituationLayer({
+      situation: raw.situation,
+      situationLabel: raw.situationLabel,
+      mood: raw.emotionalState,
+      energy: raw.energy,
+    }),
     openingLine: String(raw.openingLine ?? "כן? מי זה?"),
-    pressure: number(raw.pressure, 6),
-    irritability: number(raw.irritability, 6),
-    skepticism: number(raw.skepticism, 6),
-    patience: number(raw.patience, 4),
-    energy: number(raw.energy, 6),
-    chaosBehaviors: Array.isArray(raw.chaosBehaviors)
-      ? raw.chaosBehaviors.filter((item) => typeof item === "string").slice(0, 5)
-      : [],
     industryLabel: String(raw.industryLabel ?? "כללי"),
     industryObjections: Array.isArray(raw.industryObjections)
-      ? raw.industryObjections.filter((item) => typeof item === "string").slice(0, 5)
+      ? raw.industryObjections.filter((item) => typeof item === "string")
       : [],
     saleContext: String(raw.saleContext ?? "שיחת מכירה"),
     weaknessFocus: Array.isArray(raw.weaknessFocus)
-      ? raw.weaknessFocus.filter((item) => typeof item === "string").slice(0, 5)
+      ? raw.weaknessFocus.filter((item) => typeof item === "string")
       : [],
-    difficultyLabel: String(raw.difficultyLabel ?? "רמה 3"),
   };
 }
 
 export function getScenarioDisplayTags(scenario: ArenaDynamicScenario) {
   return [
-    scenario.situationLabel,
-    scenario.personalityLabel,
-    scenario.emotionalState,
+    scenario.difficulty.label,
+    scenario.situationLayer.situationLabel,
+    scenario.situationLayer.mood,
     scenario.industryLabel,
   ];
 }

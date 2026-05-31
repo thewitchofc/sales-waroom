@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
+import { useState } from "react";
 import { useArenaSimulation } from "@/hooks/use-arena-simulation";
 import Link from "next/link";
 import {
@@ -135,7 +135,12 @@ export function ArenaSimulationDashboard() {
 
         {sim.scenario && sessionActive && (
           <div className="mt-4 border border-white/[0.08] bg-white/[0.02] p-4 sm:p-5">
-            <p className="text-xs text-red-400/90">סיטואציה חיה</p>
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <p className="text-xs text-red-400/90">שיחה חיה</p>
+              <span className="text-xs text-white/45">
+                {sim.levelMeta.label} · {sim.scenario.difficulty.styleLabel}
+              </span>
+            </div>
             <div className="mt-3 flex flex-wrap gap-2">
               {sim.scenarioTags.map((tag) => (
                 <span
@@ -147,14 +152,42 @@ export function ArenaSimulationDashboard() {
               ))}
             </div>
             <p className="mt-3 text-sm leading-relaxed text-white/55">
-              {sim.scenario.situation} · טון: {sim.scenario.speechTone}
+              {sim.scenario.situationLayer.situation}
             </p>
-            <div className="mt-3 grid grid-cols-2 gap-2 text-xs text-white/40 sm:grid-cols-5">
-              <Trait label="לחץ" value={sim.scenario.pressure} />
-              <Trait label="עצבנות" value={sim.scenario.irritability} />
-              <Trait label="חשדנות" value={sim.scenario.skepticism} />
-              <Trait label="סבלנות" value={sim.scenario.patience} />
-              <Trait label="אנרגיה" value={sim.scenario.energy} />
+            <p className="mt-2 text-xs text-white/40">
+              {sim.scenario.situationLayer.environment} · מצב רוח:{" "}
+              {sim.scenario.situationLayer.mood}
+            </p>
+
+            <div className="mt-4 grid gap-3 sm:grid-cols-2">
+              <div>
+                <p className="mb-2 text-[10px] uppercase tracking-wider text-red-400/80">
+                  רמת קושי (בחירתך)
+                </p>
+                <div className="grid grid-cols-2 gap-2 text-xs text-white/40">
+                  <Trait label="התנגדויות" value={sim.scenario.difficulty.objectionLevel} />
+                  <Trait label="לחץ" value={sim.scenario.difficulty.pressure} />
+                  <Trait label="שליטה" value={sim.scenario.difficulty.control} />
+                  <Trait label="תחכום" value={sim.scenario.difficulty.sophistication} />
+                  <Trait label="מניפולציה" value={sim.scenario.difficulty.manipulation} />
+                  <Trait label="מהירות" value={sim.scenario.difficulty.speechSpeed} />
+                  <Trait label="הפרעות" value={sim.scenario.difficulty.interruptions} />
+                  <Trait label="סבלנות" value={sim.scenario.difficulty.patience} />
+                </div>
+              </div>
+              <div>
+                <p className="mb-2 text-[10px] uppercase tracking-wider text-white/35">
+                  סיטואציה (רנדומלי)
+                </p>
+                <div className="grid grid-cols-2 gap-2 text-xs text-white/40">
+                  <Trait label="פניות" value={sim.scenario.situationLayer.availability} />
+                  <Trait label="אנרגיה" value={sim.scenario.situationLayer.energy} />
+                </div>
+                <p className="mt-3 text-xs leading-relaxed text-white/40">
+                  {sim.scenario.situationLayer.situationLabel} — לא קובע כמה
+                  הלקוח קשה, רק איפה הוא ומה קורה סביבו.
+                </p>
+              </div>
             </div>
           </div>
         )}
@@ -301,8 +334,8 @@ export function ArenaSimulationDashboard() {
               <div className="space-y-4 border border-white/[0.08] p-5 text-sm leading-relaxed text-white/50">
                 <p>{sim.levelMeta.description}</p>
                 <p className="text-xs text-white/35">
-                  כל התחלה = סיטואציה חדשה: מוסך, נהיגה, ילדים, קניות, עייפות,
-                  ועוד.
+                  בחרי רמת קושי ↑ — כל התחלה מוסיפה סיטואציה רנדומלית (מקום,
+                  מצב רוח, הפרעות).
                 </p>
               </div>
             ) : (

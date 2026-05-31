@@ -132,8 +132,9 @@ export function TrainingProfileForm({ compact = false }: { compact?: boolean }) 
       </Field>
 
       <p className="text-xs leading-relaxed text-white/40">
-        הסימולציה ב-Arena תתאים לקוחות, התנגדויות ולחץ לפי הפרופיל הזה. כל
-        &quot;התחל שיחה&quot; יוצר סיטואציה חדשה ורנדומלית.
+        רמת הניסיון כאן מכוונת קלות את הקושי בתוך הרמה שבחרת ב-Arena. תחום
+        וחולשות מותאמים לכל שיחה. הסיטואציה (מוסך, קניות, ילדים...) נבחרת
+        רנדומלית בכל התחלה.
       </p>
     </div>
   );
