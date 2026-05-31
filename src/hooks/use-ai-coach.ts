@@ -3,10 +3,12 @@
 import { useCallback, useMemo, useRef, useState } from "react";
 import {
   createCoachMessageId,
+  getCoachSpeechText,
   parseCoachSections,
   streamCoachChat,
   type CoachChatMessage,
 } from "@/lib/ai-coach-chat";
+import { speakHebrew, stopHebrewSpeech } from "@/lib/speak-hebrew";
 
 export function useAICoach() {
   const [messages, setMessages] = useState<CoachChatMessage[]>([]);
@@ -50,11 +52,14 @@ export function useAICoach() {
       abortRef.current?.abort();
       abortRef.current = new AbortController();
 
+      let fullContent = "";
+
       try {
         await streamCoachChat({
           messages: nextMessages.map(({ role, content }) => ({ role, content })),
           signal: abortRef.current.signal,
           onDelta: (delta) => {
+            fullContent += delta;
             setMessages((current) =>
               current.map((message) =>
                 message.id === assistantId
@@ -64,6 +69,9 @@ export function useAICoach() {
             );
           },
         });
+
+        const speechText = getCoachSpeechText(fullContent);
+        if (speechText) void speakHebrew(speechText, "coach");
       } catch (err) {
         if (err instanceof Error && err.name === "AbortError") return;
         const message =
@@ -78,10 +86,12 @@ export function useAICoach() {
 
   const stopStreaming = useCallback(() => {
     abortRef.current?.abort();
+    stopHebrewSpeech();
   }, []);
 
   const resetChat = useCallback(() => {
     abortRef.current?.abort();
+    stopHebrewSpeech();
     setMessages([]);
     setInput("");
     setError(null);

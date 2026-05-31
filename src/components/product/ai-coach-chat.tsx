@@ -86,7 +86,7 @@ export function CoachHeader({ streaming }: { streaming: boolean }) {
         animate={{ opacity: streaming ? [1, 0.35, 1] : 1 }}
         transition={{ duration: 1.2, repeat: streaming ? Infinity : 0 }}
       >
-        {streaming ? "● מנתח" : "● מוכן"}
+        {streaming ? "● מנתח · קול אנושי" : "● מוכן · קול אנושי"}
       </motion.span>
     </div>
   );

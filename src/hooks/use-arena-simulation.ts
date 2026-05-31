@@ -13,6 +13,7 @@ import {
   type ArenaChatMessage,
   type ArenaLiveScores,
 } from "@/lib/arena-simulation";
+import { speakHebrew, stopHebrewSpeech } from "@/lib/speak-hebrew";
 
 export type ArenaSessionStatus = "idle" | "live" | "thinking";
 
@@ -127,6 +128,7 @@ export function useArenaSimulation(initialLevel: ArenaSimulationLevel = "hard") 
           setObjection(parsed.objection);
           setCorrection(parsed.correction);
           pushTranscript("customer", parsed.customer);
+          void speakHebrew(parsed.customer, "customer");
         }
 
         setStatus("live");
@@ -172,11 +174,13 @@ export function useArenaSimulation(initialLevel: ArenaSimulationLevel = "hard") 
 
   const stopSession = useCallback(() => {
     abortRef.current?.abort();
+    stopHebrewSpeech();
     setStatus("idle");
   }, []);
 
   const resetSession = useCallback(() => {
     abortRef.current?.abort();
+    stopHebrewSpeech();
     setMessages([]);
     setTranscript([]);
     setScores(DEFAULT_ARENA_SCORES);

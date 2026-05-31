@@ -105,3 +105,8 @@ export function parseCoachSections(content: string) {
     scores,
   };
 }
+
+export function getCoachSpeechText(content: string) {
+  const { coaching, response } = parseCoachSections(content);
+  return [coaching, response].filter(Boolean).join("\n\n");
+}

@@ -167,6 +167,9 @@ export function ArenaSimulationDashboard() {
             {sim.status === "live" && (
               <span className="text-xs text-red-400">● חי</span>
             )}
+            {sim.status === "thinking" && (
+              <span className="text-xs text-white/35">🔊 קול אנושי</span>
+            )}
           </div>
 
           <div className="flex min-h-0 flex-1 flex-col border border-white/[0.08] bg-white/[0.02]">
