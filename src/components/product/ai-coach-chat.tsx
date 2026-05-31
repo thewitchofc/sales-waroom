@@ -14,6 +14,8 @@ const scoreLabels: Record<string, string> = {
   pressure_handling: "לחץ",
   frame_control: "פריים",
   positioning: "מיצוב",
+  pricing_confidence: "ביטחון מחיר",
+  follow_up_authority: "מעקב סמכותי",
   urgency: "דחיפות",
   procrastination_handling: "דחיינות",
   info_escape_handling: "בריחה למידע",
@@ -25,6 +27,7 @@ const starterPrompts = [
   "הלקוח ביקש פרטים במייל. איך אני שומר את השיחה חיה?",
   "הלקוחה אמרה 'תשלחי לי PDF'. עניתי 'בסדר אשלח'. מה קרה?",
   "הלקוחה אמרה שמישהי אחרת לוקחת חצי מחיר. התחלתי להצדיק. מה עשיתי לא נכון?",
+  "הלקוחה אמרה: אני לא יכולה להרשות לעצמי. הצעתי הנחה. מה הטעות?",
 ];
 
 interface AICoachChatProps {

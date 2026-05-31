@@ -18,6 +18,8 @@ export interface ArenaLiveScores {
   urgency: number;
   procrastination_handling: number;
   positioning: number;
+  pricing_confidence: number;
+  follow_up_authority: number;
 }
 
 export interface ArenaParsedTurn {
@@ -36,6 +38,8 @@ export const DEFAULT_ARENA_SCORES: ArenaLiveScores = {
   urgency: 50,
   procrastination_handling: 50,
   positioning: 50,
+  pricing_confidence: 50,
+  follow_up_authority: 50,
 };
 
 export function createArenaMessageId() {
