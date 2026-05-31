@@ -13,9 +13,9 @@ export const mainNav: NavItem[] = [
 ];
 
 export const dashboardNav: NavItem[] = [
+  { label: "סימולציה", href: "/arena" },
   { label: "תרגול", href: "/dashboard" },
   { label: "מבחן תיאוריה", href: "/theory-quiz" },
-  { label: "הזירה", href: "/arena" },
   { label: "דירוג", href: "/leaderboard" },
   { label: "עונה", href: "/season" },
   { label: "פרופיל", href: "/profile" },
@@ -37,7 +37,7 @@ export const footerPlatformLinks: NavItem[] = [
 ];
 
 export const footerCommandLinks: NavItem[] = [
-  { label: "הזירה", href: "/arena" },
+  { label: "סימולציה", href: "/arena" },
   { label: "דירוג", href: "/leaderboard" },
   { label: "עונה", href: "/season" },
 ];
@@ -51,6 +51,12 @@ export const footerAccessLinks: NavItem[] = [
 ];
 
 export const productRoutes = [
+  {
+    title: "AI Simulation",
+    href: "/arena",
+    label: "מרכזי",
+    description: "לקוח AI קשה. ניתוח בזמן אמת. חדר אימון עילית.",
+  },
   {
     title: "דמו",
     href: "/demo",
@@ -66,13 +72,7 @@ export const productRoutes = [
   {
     title: "תרגול",
     href: "/dashboard",
-    label: "יומיומי",
-    description: "מתרגלים שיחות ומקבלים משוב מהמאמן.",
-  },
-  {
-    title: "הזירה",
-    href: "/arena",
-    label: "תחרות",
-    description: "אתגרים שבועיים ודירוג מול אחרים.",
+    label: "מאמן",
+    description: "מאמן AI. ניתוח חד ותשובות מומלצות.",
   },
 ] as const;

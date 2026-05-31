@@ -13,6 +13,8 @@ const scoreLabels: Record<string, string> = {
   qualification: "העמקה",
   pressure_handling: "לחץ",
   frame_control: "פריים",
+  urgency: "דחיפות",
+  procrastination_handling: "דחיינות",
 };
 
 const starterPrompts = [

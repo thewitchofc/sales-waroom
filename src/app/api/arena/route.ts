@@ -1,10 +1,11 @@
 import OpenAI from "openai";
 import {
-  OPENAI_MODEL,
-  SALES_WARROOM_AI_COACH_FORMAT_PROMPT,
-  SALES_WARROOM_AI_COACH_PROMPT,
-  SALES_WARROOM_AI_PHILOSOPHY_PROMPT,
-} from "@/config/ai-coach-prompt";
+  ARENA_CUSTOMER_SYSTEM_PROMPT,
+  ARENA_SESSION_OPEN_PROMPT,
+  buildArenaFormatPrompt,
+  type ArenaSimulationLevel,
+} from "@/config/arena-simulation-prompt";
+import { OPENAI_MODEL } from "@/config/ai-coach-prompt";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
@@ -18,6 +19,7 @@ interface ChatMessage {
 
 const MAX_MESSAGES = 24;
 const MAX_CONTENT_LENGTH = 4000;
+const LEVELS: ArenaSimulationLevel[] = ["entry", "medium", "hard", "elite"];
 
 function sanitizeMessages(input: unknown): ChatMessage[] {
   if (!Array.isArray(input)) return [];
@@ -37,6 +39,13 @@ function sanitizeMessages(input: unknown): ChatMessage[] {
     .slice(-MAX_MESSAGES);
 }
 
+function sanitizeLevel(input: unknown): ArenaSimulationLevel {
+  if (typeof input === "string" && LEVELS.includes(input as ArenaSimulationLevel)) {
+    return input as ArenaSimulationLevel;
+  }
+  return "hard";
+}
+
 function getOpenAIClient() {
   const apiKey = process.env.OPENAI_API_KEY;
   if (!apiKey) {
@@ -47,12 +56,23 @@ function getOpenAIClient() {
 
 export async function POST(request: Request) {
   try {
-    const body = (await request.json()) as { messages?: unknown };
+    const body = (await request.json()) as {
+      messages?: unknown;
+      level?: unknown;
+      start?: boolean;
+    };
+
+    const level = sanitizeLevel(body.level);
+    const start = body.start === true;
     const messages = sanitizeMessages(body.messages);
 
-    if (messages.length === 0) {
+    if (!start && messages.length === 0) {
       return Response.json({ error: "Messages are required" }, { status: 400 });
     }
+
+    const conversation: ChatMessage[] = start
+      ? [{ role: "user", content: ARENA_SESSION_OPEN_PROMPT }]
+      : messages;
 
     const openai = getOpenAIClient();
 
@@ -60,10 +80,9 @@ export async function POST(request: Request) {
       model: OPENAI_MODEL,
       stream: true,
       messages: [
-        { role: "system", content: SALES_WARROOM_AI_COACH_PROMPT },
-        { role: "system", content: SALES_WARROOM_AI_PHILOSOPHY_PROMPT },
-        { role: "system", content: SALES_WARROOM_AI_COACH_FORMAT_PROMPT },
-        ...messages,
+        { role: "system", content: ARENA_CUSTOMER_SYSTEM_PROMPT },
+        { role: "system", content: buildArenaFormatPrompt(level) },
+        ...conversation,
       ],
     });
 
@@ -104,7 +123,7 @@ export async function POST(request: Request) {
     });
   } catch (error) {
     const message =
-      error instanceof Error ? error.message : "Failed to start chat stream";
+      error instanceof Error ? error.message : "Failed to start arena stream";
     const status = message.includes("OPENAI_API_KEY") ? 503 : 500;
     return Response.json({ error: message }, { status });
   }

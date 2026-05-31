@@ -75,7 +75,7 @@ function SidebarNav({
 export function DashboardShell({ children }: { children: React.ReactNode }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
-  const isArena = (arenaRoutes as readonly string[]).includes(pathname);
+  const isArenaSimulation = pathname === "/arena";
   const quietSidebar = true;
 
   useEffect(() => {
@@ -168,33 +168,57 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
       </AnimatePresence>
 
       <div className="flex flex-1 flex-col lg:ms-60">
-        <header className="sticky top-0 z-30 flex items-center justify-between border-b border-white/5 bg-black/85 px-4 py-3 backdrop-blur-xl sm:px-6 sm:py-4">
-          <div className="flex items-center gap-3">
+        {isArenaSimulation ? (
+          <header className="sticky top-0 z-30 flex items-center justify-between border-b border-white/[0.06] bg-black px-4 py-3 lg:hidden">
             <button
               type="button"
-              className="flex flex-col gap-1.5 border border-white/10 p-2 lg:hidden"
+              className="flex flex-col gap-1.5 p-2"
               onClick={() => setMobileOpen(true)}
               aria-label="פתיחת תפריט"
             >
-              <span className="block h-px w-5 bg-white" />
-              <span className="block h-px w-5 bg-white" />
-              <span className="block h-px w-5 bg-white" />
+              <span className="block h-px w-5 bg-white/80" />
+              <span className="block h-px w-5 bg-white/80" />
+              <span className="block h-px w-5 bg-white/80" />
             </button>
-            <span className="text-xs text-white/40">Sales Waroom</span>
-          </div>
-          <div className="flex items-center gap-3 sm:gap-4">
-            <span className="hidden text-xs text-white/35 md:block">
-              דנה כהן
-            </span>
-            <Link
-              href="/"
-              className="interactive-surface border border-white/10 px-3 py-1.5 text-xs text-muted-foreground hover:border-accent/30 hover:text-white"
-            >
+            <Link href="/" className="text-xs text-white/45">
               יציאה
             </Link>
-          </div>
-        </header>
-        <main id="main-content" className="flex-1 p-4 sm:p-6 lg:p-8">
+          </header>
+        ) : (
+          <header className="sticky top-0 z-30 flex items-center justify-between border-b border-white/5 bg-black/85 px-4 py-3 backdrop-blur-xl sm:px-6 sm:py-4">
+            <div className="flex items-center gap-3">
+              <button
+                type="button"
+                className="flex flex-col gap-1.5 border border-white/10 p-2 lg:hidden"
+                onClick={() => setMobileOpen(true)}
+                aria-label="פתיחת תפריט"
+              >
+                <span className="block h-px w-5 bg-white" />
+                <span className="block h-px w-5 bg-white" />
+                <span className="block h-px w-5 bg-white" />
+              </button>
+              <span className="text-xs text-white/40">Sales Waroom</span>
+            </div>
+            <div className="flex items-center gap-3 sm:gap-4">
+              <span className="hidden text-xs text-white/35 md:block">
+                דנה כהן
+              </span>
+              <Link
+                href="/"
+                className="interactive-surface border border-white/10 px-3 py-1.5 text-xs text-muted-foreground hover:border-accent/30 hover:text-white"
+              >
+                יציאה
+              </Link>
+            </div>
+          </header>
+        )}
+        <main
+          id="main-content"
+          className={cn(
+            "flex-1",
+            isArenaSimulation ? "p-0" : "p-4 sm:p-6 lg:p-8",
+          )}
+        >
           {children}
         </main>
       </div>

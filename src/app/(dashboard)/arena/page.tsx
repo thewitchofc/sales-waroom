@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import { ArenaPageContent } from "@/components/pages/arena-page-content";
 
 export const metadata: Metadata = {
-  title: "הזירה",
-  description: "זירת תחרות AI, אתגר שבועי, דירוג חי וטורנירים עילית.",
+  title: "AI Simulation",
+  description:
+    "סימולציית מכירות AI מרכזית. לקוח קשה, ניתוח בזמן אמת, חדר אימון עילית.",
 };
 
 export default function ArenaPage() {
