@@ -14,21 +14,28 @@ import {
 import { BehaviorModeBadge } from "@/components/product/frame-control-indicator";
 import { useSimulationOptional } from "@/components/product/simulation-provider";
 import { useLiveDemo } from "@/hooks/use-live-demo";
+import { AICoachChat } from "@/components/product/ai-coach-chat";
 import { TIMELINE_EVENTS } from "@/components/product/demo-data";
 
 export function LiveCallInterface({
   compact = false,
   focusedWaveform = false,
   simple = false,
+  connected = false,
 }: {
   compact?: boolean;
   focusedWaveform?: boolean;
   simple?: boolean;
+  connected?: boolean;
 }) {
   const contextDemo = useSimulationOptional();
   const localDemo = useLiveDemo();
   const demo = contextDemo ?? localDemo;
   const isCompact = compact || simple;
+
+  if (simple && connected) {
+    return <AICoachChat showIntro />;
+  }
 
   if (simple) {
     return (

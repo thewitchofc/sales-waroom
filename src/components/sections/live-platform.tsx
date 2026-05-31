@@ -22,7 +22,7 @@ function DemoContent() {
       </header>
 
       <div className="px-5 sm:px-8">
-        <LiveCallInterface simple />
+        <LiveCallInterface simple connected />
       </div>
 
       {demo.visibleInsights.length > 0 && (
