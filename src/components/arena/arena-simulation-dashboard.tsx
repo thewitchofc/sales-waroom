@@ -14,6 +14,7 @@ const metrics = [
   { key: "qualification", label: "העמקה" },
   { key: "tonality", label: "טונציה" },
   { key: "emotional_control", label: "שליטה רגשית" },
+  { key: "positioning", label: "מיצוב" },
   { key: "urgency", label: "דחיפות" },
   { key: "procrastination_handling", label: "דחיינות" },
 ] as const;

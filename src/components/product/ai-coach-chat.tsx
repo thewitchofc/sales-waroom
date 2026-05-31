@@ -13,14 +13,18 @@ const scoreLabels: Record<string, string> = {
   qualification: "העמקה",
   pressure_handling: "לחץ",
   frame_control: "פריים",
+  positioning: "מיצוב",
   urgency: "דחיפות",
   procrastination_handling: "דחיינות",
+  info_escape_handling: "בריחה למידע",
 };
 
 const starterPrompts = [
   "הלקוח אמר: יוקר לי. עניתי: אצלנו הכי טוב בשוק. מה הטעות?",
   "פתחתי ב: יש לי הצעה מדהימה. הלקוח נסגר. מה עשיתי לא נכון?",
   "הלקוח ביקש פרטים במייל. איך אני שומר את השיחה חיה?",
+  "הלקוחה אמרה 'תשלחי לי PDF'. עניתי 'בסדר אשלח'. מה קרה?",
+  "הלקוחה אמרה שמישהי אחרת לוקחת חצי מחיר. התחלתי להצדיק. מה עשיתי לא נכון?",
 ];
 
 interface AICoachChatProps {
